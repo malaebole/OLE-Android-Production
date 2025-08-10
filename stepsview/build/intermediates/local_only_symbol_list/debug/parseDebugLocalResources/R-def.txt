@@ -1,0 +1,23 @@
+R_DEF: Internal format may change without notice
+local
+attr? barColor
+attr? circle_radius
+attr? completePosition
+attr? hideProgressText
+attr? labelColor
+attr? labelSize
+attr? labels
+attr? numOfSteps
+attr? progressColor
+attr? progressMargin
+attr? progressStrokeWidth
+attr? progressTextColor
+color orange
+color primary
+color white
+color yellow
+id labels_container
+id steps_indicator_view
+layout widget_steps_view
+string app_name
+styleable StepsView numOfSteps completePosition labels barColor progressColor labelColor progressTextColor hideProgressText labelSize progressMargin circle_radius progressStrokeWidth

@@ -1,2 +1,3 @@
-include ':app', ':ResideMenu', ':ActionSheet', ':stepsview'
+include ':app', ':ResideMenu', ':ActionSheet', ':stepsview',':imageviewer'
 rootProject.name='MalaebOle'
+include ':imageviewer'
