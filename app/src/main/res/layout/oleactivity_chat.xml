@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgVuColor"
+    tools:context=".player.OleChatActivity">
+
+    <RelativeLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/title_bar"
+            layout="@layout/oleplayer_app_bar_main"/>
+
+        <androidx.appcompat.widget.SwitchCompat
+            android:id="@+id/btn_switch"
+            android:theme="@style/MySwitch"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:background="@null"
+            android:checked="true"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/ll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/bar"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:layout_marginStart="@dimen/_10sdp">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/pictures_vu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <LinearLayout
+            android:id="@+id/players_vu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:weightSum="2">
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:gravity="center_horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/cardvu"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    app:contentPadding="@dimen/_3sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/whiteColor"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:id="@+id/p1_img_vu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/player_active"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:id="@+id/tv_p1_rank"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blueColorNew"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="LV: 999"
+                        android:textSize="@dimen/_9sdp"
+                        android:gravity="center"
+                        android:layout_gravity="bottom|end"
+                        android:background="@color/yellowColor" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tv_p1_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Player"
+                    android:gravity="center_horizontal"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/darkTextColor"
+                    android:layout_marginTop="@dimen/_5sdp"/>
+
+                <TextView
+                    android:id="@+id/tv_p1_played"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0 times played"
+                    android:gravity="center_horizontal"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/darkTextColor"
+                    android:layout_marginTop="@dimen/_3sdp"/>
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_weight="1"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:gravity="center_horizontal">
+
+                <androidx.cardview.widget.CardView
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    app:contentPadding="@dimen/_3sdp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardBackgroundColor="@color/whiteColor"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:id="@+id/p2_img_vu"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/player_active"
+                        android:scaleType="centerInside" />
+
+                    <TextView
+                        android:id="@+id/tv_p2_rank"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blueColorNew"
+                        android:fontFamily="sans-serif-medium"
+                        android:text="LV: 999"
+                        android:textSize="@dimen/_9sdp"
+                        android:gravity="center"
+                        android:layout_gravity="bottom|end"
+                        android:background="@color/yellowColor" />
+
+                </androidx.cardview.widget.CardView>
+
+                <TextView
+                    android:id="@+id/tv_p2_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Player"
+                    android:gravity="center_horizontal"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/darkTextColor"
+                    android:layout_marginTop="@dimen/_5sdp"/>
+
+                <TextView
+                    android:id="@+id/tv_p2_played"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="0 times played"
+                    android:gravity="center_horizontal"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/darkTextColor"
+                    android:layout_marginTop="@dimen/_3sdp"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_vu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@id/msg_vu"
+        android:layout_below="@+id/ll"
+        android:layout_marginTop="@dimen/_10sdp" />
+
+    <RelativeLayout
+        android:id="@+id/msg_vu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:background="@drawable/rounded_corner_bg_white_no_padding">
+
+        <EditText
+            android:id="@+id/et_msg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:layout_toStartOf="@id/btn_send"
+            android:background="@drawable/msg_field_border"
+            android:fontFamily="sans-serif"
+            android:inputType="textMultiLine"
+            android:minHeight="@dimen/_30sdp"
+            android:text=""
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/darkTextColor" />
+
+        <ImageButton
+            android:id="@+id/btn_send"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignBottom="@id/et_msg"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:background="@null"
+            android:padding="@dimen/_5sdp"
+            android:scaleType="centerInside"
+            android:src="@drawable/send_ic" />
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_restrict"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignTop="@id/msg_vu"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="#F2F2F7"
+        android:textColor="@color/darkTextColor"
+        android:text="@string/match_creator_can_send"
+        android:gravity="center"
+        android:visibility="gone"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:fontFamily="sans-serif"/>
+
+</RelativeLayout>

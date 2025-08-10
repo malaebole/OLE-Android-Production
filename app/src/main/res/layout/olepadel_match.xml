@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@android:color/transparent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/parent">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rel_main"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_220sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/whiteColor">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/padel_match_cell_bg"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:layout_width="@dimen/_110sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:src="@drawable/vs_big"
+            android:scaleType="centerInside"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_gravity="bottom|center_horizontal"/>
+
+        <ImageView
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:src="@drawable/right_bat"
+            android:scaleType="centerInside"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_gravity="bottom|end"/>
+
+        <ImageView
+            android:layout_width="@dimen/_90sdp"
+            android:layout_height="@dimen/_60sdp"
+            android:src="@drawable/left_bat"
+            android:scaleType="centerInside"
+            android:layout_marginStart="@dimen/_4sdp"
+            android:layout_gravity="bottom|start"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:id="@+id/ln"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:weightSum="3">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_centerHorizontal="true"
+                        android:weightSum="2">
+
+                        <ae.oleapp.util.OlePadelProfileView
+                            android:id="@+id/my_profile_vu"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            app:p_p_image="@drawable/player_active"
+                            app:p_p_name="Name"/>
+
+                        <ae.oleapp.util.OlePadelProfileView
+                            android:id="@+id/my_partner_profile_vu"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            app:p_p_image="@drawable/player_active"
+                            app:p_p_name="Name"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1.6"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="date"
+                        android:textColor="@color/whiteColor"
+                        android:fontFamily="sans-serif"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:id="@+id/tv_time"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="time"
+                        android:textColor="@color/whiteColor"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:fontFamily="sans-serif"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:id="@+id/tv_age"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="age"
+                        android:textColor="@color/whiteColor"
+                        android:fontFamily="sans-serif"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:id="@+id/tv_price"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="300 AED"
+                        android:textColor="@color/whiteColor"
+                        android:fontFamily="sans-serif"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:id="@+id/tv_power"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Power: C"
+                        android:textColor="@color/whiteColor"
+                        android:fontFamily="sans-serif-medium"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:textAlignment="center" />
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/btn_challenge"
+                        android:layout_width="@dimen/_95sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardElevation="0dp"
+                        app:cardBackgroundColor="#FFE200">
+
+                        <TextView
+                            android:id="@+id/tv_challenge"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/challenge"
+                            android:gravity="center"
+                            android:textColor="#845700"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:fontFamily="sans-serif-medium"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="0.7"
+                    android:layout_marginTop="@dimen/_5sdp">
+
+                    <LinearLayout
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="match_parent"
+                        android:orientation="vertical"
+                        android:layout_centerHorizontal="true"
+                        android:weightSum="2">
+
+                        <ae.oleapp.util.OlePadelProfileView
+                            android:id="@+id/opponent_profile_vu"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginBottom="@dimen/_2sdp"
+                            app:p_p_image="@drawable/player_active"
+                            app:p_p_name="Name"/>
+
+                        <ae.oleapp.util.OlePadelProfileView
+                            android:id="@+id/opponent_partner_profile_vu"
+                            android:layout_width="@dimen/_60sdp"
+                            android:layout_height="0dp"
+                            android:layout_weight="1"
+                            android:layout_marginTop="@dimen/_2sdp"
+                            app:p_p_image="@drawable/player_active"
+                            app:p_p_name="Name"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/ln"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:layout_marginBottom="@dimen/_5sdp">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true">
+
+                    <ImageView
+                        android:id="@+id/img1"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/club_ic_new" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/img1"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/tv_field_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/field_name"
+                            android:textColor="#B3FFFFFF" />
+
+                        <TextView
+                            android:id="@+id/tv_club_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:ellipsize="end"
+                            android:fontFamily="sans-serif"
+                            android:lines="1"
+                            android:text="club name"
+                            android:textColor="@color/whiteColor" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_8sdp">
+
+                    <ImageView
+                        android:id="@+id/img3"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/loc_ic_new" />
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/img3"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/address"
+                            android:textColor="#B3FFFFFF" />
+
+                        <TextView
+                            android:id="@+id/tv_address"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="@dimen/_3sdp"
+                            android:ellipsize="end"
+                            android:fontFamily="sans-serif"
+                            android:lines="1"
+                            android:text="city"
+                            android:textColor="@color/whiteColor" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

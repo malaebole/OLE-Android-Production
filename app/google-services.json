@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "239623316271",
+    "firebase_url": "https://malaebole-248119.firebaseio.com",
+    "project_id": "malaebole-248119",
+    "storage_bucket": "malaebole-248119.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:239623316271:android:41c7dc5f7000d2255f37da",
+        "android_client_info": {
+          "package_name": "ae.oleapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "239623316271-9fkri1fj66bk85qeuoliiam477oeu06e.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCIbZEYCyEFNtVPLPCt9yBWWlTVfCGiOHs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "239623316271-9fkri1fj66bk85qeuoliiam477oeu06e.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "239623316271-40ntc2iooer81b0kkpsmu95cc97a4n1k.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "ae.malaebole.MalaebOle",
+                "app_store_id": "1472879986"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

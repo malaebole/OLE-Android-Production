@@ -1,0 +1,624 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#DE18707B"
+    tools:context=".activities.GroupFormationActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/btm_vu">
+
+        <ImageView
+            android:id="@+id/field_bg_img_vu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bgl" />
+
+        <RelativeLayout
+            android:id="@+id/top_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#7A000000">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_50sdp"
+                android:layout_marginTop="@dimen/_30sdp">
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_toStartOf="@id/top_ll"
+                    android:layout_toEndOf="@id/btn_close"
+                    android:gravity="center"
+                    android:text="Group name"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:textColor="@color/yellowColor"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/btn_close"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/close_btnl" />
+
+                <LinearLayout
+                    android:id="@+id/top_ll"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:orientation="horizontal">
+
+                    <ImageButton
+                        android:id="@+id/btn_share"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@null"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/share_icl" />
+
+                    <ImageButton
+                        android:id="@+id/btn_speak"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:background="@null"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/mic_deactivel" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:layout_below="@id/top_bar">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/players_recycler_vu"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/_50sdp"
+                android:scrollbars="none"
+                android:visibility="invisible"
+                android:layoutDirection="ltr" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/tab_vu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@drawable/tab_bgl"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/_5sdp"
+                android:layout_marginTop="@dimen/_15sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/tab_team_a"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="#29000000"
+                        app:cardElevation="0dp"
+                        app:contentPadding="@dimen/_3sdp"
+                        app:cardCornerRadius="@dimen/_20sdp">
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/tab_bg_team_a"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/selected_tab2l"
+                            android:scaleType="centerCrop"
+                            app:riv_corner_radius="@dimen/_17sdp"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingStart="@dimen/_3sdp"
+                            android:paddingEnd="@dimen/_3sdp">
+
+                            <TextView
+                                android:id="@+id/tv_team_a"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/_3sdp"
+                                android:layout_toStartOf="@+id/team_a_circle"
+                                android:ellipsize="end"
+                                android:fontFamily="sans-serif"
+                                android:gravity="center"
+                                android:lines="1"
+                                android:text="Team A"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/whiteColor" />
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/team_a_circle"
+                                android:theme="@style/Theme.MaterialComponents.Light"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_alignParentEnd="true"
+                                app:cardElevation="0dp"
+                                android:layout_centerVertical="true"
+                                app:cardBackgroundColor="#6B000000"
+                                app:strokeColor="@color/yellowColor"
+                                app:strokeWidth="@dimen/_1sdp"
+                                app:cardCornerRadius="@dimen/_13sdp">
+
+                                <TextView
+                                    android:id="@+id/tv_team_a_count"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textColor="@color/whiteColor"
+                                    android:text="0"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:gravity="center"
+                                    android:layout_centerVertical="true"
+                                    android:fontFamily="sans-serif-medium"/>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <View
+                        android:layout_width="@dimen/_10sdp"
+                        android:layout_height="@dimen/_20sdp"
+                        android:background="@color/transparent"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/tab_team_b"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1"
+                        app:cardBackgroundColor="#29000000"
+                        app:cardElevation="0dp"
+                        app:contentPadding="@dimen/_3sdp"
+                        app:cardCornerRadius="@dimen/_20sdp">
+
+                        <com.makeramen.roundedimageview.RoundedImageView
+                            android:id="@+id/tab_bg_team_b"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/selected_tab2l"
+                            android:visibility="invisible"
+                            app:riv_corner_radius="@dimen/_17sdp"
+                            android:scaleType="centerCrop"/>
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:paddingStart="@dimen/_3sdp"
+                            android:paddingEnd="@dimen/_3sdp">
+
+                            <TextView
+                                android:id="@+id/tv_team_b"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_centerVertical="true"
+                                android:layout_marginEnd="@dimen/_3sdp"
+                                android:layout_toStartOf="@+id/team_b_circle"
+                                android:ellipsize="end"
+                                android:fontFamily="sans-serif"
+                                android:gravity="center"
+                                android:lines="1"
+                                android:text="Team B"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/whiteColor" />
+
+                            <com.google.android.material.card.MaterialCardView
+                                android:id="@+id/team_b_circle"
+                                android:theme="@style/Theme.MaterialComponents.Light"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:layout_alignParentEnd="true"
+                                app:cardElevation="0dp"
+                                android:layout_centerVertical="true"
+                                app:cardBackgroundColor="#6B000000"
+                                app:strokeColor="@color/yellowColor"
+                                app:strokeWidth="@dimen/_1sdp"
+                                app:cardCornerRadius="@dimen/_13sdp">
+
+                                <TextView
+                                    android:id="@+id/tv_team_b_count"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:textColor="@color/whiteColor"
+                                    android:text="0"
+                                    android:textSize="@dimen/_10sdp"
+                                    android:gravity="center"
+                                    android:layout_centerVertical="true"
+                                    android:fontFamily="sans-serif-medium"/>
+
+                            </com.google.android.material.card.MaterialCardView>
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
+
+            <TextView
+                android:id="@+id/tv_turn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/tab_vu"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginStart="@dimen/_15sdp"
+                android:layout_marginEnd="@dimen/_15sdp"
+                android:paddingStart="@dimen/_15sdp"
+                android:paddingEnd="@dimen/_15sdp"
+                android:background="#F02301"
+                android:text="your turn"
+                android:textColor="@color/whiteColor"
+                android:fontFamily="sans-serif"
+                android:visibility="visible"
+                android:gravity="center"/>
+
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/share_vu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/ll"
+            android:layout_alignParentBottom="true">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_alignTop="@+id/field_img_vu"
+                    android:layout_marginTop="@dimen/_minus50sdp">
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:id="@+id/banner_right"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:background="@drawable/black_dotted_borderl"
+                            android:layout_centerHorizontal="true">
+
+                            <ImageView
+                                android:id="@+id/banner_img_vu_right"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/official_logoll" />
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="@dimen/_85sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_minus2sdp"
+                            android:layout_below="@id/banner_right">
+
+                            <View
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="match_parent"
+                                android:background="#CCCCCC"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="@dimen/_15sdp"/>
+
+                            <View
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="match_parent"
+                                android:background="#CCCCCC"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="@dimen/_15sdp"/>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_weight="1">
+
+                        <RelativeLayout
+                            android:id="@+id/banner_left"
+                            android:layout_width="@dimen/_80sdp"
+                            android:layout_height="@dimen/_35sdp"
+                            android:layout_centerHorizontal="true">
+                            <ImageView
+                                android:id="@+id/banner_img_vu_left"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/official_logoll" />
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_width="@dimen/_70sdp"
+                            android:layout_height="@dimen/_85sdp"
+                            android:layout_marginTop="@dimen/_minus2sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_below="@id/banner_left">
+
+                            <View
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="match_parent"
+                                android:background="#CCCCCC"
+                                android:layout_alignParentStart="true"
+                                android:layout_marginStart="@dimen/_15sdp"/>
+
+                            <View
+                                android:layout_width="@dimen/_3sdp"
+                                android:layout_height="match_parent"
+                                android:background="#CCCCCC"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginEnd="@dimen/_15sdp"/>
+
+                        </RelativeLayout>
+
+                    </RelativeLayout>
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/field_img_vu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_below="@id/tab_vu"
+                    android:layout_marginTop="@dimen/_60sdp"
+                    android:scaleType="fitXY"
+                    android:src="@drawable/test1l" />
+                <RelativeLayout
+                    android:id="@+id/vu_team_a"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_40sdp"/>
+
+                <RelativeLayout
+                    android:id="@+id/vu_team_b"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="@dimen/_40sdp" />
+            </RelativeLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <ImageButton
+            android:id="@+id/btn_refresh"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignTop="@id/share_vu"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@null"
+            android:visibility="gone"
+            android:scaleType="centerInside"
+            android:src="@drawable/reset_icl" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btm_vu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#1275C6">
+
+        <ImageView
+            android:layout_width="@dimen/_80sdp"
+            android:layout_height="@dimen/_80sdp"
+            android:layout_alignBottom="@id/linear"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="@dimen/_minus10sdp"
+            android:layout_marginBottom="@dimen/_minus25sdp"
+            android:src="@drawable/footballl" />
+
+        <RelativeLayout
+            android:id="@+id/bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:background="@drawable/rounded_corner_bg_blackl"
+            android:padding="@dimen/_5sdp">
+
+            <ImageView
+                android:id="@id/logo"
+                android:layout_width="@dimen/_110sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/splash_logol" />
+
+            <LinearLayout
+                android:id="@+id/country_vu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:gravity="center_vertical"
+                android:orientation="horizontal"
+                android:visibility="invisible">
+
+                <ImageView
+                    android:id="@+id/flag_img_vu"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/flag_uae" />
+
+                <TextView
+                    android:id="@+id/tv_country"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="UAE"
+                    android:textColor="#96FFFFFF" />
+
+
+                <ImageView
+                    android:id="@+id/arrow"
+                    android:layout_width="@dimen/_17sdp"
+                    android:layout_height="@dimen/_17sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/arrow_down_gray" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageButton
+                    android:id="@+id/btn_shirt"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/shirt_inactive" />
+
+                <View
+                    android:layout_width="@dimen/_1sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:background="#799AB5" />
+
+                <ImageButton
+                    android:id="@+id/btn_gk_shirts"
+                    android:layout_width="@dimen/_25sdp"
+                    android:layout_height="@dimen/_25sdp"
+                    android:background="@null"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/gk_shirt_activel" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/bar"
+            android:layout_marginStart="@dimen/_15sdp"
+            android:layout_marginEnd="@dimen/_15sdp"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:orientation="vertical">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/team_recycler_vu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layoutDirection="ltr"
+                android:scrollbars="none"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/shirt_recycler_vu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layoutDirection="ltr"
+                android:scrollbars="none"
+                android:visibility="gone" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/gk_recycler_vu"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_45sdp"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:layoutDirection="ltr"
+                android:scrollbars="none" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rel_main"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardBackgroundColor="@color/whiteColor"
+        app:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/ln"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:weightSum="3"
+                android:paddingBottom="@dimen/_8sdp"
+                android:paddingTop="@dimen/_8sdp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.9"
+                    android:layout_marginStart="@dimen/_8sdp">
+
+                    <ae.oleapp.util.OleProfileView
+                        android:id="@+id/profile_vu_1"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_80sdp" />
+
+                    <ImageView
+                        android:id="@+id/winner_badge_1"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/match_winner_badge"
+                        android:scaleType="centerInside"
+                        android:layout_alignParentEnd="true"/>
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_weight="1.2"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="@dimen/_8sdp"
+                    android:layout_marginEnd="@dimen/_8sdp"
+                    android:gravity="center_horizontal">
+
+                    <TextView
+                        android:id="@+id/tv_club"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="club name"
+                        android:textColor="@color/subTextColor"
+                        android:fontFamily="sans-serif"
+                        android:maxLines="1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="Today | 12:30-14:00"
+                        android:textColor="@color/subTextColor"
+                        android:fontFamily="sans-serif"
+                        android:maxLines="1"
+                        android:layout_marginTop="@dimen/_2sdp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textAlignment="center"/>
+
+                    <TextView
+                        android:id="@+id/tv_points"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="3-0"
+                        android:textColor="@color/darkTextColor"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:fontFamily="sans-serif-black"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                        android:textSize="@dimen/_30sdp"/>
+
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_weight="0.9"
+                    android:layout_marginEnd="@dimen/_8sdp">
+
+                    <ae.oleapp.util.OleProfileView
+                        android:id="@+id/profile_vu_2"
+                        android:layout_width="@dimen/_60sdp"
+                        android:layout_height="@dimen/_80sdp"
+                        android:layout_alignParentEnd="true"/>
+
+                    <ImageView
+                        android:id="@+id/winner_badge_2"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:src="@drawable/match_winner_badge"
+                        android:scaleType="centerInside"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

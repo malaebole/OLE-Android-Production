@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgVuColor"
+    tools:context=".player.OleJoinedPlayersActivity">
+
+    <include
+        android:id="@+id/bar"
+        layout="@layout/oleplayer_app_bar_main"/>
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recycler_vu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tv_remain_amount"
+        android:layout_below="@+id/bar" />
+
+    <TextView
+        android:id="@+id/tv_remain_amount"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:background="@color/whiteColor"
+        android:gravity="center"
+        android:text="Remaining amount: 0 AED"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/redColor" />
+
+</RelativeLayout>

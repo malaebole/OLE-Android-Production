@@ -1,0 +1,373 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgVuColor"
+    tools:context=".player.OleFootballResultShareActivity">
+
+    <RelativeLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/title_bar"
+            layout="@layout/oleplayer_app_bar_main"/>
+
+        <Button
+            android:id="@+id/btn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/post"
+            android:textAllCaps="false"
+            android:textColor="@color/blueColorNew"
+            android:padding="@dimen/_2sdp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/share_vu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/bar">
+
+        <ImageView
+            android:id="@+id/field_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/story_result" />
+
+        <ImageView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_marginStart="@dimen/_minus30sdp"
+            android:layout_marginTop="@dimen/_minus30sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/football_share" />
+
+        <ImageView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="@dimen/_minus30sdp"
+            android:layout_marginEnd="@dimen/_minus30sdp"
+            android:scaleType="fitXY"
+            android:src="@drawable/football_share" />
+
+        <ImageView
+            android:layout_width="@dimen/_150sdp"
+            android:layout_height="@dimen/_150sdp"
+            android:src="@drawable/football_share"
+            android:scaleType="fitXY"
+            android:layout_above="@+id/btm_vu"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/_minus60sdp"/>
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="@dimen/_170sdp"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/ln"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:scaleType="centerInside"
+            android:src="@drawable/result_logo" />
+
+        <LinearLayout
+            android:id="@+id/ln"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_30sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:background="@drawable/result_box"
+            android:orientation="vertical"
+            android:padding="@dimen/_20sdp">
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/result_loc" />
+
+                <TextView
+                    android:id="@+id/tv_club_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:text="Al Tahadi"
+                    android:textColor="@color/blackColor"
+                    android:textSize="22sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="@dimen/_20sdp"
+                android:fontFamily="@font/montserrat_extrabold_italic"
+                android:gravity="center"
+                android:text="Thu, 27/09/2021"
+                android:textColor="@color/blackColor"
+                android:textSize="25sp" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_30sdp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toStartOf="@id/vs"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:id="@+id/rel_1"
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:cardBackgroundColor="@color/transparent"
+                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardElevation="0dp">
+
+                            <com.rishabhharit.roundedimageview.RoundedImageView
+                                android:id="@+id/p1_img_vu"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/player_active"
+                                android:padding="@dimen/_5sdp"
+                                android:background="@color/blueColorNew"
+                                app:cornerRadius="@dimen/_10sdp" />
+
+                            <TextView
+                                android:id="@+id/tv_p1_level"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:background="@drawable/level_corner"
+                                android:fontFamily="@font/franklin_gothic_heavy"
+                                android:gravity="center"
+                                android:text="LV: 1"
+                                android:textColor="#021326"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_p1_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kenyan_coffee_bold"
+                        android:gravity="center"
+                        android:text=" Player name "
+                        android:textColor="@color/blackColor"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+
+                <ImageView
+                    android:id="@+id/vs"
+                    android:layout_width="@dimen/_55sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_centerInParent="true"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/result_vs" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/vs"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/_100sdp"
+                        android:layout_height="@dimen/_100sdp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            app:cardBackgroundColor="@color/transparent"
+                            app:cardCornerRadius="@dimen/_10sdp"
+                            app:cardElevation="0dp">
+
+                            <com.rishabhharit.roundedimageview.RoundedImageView
+                                android:id="@+id/p2_img_vu"
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:scaleType="centerInside"
+                                android:padding="@dimen/_5sdp"
+                                android:background="@color/blueColorNew"
+                                android:src="@drawable/player_active"
+                                app:cornerRadius="@dimen/_10sdp" />
+
+                            <TextView
+                                android:id="@+id/tv_p2_level"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="bottom"
+                                android:background="@drawable/level_corner"
+                                android:fontFamily="@font/franklin_gothic_heavy"
+                                android:gravity="center"
+                                android:text="LV: 1"
+                                android:textColor="#021326"
+                                android:textSize="20sp"
+                                android:textStyle="bold" />
+
+                        </androidx.cardview.widget.CardView>
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/tv_p2_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/kenyan_coffee_bold"
+                        android:gravity="center"
+                        android:text=" Player name "
+                        android:textColor="@color/blackColor"
+                        android:textSize="25sp" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/tv_p1_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Player name "
+            android:background="@color/whiteColor"
+            android:fontFamily="@font/kenyan_coffee_bold"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/blackColor"
+            android:textSize="25sp"
+            android:layout_alignParentStart="true"
+            android:layout_above="@id/btm_vu"/>
+
+        <TextView
+            android:id="@+id/tv_p2_player"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Player name "
+            android:background="@color/whiteColor"
+            android:fontFamily="@font/kenyan_coffee_bold"
+            android:padding="@dimen/_10sdp"
+            android:textColor="@color/blackColor"
+            android:textSize="25sp"
+            android:layout_alignParentEnd="true"
+            android:layout_above="@id/btm_vu"/>
+
+        <RelativeLayout
+            android:id="@+id/btm_vu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true">
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_90sdp"
+                android:background="@color/blackColor"
+                android:layout_marginTop="@dimen/_30sdp"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_120sdp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/_10sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/f_left_vu"
+                        android:scaleType="fitXY"/>
+
+                    <TextView
+                        android:id="@+id/tv_p1_score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_50sdp"
+                        android:fontFamily="@font/kenyan_coffee_regular"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/blackColor"
+                        android:textSize="80sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:layout_marginStart="@dimen/_10sdp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/f_right_vu" />
+
+                    <TextView
+                        android:id="@+id/tv_p2_score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_50sdp"
+                        android:fontFamily="@font/kenyan_coffee_regular"
+                        android:gravity="center"
+                        android:text="0"
+                        android:textColor="@color/blackColor"
+                        android:textSize="80sp"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:layout_width="@dimen/_45sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:background="@color/whiteColor"
+                android:layout_centerInParent="true"/>
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

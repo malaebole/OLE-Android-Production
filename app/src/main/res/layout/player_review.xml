@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardBackgroundColor="#80FFFFFF"
+    android:id="@+id/main_layout"
+    app:cardElevation="0dp"
+    android:layout_marginTop="@dimen/_7sdp"
+    android:layout_marginStart="@dimen/_15sdp"
+    android:layout_marginEnd="@dimen/_15sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp">
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:id="@+id/rel"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="0.6">
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/img_card"
+                    android:layout_width="@dimen/_60sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_centerVertical="true"
+                    app:cardBackgroundColor="#A3006471"
+                    app:cardCornerRadius="@dimen/_40sdp"
+                    app:cardElevation="0dp">
+
+                    <LinearLayout
+                        android:id="@+id/emoji_vu"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_3sdp"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/emoji_img_vu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"
+                            android:elevation="4dp"
+                            android:scaleType="centerInside" />
+
+                        <ImageView
+                            android:id="@+id/shirt_img_vu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"
+                            android:layout_marginTop="@dimen/_minus7sdp"
+                            android:elevation="2dp"
+                            android:scaleType="centerInside" />
+
+                    </LinearLayout>
+
+                </androidx.cardview.widget.CardView>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@+id/img_card"
+                    android:layout_marginStart="@dimen/_10sdp">
+
+                    <TextView
+                        android:id="@+id/tv_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="name"
+                        android:fontFamily="sans-serif-medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/darkTextColor" />
+
+                    <TextView
+                        android:id="@+id/tv_date"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="date"
+                        android:layout_marginTop="@dimen/_5sdp"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="#327F88" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                android:layout_weight="0.4"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/_35sdp"
+                app:strokeWidth="@dimen/_1sdp"
+                app:contentPadding="@dimen/_5sdp"
+                app:strokeColor="@color/yellowColor">
+
+                <RelativeLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal">
+
+                    <ae.oleapp.util.FlexibleThumbSeekbar
+                        android:id="@+id/skills_progressbar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_toStartOf="@+id/tv_playing_skills"
+                        android:max="100"
+                        android:maxHeight="@dimen/_4sdp"
+                        android:progress="0"
+                        android:progressDrawable="@drawable/review_seekbar_stylel"
+                        android:splitTrack="false"
+                        android:thumb="@drawable/profile_skills_thumbl"
+                        android:thumbOffset="0dp" />
+
+                    <TextView
+                        android:id="@+id/tv_playing_skills"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="0%"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/yellowColor" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </LinearLayout>
+
+        <io.github.rockerhieu.emojicon.EmojiconTextView
+            android:id="@+id/tv_reach_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/linear"
+            android:layout_marginTop="@dimen/_15sdp"
+            android:fontFamily="sans-serif"
+            android:text="@string/before_the_time"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/darkTextColor"
+            app:fontFamily="sans-serif-medium" />
+
+        <TextView
+            android:id="@+id/tv_review"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/tv_reach_time"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:fontFamily="sans-serif"
+            android:text="name"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+            android:textColor="@color/darkTextColor" />
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

@@ -1,0 +1,314 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgVuColor"
+    tools:context=".padel.OleCreatePadelMatchActivity">
+
+    <include
+        android:id="@+id/bar"
+        layout="@layout/oleplayer_app_bar_main"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/bar"
+        android:layout_above="@+id/btn_create">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/rel_friendly"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_120sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_gravity="center_horizontal"
+                app:cardBackgroundColor="@color/whiteColor"
+                app:cardCornerRadius="@dimen/_5sdp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/darkTextColor"
+                    android:text="@string/double_player"
+                    android:gravity="center"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:fontFamily="sans-serif"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_90sdp"
+                    android:src="@drawable/create_padel_match"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:scaleType="centerInside"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:visibility="visible"
+                android:paddingBottom="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp">
+
+                <LinearLayout
+                    android:id="@+id/challenge_slider_vu"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:background="@drawable/rounded_corner_bg_white"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:paddingTop="@dimen/_10sdp"
+                    android:paddingBottom="@dimen/_10sdp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/darkTextColor"
+                            android:layout_centerVertical="true"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/age_range"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+                        <LinearLayout
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerVertical="true"
+                            android:layout_alignParentEnd="true"
+                            android:orientation="horizontal">
+
+                            <TextView
+                                android:id="@+id/tv_min_age"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/blueColorNew"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="20" />
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/blueColorNew"
+                                android:fontFamily="sans-serif-medium"
+                                android:text=" - " />
+
+                            <TextView
+                                android:id="@+id/tv_max_age"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:textColor="@color/blueColorNew"
+                                android:fontFamily="sans-serif-medium"
+                                android:text="50" />
+
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                    <io.apptik.widget.MultiSlider
+                        android:id="@+id/slider"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/_10sdp"
+                        app:thumbNumber="2"
+                        app:thumbColor="@color/separatorColor"
+                        app:mirrorForRTL="true"
+                        app:rangeColor="@color/blueColorNew"
+                        app:trackColor="@color/separatorColor"
+                        app:thumbValue1="12"
+                        app:thumbValue2="60" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blueColorNew"
+                    android:text="@string/select_skills_level"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/recycler_vu"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layoutDirection="ltr"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/blueColorNew"
+                    android:text="@string/your_partner"
+                    android:fontFamily="sans-serif-medium"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <TextView
+                    android:id="@+id/tv_partner_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/darkTextColor"
+                    android:text="@string/padel_match_desc"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center_horizontal"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                <RelativeLayout
+                    android:id="@+id/partner_vu"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_10sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_bg_white_no_padding">
+
+                    <com.google.android.material.card.MaterialCardView
+                        android:id="@+id/cardvu"
+                        android:theme="@style/Theme.MaterialComponents.Light"
+                        android:layout_width="@dimen/_45sdp"
+                        android:layout_height="@dimen/_45sdp"
+                        android:background="@android:color/transparent"
+                        android:layout_centerVertical="true"
+                        app:cardCornerRadius="@dimen/_5sdp"
+                        app:cardBackgroundColor="@android:color/transparent"
+                        app:cardElevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/player_image"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/player_active"
+                            android:background="@color/whiteColor"
+                            android:scaleType="centerInside"/>
+
+                        <TextView
+                            android:id="@+id/tv_rank"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blueColorNew"
+                            android:fontFamily="sans-serif-medium"
+                            android:text="LV: 999"
+                            android:textSize="@dimen/_9sdp"
+                            android:gravity="center"
+                            android:layout_gravity="bottom|end"
+                            android:background="@color/yellowColor" />
+
+                    </com.google.android.material.card.MaterialCardView>
+
+                    <LinearLayout
+                        android:id="@+id/ln"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toEndOf="@id/cardvu"
+                        android:orientation="vertical"
+                        android:layout_marginStart="@dimen/_8sdp"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_centerVertical="true">
+
+                        <TextView
+                            android:id="@+id/tv_name"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/blueColorNew"
+                            android:text="@string/name"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:lines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="sans-serif-medium"/>
+
+                        <TextView
+                            android:id="@+id/tv_age"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:textColor="@color/darkTextColor"
+                            android:text="Age 30"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                            android:lines="1"
+                            android:ellipsize="end"
+                            android:fontFamily="sans-serif"/>
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+
+                <RelativeLayout
+                    android:id="@+id/btn_select_partner"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_35sdp"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:background="@drawable/blue_dotted_border">
+
+                    <TextView
+                        android:id="@+id/tv_select_partner"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="@string/select_your_partner"
+                        android:textColor="@color/blueColorNew" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btn_create"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_40sdp"
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_alignParentBottom="true"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="0dp">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/padel_green_btn"
+            android:scaleType="centerCrop"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="@string/create_now"
+            android:gravity="center"
+            android:textColor="@color/whiteColor"
+            android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

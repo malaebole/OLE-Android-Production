@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardBackgroundColor="@android:color/transparent"
+    app:cardElevation="0dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".dialogs.OleMissionCompleteDialogFragment">
+
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_500sdp"
+        android:background="#0084FF">
+
+        <ImageView
+            android:id="@+id/bg_img_vu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignParentBottom="true"
+            android:scaleType="centerCrop"
+            android:src="@drawable/reward_popup_bg" />
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_above="@+id/linear"
+            android:layout_marginBottom="@dimen/_10sdp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp"
+                android:layout_gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/rewards_img_vu"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_170sdp"
+                    android:scaleType="centerInside"
+                    android:layout_marginTop="@dimen/_20sdp"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteColor"
+                    android:gravity="center"
+                    android:text="@string/congratulation"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteColor"
+                    android:gravity="center"
+                    android:text="@string/mission_completed_desc"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:fontFamily="sans-serif"/>
+
+                <TextView
+                    android:id="@+id/tv_rewards_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteColor"
+                    android:gravity="center"
+                    android:text="name"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:fontFamily="sans-serif-medium"/>
+
+                <TextView
+                    android:id="@+id/tv_rewards_desc"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/whiteColor"
+                    android:gravity="center"
+                    android:text="desc"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:fontFamily="sans-serif"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/mission_recycler_vu"
+                    android:layout_width="wrap_content"
+                    android:layout_height="@dimen/_35sdp"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginBottom="@dimen/_5sdp"
+                    android:scrollbars="none"
+                    android:layout_gravity="center_horizontal"
+                    android:layoutDirection="ltr"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:layout_marginBottom="@dimen/_15sdp"
+            android:layout_alignParentBottom="true">
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/btn_collect"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                app:cardElevation="0dp"
+                app:cardCornerRadius="@dimen/_5sdp">
+
+                <ImageView
+                    android:id="@+id/btn_img"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:src="@drawable/green_btn_bg"
+                    android:scaleType="centerCrop"/>
+
+                <TextView
+                    android:id="@+id/tv_collect"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                    android:text="@string/collect_reward"
+                    android:textColor="@color/whiteColor"
+                    android:fontFamily="sans-serif"
+                    android:layout_gravity="center"/>
+
+            </androidx.cardview.widget.CardView>
+
+            <Button
+                android:id="@+id/btn_dismiss"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_gravity="center_horizontal"
+                android:background="@null"
+                android:textColor="@color/whiteColor"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:textAllCaps="false"
+                android:text="@string/dismiss_underline"/>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

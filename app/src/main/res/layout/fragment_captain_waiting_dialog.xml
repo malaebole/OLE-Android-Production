@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/transparent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".fragments.CaptainWaitingDialogFragment">
+
+<ImageButton
+    android:id="@+id/btn_close"
+    android:layout_width="@dimen/_35sdp"
+    android:layout_height="@dimen/_35sdp"
+    android:layout_above="@+id/main_ll"
+    android:layout_alignParentEnd="true"
+    android:background="@null"
+    android:scaleType="centerInside"
+    android:layout_marginEnd="@dimen/_40sdp"
+    android:layout_marginBottom="@dimen/_5sdp"
+    android:src="@drawable/close_btnl" />
+
+<androidx.cardview.widget.CardView
+    android:id="@+id/main_ll"
+    android:layout_width="match_parent"
+    android:layout_height="280dp"
+    app:cardCornerRadius="@dimen/_5sdp"
+    android:layout_centerInParent="true"
+    app:cardBackgroundColor="@color/transparent"
+    app:cardElevation="0dp"
+    android:layout_marginStart="@dimen/_40sdp"
+    android:layout_marginEnd="@dimen/_40sdp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/white">
+
+        <RelativeLayout
+            android:id="@+id/subs_card"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_10sdp">
+
+            <pl.droidsonroids.gif.GifImageView
+                android:id="@+id/shirt_img_vu_subs"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_gravity="center"
+                android:elevation="2dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/loading"/>
+
+            <TextView
+                android:id="@+id/tv_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:layout_below="@+id/shirt_img_vu_subs"
+                android:text="Please wait we will redirect you to divide player screen in a while. \n\nلرجاء الانتظار، سيتم تحويلك إلى شاشة تقسيم اللاعبين بعد قليل."
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textSize="16sp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textColor="@color/blackColor" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+
+</androidx.cardview.widget.CardView>
+
+</RelativeLayout>
+

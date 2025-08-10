@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="@dimen/_100sdp"
+    android:layout_height="@dimen/_100sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rel_main"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="0dp"
+        app:cardBackgroundColor="#0D68B7">
+
+        <ImageView
+            android:id="@+id/img_vu_field_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/field_bg_1"
+            android:scaleType="centerCrop"/>
+
+        <ImageView
+            android:id="@+id/img_vu_field"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/field_bg_1_img"
+            android:layout_marginBottom="@dimen/_5sdp"
+            android:scaleType="centerInside"/>
+
+        <ImageView
+            android:id="@+id/img_vu_shirt"
+            android:layout_width="@dimen/_50sdp"
+            android:layout_height="@dimen/_50sdp"
+            android:src="@drawable/t_shirt_ic"
+            android:scaleType="centerInside"
+            android:layout_gravity="center"/>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

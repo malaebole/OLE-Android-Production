@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/one_hour"
+        android:title="@string/one_hour" />
+
+    <item
+        android:id="@+id/one_half_hour"
+        android:title="@string/one_half_hour" />
+
+    <item
+        android:id="@+id/two_hour"
+        android:title="@string/two_hour" />
+
+</menu>

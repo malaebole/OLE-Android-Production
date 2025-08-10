@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgVuColor"
+    tools:context=".player.OleHistoryDetailActivity">
+
+    <include
+        android:id="@+id/bar"
+        layout="@layout/oleplayer_app_bar_main"/>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/top"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_15sdp"
+        android:layout_below="@+id/bar"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardBackgroundColor="@color/whiteColor"
+        app:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp">
+
+            <LinearLayout
+                android:id="@+id/ln_top"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tv_played"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="TOTAL 0 PLAYED"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/blueColorNew"/>
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Last Played"
+                    android:gravity="center"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/subTextColor"/>
+
+            </LinearLayout>
+
+            <ae.oleapp.util.OleProfileView
+                android:id="@+id/profile_vu_1"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_below="@id/ln_top"
+                app:p_image="@drawable/player_active"
+                app:p_name=""/>
+
+            <LinearLayout
+                android:id="@+id/ln"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_toEndOf="@+id/profile_vu_1"
+                android:layout_toStartOf="@id/profile_vu_2"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@id/ln_top"
+                android:layout_marginTop="@dimen/_8sdp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_bg_gray_no_padding">
+
+                    <TextView
+                        android:id="@+id/tv_p1_win"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blueColorNew"
+                        android:text="23"
+                        android:fontFamily="sans-serif"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/darkTextColor"
+                        android:text="@string/win"
+                        android:layout_below="@+id/tv_p1_win"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:fontFamily="sans-serif"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:layout_marginEnd="@dimen/_5sdp"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:background="@drawable/rounded_corner_bg_gray_no_padding">
+
+                    <TextView
+                        android:id="@+id/tv_draw"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blueColorNew"
+                        android:text="23"
+                        android:fontFamily="sans-serif"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/darkTextColor"
+                        android:text="@string/draw"
+                        android:layout_below="@+id/tv_draw"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:fontFamily="sans-serif"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:background="@drawable/rounded_corner_bg_gray_no_padding">
+
+                    <TextView
+                        android:id="@+id/tv_p2_win"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/blueColorNew"
+                        android:text="23"
+                        android:fontFamily="sans-serif"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/darkTextColor"
+                        android:text="@string/win"
+                        android:layout_below="@+id/tv_p2_win"
+                        android:layout_centerHorizontal="true"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:fontFamily="sans-serif"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <ae.oleapp.util.OleProfileView
+                android:id="@+id/profile_vu_2"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_80sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_below="@id/ln_top"
+                app:p_image="@drawable/player_active"
+                app:p_name=""/>
+
+            <ImageView
+                android:id="@+id/vs"
+                android:layout_width="@dimen/_23sdp"
+                android:layout_height="@dimen/_23sdp"
+                android:src="@drawable/vs_ic"
+                android:scaleType="centerInside"
+                android:layout_below="@+id/ln"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"/>
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/btm_vu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginBottom="@dimen/_15sdp"
+        android:layout_below="@+id/top"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardBackgroundColor="@color/whiteColor"
+        app:cardElevation="0dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:id="@+id/header"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:weightSum="2">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:weightSum="1">
+
+                        <TextView
+                            android:id="@+id/date"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_weight="0.5"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/date"
+                            android:textColor="@color/darkTextColor" />
+
+                        <TextView
+                            android:id="@+id/club"
+                            android:layout_width="0dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0.5"
+                            android:fontFamily="sans-serif"
+                            android:text="@string/club"
+                            android:textColor="@color/darkTextColor" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardvu1"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        app:cardCornerRadius="@dimen/_3sdp"
+                        app:cardElevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/p1_small_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/player_active"
+                            android:scaleType="centerInside"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <ImageView
+                        android:id="@+id/vs2"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:src="@drawable/vs_ic"
+                        android:scaleType="centerInside"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/cardvu1"/>
+
+                    <androidx.cardview.widget.CardView
+                        android:id="@+id/cardvu2"
+                        android:layout_width="@dimen/_24sdp"
+                        android:layout_height="@dimen/_24sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_toEndOf="@id/vs2"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        app:cardCornerRadius="@dimen/_3sdp"
+                        app:cardElevation="0dp">
+
+                        <ImageView
+                            android:id="@+id/p2_small_img"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:src="@drawable/player_active"
+                            android:scaleType="centerInside"/>
+
+                    </androidx.cardview.widget.CardView>
+
+                    <TextView
+                        android:id="@+id/points"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/goals"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:fontFamily="sans-serif"
+                        android:textColor="@color/darkTextColor"
+                        android:gravity="center"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:layout_toEndOf="@id/cardvu2"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <View
+                android:id="@+id/sep"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_1sdp"
+                android:layout_below="@id/header"
+                android:background="@color/separatorColor"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_vu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/sep"
+                android:layout_marginTop="@dimen/_5sdp" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

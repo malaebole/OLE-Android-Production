@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="PreviewFieldViewA">
+        <attr name="image" format="reference" />
+        <attr name="text" format="string" />
+        <attr name="progress" format="float" />
+    </declare-styleable>
+
+    <declare-styleable name="NormalPreviewFieldView">
+        <attr name="shirt_image" format="reference" />
+        <attr name="player_name" format="string" />
+        <attr name="profile_image" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="ProfileView">
+        <attr name="p_image" format="reference" />
+        <attr name="p_name" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="GreenBtnBig">
+        <attr name="btn_image" format="reference" />
+        <attr name="btn_title" format="string" />
+        <attr name="btn_title_color" format="color" />
+        <attr name="btn_text_appearance" format="reference" />
+    </declare-styleable>
+
+    <declare-styleable name="PadelProfileView">
+        <attr name="p_p_image" format="reference" />
+        <attr name="p_p_name" format="string" />
+    </declare-styleable>
+
+    <declare-styleable name="OutlineTextView">
+        <attr name="textStrokeColor" format="color"/>
+        <attr name="textStrokeWidth" format="float"/>
+    </declare-styleable>
+    <declare-styleable name="PreviewFieldView">
+        <attr name="lineupshirt_image" format="reference" />
+        <attr name="lineupplayer_name" format="string" />
+        <attr name="lineupprofile_image" format="reference" />
+    </declare-styleable>
+    <declare-styleable name="MagicTextView">
+        <attr name="strokeWidth" format="dimension" />
+        <attr name="strokeMiter" format="dimension" />
+        <attr name="strokeColor" format="color" />
+        <attr name="strokeJoinStyle">
+            <enum name="miter" value="0" />
+            <enum name="bevel" value="1" />
+            <enum name="round" value="2" />
+        </attr>
+    </declare-styleable>
+    <declare-styleable name="RadarView">
+        <attr name="radar_layer" format="integer" />
+        <attr name="rotation_enable" format="boolean" />
+        <attr name="web_mode" format="enum">
+            <enum name="polygon" value="1" />
+            <enum name="circle" value="2" />
+        </attr>
+        <attr name="max_value" format="float" />
+
+        <attr name="vertex_line_color" format="color" />
+        <attr name="vertex_line_width" format="dimension" />
+        <attr name="layer_line_color" format="color" />
+        <attr name="layer_line_width" format="dimension" />
+        <attr name="vertex_text_color" format="color" />
+        <attr name="vertex_text_size" format="dimension" />
+        <attr name="vertex_icon_size" format="dimension" />
+        <attr name="vertex_icon_position" format="enum">
+            <enum name="left" value="1" />
+            <enum name="right" value="2" />
+            <enum name="top" value="3" />
+            <enum name="bottom" value="4" />
+            <enum name="center" value="5" />
+        </attr>
+        <attr name="vertex_icon_margin" format="dimension" />
+        <attr name="center_text_color" format="color" />
+        <attr name="center_text_size" format="dimension" />
+        <attr name="vertex_text_offset" format="dimension" />
+
+        <attr name="center_text" format="string" />
+        <attr name="vertex_text" format="reference" />
+
+
+        //Deprecated
+        <attr name="radar_line_color" format="color" />
+        <attr name="radar_line_enable" format="boolean" />
+        <attr name="radar_line_width" format="dimension" />
+    </declare-styleable>
+</resources>

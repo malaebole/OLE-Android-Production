@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="orange">#fffaaa00</color>
+    <color name="primary">#03A9F4</color>
+    <color name="white">#fff</color>
+    <color name="yellow">#ffff981e</color>
+    <string name="app_name">StepsView</string>
+    <declare-styleable name="StepsView">
+        <attr format="integer" name="numOfSteps"/>
+        <attr format="integer" name="completePosition"/>
+        <attr format="reference" name="labels"/>
+        <attr format="reference" name="barColor"/>
+        <attr format="reference" name="progressColor"/>
+        <attr format="reference" name="labelColor"/>
+        <attr format="reference" name="progressTextColor"/>
+        <attr format="boolean" name="hideProgressText"/>
+        <attr format="float" name="labelSize"/>
+        <attr format="float" name="progressMargin"/>
+        <attr format="float" name="circle_radius"/>
+        <attr format="float" name="progressStrokeWidth"/>
+    </declare-styleable>
+</resources>

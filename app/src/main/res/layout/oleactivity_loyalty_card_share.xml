@@ -1,0 +1,462 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/bgVuColor"
+    tools:context=".player.OleLoyaltyCardShareActivity">
+
+    <RelativeLayout
+        android:id="@+id/bar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <include
+            android:id="@+id/title_bar"
+            layout="@layout/oleplayer_app_bar_main"/>
+
+        <Button
+            android:id="@+id/btn_share"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:layout_centerVertical="true"
+            android:layout_alignParentEnd="true"
+            android:text="@string/post"
+            android:textAllCaps="false"
+            android:textColor="@color/blueColorNew"
+            android:padding="@dimen/_2sdp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/share_vu"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/bar">
+
+        <ImageView
+            android:id="@+id/field_bg"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/story_loyalty" />
+
+        <ImageView
+            android:id="@+id/logo"
+            android:layout_width="@dimen/_170sdp"
+            android:layout_height="@dimen/_70sdp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:scaleType="centerInside"
+            android:src="@drawable/result_logo" />
+
+        <RelativeLayout
+            android:id="@+id/title_vu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_110sdp"
+            android:layout_below="@id/logo"
+            android:layout_marginTop="@dimen/_20sdp"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginEnd="@dimen/_20sdp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:src="@drawable/loyalty_title_frame" />
+
+            <TextView
+                android:id="@+id/tv_offer_name"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/barlow_blackitalic"
+                android:gravity="center"
+                android:text="Winter\nOffer"
+                android:textAllCaps="true"
+                android:textColor="@color/whiteColor"
+                android:textSize="40sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_bar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/title_vu"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_25sdp"
+            android:layout_marginEnd="@dimen/_20sdp"
+            android:background="@drawable/loyalty_template_border">
+
+            <ImageView
+                android:id="@+id/offer_tag"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="@dimen/_50sdp"
+                android:src="@drawable/loyalty_offer_tag"
+                android:scaleType="centerInside"
+                android:layout_alignParentEnd="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:layout_marginBottom="@dimen/_15sdp"/>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_3sdp"
+                android:background="#AFBE00"
+                android:layout_centerVertical="true"
+                android:layout_toStartOf="@+id/offer_tag"
+                android:layout_alignStart="@id/ln"
+                android:layout_marginStart="@dimen/_15sdp"/>
+
+            <LinearLayout
+                android:id="@+id/ln"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_40sdp"
+                android:orientation="horizontal"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toStartOf="@+id/offer_tag">
+
+                <RelativeLayout
+                    android:id="@+id/rel_circle_1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/circle_1"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/offer_circle"
+                        android:scaleType="centerInside"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignStart="@id/circle_1"
+                        android:layout_alignEnd="@id/circle_1"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:gravity="center"
+                        android:text="1"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/_25sdp" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_circle_2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/circle_2"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/offer_circle"
+                        android:scaleType="centerInside"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="2"
+                        android:layout_alignStart="@id/circle_2"
+                        android:layout_alignEnd="@id/circle_2"
+                        android:gravity="center"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/_25sdp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_circle_3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/circle_3"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/offer_circle"
+                        android:scaleType="centerInside"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="3"
+                        android:layout_alignStart="@id/circle_3"
+                        android:layout_alignEnd="@id/circle_3"
+                        android:gravity="center"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/_25sdp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_circle_4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/circle_4"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/offer_circle"
+                        android:scaleType="centerInside"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="4"
+                        android:layout_alignStart="@id/circle_4"
+                        android:layout_alignEnd="@id/circle_4"
+                        android:gravity="center"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/_25sdp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_circle_5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/circle_5"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/offer_circle"
+                        android:scaleType="centerInside"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="5"
+                        android:layout_alignStart="@id/circle_5"
+                        android:layout_alignEnd="@id/circle_5"
+                        android:gravity="center"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/_25sdp"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/rel_circle_6"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/circle_6"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:src="@drawable/offer_circle"
+                        android:scaleType="centerInside"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:text="6"
+                        android:layout_alignStart="@id/circle_6"
+                        android:layout_alignEnd="@id/circle_6"
+                        android:gravity="center"
+                        android:fontFamily="@font/montserrat_bold"
+                        android:textColor="@color/blackColor"
+                        android:textSize="@dimen/_25sdp"/>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_en"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rel_bar"
+            android:visibility="invisible"
+            android:layoutDirection="ltr">
+
+            <TextView
+                android:id="@+id/tv_discount_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="@font/oswald_regular"
+                android:gravity="center"
+                android:text="75"
+                android:textColor="#FFE610"
+                android:textSize="100sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toStartOf="@+id/tv_discount_value"
+                android:fontFamily="@font/oswald_regular"
+                android:gravity="center"
+                android:text="get"
+                android:textAllCaps="true"
+                android:textColor="#FFE610"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/tv_currency"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:layout_toEndOf="@+id/tv_discount_value"
+                android:fontFamily="@font/oswald_regular"
+                android:gravity="center"
+                android:text="AED"
+                android:textColor="#FFE610"
+                android:textSize="50sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_currency"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginTop="@dimen/_minus25sdp"
+                android:layout_toEndOf="@+id/tv_discount_value"
+                android:fontFamily="@font/oswald_regular"
+                android:gravity="center"
+                android:text="OFF"
+                android:textColor="#FFE610"
+                android:textSize="50sp" />
+
+            <TextView
+                android:id="@+id/booking_count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_discount_value"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_10sdp"
+                android:fontFamily="@font/robotocondensed_bolditalic"
+                android:gravity="center"
+                android:text="6th"
+                android:textColor="#FFE610"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_discount_value"
+                android:layout_alignTop="@id/booking_count"
+                android:layout_centerHorizontal="true"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_toStartOf="@id/booking_count"
+                android:fontFamily="@font/robotocondensed_bolditalic"
+                android:gravity="center"
+                android:text="On your"
+                android:textColor="@color/whiteColor"
+                android:textSize="40sp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_discount_value"
+                android:layout_alignTop="@id/booking_count"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_toEndOf="@id/booking_count"
+                android:fontFamily="@font/robotocondensed_bolditalic"
+                android:gravity="center"
+                android:text="Booking"
+                android:textColor="@color/whiteColor"
+                android:textSize="40sp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/rel_ar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/rel_bar"
+            android:layoutDirection="rtl">
+
+            <TextView
+                android:id="@+id/tv_discount_ar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_25sdp"
+                android:fontFamily="@font/oswald_regular"
+                android:gravity="center"
+                android:text="احصل على خصم ٢٥٪ على حجزك السادس"
+                android:textAllCaps="true"
+                android:textColor="#FFE610"
+                android:textSize="40sp" />
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_below="@+id/rel_en"
+            android:layout_marginStart="@dimen/_20sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_20sdp">
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/robotocondensed_bolditalic"
+                android:gravity="center"
+                android:text="Valid till 10/10/2021"
+                android:textColor="#F02301"
+                android:textSize="30sp" />
+
+            <LinearLayout
+                android:id="@+id/club_vu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/_15sdp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:layout_width="@dimen/_35sdp"
+                    android:layout_height="@dimen/_35sdp"
+                    android:scaleType="centerInside"
+                    android:layout_gravity="center_vertical"
+                    android:src="@drawable/result_loc_white" />
+
+                <TextView
+                    android:id="@+id/tv_club_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/montserrat_extrabold"
+                    android:text="Al Tahadi"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    android:textColor="@color/whiteColor"
+                    android:textSize="30sp" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</RelativeLayout>

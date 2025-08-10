@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        tools:context=".fragments.UnlockedJerseyPopupFragment">
+
+
+    <ImageButton
+        android:id="@+id/btn_close"
+        android:layout_width="45dp"
+        android:layout_height="45dp"
+        android:layout_above="@+id/watch_ad"
+        android:layout_alignStart="@+id/watch_ad"
+        android:layout_alignEnd="@+id/watch_ad"
+        android:layout_marginStart="194dp"
+        android:layout_marginTop="181dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="5dp"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:src="@drawable/close_button" />
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/watch_ad"
+        android:layout_width="240dp"
+        android:layout_height="@dimen/_280sdp"
+        android:layout_weight="1"
+        app:cardCornerRadius="@dimen/_10sdp"
+        android:layout_centerInParent="true"
+        app:cardElevation="0dp">
+
+                        <RelativeLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:background="@drawable/customborder">
+
+                            <ImageView
+                                android:layout_width="wrap_content"
+                                android:layout_height="@dimen/_40sdp"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="10dp"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginEnd="10dp"
+                                android:layout_marginBottom="@dimen/_10sdp"
+                                android:gravity="center"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/subscription_txt_bg" />
+                            <TextView
+                                android:id="@+id/ad_jersey_txt"
+                                android:layout_width="match_parent"
+                                android:layout_height="@dimen/_30sdp"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentTop="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_marginStart="2dp"
+                                android:layout_marginTop="0dp"
+                                android:layout_marginEnd="0dp"
+                                android:gravity="center"
+                                android:fontFamily="@font/dubai_bold"
+                                android:text="Congratulations"
+                                android:textColor="@color/black" />
+
+                            <RelativeLayout
+                                android:id="@+id/ad_card"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_below="@id/ad_jersey_txt"
+                                android:layout_centerHorizontal="true"
+                                android:layout_marginTop="@dimen/_20sdp">
+
+                                <FrameLayout
+                                    android:layout_width="@dimen/_140sdp"
+                                    android:layout_height="@dimen/_140sdp"
+                                    android:layout_marginStart="@dimen/_10sdp"
+                                    android:layout_marginEnd="@dimen/_10sdp">
+
+                                    <pl.droidsonroids.gif.GifImageView
+                                        android:id="@+id/spark"
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:src="@drawable/spark"
+                                        android:layout_gravity="center_vertical|center"
+                                        android:scaleType="centerInside"/>
+                                    <View
+                                        android:layout_width="match_parent"
+                                        android:layout_height="match_parent"
+                                        android:background="@drawable/customcircle" />
+
+                                    <ImageView
+                                        android:id="@+id/shirt_img_vu_ad"
+                                        android:layout_width="@dimen/_80sdp"
+                                        android:layout_height="@dimen/_80sdp"
+                                        android:layout_gravity="center"
+                                        android:elevation="2dp"
+                                        android:scaleType="centerInside"
+                                        android:src="@drawable/shirtl" />
+
+                                </FrameLayout>
+
+                            </RelativeLayout>
+
+
+                            <TextView
+                                android:id="@+id/tv_ad"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_alignParentStart="true"
+                                android:layout_alignParentEnd="true"
+                                android:layout_alignParentBottom="true"
+                                android:layout_marginStart="0dp"
+                                android:layout_marginEnd="0dp"
+                                android:layout_marginBottom="@dimen/_20sdp"
+                                android:gravity="center"
+                                android:text="This Jersey Has Been Unlocked \nFor Next 24 Hours!"
+                                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                                android:textColor="@color/whiteColor" />
+
+                        </RelativeLayout>
+
+                    </androidx.cardview.widget.CardView>
+
+
+
+    </RelativeLayout>
+

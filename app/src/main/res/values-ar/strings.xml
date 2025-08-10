@@ -1,0 +1,1423 @@
+<resources>
+    <string name="facebook_app_id">502131068113695</string>
+    <string name="site_key">6Le5ddkkAAAAAIx6IfHPbCdW98gszYrU3Wp9vrjP</string>
+    <string name="app_name">اوليه</string>
+    <string name="email">ايميل</string>
+    <string name="phone">رقم الهاتف</string>
+    <string name="password">الرقم السري</string>
+    <string name="forgot_pass">نسيت الرقم السري</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="signup">التسجيل</string>
+    <string name="i_want_to_signup">اريد الاشتراك</string>
+    <string name="skip">تخطى</string>
+    <string name="phone_no">رقم الهاتف</string>
+    <string name="invalid_email">الايميل خطا</string>
+    <string name="invalid_pass">الرقم السري يجب ان يتكون من ٦ احرف</string>
+    <string name="select_country_code">حدد فتح خط دولتك</string>
+    <string name="enter_phone">ادخل رقم الهاتف</string>
+    <string name="phone_not_start_0">لا ينبغي أن يبدأ الهاتف بـ 0</string>
+    <string name="next">التالي</string>
+    <string name="select_user_type">اختر فئتك</string>
+    <string name="player">لاعب</string>
+    <string name="referee">حكم</string>
+    <string name="owner">صاحب ملعب</string>
+    <string name="select_usertype">اختر فئتك</string>
+    <string name="coming_soon">قريبا</string>
+    <string name="first_name">الاسم الاول</string>
+    <string name="add_image_optional">أضف صورة (اختياري)</string>
+    <string name="last_name">الاسم الاخير</string>
+    <string name="nick_name">الاسم المستعار</string>
+    <string name="select_country">اختار الدولة</string>
+    <string name="select_country_region">حدد البلد / المنطقة</string>
+    <string name="select_city">اختار المدينة</string>
+    <string name="date_of_birth">تاريخ الميلاد</string>
+    <string name="terms_cond_register">بالنقر على الاشتراك ، انت توافق على الشروط والاحكام الخاصة بنا .</string>
+    <string name="club_name">اسم الملعب</string>
+    <string name="club_name_ar">اسم الملعب بالعربية</string>
+    <string name="reset_pass"><a href="#">استرجع الرقم السري</a></string>
+    <string name="reset_p">استرجع الرقم السري</string>
+    <string name="enter_email_associated_account">ادخل ايميلك المترابط مع حسابك</string>
+    <string name="submit">اكمل التسجيل</string>
+    <string name="recover_pass">استرجع كلمة السر</string>
+    <string name="enter_code_pass">ادخل كود التفعيل و كلمة السر</string>
+    <string name="resend">اعد الارسال</string>
+    <string name="resend_underline"><u>اعد الارسال</u></string>
+    <string name="didnt_receive_code">لم تستلم الرسالة ؟ ارسل مرة اخرى</string>
+    <string name="invalid_code">خطا في الكود</string>
+    <string name="error_occured">حصل خطا ، ارجو اعادة المحاولة</string>
+    <string name="new_password">كلمة سر جديدة</string>
+    <string name="enter_verfi_code">ادخل كود التفعيل</string>
+    <string name="enter_otp">ادخل الكود</string>
+    <string name="we_have_sent_otp">تم ارسال الكود عن طريق رسالة نصية</string>
+    <string name="verify">فعل</string>
+    <string name="enter_first_name">ادخل الاسم الاول</string>
+    <string name="enter_first_name_english">ادخل الاسم الاول بالانجليزي</string>
+    <string name="enter_nick_name_english">ادخل الاسم المستعار</string>
+    <string name="enter_nick_name">ادخل الاسم المستعار</string>
+    <string name="enter_last_name_english">ادخل الاسم الاخير بالانجليزي</string>
+    <string name="enter_last_name">ادخل الاسم الاخير</string>
+    <string name="enter_dob">ادخل تاريخ ميلادك</string>
+    <string name="dismiss">رفض</string>
+    <string name="dismiss_underline"><u>رفض</u></string>
+    <string name="alert">تنبيه</string>
+    <string name="clubs">ملاعب</string>
+    <string name="bookings">حجوزاتي</string>
+    <string name="matches">مباريات</string>
+    <string name="favorites">المفضلة</string>
+    <string name="rank">ترتيب الفرق</string>
+    <string name="my_payment">مدفوعاتي</string>
+    <string name="saved_cards">البطاقات المحفوظة</string>
+    <string name="ole_credit">محفظة اوليه</string>
+    <string name="add_my_price">اضف سعري</string>
+    <string name="add_offers">اضف عرض ( خصومات )</string>
+    <string name="on_call_booking">حجز عن طريق الاتصال</string>
+    <string name="schedule_booking">تثبيت الحجوزات</string>
+    <string name="settings">الضبط</string>
+    <string name="challenges">تحديات</string>
+    <string name="term_condition">الشروط و الاحكام</string>
+    <string name="privacy_policy">سياسة الخصوصية</string>
+    <string name="contact_us">تواصل معنا</string>
+    <string name="live_chat">المحادثة المباشرة</string>
+    <string name="sign_out">تسجيل خروج</string>
+    <string name="do_you_want_signout">هل تود تسجيل الخروج ؟</string>
+    <string name="no">لا</string>
+    <string name="yes">نعم</string>
+    <string name="search_club_by_name">ابحث بالاسم</string>
+    <string name="featured">ميزه</string>
+    <string name="start_from">يبدأ من</string>
+    <string name="see_all">اظهار الكل</string>
+    <string name="join_game">انضم الان</string>
+    <string name="accept">اقبل</string>
+    <string name="km_place">%s كم</string>
+    <string name="aed_place">%s درهم</string>
+    <string name="currency_place">%s %s</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="filter">تصفية</string>
+    <string name="city">المدينة</string>
+    <string name="select_size">اختر حجم الملعب</string>
+    <string name="field_type">نوع الملعب</string>
+    <string name="grass_type">نوع العشب</string>
+    <string name="offers">العروض</string>
+    <string name="available_time">الاوقات المتوفرة</string>
+    <string name="apply">فعل</string>
+    <string name="reset">اعادة تعيين</string>
+    <string name="reset_underline"><u>اعادة تعيين</u></string>
+    <string name="done">تم</string>
+    <string name="off">ايقاف</string>
+    <string name="club_details">معلومات عن الملعب</string>
+    <string name="club_rating">تقييم الملعب</string>
+    <string name="rating_not_zero">لا يمكن أن يكون التقييم صفرًا</string>
+    <string name="book">احجز</string>
+    <string name="booking">حجوزات</string>
+    <string name="change_pass">تغيير الرقم السري</string>
+    <string name="blocked_users">المستخدم محظور</string>
+    <string name="featured_club">ميزة اعلان لملعبك</string>
+    <string name="offered_field">عروض الملاعب</string>
+    <string name="update">تحديث</string>
+    <string name="old_pass">الرقم السري السابق</string>
+    <string name="new_pass">الرقم السري الجديد</string>
+    <string name="confirm_pass">تاكيد الرقم السري</string>
+    <string name="invalid_old_pass">الرقم السري يجب ان لا يقل عن 6 احرف</string>
+    <string name="invalid_new_pass">الرقم الجديد يجب ان لا يقل عن 6 احرف</string>
+    <string name="pass_not_matched">الرقم السري غير متطابق</string>
+    <string name="select_lang">اختر اللغة</string>
+    <string name="book_now">احجز الان</string>
+    <string name="one_hour">1 ساعة</string>
+    <string name="one_half_hour">1.5 ساعة</string>
+    <string name="two_hour">2 ساعتان</string>
+    <string name="saturday">السبت</string>
+    <string name="sunday">الاحد</string>
+    <string name="monday">الاثنين</string>
+    <string name="tuesday">الثلاثاء</string>
+    <string name="wednesday">الاربعاء</string>
+    <string name="thursday">الخميس</string>
+    <string name="friday">الجمعة</string>
+    <string name="offer_desc_place">لدينا خصم في هذا الملعب في الايام التالية %s من الساعة %s - %s. قيمة الخصم %s %s</string>
+    <string name="offer_desc">هذا الملعب لديه عرض</string>
+    <string name="offer">عروض</string>
+    <string name="free">مجانا</string>
+    <string name="you_select_max_qty_place">يمكنك اختيار اقصى كمية %d</string>
+    <string name="duration">المدة</string>
+    <string name="select_duration">اختر المدة</string>
+    <string name="min">دقيقة</string>
+    <string name="you_hide_this_slot">لقد اخفست هذا الوقت</string>
+    <string name="slot_selected_dur_msg">مدة الوقت المختار هو %s ساعات و مدة الوقت هو %s ساعات. هل تود الحجز ل %s ساعات؟</string>
+    <string name="confirmation">تاكيد</string>
+    <string name="selected_time_not_available">الوقت محجوز , هل تريد ان يصلك تنبيه في حال تم توفر الحجز ؟</string>
+    <string name="confirm_booking">تاكيد الحجز</string>
+    <string name="cancel_booking">الغاء الحجز</string>
+    <string name="you_are_blocked_by_field_owner">انت محظور من قبل الملعب</string>
+    <string name="select_date">اختر التاريخ</string>
+    <string name="select_time">اختر الوقت</string>
+    <string name="booking_info">بيانات الحجز</string>
+    <string name="select_payment_type">اختر نوع الدفع</string>
+    <string name="card">بطاقة</string>
+    <string name="cash">نقدا</string>
+    <string name="player_info">بيانات اللاعب</string>
+    <string name="player_name">اسم اللاعب</string>
+    <string name="mobile_no">رقم الهاتف</string>
+    <string name="enter_promo_code">ادخل كود الخصم</string>
+    <string name="field_name">اسم الملعب</string>
+    <string name="field_size">حجم الملعب</string>
+    <string name="day">يوم</string>
+    <string name="date">تاريخ</string>
+    <string name="time">الوقت</string>
+    <string name="hour">ساعة</string>
+    <string name="card_coming_soon">قريبا الدفع الالكتروني</string>
+    <string name="enter_mobile_no">ادخل رقم الهاتف</string>
+    <string name="enter_name">ادخل الاسم</string>
+    <string name="do_you_want_book_at_place">هل انت متاكد من حجزك %s من %s</string>
+    <string name="congrat_booking_done">مبروك ، حجزك اكتمل</string>
+    <string name="go_to_booking_list">اذهب الى قائمة الحجوزات</string>
+    <string name="create_match">انشاء مباراة</string>
+    <string name="select_date_range">حدد نطاق التواريخ</string>
+    <string name="booking_detail">بيانات الحجز</string>
+    <string name="details">معلومات</string>
+    <string name="joined">الفريق المنضم</string>
+    <string name="formation">تقسيم الفريقين</string>
+    <string name="received_request">طلبات الانضمام</string>
+    <string name="cancel">الغاء</string>
+    <string name="confirm">تاكيد</string>
+    <string name="field">ملعب</string>
+    <string name="booking_price">سعر الحجز</string>
+    <string name="joining_fee_per_player">رسوم الاشتراك لدى اللاعب</string>
+    <string name="invoice_number">رقم الفاتورة</string>
+    <string name="note">ملاحظات</string>
+    <string name="status">الحاله</string>
+    <string name="want_to_visible_for_all">هل تريد اظهار المباراة للكل ، لتحصل على فريق ؟</string>
+    <string name="facility_not_available">المرافق غير متوفرة</string>
+    <string name="add_update_facility">اضافة/تحديث</string>
+    <string name="has_booked_this_time"> لقد حجزت هذه المرة %s</string>
+    <string name="edit">تعديل</string>
+    <string name="service_fee">رسوم الخدمة</string>
+    <string name="pending">قيد الانتظار</string>
+    <string name="confirm_by_player">تم التاكيد من قبل اللاعب</string>
+    <string name="confirm_by_owner">تم التاكيد من قبل صاحب الملعب</string>
+    <string name="finished">انتهى</string>
+    <string name="cancel_by_player">تم الالغاء من قبل اللاعب</string>
+    <string name="cancel_by_owner">تم الالغاء من قبل صاحب الملعب</string>
+    <string name="expired">انتهى</string>
+    <string name="blocked">محظور</string>
+    <string name="do_you_want_to_confirm_booking">هل تود التاكيد على الحجز</string>
+    <string name="do_you_want_to_cancel_booking">هل تود الغاء الحجز</string>
+    <string name="write_reason_of_cancel">نرجو منك كتابة سبب الغاء الحجز</string>
+    <string name="you_can_update_fac_in_cash">يمكن تحديث السلة فقط في الحجز النقدي</string>
+    <string name="facilities">مرافق</string>
+    <string name="players">اللاعبين</string>
+    <string name="clubs_place">ملاعب (%d)</string>
+    <string name="players_place">اللاعبين (%d)</string>
+    <string name="all">الكل</string>
+    <string name="most_booking">الاكثر حجزا</string>
+    <string name="most_winning">الاكثر فوزا</string>
+    <string name="name">الاسم</string>
+    <string name="points">النقاط</string>
+    <string name="booking_hrs">عدد ساعات الحجز</string>
+    <string name="hrs_booking_place">حجز ساعة %s</string>
+    <string name="points_place">النقاط %s</string>
+    <string name="profile">الملف</string>
+    <string name="summary">ملخص</string>
+    <string name="oleCountry">الدولة</string>
+    <string name="nationality">الجنسية</string>
+    <string name="played">المباريات السابقة</string>
+    <string name="won">فوز</string>
+    <string name="friendly">تقسيمة</string>
+    <string name="draw_matches">التعادل</string>
+    <string name="lost_matches">عدد الخسائر</string>
+    <string name="win_percentage">نسبة الفوز</string>
+    <string name="change_photo"><u>تغيير الصورة</u></string>
+    <string name="pick_image">اختار صورة</string>
+    <string name="delete_image">احذف الصورة</string>
+    <string name="verify_underline"><u>فعل</u></string>
+    <string name="select_nationality">اختر جنسيتك</string>
+    <string name="notifications">تنبيهات</string>
+    <string name="delete_all">حذف الكل</string>
+    <string name="delete">حذف</string>
+    <string name="delete_notification">احذف التنبيه</string>
+    <string name="delete_all_notifications">حذف جميع الإخطارات</string>
+    <string name="read_all_notifications">قرأت جميع الاشعارات</string>
+    <string name="full_name">الاسم الكامل</string>
+    <string name="contact_no">التواصل</string>
+    <string name="write_msg">اكتب رسالة</string>
+    <string name="enter_full_name">ادخل اسمك الكامل</string>
+    <string name="transactions">عمليات الدفع</string>
+    <string name="my_balance">رصيدي</string>
+    <string name="total_spent">مجموع الصرف</string>
+    <string name="data_not_found">البيانات غير موجودة</string>
+    <string name="wallet">المحفظة</string>
+    <string name="amount_added_wallet_on_place">المبلغ المضاف في المحفظة من %s</string>
+    <string name="amount_added_wallet">المبلغ المضاف في المحفظة</string>
+    <string name="payment">الدفع</string>
+    <string name="discount">خصم</string>
+    <string name="withdraw">سحب</string>
+    <string name="select_club">اختار ملعب</string>
+    <string name="select_field">اختر ملعب</string>
+    <string name="choose_date_range">اختر التواريخ</string>
+    <string name="from">من</string>
+    <string name="to">الى</string>
+    <string name="lifetime">مدى الحياة</string>
+    <string name="today">اليوم</string>
+    <string name="last_week">اخر اسبوع</string>
+    <string name="last_month">اخر شهر</string>
+    <string name="last_2_month">اخر شهرين</string>
+    <string name="last_6_month">اخر 6 اشهر</string>
+    <string name="last_year">اخر سنة</string>
+    <string name="no_result_found">لا يوجد نتائج</string>
+    <string name="search_hint">بحث</string>
+    <string name="club_not_allow_match">لا يسمح عمل مباراة في هذا الملعب</string>
+    <string name="friendly_game">تقسيمه</string>
+    <string name="challenge_match">مباراة ضد فريق</string>
+    <string name="how_many_player_need_play_game">كم لاعب في الملعب</string>
+    <string name="how_many_player_you_need">كم لاعب تحتاج</string>
+    <string name="age_range">الفئة العمرية</string>
+    <string name="create_now">انشئ الان</string>
+    <string name="invite_player">ادعو فريق</string>
+    <string name="visible_for_all">اظهار الطلب للكل</string>
+    <string name="select_players">اختر اللاعبين</string>
+    <string name="challenge_now">تحدى الآن</string>
+    <string name="player_selected">تم اختبار اللاعب%d </string>
+    <string name="enter_total_player">ادخل عدد جميع اللاعبين</string>
+    <string name="max_player_22">مجموع اللاعبين يجب ان يكون بين ١٠ لاعبين و ٢٢ لاعب</string>
+    <string name="enter_player_count">ادخل كم لاعب تريده ان يشارك في التقسيمه</string>
+    <string name="player_name_phone">اسم اللاعب/رقم الهاتف</string>
+    <string name="invite">ادعو</string>
+    <string name="invite_friends">ادعو صديق</string>
+    <string name="player_not_found">اللاعب غير موجود</string>
+    <string name="text_should_3_charachters">الكتابة يجب ان تتكون من 3 احرف</string>
+    <string name="accepted">تم القبول</string>
+    <string name="rejected">تم الرفض</string>
+    <string name="cancelled">ملغى</string>
+    <string name="past">الحجوزات الماضية</string>
+    <string name="top_100_players">افضل 100 فريق</string>
+    <string name="highest_points">اعلى نقاط</string>
+    <string name="most_played_month">اكثر فريق قام باللعب هذا الشهر</string>
+    <string name="most_played_overall">اكثر فريق قام باللعب</string>
+    <string name="min_age">اقل عمر</string>
+    <string name="years">سنوات</string>
+    <string name="remove">ازالة</string>
+    <string name="select_one_player">حدد لاعب واحد على الاقل</string>
+    <string name="remains_place">%s متبقي</string>
+    <string name="invited_place">تمت الدعوة (%d)</string>
+    <string name="invited">تمت الدعوة</string>
+    <string name="you_give_rate">قيم اللاعب</string>
+    <string name="rate">تقييم</string>
+    <string name="paid">قام بالدفع</string>
+    <string name="his_last_rating">اخر تقييم له</string>
+    <string name="joined_place">الفريق المنضم (%d)</string>
+    <string name="received_request_place">الطلبات الانضمام (%d)</string>
+    <string name="add_to_fav">اضف للمفضلة</string>
+    <string name="remove_from_fav">ازالة من المفضلة</string>
+    <string name="reject">تم الرفض</string>
+    <string name="draw">تعادل</string>
+    <string name="challenge_lost">خسر التحدي</string>
+    <string name="match_history">تاريخ المباريات</string>
+    <string name="request">الطلب</string>
+    <string name="do_you_want_to_reject_request">هل تود رفض الطلب</string>
+    <string name="match">مباراة</string>
+    <string name="do_you_want_to_change_match">هل تود اظهار المباراة للكل</string>
+    <string name="win">فوز</string>
+    <string name="club">ملعب</string>
+    <string name="lost">خسر</string>
+    <string name="total_played_place">مجموع المباريات %s مباراة</string>
+    <string name="last_played_place">اخر لعب كان بتاريخ %s</string>
+    <string name="friendly_games_played">عدد التقسيمات</string>
+    <string name="playing_reviews">ملاحظات اللعب</string>
+    <string name="playing_level">مستوى اللعب</string>
+    <string name="what_time_he_came">في اي وقت اتى</string>
+    <string name="not_come">لم يقم بالحضور 😡</string>
+    <string name="late">متأخر ☹️</string>
+    <string name="on_time">على الوقت 😁</string>
+    <string name="before_the_time">قبل الوقت 😍</string>
+    <string name="yrs_old_place">(%s عمره)</string>
+    <string name="have_no_team_create_new">لم تقم بإنشاء فريق ، ارجو انشاء فريق .</string>
+    <string name="create_team">انشئ فريق</string>
+    <string name="upcoming">المباريات القادمة</string>
+    <string name="created_friendly_game_place">%s انشئ تقسيمه</string>
+    <string name="you_are_in">انت منضم</string>
+    <string name="challenge">تحدى</string>
+    <string name="match_request">طلب مباراة</string>
+    <string name="select_your_position">اختر مركزك</string>
+    <string name="note_join_game">للاشتراك في هذه التقسيمه يجب علي الدفع%s %s</string>
+    <string name="match_detail">بيانات المباراة</string>
+    <string name="call">اتصل</string>
+    <string name="accept_now">اقبل الان</string>
+    <string name="match_payment_check">يجب عليك دفع رسوم الاشتراك + رسوم الخدمه %s %s</string>
+    <string name="open">افتح</string>
+    <string name="match_started">بدأت المباراة</string>
+    <string name="match_end">المباراة انتهت</string>
+    <string name="requset_check">ارجو قبول رسوم المشاركة</string>
+    <string name="do_you_want_to_cancel_match">هل تود الغاء المباراة</string>
+    <string name="player_joined_you_want_notification">اللعب مكتمل ، تبغينا نخبرك في حال حد كنسل ؟</string>
+    <string name="update_team">حدث الفريق</string>
+    <string name="team_a">فريق A</string>
+    <string name="team_name">اسم الفريق</string>
+    <string name="team_and_nick_name">الاسم المستعار/اسم الفريق</string>
+    <string name="pick_color">اختر اللون</string>
+    <string name="team_b">فريق B</string>
+    <string name="black">أسود</string>
+    <string name="gray">رصاصي</string>
+    <string name="blue">ازرق</string>
+    <string name="yellow">اصفر</string>
+    <string name="pink">وردي</string>
+    <string name="red">احمر</string>
+    <string name="purple">بنفسجي</string>
+    <string name="aqua">اكوا</string>
+    <string name="select_color">إختر لون</string>
+    <string name="enter_team_name">ادخل اسم الفريق</string>
+    <string name="enter_team_name_english">ادخل اسم الفريق بالانجليزي</string>
+    <string name="add_players">اضف لاعبين</string>
+    <string name="preview">عرض التوزيع</string>
+    <string name="booking_finished_cannot_add">لقد قمت بلعب هذه المباراة ، لا يمكن اضافة لاعب الان</string>
+    <string name="add">اضف</string>
+    <string name="add_to_game">اضفه للتقسيمة</string>
+    <string name="select_position">اختر المركز</string>
+    <string name="add_now">اضف الان</string>
+    <string name="remove_from_game">ازالته من التقسيمه</string>
+    <string name="make_captain">قسم اللاعبين</string>
+    <string name="remove_player_before_make_captain">ابعده من الفريق لنسمح لك باختيار كبتن</string>
+    <string name="remove_captain">الغاء تقسيمة اللاعبين</string>
+    <string name="captain_turn">دور الكبتن</string>
+    <string name="your_turn">دورك</string>
+    <string name="do_you_want_captain_choose_player">هو تريد ان يبدا الكبتن باختيار لاعب ؟</string>
+    <string name="write_your_feedback">اكتب ملاحظاتك</string>
+    <string name="playing_level_not_zero">تقييم اللاعب لا يمكن ان يكون صفر</string>
+    <string name="select_player_time">يرجى اختيار وقت حضور اللاعب</string>
+    <string name="skip_all">تخطى الكل</string>
+    <string name="rate_players">قيم اللاعب</string>
+    <string name="pdf_file">ملف PDF جودة اعلى</string>
+    <string name="image">صورة</string>
+    <string name="pay_with_cash">ادفع كاش</string>
+    <string name="add_new_card">اضف بطاقة جديدة</string>
+    <string name="expiry">انتهاء</string>
+    <string name="cvv">الكود</string>
+    <string name="card_number">رقم البطاقة</string>
+    <string name="enter_card_number">ادخل رقم البطاقة</string>
+    <string name="add_my_card">اضف بطاقتي</string>
+    <string name="invalid_cvv">كود البطاقة خاطئ</string>
+    <string name="invalid_expiry">تاريخ الانتهاء خاطئ</string>
+    <string name="invalid_card_number">رقم البطاقة خاطئ</string>
+    <string name="result">النتائج</string>
+    <string name="from_date">من تاريخ</string>
+    <string name="to_date">الى تاريخ</string>
+    <string name="goals">اهداف</string>
+    <string name="add_balance">اضف رصيد</string>
+    <string name="ole_balance">رصيد اوليه</string>
+    <string name="available">متاح</string>
+    <string name="aed">درهم</string>
+    <string name="available_credit">الرصيد المتبقي</string>
+    <string name="topup">تعبئة</string>
+    <string name="deduction">المبلغ المستقطع</string>
+    <string name="date_time">التاريخ و الوقت</string>
+    <string name="do_you_want_to_accept_request">هل تود قبول الطلب</string>
+    <string name="want_to_send_challenge">هل تود ارسال التحدي</string>
+    <string name="age">العمر</string>
+    <string name="players_should_even">عدد اللاعبين يجب ان يكون زوجي</string>
+    <string name="booking_remaining_discount">"متبقي %s حجوزات لتحصل على خصم (%s/%s)"</string>
+    <string name="remaining_amount_place">"المبلغ المتبقي: %s %s"</string>
+    <string name="booking_finished_cannot_create_team">التقسيمة انتهت , لن تتمكن من انشاء فريقين</string>
+    <string name="select_card">اختر بطاقة</string>
+    <string name="payment_is_in_process">الدفع قيد الاجراء</string>
+    <string name="insufficient_balance_wallet">ليس لديك الرصيد الكافي في المحفظة</string>
+    <string name="amount">كمية</string>
+    <string name="load">تعبئة</string>
+    <string name="success">نجح</string>
+    <string name="payment_status">حالة السداد</string>
+    <string name="pay">ادفع</string>
+    <string name="unpaid">غير مدفوع</string>
+    <string name="total_player_in_game">مجموع اللاعبين في هذه التقسيمة</string>
+    <string name="total_player_you_need">كم لاعب تحتاج</string>
+    <string name="joining_fee_per_team">رسوم دفع للفريق</string>
+    <string name="cancel_game">الغاء التقسيمة</string>
+    <string name="cancel_match">"الغاء المباراة</string>
+    <string name="place_joined">تم الانضمام %d</string>
+    <string name="discount_on_next_booking">مبروك لديك خصم على حجزك التالي</string>
+    <string name="friendly_game_notes">سعر هذه التقسيمة ( يشمل سعر الحجز في حال لم يتم الدفع اونلاين ) و في حال قمت بالدفع اونلاين , سيتم تحويل المبلغ المتبقي في محفظة اوليه بعد دفع اللاعبين المبلغ</string>
+    <string name="match_notes">سعر هذه المباراة ( يشمل سعر الحجز ان لم تقم بالدفع اونلاين ) وفي حال الدفع اونلاين سيتم استلام نصف المبلغ كاش من قبل الفريق المنافس وفي حال قام الفريق الاخر بالدفع اونلاين فسيتم تحويل المبلغ لمحفظة اوليه الخاصه بك</string>
+    <string name="time_to_update">حان الوقت لتحديث التطبيق</string>
+    <string name="update_desc">لقد قمنا بعمل الكثير من التحديثات لاجلك لتجربة واستخدام افضل</string>
+    <string name="update_app">حدث الان</string>
+    <string name="not_now"><u>ليس الان</u></string>
+    <string name="major_changes_in_app">الكثير من التحديثات ، حدث التطبيق اولا</string>
+    <string name="match_creator_can_send">فقط منشىء المباراة يمكنه الكتابه</string>
+    <string name="chat">دردشة</string>
+    <string name="game_creator_can_send">فقط منشىء التقسيمه يمكنه الكتابه</string>
+    <string name="players_not_avail_chat">اللاعبون ليسو متاحين للدردشة</string>
+    <string name="enter_club_name">ادخل اسم الملعب</string>
+    <string name="enter_club_name_english">ادخل اسم الملعب بالانجليزية</string>
+    <string name="earnings">الدخل</string>
+    <string name="fast_on_call_booking">الحجز السريع</string>
+    <string name="create_promotion">انشئ خصومات</string>
+    <string name="promotion">خصومات</string>
+    <string name="today_earning">ايرادات اليوم</string>
+    <string name="hours">عدد الساعات</string>
+    <string name="confirmed">أكدو الحجز</string>
+    <string name="sms_services">خدمة الرسائل النصية</string>
+    <string name="delete_club">احذف معلب</string>
+    <string name="payment_settings">خيارات الدفع</string>
+    <string name="advertise_club">اعلن عن ملعبك</string>
+    <string name="player_booking_count">عدد حجوزات اللاعبين</string>
+    <string name="select_club_first">اختر ملعب اولا</string>
+    <string name="field_not_found">لم يتم العثور على الملعب</string>
+    <string name="flex_booking_time">الحجز المرن</string>
+    <string name="add_field">اضف ملعب</string>
+    <string name="add_club">اضف ملعب</string>
+    <string name="add_logo">اضف شعار</string>
+    <string name="add_cover_image">اضف صورة للملعب</string>
+    <string name="location">العنوان</string>
+    <string name="open_time">يفتح من</string>
+    <string name="close_time">موعد الاغلاق</string>
+    <string name="add_more_shift">اضف شفت اخر</string>
+    <string name="notify_gap">اخبرني في حال وجود 30 دقيقه خاليه</string>
+    <string name="select_day">اختار اليوم</string>
+    <string name="select_2nd_shift">اختار الوقت للشفت الثاني</string>
+    <string name="select_1st_shift">اختار الوقت للشفت الاول</string>
+    <string name="add_max_two_shift">يمكنك اضافة شفتين فقط لليوم الواحد</string>
+    <string name="select_location">حدد العنوان</string>
+    <string name="select_open_close_time">اختار موعد الفتح والاغلاق</string>
+    <string name="select_booking_time_dur">اختر الوقت المتكرر</string>
+    <string name="add_club_first">اضف ملعب اولا</string>
+    <string name="select_field_size">اختر حجم الملعب</string>
+    <string name="select_field_type">اختر نوع الملعب</string>
+    <string name="select_grass_type">اختر نوع الارضية</string>
+    <string name="merge_fields">هل تود ضم الملاعب ؟</string>
+    <string name="select_day_price">اختر اليوم و السعر </string>
+    <string name="enter_price">ادخل السعر</string>
+    <string name="max_three_field_merge">يمكنك ضم ٣ ملاعب كأقصى حد</string>
+    <string name="min_two_fields_merge">ملعبين هو الحد الادنى للدمج. ليس لديك ملاعب كافية</string>
+    <string name="enter_field_name">ادخل اسم الملعب مثال ( ملعب رقم 1 )</string>
+    <string name="select_atleast_teo_fields">اختر ملعبين على الاقل</string>
+    <string name="fields">ملاعب</string>
+    <string name="hide_field">اخفي الملعب</string>
+    <string name="do_you_want_to_delete_field">هل تود حذف الملعب</string>
+    <string name="delete_field">حذف ملعب</string>
+    <string name="place_hours">ساعات %s</string>
+    <string name="open_place">يفتح: %s</string>
+    <string name="close_place">يغلق: %s</string>
+    <string name="do_you_want_to_delete_club">هل تود حذف ملعب</string>
+    <string name="price">السعر</string>
+    <string name="select_type">اختر النوع</string>
+    <string name="unit">الوحده</string>
+    <string name="max_quantity">الحد الاقصى المسموح شراءه</string>
+    <string name="selectable">اختياري</string>
+    <string name="fixed">ثابت</string>
+    <string name="per_item">بالحبة</string>
+    <string name="box">كرتون</string>
+    <string name="select_unit">اختر الوحدة</string>
+    <string name="enter_max_qty">اختر الحد الاقصى</string>
+    <string name="hidden_fields">الملاعب المخفيه</string>
+    <string name="hide_field_for_other">اغلق الملعب</string>
+    <string name="tournament">"بطولة</string>
+    <string name="maintenance">صيانة</string>
+    <string name="holidays">عطلة</string>
+    <string name="other">اخرى</string>
+    <string name="select_all">حدد الكل</string>
+    <string name="hide_now">اغلق الان</string>
+    <string name="unhide">الغي الاغلاق</string>
+    <string name="do_you_want_to_unhide_all_slots">هل تود اغلاق جميع الحجوزات ؟</string>
+    <string name="place_selected">المحدد (%d)</string>
+    <string name="reason">السبب</string>
+    <string name="enter_reason">أدخل السبب</string>
+    <string name="add_price">اضف سعر</string>
+    <string name="discount_price">سعر الخصم</string>
+    <string name="continuous_booking">الحجز المستمر</string>
+    <string name="continuous">المستمر</string>
+    <string name="total_price">السعر الاجمالي</string>
+    <string name="select_from_date">من تاريخ</string>
+    <string name="select_to_date">الى تاريخ</string>
+    <string name="select_days">اختر الايام</string>
+    <string name="do_you_want_schedule_book_at_place" formatted="false">هل تود تثبيت الحجز بالايام التالية %s من تاريخ %s الى %s</string>
+    <string name="bookings_place">حجوزاتي (%d)</string>
+    <string name="cancelled_place">ملغى (%d)</string>
+    <string name="past_place">الحجوزات الماضية (%d)</string>
+    <string name="every_place">كل: %s</string>
+    <string name="update_details">تحدث البيانات</string>
+    <string name="select">اختر</string>
+    <string name="unselect">الغي التحديد</string>
+    <string name="delete_underline"><u>حذف</u></string>
+    <string name="lifetime_booking">جميع حجوزات اللاعب</string>
+    <string name="this_month_booking">حجوزات اللاعب هذا الشهر</string>
+    <string name="block_this_user">احظر هذا المستخدم</string>
+    <string name="unblock">الغاء الحظر</string>
+    <string name="complete">مكتمل</string>
+    <string name="unblock_this_user">الغي حظر هذا اللاعب</string>
+    <string name="promo_place">فعل كود الخصم (-%s %s)</string>
+    <string name="offer_place">فعل الخصم (-%s %s)</string>
+    <string name="loyalty_place">فعل الخصم (-%s %s)</string>
+    <string name="cancel_note_place">هذا اللاعب الغى الحجز %s مرات خلال %s ساعات قبل الحجز</string>
+    <string name="place_discount_on_next_booking">%s خصم في حجزك التالي</string>
+    <string name="place_booking_remaining_discount">متبقي %s حجوزات و تحصل على خصم %s</string>
+    <string name="do_you_want_to_complete">هل تود الاستمرار ؟</string>
+    <string name="unblock_user">الغاء الحظر للمستخدم</string>
+    <string name="do_you_want_to_unblock_user">هل تود الغاء الحظر للمستخدم</string>
+    <string name="block_user">حظر المستخدم</string>
+    <string name="do_you_want_to_block_user">هل تود حظر المستخدم</string>
+    <string name="complete_booking">الحجوزات المؤكدة</string>
+    <string name="extend_time">تمديد الوقت</string>
+    <string name="thirty_minutes">30 دقيقه</string>
+    <string name="sixty_minutes">60 دقيقه</string>
+    <string name="minutes">دقيقه</string>
+    <string name="seconds">ثواني</string>
+    <string name="winner">لقد ربحت</string>
+    <string name="add_card_note">سيتم خصم ١ درهم للتحقق من البطاقة</string>
+    <string name="discount_cards">بطاقات الخصم</string>
+    <string name="promo_codes">كود الخصم</string>
+    <string name="create_new_discount">انشئ خصم جديد</string>
+    <string name="discount_card">بطاقة الخصم</string>
+    <string name="title">عنوان</string>
+    <string name="booking_required">مرات الحجز</string>
+    <string name="percentage">النسبة</string>
+    <string name="enter_title">ادخل العنوان</string>
+    <string name="enter_req_booking">ادخل مرات الحجز</string>
+    <string name="enter_discount_value">ادخل مبلغ الخصم</string>
+    <string name="booking_required_place">مرات الحجز: %s</string>
+    <string name="create_new_promo">انشئ كود خصم جديد</string>
+    <string name="promo_code">كود خصم</string>
+    <string name="generate">تلقائي</string>
+    <string name="limit">الحد الاقصى</string>
+    <string name="unlimited_use">غير محدود</string>
+    <string name="enter_usage_limit">عدد الاستخدام</string>
+    <string name="place_times_applied">%s مرات الاستخدام</string>
+    <string name="create_new_offer">انشئ اوفر جديد</string>
+    <string name="add_offer">اضف اوفر</string>
+    <string name="offer_start">يبدا الاوفر</string>
+    <string name="offer_hours">ساعات الاوفر</string>
+    <string name="select_hours">اختر الساعات</string>
+    <string name="history">التاريخ</string>
+    <string name="this_week">هذا الاسبوع</string>
+    <string name="this_month">هذا الشهر</string>
+    <string name="cancelled_bookings">الحجوزات الملغية</string>
+    <string name="no_have_sms">لا يوجد لديك رسائل نصير , اظغط شراء لتعبئة رصيدك</string>
+    <string name="buy_sms">شراء رسائل نصية</string>
+    <string name="send_sms">ارسل رسالة نصية</string>
+    <string name="buy_now">اشتر الان</string>
+    <string name="quantity">الكمية</string>
+    <string name="for_field_owner">لصاحب الملعب</string>
+    <string name="for_player">للاعبين</string>
+    <string name="thirty_min_gap">للفراغ بين الحجوزات</string>
+    <string name="send_request">ارسل الطلب</string>
+    <string name="favorite_players">اللاعبين المفضلين</string>
+    <string name="sms">رسائل نصية</string>
+    <string name="game_finished">انتهت التقسيمة</string>
+    <string name="match_finished">انتهت المباراة</string>
+    <string name="place_times_played">لعب %s مرات</string>
+    <string name="employee_list">قائمة الموظفين</string>
+    <string name="place_sms">%d رسائل نصية</string>
+    <string name="select_100_sms_min">الرجاء اختيار 100 رسالة على الاقل</string>
+    <string name="place_sms_remain">متبقي %s رسائل</string>
+    <string name="send_sms_request">ارسل طلب الرسائل النصية</string>
+    <string name="approved">تم الاعتماد</string>
+    <string name="sent">تم الارسال</string>
+    <string name="you_have_place_players">(لديك %s لاعب)</string>
+    <string name="cash_payment">دفع الكاش</string>
+    <string name="card_payment">دفع البطاقة</string>
+    <string name="add_bank_account">اضف حسابك البنكي</string>
+    <string name="account_no_place">رقم الحساب: %s</string>
+    <string name="bank_name">اسم البنك</string>
+    <string name="bank">البنك</string>
+    <string name="account_title">عنوان الحساب</string>
+    <string name="iban_number">رقم الايبان</string>
+    <string name="account_no">رقم الحساب</string>
+    <string name="branch">الفرع</string>
+    <string name="enter_bank_name">ادخل اسم البنك</string>
+    <string name="enter_account_title">ادخل عنوان الحساب</string>
+    <string name="enter_account_no">ادخل رقم الحساب</string>
+    <string name="iban_no_place">رقم الايبان: %s</string>
+    <string name="new_advertise">اعلان جديد</string>
+    <string name="featured_now">اعلن الان</string>
+    <string name="active">فعال</string>
+    <string name="expired_soon">ينتهي قريبا</string>
+    <string name="aed_place_day">%s %s/لليوم</string>
+    <string name="total_earning">مجموع الايرادات</string>
+    <string name="total_cash">مجموع الكاش</string>
+    <string name="online_payment">الدفع الالكتروني</string>
+    <string name="export">اخراج</string>
+    <string name="new_customers">العملاء الجدد: %s</string>
+    <string name="email_address">البريد الالكتروني</string>
+    <string name="ole_match_fee">رسوم خدمة اوليه</string>
+    <string name="transfer_to_bank">الايداع الى البنك</string>
+    <string name="transfer">تحويل</string>
+    <string name="received">المستلم</string>
+    <string name="total_bookings">مجموع الحجوزات</string>
+    <string name="total_amount">المبلغ الاجمالي</string>
+    <string name="online_charges">رسوم الخدمة الالكترونية</string>
+    <string name="transaction_date_time">تاريخ المعامله و الوقت</string>
+    <string name="add_employee">اضف موظف</string>
+    <string name="branch_place">الفرع: %s</string>
+    <string name="add_user_roles">اضف المهنه</string>
+    <string name="permissions">التصاريح</string>
+    <string name="user_roles">المهنه</string>
+    <string name="select_permissions">اختر التصاريح</string>
+    <string name="select_user_role">اختر المهنه</string>
+    <string name="employee">موظف</string>
+    <string name="employee_id_place">رقم الموظف: %s</string>
+    <string name="employee_id">رقم الموظف</string>
+    <string name="enter_employee_id">ادخل رقم الموظف</string>
+    <string name="do_you_want_to_delete_employee">هل تود حذف الموظف</string>
+    <string name="you_have_received_payment">لقد تلقيت الدفع</string>
+    <string name="login_as_employee">الدخول كموظف</string>
+    <string name="please_login_first">الرجاء الدخول اولا!</string>
+    <string name="you_have_been_log">تم تسجيل الدخول من هاتف اخر ، الرجاء اعادة الدخول مرة اخرى</string>
+    <string name="ole_game_history">ملف التقسيمه</string>
+    <string name="guest">زائر</string>
+    <string name="emp_id">رقم الموظف</string>
+    <string name="check_internet_connection">تحقق من اتصالك بالإنترنت</string>
+    <string name="all_age">جميع الاعمار</string>
+    <string name="home">الرئيسية</string>
+    <string name="search_club">ابحث عن ملعب</string>
+    <string name="nearby_clubs">الملاعب القريبة</string>
+    <string name="nearby_matches">المباريات القريبة</string>
+    <string name="notifications_promotions">اشعارات/عروض</string>
+    <string name="fee">رسوم</string>
+    <string name="address">العنوان</string>
+    <string name="challenged_you">تحداك</string>
+    <string name="reply">رد</string>
+    <string name="next_booking">حجزك القادم</string>
+    <string name="next_match">المباراة القادمة</string>
+    <string name="next_game">التقسيمة القادمة</string>
+    <string name="request_friendly_game">طلب الانضمام للتقسيمة</string>
+    <string name="invited_you">دعوه</string>
+    <string name="joined_players">اللاعبين المنضمين</string>
+    <string name="invited_players">اللاعبين المدعوين</string>
+    <string name="game_detail">بيانات التقسيمة</string>
+    <string name="lets_talk">كلمنا</string>
+    <string name="reservation_detail">وقت اصدار الحجز</string>
+    <string name="booked_by">الحجز من قبل</string>
+    <string name="confirmed_by">تاكيد الحجز من</string>
+    <string name="completed_by">اكمال الحجز من</string>
+    <string name="cancelled_by">الغاء الحجز من</string>
+    <string name="paid_amount">المبلغ المدفوع</string>
+    <string name="remaining_amount">المبلغ المتبقي</string>
+    <string name="fav_players_not_enough">عدد اللاعبين في المفضلة لا يكفي للعب التقسية</string>
+    <string name="price_detail">بيانات السعر</string>
+    <string name="only_captain_can_change">فقط الكبتن يستطيع التغيير</string>
+    <string name="rate_now">قيم الان</string>
+    <string name="booking_not_found">الحجز غير متوفر</string>
+    <string name="signin">سجل الان</string>
+    <string name="am_new_user">انا مشترك جديد</string>
+    <string name="all_dates">جميع التواريخ</string>
+    <string name="my_booking_dates">تواريخ حجزي</string>
+    <string name="search_items">ابحث عن منتج</string>
+    <string name="categories">الفروع</string>
+    <string name="trending">ترند</string>
+    <string name="flash_deals">خصومات مختارة</string>
+    <string name="best_picks">الاكثر طلبا</string>
+    <string name="pick_best_items">المنتجات الاكثر طلب</string>
+    <string name="hot_trending">ترند</string>
+    <string name="products">المنتجات</string>
+    <string name="brand_products">العلامة التجارية</string>
+    <string name="sold_place">مباع: %s</string>
+    <string name="view_all">اظهار الكل</string>
+    <string name="cart">العربه</string>
+    <string name="checkout">الدفع</string>
+    <string name="add_new_address">اضف عنوان جديد</string>
+    <string name="search_for_address">ابحق عن موقعك</string>
+    <string name="confirm_location">تأكد الموقع</string>
+    <string name="flat_villa_no">شقة/رقم الفيلا</string>
+    <string name="delivery_instruction">تعليمات التوصيل</string>
+    <string name="area">المنطقة</string>
+    <string name="enter_city">ادخل المدينة</string>
+    <string name="enter_area">ادخل المنطقة</string>
+    <string name="enter_address">ادخل العنوان</string>
+    <string name="enter_flat_villa_no">ادخل الشقة/رقم الفيلا</string>
+    <string name="enter_coupon_code">ادخل كود الخصم</string>
+    <string name="shopping_items">منتجاتك</string>
+    <string name="shipping_address">عنوان التوصيل</string>
+    <string name="continue_shoping">اكمل التسوق</string>
+    <string name="track_items">اتبع طلبك</string>
+    <string name="order_has_been_placed">تم اتمام الطلب بنجاح</string>
+    <string name="successfully">مبروك</string>
+    <string name="shop_orders">مشترياتك</string>
+    <string name="tracking">التتبع</string>
+    <string name="placed">قيد التوصيل</string>
+    <string name="shipped">تم الشحن</string>
+    <string name="delivered">تم توصيل الطلب</string>
+    <string name="payment_method">طريقة الدفع</string>
+    <string name="item_total">سعر المنتج</string>
+    <string name="shipping_fee">رسوم الشحن</string>
+    <string name="grand_total">المبلغ الكلي:</string>
+    <string name="review">تقييم</string>
+    <string name="club_not_allow_game">لا يسمح عمل تقسيمه في هذا الملعب</string>
+    <string name="sorting">فرز</string>
+    <string name="popularity">اكثر شعبية</string>
+    <string name="price_high_to_low">السعر:الاغلى الي الارخص</string>
+    <string name="price_low_to_high">السعر:الارخص الى الاغلى</string>
+    <string name="min_price">اقل سعر</string>
+    <string name="max_price">اكثر سعر</string>
+    <string name="inc_vat">(مع الضريبه)</string>
+    <string name="in_stock">سلعة متوفرة حالياً</string>
+    <string name="available_colors">اللون المتوفر:</string>
+    <string name="delivery_to">التوصيل الى</string>
+    <string name="delivered_by">التاريخ المتوقع</string>
+    <string name="reviews">التقييمات</string>
+    <string name="specifications">المواصفات</string>
+    <string name="description">وصف المنتج</string>
+    <string name="free_returns">ارجاع مجاني</string>
+    <string name="free_returns_desc">الارجاع المجاني</string>
+    <string name="trusted_shipping">التوصيل الموثوق</string>
+    <string name="trusted_shipping_desc">سيتم تطبيق رسوم الشحن</string>
+    <string name="contactless_delivery">توصيل بدون تلامس</string>
+    <string name="contactless_delivery_desc">الشحنة سيتم وضعها عند باب بيتك</string>
+    <string name="add_to_cart">اضف الى العربه</string>
+    <string name="item_no_place">رقم المنتج: %s</string>
+    <string name="reviews_place">التقييمات %s</string>
+    <string name="out_of_stock">انتهى من المخزن</string>
+    <string name="order_in_place">اطلب خلال %s</string>
+    <string name="non_returns">غير قابل للاسترجاع</string>
+    <string name="selected_qty_more_than_stock">المنتج انتهى من المخزن</string>
+    <string name="product_added_cart">تم اضافة المنتج الى العربة</string>
+    <string name="view_cart">اظهر العربه</string>
+    <string name="color">اللون</string>
+    <string name="checkout_place">الدفع %.2f %s</string>
+    <string name="review_pay_place"><![CDATA[عرض المنتجات و الدفع %.2f %s]]></string>
+    <string name="office_no_place">مكتب رقم %s</string>
+    <string name="flat_no_place">رقم الشقة %s</string>
+    <string name="select_address">اختر العنوان</string>
+    <string name="office">مكتب</string>
+    <string name="office_no">رقم المكتب</string>
+    <string name="pay_now_place">"ادفع الان %.2f %s</string>
+    <string name="coupon_discount">كود الخصم</string>
+    <string name="cod_fee">الدفع عند التسليم</string>
+    <string name="coupon_place">تم تفعيل كود الخصم (%.2f %s)</string>
+    <string name="items_place">المنتجات: %s</string>
+    <string name="view"><u>عرض</u></string>
+    <string name="order_no_place">رقم الطلب %s</string>
+    <string name="placed_on_place">تم الطلب بتاريخ %s</string>
+    <string name="submit_review">ادخل التقييم</string>
+    <string name="give_review">قيم المنتج</string>
+    <string name="search">بحث</string>
+    <string name="wishlist">المفضله</string>
+
+    <string name="add_more">أضف المزيد</string>
+    <string name="show_to_fav_players">اظهار للاعبين المفضلين</string>
+    <string name="related_products">ذات صلة</string>
+    <string name="shop">تسوق</string>
+    <string name="wallet_deduction">خصم من المحفظة</string>
+    <string name="select_product_variant">حدد نوع المنتج</string>
+    <string name="cancel_order">الغاء الطلب</string>
+    <string name="do_you_want_to_cancel_order">هل تود الغاء الطلب ؟</string>
+    <string name="your_cart_is_empty">عربتك خاليه</string>
+    <string name="shop_now">تسوق الان</string>
+    <string name="pick_up">استلام</string>
+    <string name="delivery">توصيل</string>
+    <string name="collection_point">نقطة الاستلام</string>
+    <string name="insufficient_balance_wallet_remaining_amount_card">لديك رصيد غير كاف في المحفظة.  هل تريد دفع المبلغ المتبقي عبر الانترنت؟</string>
+    <string name="football">كرة قدم</string>
+    <string name="padel">بادل</string>
+    <string name="select_your_partner">اختر زميلك</string>
+    <string name="select_partners_for_pay">اختر زملائك الذين تود الدفع عنهم</string>
+    <string name="your_partners">زملائك</string>
+    <string name="must_select_three_partner">يتوجب عليك اختيار ثلاثة لاعبين او احذف اللاعبين المختارين</string>
+    <string name="must_pay_online_partner">يتوجب عليك الدفع الكترونيا في حال اخترت لاعبين</string>
+    <string name="select_three_player">اختر ثلاثة لاعبين</string>
+    <string name="padel_match_partner_count_error">يجب ازالة زميل واحد و ذلك لان المباراة تحتاج لاعبين فقط</string>
+    <string name="padel_match_duration_error">يجب عليك حجز ساعة ونصف للتمكن من انشاء مباراة</string>
+    <string name="booking_holder_can_create_match">صاحب الحجز فقط يمكنه انشاء مباراة</string>
+    <string name="booking_holder">صاحب الحجز</string>
+    <string name="remove_myself">اخرجني</string>
+    <string name="assign_booking_to_player">اعط حجزي للاعب اخر</string>
+    <string name="select_one_player_only">اختر لاعب واحد</string>
+    <string name="continue_">مستمر</string>
+    <string name="select_your_favorite_sport">اختر رياضتك المفضلة</string>
+    <string name="hello">هلا</string>
+    <string name="your_partner">زميلك</string>
+    <string name="padel_match_desc">انت لم تقم باختيار زميل لك و يتوجب علي اختيار زميل ثم انشاء مباراة</string>
+    <string name="double_player">زميلين</string>
+    <string name="change_your_partner">قم بتغيير زميلك</string>
+    <string name="choose_different_partner_who_not_in_match">اختر زميل اخر ليس متواجد في هذه المباراة</string>
+    <string name="remove_opponent">اخرج الفريق الاخر</string>
+    <string name="partner">زميل</string>
+    <string name="biometric_login">استخدم معرف اللمس</string>
+    <string name="upload_your_profile_photo_first">الرجاء اضافة صورة عرض اولا!</string>
+    <string name="global_rank">التصنيف العالمي</string>
+    <string name="become_member">اصبح عضوا</string>
+    <string name="add_certificate">اضف شهادة</string>
+    <string name="add_certificate_desc">يتطلب وضع وثائق التاهيل لتصبح عضوا معتمد</string>
+    <string name="attach_certificate">اضف شهادة معتمدة</string>
+    <string name="upload_now">حمل الان</string>
+    <string name="booking_dates_limit">تحديد مدة الحجز</string>
+    <string name="football_padel">كرة قدم و بادل</string>
+    <string name="cash_card"><![CDATA[كاش & دفع الكتروني]]></string>
+    <string name="padel_rank">تصنيف البادل</string>
+    <string name="football_rank">تصنيف كرة القدم</string>
+    <string name="one_month">شهر واحد</string>
+    <string name="two_months">شهرين</string>
+    <string name="three_months">ثلاثة اشهر</string>
+    <string name="six_months">ستة اشهر</string>
+    <string name="nine_months">تسعة اشهر</string>
+    <string name="one_year">سنة</string>
+    <string name="two_weeks">اسبوعين</string>
+    <string name="rewards">المكافآت</string>
+    <string name="booking_cancellation">الحجوزات الملغيه</string>
+    <string name="times">مرات</string>
+    <string name="achievements">انجازات</string>
+    <string name="statistics_of_these_results">إحصائيات هذه النتائج</string>
+    <string name="totals">المجموع</string>
+    <string name="players_that_i_played_most_with">أكثر اللاعبين الذين لعبت معهم</string>
+    <string name="select_skills_level">حدد قوتك</string>
+    <string name="skills_level">القوة المطلوبة</string>
+    <string name="power">القوة</string>
+    <string name="remaining">متبقي: </string>
+    <string name="total_remaining">مجموع متبقي: </string>
+    <string name="total_remainingx">مجموع متبقي</string>
+    <string name="completed">مكتمل</string>
+    <string name="collect_reward">استلم مكافئتك</string>
+    <string name="congratulation">الف مبروك</string>
+    <string name="mission_completed_desc">لقد أكملت المهمة بنجاح</string>
+    <string name="owner_signup_desc">ارجو الاكمال في حال كنت المالك لملعب كرة قدم</string>
+    <string name="club_owner">مالك الملعب</string>
+    <string name="how_join_us">كيف توظ الانضمام لنا</string>
+    <string name="change_from_here">تغير من هنا</string>
+    <string name="groups">مجموعات</string>
+    <string name="create_group">انشئ مجموعة</string>
+    <string name="see_all_groups">اظهر جميع المجموعات</string>
+    <string name="select_group">اختر مجموعة</string>
+    <string name="do_you_want_to_delete_group">هل تود حذف المجموعة</string>
+    <string name="new_group">مجموعة جديدة</string>
+    <string name="group_name">اسم المجموعة</string>
+    <string name="enter_group_name">ادخل اسم المجموعة</string>
+    <string name="group_players_not_enough">ليس لديك عدد كافي من اللاعبين في المجموعة</string>
+    <string name="payment_detail">بيانات الدفع</string>
+    <string name="total_paid">مجموع الدفع:</string>
+    <string name="awesome">خطير!</string>
+    <string name="add_score">اضف النتيجة</string>
+    <string name="match_score">نتيجة المباراة</string>
+    <string name="score">النتيجة</string>
+    <string name="enter_score">اضف النتيجة</string>
+    <string name="set_1">Set-1</string>
+    <string name="set_2">Set-2</string>
+    <string name="set_3">Set-3</string>
+    <string name="select_winner_team">إختر الفريق الفائز</string>
+    <string name="pos_payment">الدفع عبر الجهاز</string>
+    <string name="how_many_time_each_player_can_use">عدد استخدام الكود لكل مشترك</string>
+    <string name="group">مجموعة</string>
+    <string name="girls_time_slots">اوقات للنساء</string>
+    <string name="add_score_after_complete_booking">يمكنك اضافة النتيجة بعد انتهاء وقت الحجز</string>
+    <string name="pay_full_amount">دفع المبلغ كامل</string>
+    <string name="pay_for_my_team">الدفع لفريقي</string>
+    <string name="you_cannot_change_partner">لا يمكنك تغيير زميلك</string>
+    <string name="renew_your_membership">جدد اشتراكك</string>
+    <string name="membership_plan">باقة الاشتراك</string>
+    <string name="choose_plan">اختر باقة</string>
+    <string name="renew_membership_first">انتهت الباقة , يرجى التجديد اولا</string>
+    <string name="membership_expired">انتهت باقتك</string>
+    <string name="membership_expire_place_days">باقتك ستنتهي بعد %d ايام</string>
+    <string name="membership_expiry_date">تاريخ انتهاء الباقة</string>
+    <string name="login_with_phone">تسجيل الدخول برقم الهاتف</string>
+    <string name="employee_login">دخول الموظفين</string>
+    <string name="enter_your_mobile_number">ادخل رقم هاتفك </string>
+    <string name="otp">رمز التعريف</string>
+    <string name="get_help">احصل على مساعدة?</string>
+    <string name="about_you">من انت</string>
+    <string name="tell_us_about_you">اخبرنا عن نفسك</string>
+    <string name="am_player">انا لاعب</string>
+    <string name="am_player_desc">أريد أن احجز ملعبا |  العب مباراة |  اتحدى الفرق الأخرى |  اكون معروفًا عالميًا.</string>
+    <string name="am_club_owner">أنا مالك الملعب او موظف الملعب</string>
+    <string name="am_club_owner_desc">أرغب في: تأجير الملعب الخاص بي |  تقديم خدمات للاعبين |  زيادة الإيرادات |  زيادة الحجوزات.</string>
+    <string name="am_referee">انا حكم</string>
+    <string name="am_referee_desc">أريد: مراقبة اللعبة |  فرض اللعب النظيف |  الحفاظ على الانضباط في المباراة |  اتقاضى مبلغا مقابل التحكيم.</string>
+    <string name="enter_name_english">ادخل الاسم بالانجليزي</string>
+    <string name="gender">الجنس</string>
+    <string name="select_gender">اختر الجنس</string>
+    <string name="male">ذكر</string>
+    <string name="female">انثى</string>
+    <string name="no_stadium">لا توجد شركة</string>
+    <string name="no_stadium_desc">لم تقم بادخال بيانات شركتك , يرجى اضافة شركتك</string>
+    <string name="logo">الشعار </string>
+    <string name="open_24_hours">هل ملعبك مفتوح ٢٤ ساعة ؟</string>
+    <string name="apply_everyday">هل ملعبك مفتوح بنفس الاوقات كل يوم ؟</string>
+    <string name="price_same_all_days">هل اسعارك متشابهه كل يوم ؟</string>
+    <string name="save">احفظ</string>
+    <string name="no_fields">لا يوجد ملعب</string>
+    <string name="no_fields_desc">لم تقم بادخال بيانات ملعبك , يرجى اضافة ملعب</string>
+    <string name="enter_number_create_account">ادخل رقم هاتفك للدخول او لاضافة حساب جديد</string>
+    <string name="one_hour_price">سعر الساعة</string>
+    <string name="one_half_hour_price">سعر الساعة والنصف</string>
+    <string name="two_hour_price">سعر الساعتين</string>
+    <string name="How_this_field_bookings_willbe">كيف سترى هذه الخاصية في الحجوزات</string>
+    <string name="club_settings">الاعدادات</string>
+    <string name="edit_club">تعديل بيانات الملعب</string>
+    <string name="no_sms">لا يوجد رصيد للرسائل النصية</string>
+    <string name="select_date_time">اختر التاريخ و الوقت</string>
+    <string name="select_sms_quantity">حدد كمية الرسائل القصيرة</string>
+    <string name="you_will_get">ستحصل</string>
+    <string name="sms_price">سعر الرسائل النصية</string>
+    <string name="no_advertise">لا يوجد اعلان</string>
+    <string name="no_advertise_desc">لم تقم بالاعلان لملعبك , يمكنك الاعلان بالظغط على اعلن عن ملعبك</string>
+    <string name="You_have_selected_place_days">لقد قمت باختيار %d ايام</string>
+    <string name="total_sms">مجموع الرسائل النصية</string>
+    <string name="remaining_sms">الرسائل القصيرة المتبقية</string>
+    <string name="warning">تنبيه</string>
+    <string name="make_offers">اعمل عرض</string>
+    <string name="add_new_offer">اضف عرض جديد</string>
+    <string name="no_offer">لا توجد عروض</string>
+    <string name="no_offer_desc">لم تقم بإضافة اي عرض , يرجى الظغط على الزر</string>
+    <string name="change">غير</string>
+    <string name="enter_hours">ادخل عدد الساعات</string>
+    <string name="hours_one_to_24">اقصى حد هو ٢٤</string>
+    <string name="no_promo">لا يوجد كود خصم</string>
+    <string name="no_promo_desc">لم تقم بوضع أي كود خصم , يرجى الظغط على الزر لانشاء كود خصم</string>
+    <string name="limited_use">استخدام محدود</string>
+    <string name="no_loyalty_card">لا يوجد كرت الولاء</string>
+    <string name="no_loyalty_card_desc">لم تقم بإنشاء كرت الولاء , يرجى منك الظغط على الزر للانشاء</string>
+    <string name="loyalty_cards">كروت الولاء</string>
+    <string name="loyalty_card">كرت الولاء</string>
+    <string name="no_employee">لا يوجد موظف</string>
+    <string name="no_employee_desc">لم تقم بإضافة موظفين , يرجى ظغط الزر للبدء بإلاضافة</string>
+    <string name="no_blocked">لا يوجد محظورين</string>
+    <string name="blocked_place">المحظورين: %s</string>
+    <string name="no_hidden_fields">لا توجد ملاعب مخفية</string>
+    <string name="all_players">جميع اللاعبين</string>
+    <string name="count">العدد</string>
+    <string name="top_10_players">اكثر عشرة لاعبين حجزا</string>
+    <string name="call_booking_players">اللاعبين بحجز الاتصال</string>
+    <string name="online_booking_players">اللاعبين بحجز التطبيق</string>
+    <string name="new_">جديد</string>
+    <string name="renew_now">جدد الان</string>
+    <string name="select_club_type">اختر نوع الملعب</string>
+    <string name="online">الكتروني</string>
+    <string name="club_type">نوع الملعب</string>
+    <string name="expired_on_place">ينتهي الاشتراك بتاريخ %s</string>
+    <string name="included_sms">يشمل الرسائل النصية</string>
+    <string name="place_save">%s وفر</string>
+    <string name="sms_will_be_sent_to_players">سيتم ارسال الرسائل النصية لك و لزبائنك</string>
+    <string name="sms_will_not_be_sent">لن يتم ارسال الرسائل النصية</string>
+    <string name="player_search">بحث اللاعبين</string>
+    <string name="device">الجهاز</string>
+    <string name="total_hours">مجموع الساعات</string>
+    <string name="call_bookings">حجوزات بالاتصال</string>
+    <string name="bookings_by_app">حجوزات بالتطبيق</string>
+    <string name="upcoming_bookings">الحجوزات القادمة</string>
+    <string name="payment_that_player_spent">المبالغ المدفوعة من قبل اللاعب</string>
+    <string name="loyalty_card_desc_place">لقد أكملت %s حجوزات , احجز الان واحصل على خصم %s , العرض سينتهي بتاريخ %s</string>
+    <string name="switch_to">انتقل لل</string>
+    <string name="cancellation_last_place_hours">الغاء قبل الحجز ب %s ساعات او اقل</string>
+    <string name="one_week">أسبوع واحد</string>
+    <string name="two_days">يومين</string>
+    <string name="completed_bookings">الحجوزات المكتملة</string>
+    <string name="completed_hours">عدد الساعات المكتملة</string>
+    <string name="phone_blocked_desc">هذا الرقم محظور هل تود الاستمرار في الحجز ؟</string>
+    <string name="write_reason_of_block">يرجى اختيار سبب الحظر</string>
+    <string name="post">نشر</string>
+    <string name="share">مشاركة</string>
+    <string name="empty_slots">الأوقات المتوفرة</string>
+    <string name="match_result">نتيجة المباريات</string>
+    <string name="select_max_six_slots">اختر كحد اقصى ٦ أوقات</string>
+    <string name="req_booking_shouldnt_six">يتوجب عليك اختيار اقل من ٦ حجوزات</string>
+    <string name="get">احصل على</string>
+    <string name="on_your">على الخاص بك</string>
+    <string name="valid_till_place">صالح حتى تاريخ %s</string>
+    <string name="accept_the_challenge"> اقبل التحدي </string>
+    <string name="football_match"> مباراة كرة قدم </string>
+    <string name="join_now"> انضم الان </string>
+    <string name="with_ole_app">مع تطبيق OLE</string>
+    <string name="join_the_friendly_game">انضم للتقسيمة</string>
+    <string name="padel_match">مباراة بادل</string>
+    <string name="most_app_bookings">اكثر الحجوزات بالتطبيق</string>
+    <string name="most_call_bookings">اكثر الحجوزات بالاتصال</string>
+    <string name="most_cancellation">اكثر الحجوزات الملغية</string>
+    <string name="days">الأيام</string>
+    <string name="use_promo">استخدم كود الخصم</string>
+    <string name="pending_bookings">الحجوزات القادمة</string>
+    <string name="players_payments">المبالغ المدفوعة</string>
+    <string name="new_players">لاعبين جدد</string>
+    <string name="discount_perc">نسبة الخصم</string>
+    <string name="one_hour_discount">خصم للساعة</string>
+    <string name="one_half_hour_discount">خصم للساعة والنصف</string>
+    <string name="two_hour_discount">خصم للساعتين</string>
+    <string name="add_image">اضف صورة</string>
+    <string name="add_new_player">اضف لاعب جديد</string>
+    <string name="fast_booking">الحجز السريع</string>
+    <string name="my_goals">عدد الاهداف</string>
+    <string name="opponent_goals">اهداف الخصم</string>
+    <string name="pending_balance">الحساب الغير مدفوع</string>
+    <string name="balance">المتاخرات</string>
+    <string name="receipt_photo">صورة الايصال</string>
+    <string name="view_receipt"><u>عرض الايصال</u></string>
+    <string name="make_discount">اخصم المبلغ</string>
+    <string name="enter_amount">ادخل المبلغ</string>
+    <string name="four_days">أربعة أيام</string>
+    <string name="cancellation">الحجوزات الملغية</string>
+    <string name="statistics">الإحصائيات</string>
+    <string name="paid_balance">الحساب المدفوع</string>
+    <string name="last_booking_date">تاريخ اخر حجز</string>
+    <string name="booking_cancel_note_booking_info">ملاحظة: الخصومات والعروض الخاصة تعتمد على إلغاء الحجوزات الخاصة بك.  لن تحصل على خصم إذا قمت بإلغاء حجوزاتك.</string>
+    <string name="one_day">يوم واحد</string>
+    <string name="received_by">استلمت من قبل</string>
+    <string name="it_was_discount">مبلغ مخصوم</string>
+    <string name="added_by">أضيفت من قبل</string>
+    <string name="late_payment">المتاخرات</string>
+    <string name="got_it">علم</string>
+    <string name="loyalty_card_desc_remain_place">لقد أكملت %s حجوزات.   متبقي %s للحصول على الخصم.  ينتهي هذا العرض في %s</string>
+    <string name="oops">وابوي</string>
+    <string name="online_bookings">حجوزات الكترونيه</string>
+    <string name="remaining_bookings">الحجوزات المتبقية</string>
+    <string name="set_face_inside_frame">يرجى وضع الوجه داخل الإطار</string>
+    <string name="camera">كاميرا</string>
+    <string name="gallery">المعرض</string>
+    <string name="please_select_image_source">الرجاء تحديد مصدر الصورة</string>
+    <string name="lost_loyalty_discount_booking">لقد فقدت عدد 1 من الحجوزات  لتحصل على الخصم بسبب الإلغاء</string>
+    <string name="loyalty_card_lost_desc_remain_place">%s حجوزات متبقية للحصول على الخصم.  ينتهي هذا العرض في %s </string>
+    <string name="players_not_found_add_new_players">لا يوجد لاعبين .  الرجاء إضافة لاعب جديد</string>
+    <string name="limits_for_number_of_bookings">اقصى حد لكل لاعب</string>
+    <string name="unlimited">غير محدود</string>
+    <string name="one_booking">حجز واحد</string>
+    <string name="two_bookings">حجزين</string>
+    <string name="four_bookings">4 حجوزات</string>
+    <string name="seven_bookings">7 حجوزات</string>
+    <string name="fifteen_bookings">15 حجز</string>
+    <string name="thirty_bookings">30 حجز</string>
+    <string name="allow_continuous_booking">السماح لتثبيت الحجز</string>
+    <string name="employee_info">بيانات الموظف</string>
+    <string name="add_picture">اضف صورة</string>
+    <string name="role">المهنة</string>
+    <string name="employee_rating">تقييم الموظفين</string>
+    <string name="employee_rating_desc">قيم الموظف الذي قام بخدمتك في اخر حجز , نود ان نسمع منك عزيزي</string>
+    <string name="select_employee">اختر موظف</string>
+    <string name="how_was_services_of">كيف كانت خدمة لك</string>
+    <string name="average">متوسط</string>
+    <string name="add_tip_for_employee_optional">اضف اكرامية للموظف ( اختياري ) </string>
+    <string name="excellent">ممتاز!</string>
+    <string name="bad_service">خدمة سيئة</string>
+    <string name="good">جيد</string>
+    <string name="very_good">جيد جدا</string>
+    <string name="total_tip">مجموع الاكراميات</string>
+    <string name="tip_place">اكرامية: %s %s</string>
+    <string name="rating_high_to_low">تقييم : الأكثر الى الأقل</string>
+    <string name="rating_low_to_high">تقييم : الأقل الى الأكثر</string>
+    <string name="payable_tip">المبلغ المستحق</string>
+    <string name="tip_history">جميع الاكراميات</string>
+    <string name="todays_tip">اكراميات اليوم</string>
+    <string name="last_week_tip">اكراميات اخر أسبوع</string>
+    <string name="lifetime_tip">جميع الاكراميات</string>
+    <string name="completed_payment">تم دفع</string>
+    <string name="my_ratings">تقييماتي</string>
+    <string name="receivable_tip">مستحقاتي</string>
+    <string name="anonymous">مخفي</string>
+    <string name="received_tip">الاكرامية المستلمة</string>
+    <string name="inventory">متجر</string>
+    <string name="add_new_item">اضف غرض جديد</string>
+    <string name="sell">بيع</string>
+    <string name="purchase">مشتريات</string>
+    <string name="stock">المخزون</string>
+    <string name="reports">التقارير</string>
+    <string name="add_item">اضف غرض</string>
+    <string name="item_name">اسم الغرض</string>
+    <string name="enter_item_name">ادخل اسم الغرض</string>
+    <string name="purchase_price">سعر الشراء</string>
+    <string name="enter_purchase_price">ادخل سعر الشراء</string>
+    <string name="sale_price">سعر البيع</string>
+    <string name="enter_sale_price">ادخل سعر البيع</string>
+    <string name="enter_qty">ادخل الكمية</string>
+    <string name="current_stock">المخزون الحالي</string>
+    <string name="enter_new_qty">ادخل كمية جديدة</string>
+    <string name="new_qty">كمية جديدة</string>
+    <string name="staff">موظفين</string>
+    <string name="qty">الكمية</string>
+    <string name="take_receipt_photo">ادخل صورة الفاتورة</string>
+    <string name="write_note">اكتب ملاحطة</string>
+    <string name="success_sale_desc">تم بيع الغرض بنجاح</string>
+    <string name="purchase_history">جميع  المشتريات الابدي</string>
+    <string name="sales_report">تقارير المبيعات</string>
+    <string name="purchase_report">تقارير المشتريات</string>
+    <string name="sales_orders">طلبات المبيعات</string>
+    <string name="profit_report">تقرير الأرباح</string>
+    <string name="sold_by">بيع بواسطة</string>
+    <string name="enter_qty_of_current_available_stock">ادخل كمية الغرض المتوفر حاليا</string>
+    <string name="total_sale">مجموع المبيعات</string>
+    <string name="profit">الأرباح</string>
+    <string name="stock_report_note">ادخل الغرض الذي تود تصحيح كميته , فقد صاحب الملعب لديه الاحقية للتعديل</string>
+    <string name="sold_qty">الكمية المباعة</string>
+    <string name="player_status">حالة اللاعب</string>
+    <string name="blocked_by">حظر من قبل</string>
+    <string name="cash_deposit">ايداع نقدي</string>
+    <string name="match_fee">رسوم خدمة</string>
+    <string name="add_receipt">أضف الفاتورة</string>
+    <string name="deposit_by">تم الايداع من قبل</string>
+    <string name="deposit_date">تاريخ الايداع</string>
+    <string name="receipt">الايصال</string>
+    <string name="amount_deposit">هذا المبلغ الذي يتوجب ايداعه</string>
+    <string name="yesterday_remamt">المبلغ المتبقي بالامس</string>
+    <string name="deposit_amount">مبلغ الايداع</string>
+    <string name="unpaid_amount">مبلغ غير مدفوع</string>
+    <string name="expense">مصروف</string>
+    <string name="add_expense">اضف مصروف</string>
+    <string name="select_expense">اختر مصروف</string>
+    <string name="added_date">تاريخ الاضافة: </string>
+    <string name="change_time">تغيير الوقت</string>
+    <string name="do_you_want_change_booking_time_from_on_place" formatted="false">هل تريد تغيير وقت الحجز من %s إلى %s في %s ؟</string>
+    <string name="dd_mm_yyyy">dd/MM/yyyy</string>
+    <string name="view_invoice">عرض الفاتورة</string>
+    <string name="hala">هلا!</string>
+    <string name="welcome">اهلا وسهلا</string>
+    <string name="please_login_to_use_lineup">الرجاء تسجيل الدخول لاستخدام التشكيلة!</string>
+    <string name="signup_desc">يرجى إكمال ملف التعريف الخاص بك والاستمرار في الاستمتاع بتشكيلة Ole Lineup</string>
+    <string name="enter_email">ادخل الايميل</string>
+    <string name="edit_team_name">تحرير اسم الفريق</string>
+    <string name="suggest_jersey">تحرير التيشيرت</string>
+    <string name="how_to_use">كيفية الاستخدام</string>
+    <string name="work_with_us">اعمل معنا</string>
+    <string name="my_groups">مجموعاتي</string>
+    <string name="ole_shop">متجر اوليه</string>
+    <string name="add_player_image_optional">ادخل صورة اللاعب ( اختياري )</string>
+    <string name="link_player_with_ole">اربط اللاعب مع اوليه</string>
+    <string name="get_rewards_link_player">أخبر صديقك بتنزيل تطبيق OLE وربط صديقك من هنا واحصل على مكافآت مذهلة</string>
+    <string name="link_now">اضف الى القائمة</string>
+    <string name="select_player">اختر اللاعب</string>
+    <string name="start_lineup">ابدا التشكيلة</string>
+    <string name="add_player">اضف لاعب</string>
+    <string name="minimum_8_players_required_start_lineup">مطلوب 8 لاعبين كحد أدنى لبدء التشكيلة</string>
+    <string name="do_you_want_delete_player">هل تود حذف اللاعب</string>
+    <string name="no_of_players">عدد اللاعبين</string>
+    <string name="select_no_of_players">اختر عدد اللاعبين</string>
+    <string name="edit_game">تعديل على اللعب</string>
+    <string name="enter_team_a_name">أدخل اسم الفريق أ</string>
+    <string name="enter_team_b_name">أدخل اسم الفريق ب</string>
+    <string name="add_player_in_game">أضف لاعبين في اللعبة</string>
+    <string name="do_you_want_reset_game_and_start_again">هل تريد إعادة ضبط هذه اللعبة والبدء من جديد؟</string>
+    <string name="substitute">غير اللاعب</string>
+    <string name="match_draw">تعادل</string>
+    <string name="player_comparison">مقارنة اللاعبين</string>
+    <string name="are_you_sure_this_match_is_draw">هل أنت متأكد من أن هذه المباراة تعادل؟</string>
+    <string name="this_player_already_in_game">هذا اللاعب في اللعبة بالفعل الرجاء تحديد لاعب آخر</string>
+    <string name="remove_from_team">إزالة من الفريق</string>
+    <string name="total_match">مجموع المباريات</string>
+    <string name="follow">+ اضافه</string>
+    <string name="followed">مضاف✓✓</string>
+    <string name="view_profile">عرض الملف</string>
+    <string name="playing_skills">مهارات اللعب</string>
+    <string name="winning_perc">نسبة الفوز %</string>
+    <string name="skills">المهارة</string>
+    <string name="clear">حذف</string>
+    <string name="you_are_not_captain">لا يمكنك سحب وتحريك اللاعبين لأنك لست الكبتن!</string>
+    <string name="match_cancelled">تم إلغاء المباراة</string>
+    <string name="are_you_sure_this_match_is_cancelled">هل أنت متأكد من إلغاء هذه المباراة؟</string>
+    <string name="select_player_place">اختر %d اللاعبين</string>
+    <string name="playing_skills_not_zero">مهارات اللعب لا يمكن أن تكون صفرا</string>
+    <string name="select_reach_time">حدد وقت وصول اللاعب</string>
+    <string name="player_reviews">مراجعات اللاعب</string>
+    <string name="lineup_game_history">تاريخ المباريات</string>
+    <string name="captain_already_exist">الكابتن موجود بالفعل</string>
+    <string name="captain_turn_place">"%s دور الكبتن</string>
+    <string name="select_captain_both_team">حدد كباتن كلا الفريقين</string>
+    <string name="do_you_want_remove_captain">سيتم استبعاد كابتن الفريقين , هل تريد إزالة؟</string>
+    <string name="select_players_play_this_game">Select players that will play in this game\n\nاختار اللاعبين الذين سيلعبون المباراة</string>
+    <string name="select_player_for_substitute">اختر لاعبًا كبديل</string>
+    <string name="add_player_desc">الاسم المستعار مستخدم بالفعل. يرجى التحقق مما إذا كان اللاعب أدناه هو الشخص الذي تريد إضافته ، ثم انقر فوق الزر "إضافة" أدناه</string>
+    <string name="which_team_captain_choose_player">أي كبتن فريق سيبدأ بالاختيار أولاً ؟</string>
+    <string name="only_app_user_be_captain">يمكن لمستخدم التطبيق فقط أن يكون كبتن</string>
+    <string name="take_photo">خذ صورة</string>
+    <string name="only_captain_can_change_jersey"> فقط الكبتن يمكنه تغيير القميص</string>
+    <string name="select_players_remove_this_game">حدد اللاعبين الذين تريد إزالتهم من هذه اللعبة</string>
+    <string name="select_team">اختر فريق</string>
+    <string name="registered_players">اللاعبون المسجلون</string>
+    <string name="captain">كبتن</string>
+    <string name="go_to_game">اذهب الى اللعبه</string>
+    <string name="select_status">حدد الحالة</string>
+    <string name="full_view">عرض كامل</string>
+    <string name="win_perc">نسبة الفوز %</string>
+    <string name="delete_account">حذف الحساب</string>
+    <string name="confirm_delete_account">سيتم إلغاء تنشيط حسابك ، وستتم إزالة جميع بياناتك الشخصية تلقائيًا بعد 15 يومًا.  قم بتسجيل الدخول في غضون 15 يومًا لاستخدام OLE مرة أخرى.  هل أنت واثق؟  تريد حذف حسابك الآن؟</string>
+    <string name="please_finalize_team_first">يرجى إكمال الفريق أولاً</string>
+    <string name="only_game_creator_can_remove_you">يمكن لمنشئ اللعبة فقط إزالتك</string>
+    <string name="only_game_creator_can_replace_player">يمكن لمنشئ اللعبة فقط استبدال اللاعب</string>
+    <string name="swap_player">بدل اللاعب</string>
+    <string name="kick_out">اطرد اللاعب</string>
+    <string name="replace_player">استبدل اللاعب</string>
+    <string name="enter_shirt_name">ادخل اسم القميص</string>
+    <string name="enter_country_name">ادخل اسم الدولة</string>
+    <string name="enter_year">ادخل سنة اصدار القميص</string>
+    <string name="add_shirt_photo">اضف صورة القميص</string>
+    <string name="instructions">أضف صورة  ثم اضغط على الصورة لسحبها و أسقطها على الشبكة.</string>
+    <string name="hi_add_image">أضف صورة  ثم اسحبه على الشبكة</string>
+    <integer name="num_images">11</integer>
+    <integer name="num_columns">2</integer>
+    <string name="change_sport_menu">You can change your favorite\nsports from menu</string>
+    <string name="hot_selling">الاكثر طلب</string>
+    <string name="samsung_pay">Samsung Pay</string>
+    <string name="apple_pay">Apple pay</string>
+    <string name="choose_photo">اختر صورة</string>
+    <string name="delete_photo">احذف صورة</string>
+    <string name="select_bib">اختر قميص</string>
+    <string name="enter_password">الرقم السري لا يمكن ان يكون خاليا</string>
+    <string name="pass_must">على الرقم السري ان يكون 4 احرف على الاقل</string>
+    <string name="reset_game">اعد اعداد اللعبه</string>
+    <string name="image_saved">تم حفظ الصورة في المعرض</string>
+    <string name="complete_game">اكمل اللعب</string>
+    <string name="new_user_txt"> • اذا كنت مشترك جديد الرجاء ادخل الرمز السري</string>
+    <string name="old_user_txt">• إذا كنت مستخدمًا حاليًا ، فيرجى إدخال كلمة المرور القديمة!</string>
+    <string name="forgetPassword">• إذا نسيت كلمة المرور الخاصة بك ، فيرجى النقر فوق إعادة تعيين كلمة المرور!</string>
+    <string name="fast_lineup">لاين اب سريع</string>
+    <string name="team_a_vs_team_b">فريق أ ضد فريق ب</string>
+    <string name="subscription_product_id">olesubscription</string>
+    <string name="finance">المالية</string>
+    <string name="gift">الجوائز</string>
+    <string name="available_earnings">صافي الايرادات</string>
+    <string name="income">الايرادات</string>
+    <string name="incomex">الايرادات: </string>
+    <string name="total_incomes">مجموع المدخول</string>
+    <string name="total_expenses">مجموع المصاريف</string>
+    <string name="total_upcoming_expenses">مجموع المصاريف القادمة</string>
+    <string name="upcoming_expenses">المصاريف القادمة</string>
+    <string name="earning_by_bank">المبالغ في البنك</string>
+    <string name="shareholder_earnings">ارباح الشركاء</string>
+    <string name="employee_salaries">رواتب الموظفين</string>
+    <string name="dashboard">الصفحة الرئيسية</string>
+    <string name="income_details">تفاصيح الايرادات</string>
+    <string name="income_from">مصدر الدخل</string>
+    <string name="expense_details">تفاصيل المصاريف</string>
+    <string name="upcoming_expense_details">تفاصيل المصاريف القادمة</string>
+    <string name="edit_income">تعديل المدخول</string>
+    <string name="edit_expense">تعديل المصاريف</string>
+    <string name="edit_upcoming_expense">تعديل المصاريف القادمة</string>
+    <string name="update_income_details">تحديث تفاصيل المدخول</string>
+    <string name="update_expense_details">تحديث تفاصيل المصروفات</string>
+    <string name="update_upcoming_expense_details">تحديث تفاصيل المصاريف القادمة</string>
+    <string name="expense_for">مصدر المصروف</string>
+    <string name="upcoming_date">تاريخ المصروف القادم</string>
+    <string name="payment_type">نوع الدفع</string>
+    <string name="mark_as_paid">وضع علامة كمدفوع</string>
+    <string name="payment_history">تاريخ المدفوعات</string>
+    <string name="bank_details">تفاصيل البنك</string>
+    <string name="source">المصدر</string>
+    <string name="salary">راتب</string>
+    <string name="salary_history">تاريخ رواتب المظفين</string>
+    <string name="by_bank">بواسطة بنك</string>
+    <string name="sort_by">رتب حسب</string>
+    <string name="date_from">التاريخ يبدا من</string>
+    <string name="date_to">ينتهي الى</string>
+    <string name="add_income">اضف ايرادات</string>
+    <string name="pay_salary">دفع الراتب</string>
+    <string name="pay_to_partner">ادفع للشركاء</string>
+    <string name="salary_month">راتب شهر</string>
+    <string name="employee_name">اسم الموظف</string>
+    <string name="month">شهر</string>
+    <string name="add_new_partner">اضف شريك جديد</string>
+    <string name="add_new_bank">اضف حساب بنك جديد</string>
+    <string name="delete_partner">احذف شريك</string>
+    <string name="delete_bank">احذف البنك</string>
+    <string name="enter_remaining_amount">ادخل المبلغ المتبقي</string>
+    <string name="share_percentage">نسبة المشاركة</string>
+    <string name="bank_city">فرع البنك</string>
+    <string name="deposit_type">نوع الايداع</string>
+    <string name="fill_form_first">الرجاء تعبئة النموذج اولا</string>
+    <string name="select_deposit_type">اختر طريقة الايداع</string>
+    <string name="bank_added_successfully">بنك اضافة البنك بنجاح</string>
+    <string name="bank_updated_successfully">تم التحديث على البنك بنجاح</string>
+    <string name="bank_deleted_successfully">تم حذف البنك بنجاح</string>
+    <string name="source_cannot_be_empty">مصدر الدخل لا يمكن ان يكون فارغا</string>
+    <string name="amount_cannot_be_empty">المبلغ لا يمكن ان يكون فارغا</string>
+    <string name="select_bank">اختر البنك</string>
+    <string name="income_updated">تم تحديث المدخول بنجاح</string>
+    <string name="income_added">تم اضافة المدخول بنجاح</string>
+    <string name="expense_added">تم اضافة المصروف بنجاح</string>
+    <string name="expense_list">قائمة المصاريف</string>
+    <string name="select_pay_type">الرجاء اختيار نوع الدفع</string>
+    <string name="select_upcoming_expense">اختر المصروف القادم</string>
+    <string name="upcoming_expense_updated">تم تحديث المصاريف القادمة بنجاح</string>
+    <string name="add_upcoming_expense">اضف مصروف قادم </string>
+    <string name="select_month">اختر الشهر</string>
+    <string name="expense_updated">تم تحديث المصاريف بنجاح</string>
+    <string name="salary_paid">تم دفع الراتب بنجاح</string>
+    <string name="amount_distributed">تم توزيع المبلغ بنجاح</string>
+    <string name="new_users">مشترك جديد</string>
+    <string name="new_user">( مستخدم جديد )</string>
+    <string name="facility_price">سعرالمرافق</string>
+    <string name="create_gift">انشئ جائزة</string>
+    <string name="delete_gift">احذف الجائزة</string>
+    <string name="gift_created">تم إنشاء الهدية بنجاح!</string>
+    <string name="gift_updated">تم تحديث الهدية بنجاح!</string>
+    <string name="gift_deleted">تم حذف الهدية بنجاح!</string>
+    <string name="create_new_gift">اصنع هدية جديدة</string>
+    <string name="start_date">يبدا بتاريخ</string>
+    <string name="end_date">ينتهي بتاريخ</string>
+    <string name="partner_added">تمت إضافة الشريك بنجاح!</string>
+    <string name="partner_updated">تم تحديث الشريك بنجاح!</string>
+    <string name="partner_deleted">تم حذف الشريك بنجاح!</string>
+    <string name="zero">0</string>
+    <string name="enter_salary">الرجاء إدخال الراتب</string>
+    <string name="switch_internet">الإنترنت لديك ضعيف ، يرجى التبديل إلى شبكة مختلفة أو الاتصال بنا عن طريق النقر فوق المساعدة!</string>
+    <string name="total">المجموع:</string>
+    <string name="documents">وثائق</string>
+    <string name="expected">مُتوقع: </string>
+    <string name="expectedx">مُتوقع</string>
+    <string name="shareholder_documents">وثائق الشركاء</string>
+    <string name="employee_documents">وثائق الموظفين</string>
+    <string name="add_new_folder">اضف ملف جديد</string>
+    <string name="issued">&#160;الاصداء: </string>
+    <string name="expiryd">&#160;انتهاء: </string>
+    <string name="issue_date">تاريخ الاصدار</string>
+    <string name="expiry_date">تاريخ الانتهاء</string>
+    <string name="enter_folder_name">الرجاء ادخل اسم الملف</string>
+    <string name="delete_folder">احذف الملف</string>
+    <string name="update_folder">حدث الملف</string>
+    <string name="create_folder">انشئ ملف</string>
+    <string name="folder_name">اسم الملف</string>
+    <string name="choose_pdf">اختر pdf</string>
+    <string name="select_pdf">اختر pdf</string>
+    <string name="delete_file">احذف الملف</string>
+    <string name="update_file">حدث الملف</string>
+    <string name="add_file">اضف ملف</string>
+    <string name="add_document">اضف وثائق</string>
+    <string name="folder_created">تم انشاء الملف بنجاح</string>
+    <string name="folder_deleted">تم حذل الملف بنجاح</string>
+    <string name="folder_updated">تم تحديث الملف بنجاح</string>
+    <string name="image_uploaded">تم تحميل الصورة بنجاح</string>
+    <string name="file_uploaded">تم تحديث الملف بنجاح</string>
+    <string name="file_added">تم اضافة الملف بنجاح</string>
+    <string name="file_updated">تم تحديث الملف بنجاح</string>
+    <string name="file_deleted">تم حذف الملف بنجاح</string>
+    <string name="document_name">اسم الملف</string>
+    <string name="document_number">رقم المستند</string>
+    <string name="document_list">قائمة الوثائق</string>
+    <string name="document_cannot_empty">اسم الوثيقة لا يمكن ان يكون فارغا</string>
+    <string name="failed_save_image">فشل حفظ الصورة</string>
+    <!--    Live ad unit -->
+    <string name="live_jersey_reward_ad">ca-app-pub-1988640076592171/7479631933</string>
+    <!--    Test ad unit -->
+    <string name="test_jersey_reward_ad">ca-app-pub-3940256099942544/5224354917</string>
+    <string name="subs_text">Subscribing any plan will unlock all country jerseys, and you can use jerseys till your next billing cycle!
+                                Payment will be charged on your Google account, and your subscription will auto-renew on your next billing cycle, that is your subscription plan you will choose.
+                                If you wish to cancel, you can cancel your subscription anytime from GOOGLE PayStore &gt; Tap Profile &gt; payments and subscriptions &gt; Subscription &gt; Cancel Or go to side menu and click manage.
+                                By purchasing a subscription, you agree to our Terms and conditions and the auto-renewal.</string>
+
+    <string name="upload_report">رفع التقرير</string>
+    <string name="view_report">عرض التقرير</string>
+    <string name="report_downloading">يتم تنزيل التقرير.  .  .</string>
+    <string name="chose_file">اختر ملف Excel</string>
+    <string name="update_report">تعديل التقرير</string>
+    <string name="download_report">تنزيل التقرير</string>
+    <string name="rem_amount">المبلغ المتبقي غير صحيح</string>
+
+    <string name="angry">غضب!</string>
+    <string name="upset">زعلان!</string>
+    <string name="sad">حزين!</string>
+    <string name="wow">فنان!</string>
+    <string name="rate_employees">تقييم الموظفين</string>
+    <string name="ratings">التقييمات</string>
+    <string name="rate_stadium_exp">تقييم تجربة الملعب</string>
+    <string name="how_was_your_exp">كيف كانت تجربتك في</string>
+    <string name="how_was_your_exp_empl"> كيف كانت تجربتك مع موظفينا؟</string>
+    <string name="write_feedback">اكتب ردود الفعل</string>
+    <string name="assign_country">تعيين الدولة</string>
+    <string name="lineup_employee">موظف التشكيلات</string>
+    <string name="general_employee">موظف عام</string>
+    <string name="global_player_updated">تم تحديث موظف التشكيلات بنجاح!</string>
+    <string name="global_player_added">تم اضافة موظف التشكيلات بنجاح!</string>
+    <string name="global_player_removed">تم ازالة موظف التشكيلات بنجاح!</string>
+    <string name="waiting_user">قائمة المستخدمين المنتظرين</string>
+    <string name="no_waiting_user">لا يوجد مستخدمون فيn\الانتظار</string>
+    <string name="add_waiting_user">إضافة مستخدم إلى قائمة الانتظار</string>
+    <string name="remove_schedule_booking">هل بالفعل تود حذف الحجوزات المستمرة ؟</string>
+    <string name="remove_waiting_user">هل أنت متأكد؟  هل تريد إزالة المستخدم في قائمة الانتظار؟</string>
+    <string name="remove_waiting_title">حذف المستخدم في قائمة الانتظار</string>
+    <string name="new_version_already_installed">تم تثبيت الإصدار الجديد.</string>
+
+
+
+
+
+
+
+
+</resources>

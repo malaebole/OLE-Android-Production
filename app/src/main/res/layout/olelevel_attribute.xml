@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main">
+
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@id/tv_title"
+        android:layout_alignStart="@id/tv_title">
+
+        <View
+            android:id="@+id/left_vu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:minWidth="@dimen/_15sdp"
+            android:background="#00305E"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@id/card"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerHorizontal="true"
+            app:cardBackgroundColor="#00305E"
+            app:cardCornerRadius="@dimen/_15sdp"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/img_vu_icon"
+                android:layout_width="@dimen/_13sdp"
+                android:layout_height="@dimen/_13sdp"
+                android:layout_gravity="center"
+                android:scaleType="centerInside"
+                android:src="@drawable/booking_tab" />
+
+        </androidx.cardview.widget.CardView>
+
+        <View
+            android:id="@+id/right_vu"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_2sdp"
+            android:minWidth="@dimen/_15sdp"
+            android:background="#00305E"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@+id/card"/>
+
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:minWidth="@dimen/_40sdp"
+        android:layout_centerHorizontal="true"
+        android:text="3 remaining"
+        android:gravity="center"
+        android:fontFamily="sans-serif"
+        android:paddingStart="@dimen/_8sdp"
+        android:paddingEnd="@dimen/_8sdp"
+        android:textSize="@dimen/_8sdp"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+        android:textColor="@color/yellowColor"
+        android:layout_below="@id/rel"/>
+
+</RelativeLayout>

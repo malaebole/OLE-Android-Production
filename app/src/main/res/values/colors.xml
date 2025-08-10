@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#2575C4</color>
+    <color name="colorPrimaryDark">#105AA2</color>
+    <color name="colorAccent">#2575C4</color>
+    <color name="whiteColor">#FFFFFF</color>
+    <color name="white60Color">#99FFFFFF</color>
+    <color name="white20Color">#33FFFFFF</color>
+    <color name="blackColor">#000000</color>
+    <color name="black20Color">#33000000</color>
+    <color name="blueColor">#2575C4</color>
+    <color name="blueColorNew">#0084ff</color>
+    <color name="grayColor">#DCDCDC</color>
+    <color name="darkGrayColor">#908F8F</color>
+    <color name="redColor">#f02301</color>
+    <color name="greenColor">#49d483</color>
+    <color name="subTextColor">#9d9d9d</color>
+    <color name="darkTextColor">#26334a</color>
+    <color name="separatorColor">#cdd1dd</color>
+    <color name="bgVuColor">#F0F8FF</color>  <!--#f0f8ff -->
+    <color name="yellowColor">#ffe200</color>
+    <color name="orangeColor">#FF9F00</color>
+    <color name="maskColor">#F20084FF</color>
+    <color name="pinkColor">#FF94CC</color>
+    <color name="transparent">#00000000</color>
+    <color name="step_bar_color">#004E93</color>
+    <color name="greenColor50">#8049D483</color>
+    <color name="greenGraphColor">#004C55</color>
+
+<!--    range calendar color -->
+    <color name="calendar_day_unselected_bg">#00000000</color>
+    <color name="calendar_day_selected_bg">#2575C4</color>
+    <color name="calendar_day_range_selected_bg">#DCDCDC</color>
+</resources>

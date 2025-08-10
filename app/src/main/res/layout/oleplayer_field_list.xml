@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginStart="@dimen/_15sdp"
+    android:layout_marginEnd="@dimen/_15sdp"
+    app:cardUseCompatPadding="true"
+    app:cardCornerRadius="@dimen/_5sdp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingStart="@dimen/_5sdp"
+        android:paddingEnd="@dimen/_5sdp"
+        android:paddingTop="@dimen/_10sdp"
+        android:paddingBottom="@dimen/_10sdp"
+        android:foreground="?attr/selectableItemBackgroundBorderless">
+
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/tv_size"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="7 x 7"
+                android:fontFamily="sans-serif-medium"
+                android:layout_gravity="center"
+                android:textColor="@color/blueColorNew"/>
+
+            <TextView
+                android:id="@+id/tv_field_type"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Outdoor"
+                android:layout_gravity="center"
+                android:fontFamily="sans-serif-light"
+                android:textSize="@dimen/_10sdp"
+                android:textColor="@color/darkTextColor"/>
+
+        </LinearLayout>
+
+        <com.makeramen.roundedimageview.RoundedImageView
+            android:id="@+id/img_vu"
+            android:layout_width="@dimen/_45sdp"
+            android:layout_height="@dimen/_45sdp"
+            android:background="@color/whiteColor"
+            android:scaleType="centerCrop"
+            app:riv_corner_radius="@dimen/_4sdp"/>
+
+        <View
+            android:id="@+id/sep"
+            android:layout_width="@dimen/_1sdp"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/linear"
+            android:layout_alignBottom="@+id/linear"
+            android:layout_toEndOf="@id/linear"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_centerVertical="true"
+            android:background="@color/separatorColor"/>
+
+        <LinearLayout
+            android:id="@+id/ln2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/sep"
+            android:layout_toStartOf="@id/img_offer"
+            android:layout_centerVertical="true"
+            android:orientation="vertical"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_marginEnd="@dimen/_10sdp">
+
+            <TextView
+                android:id="@+id/tv_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="field name"
+                android:fontFamily="sans-serif-medium"
+                android:textColor="@color/darkTextColor"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/tv_grass_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="sans-serif"
+                    android:text="Futsel"
+                    android:textColor="@color/subTextColor"
+                    android:textSize="@dimen/_12sdp" />
+
+                <TextView
+                    android:id="@+id/tv_price"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_5sdp"
+                    android:layout_centerVertical="true"
+                    android:layout_toEndOf="@id/tv_grass_type"
+                    android:fontFamily="sans-serif"
+                    android:text="0 AED"
+                    android:textColor="@color/blueColorNew" />
+
+            </RelativeLayout>
+
+        </LinearLayout>
+
+        <ImageView
+            android:id="@+id/img_offer"
+            android:layout_width="@dimen/_15sdp"
+            android:layout_height="@dimen/_15sdp"
+            android:src="@drawable/offer_tag"
+            android:visibility="visible"
+            android:scaleType="centerInside"
+            android:layout_centerVertical="true"
+            android:layout_toStartOf="@+id/btn_book"
+            android:layout_marginEnd="@dimen/_5sdp"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/btn_book"
+            android:layout_width="@dimen/_70sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="0dp"
+            app:cardBackgroundColor="@android:color/transparent">
+
+            <ImageView
+                android:id="@+id/btn_bg"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/small_btn_bg"
+                android:scaleType="centerCrop"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="@string/book"
+                android:gravity="center"
+                android:textColor="@color/whiteColor"
+                android:fontFamily="sans-serif"/>
+
+        </androidx.cardview.widget.CardView>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

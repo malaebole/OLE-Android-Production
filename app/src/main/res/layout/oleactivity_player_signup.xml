@@ -1,0 +1,429 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signup.PlayerSignupActivity"
+    android:isScrollContainer="true"
+    android:background="@color/bgVuColor">
+
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintHeight_percent=".55"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:src="@drawable/signup_bg_new"/>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#B30084FF"
+            android:layout_alignTop="@id/imageView"
+            android:layout_alignBottom="@id/imageView"/>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_25sdp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:text="@string/signup"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:textColor="@color/whiteColor"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btn_back"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:background="@null"
+                android:padding="@dimen/_3sdp"
+                android:scaleType="centerInside"
+                android:src="@drawable/back_arrowll" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/bottomContainer"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/login_btm_bg"
+        android:visibility="visible"
+        android:fitsSystemWindows="true"
+        android:layout_marginTop="@dimen/_155sdp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/_10sdp"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_10sdp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_20sdp"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:orientation="vertical"
+                android:paddingBottom="@dimen/_10sdp">
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/img_card"
+                    android:layout_width="@dimen/_110sdp"
+                    android:layout_height="@dimen/_110sdp"
+                    android:layout_gravity="center_horizontal"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    app:cardBackgroundColor="#33000000"
+                    app:cardCornerRadius="@dimen/_55sdp">
+
+                    <LinearLayout
+                        android:id="@+id/emoji_vu"
+                        android:layout_width="@dimen/_50sdp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:orientation="vertical">
+
+                        <ImageView
+                            android:id="@+id/emoji_img_vu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_centerHorizontal="true"
+                            android:translationZ="@dimen/_90sdp"
+                            android:scaleType="centerInside" />
+
+                        <ImageView
+                            android:id="@+id/shirt_img_vu"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_50sdp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_marginTop="@dimen/_minus5sdp"
+                            android:scaleType="centerInside" />
+
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/img_vu_place"
+                        android:layout_width="@dimen/_40sdp"
+                        android:layout_height="@dimen/_40sdp"
+                        android:layout_gravity="center"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/cam_icc" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/add_image_optional"
+                    android:textAlignment="center"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/darkTextColor" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/shirt_recycler_vu"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_50sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layoutDirection="ltr"
+                    android:scrollbars="none" />
+            </LinearLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_bg_white">
+
+                    <EditText
+                        android:id="@+id/et_full_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/full_name"
+                        android:textColorHint="@color/black"
+                        android:background="@null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/darkTextColor"
+                        android:fontFamily="sans-serif"
+                        android:textCursorDrawable="@null"
+                        android:inputType="textPersonName"/>
+
+                </RelativeLayout>
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/_40sdp"-->
+<!--                    android:layout_marginTop="@dimen/_10sdp"-->
+<!--                    android:layout_marginStart="@dimen/_15sdp"-->
+<!--                    android:layout_marginEnd="@dimen/_15sdp"-->
+<!--                    android:background="@drawable/rounded_corner_bg_white">-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/et_last_name"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:hint="@string/last_name"-->
+<!--                        android:textColorHint="@color/black"-->
+<!--                        android:background="@null"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+<!--                        android:textColor="@color/darkTextColor"-->
+<!--                        android:fontFamily="sans-serif"-->
+<!--                        android:textCursorDrawable="@null"-->
+<!--                        android:inputType="textPersonName"/>-->
+
+<!--                </RelativeLayout>-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/rounded_corner_bg_white">
+
+                    <EditText
+                        android:id="@+id/et_team_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/team_and_nick_name"
+                        android:textColorHint="@color/black"
+                        android:background="@null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/darkTextColor"
+                        android:fontFamily="sans-serif"
+                        android:textCursorDrawable="@null"
+                        android:inputType="text"/>
+
+                </RelativeLayout>
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/_40sdp"-->
+<!--                    android:layout_marginTop="@dimen/_10sdp"-->
+<!--                    android:layout_marginStart="@dimen/_15sdp"-->
+<!--                    android:layout_marginEnd="@dimen/_15sdp"-->
+<!--                    android:background="@drawable/rounded_corner_bg_white">-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/et_country"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:hint="@string/select_country"-->
+<!--                        android:textColorHint="@color/black"-->
+<!--                        android:background="@null"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+<!--                        android:textColor="@color/darkTextColor"-->
+<!--                        android:fontFamily="sans-serif"-->
+<!--                        android:textCursorDrawable="@null"-->
+<!--                        android:inputType="text"-->
+<!--                        android:focusableInTouchMode="false"-->
+<!--                        android:clickable="true"-->
+<!--                        android:focusable="true"/>-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="@dimen/_12sdp"-->
+<!--                        android:layout_height="@dimen/_12sdp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                        android:background="@null"-->
+<!--                        android:scaleType="centerInside"-->
+<!--                        android:src="@drawable/down_arrow_dark"/>-->
+
+<!--                </RelativeLayout>-->
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/_40sdp"-->
+<!--                    android:layout_marginTop="@dimen/_10sdp"-->
+<!--                    android:layout_marginStart="@dimen/_15sdp"-->
+<!--                    android:layout_marginEnd="@dimen/_15sdp"-->
+<!--                    android:background="@drawable/rounded_corner_bg_white">-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/et_city"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:hint="@string/select_city"-->
+<!--                        android:textColorHint="@color/black"-->
+<!--                        android:background="@null"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+<!--                        android:textColor="@color/darkTextColor"-->
+<!--                        android:fontFamily="sans-serif"-->
+<!--                        android:textCursorDrawable="@null"-->
+<!--                        android:inputType="text"-->
+<!--                        android:focusableInTouchMode="false"-->
+<!--                        android:clickable="true"-->
+<!--                        android:focusable="true"/>-->
+
+<!--                    <ImageView-->
+<!--                        android:layout_width="@dimen/_12sdp"-->
+<!--                        android:layout_height="@dimen/_12sdp"-->
+<!--                        android:layout_centerVertical="true"-->
+<!--                        android:layout_alignParentEnd="true"-->
+<!--                        android:layout_marginEnd="@dimen/_5sdp"-->
+<!--                        android:background="@null"-->
+<!--                        android:scaleType="centerInside"-->
+<!--                        android:src="@drawable/down_arrow_dark"/>-->
+
+<!--                </RelativeLayout>-->
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:background="@drawable/rounded_corner_bg_white">
+
+                    <EditText
+                        android:id="@+id/et_dob"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/date_of_birth"
+                        android:textColorHint="@color/black"
+                        android:background="@null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/darkTextColor"
+                        android:fontFamily="sans-serif"
+                        android:textCursorDrawable="@null"
+                        android:inputType="text"
+                        android:focusableInTouchMode="false"
+                        android:clickable="true"
+                        android:focusable="true"/>
+
+                    <ImageView
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentEnd="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:background="@null"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/calendar_dark"/>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:background="@drawable/rounded_corner_bg_white">
+
+                    <EditText
+                        android:id="@+id/et_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="@string/email"
+                        android:textColorHint="@color/black"
+                        android:background="@null"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:textColor="@color/darkTextColor"
+                        android:fontFamily="sans-serif"
+                        android:textCursorDrawable="@null"
+                        android:inputType="textEmailAddress"/>
+
+                </RelativeLayout>
+
+<!--                <RelativeLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="@dimen/_40sdp"-->
+<!--                    android:layout_marginTop="@dimen/_10sdp"-->
+<!--                    android:layout_marginStart="@dimen/_15sdp"-->
+<!--                    android:layout_marginEnd="@dimen/_15sdp"-->
+<!--                    android:background="@drawable/rounded_corner_bg_white">-->
+
+<!--                    <EditText-->
+<!--                        android:id="@+id/et_gender"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="match_parent"-->
+<!--                        android:hint="@string/gender"-->
+<!--                        android:textColorHint="@color/black"-->
+<!--                        android:background="@null"-->
+<!--                        android:textAppearance="@style/TextAppearance.AppCompat.Small"-->
+<!--                        android:textColor="@color/darkTextColor"-->
+<!--                        android:fontFamily="sans-serif"-->
+<!--                        android:textCursorDrawable="@null"-->
+<!--                        android:inputType="text"-->
+<!--                        android:focusableInTouchMode="false"-->
+<!--                        android:clickable="true"-->
+<!--                        android:focusable="true"/>-->
+
+<!--                </RelativeLayout>-->
+
+                <TextView
+                    android:id="@+id/tv_terms"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/_15sdp"
+                    android:layout_marginEnd="@dimen/_15sdp"
+                    android:text="@string/terms_cond_register"
+                    android:textColor="@color/darkTextColor"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginTop="@dimen/_10sdp"/>
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btn_signup"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    android:layout_marginEnd="@dimen/_20sdp"
+                    android:layout_marginStart="@dimen/_20sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_15sdp"
+                    app:cardCornerRadius="@dimen/_10sdp"
+                    app:cardElevation="0dp">
+
+                    <ImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/green_btn_bg"
+                        android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:text="@string/signup"
+                        android:gravity="center"
+                        android:textColor="@color/whiteColor"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

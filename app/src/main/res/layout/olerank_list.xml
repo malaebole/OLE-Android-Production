@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <RelativeLayout
+        android:id="@+id/rl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:paddingTop="@dimen/_5sdp"
+        android:paddingBottom="@dimen/_5sdp">
+
+        <TextView
+            android:id="@+id/tv_rank"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/darkTextColor"
+            android:layout_centerVertical="true"
+            android:minWidth="@dimen/_25sdp"
+            android:gravity="center"
+            android:text="10"/>
+
+        <ImageView
+            android:id="@+id/img_vu_rank"
+            android:layout_width="@dimen/_25sdp"
+            android:layout_height="@dimen/_25sdp"
+            android:src="@drawable/rank_badge_one"
+            android:layout_centerVertical="true"
+            android:scaleType="centerInside" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardvu"
+            android:theme="@style/Theme.MaterialComponents.Light"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_toEndOf="@id/tv_rank"
+            android:background="@android:color/transparent"
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardBackgroundColor="@android:color/transparent"
+            app:cardElevation="0dp">
+
+            <ImageView
+                android:id="@+id/img_vu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/player_active"
+                android:scaleType="centerInside" />
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textColor="@color/darkTextColor"
+            android:layout_toEndOf="@+id/cardvu"
+            android:layout_toStartOf="@id/ln"
+            android:layout_centerVertical="true"
+            android:text="@string/name"
+            android:layout_marginStart="@dimen/_10sdp"/>
+
+        <LinearLayout
+            android:id="@+id/ln"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="@dimen/_10sdp">
+
+            <TextView
+                android:id="@+id/tv_points"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blueColorNew"
+                android:text="10"
+                android:minWidth="@dimen/_35sdp"
+                android:gravity="center"
+                android:layout_marginEnd="@dimen/_20sdp"/>
+
+            <TextView
+                android:id="@+id/tv_perc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/greenColor"
+                android:text="%" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_below="@+id/rl"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:background="@color/separatorColor" />
+
+</RelativeLayout>

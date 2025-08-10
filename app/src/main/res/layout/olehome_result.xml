@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/rel_main"
+        android:foreground="?attr/selectableItemBackgroundBorderless"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_130sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:cardUseCompatPadding="true"
+        app:cardCornerRadius="@dimen/_8sdp"
+        app:cardBackgroundColor="@color/whiteColor">
+
+        <RelativeLayout
+            android:id="@+id/football_vu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="visible">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/home_result_bg" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:layout_above="@id/score_vu"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:gravity="center_vertical">
+
+                <ae.oleapp.util.OleProfileView
+                    android:id="@+id/profile_vu_1"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    app:p_image="@drawable/player_active"
+                    app:p_name="" />
+
+                <ae.oleapp.util.OleProfileView
+                    android:id="@+id/profile_vu_2"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="@dimen/_60sdp"
+                    android:layout_marginStart="@dimen/_10sdp"
+                    app:p_image="@drawable/player_active"
+                    app:p_name="" />
+
+            </LinearLayout>
+
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/score_vu"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                android:layout_width="@dimen/_100sdp"
+                android:layout_height="@dimen/_25sdp"
+                android:layout_above="@id/tv_date"
+                android:layout_centerHorizontal="true"
+                app:cardBackgroundColor="#00376C"
+                app:strokeWidth="@dimen/_1sdp"
+                app:strokeColor="@color/yellowColor"
+                app:cardCornerRadius="@dimen/_5sdp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <ImageView
+                        android:id="@+id/trophy_p1"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentStart="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_5sdp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/trophy_result" />
+
+                    <TextView
+                        android:id="@+id/tv_score"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginStart="@dimen/_2sdp"
+                        android:layout_marginEnd="@dimen/_2sdp"
+                        android:layout_toStartOf="@id/trophy_p2"
+                        android:layout_toEndOf="@id/trophy_p1"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:text="3 : 1"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:textColor="@color/whiteColor" />
+
+                    <ImageView
+                        android:id="@+id/trophy_p2"
+                        android:layout_width="@dimen/_15sdp"
+                        android:layout_height="@dimen/_15sdp"
+                        android:layout_alignParentEnd="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginEnd="@dimen/_5sdp"
+                        android:scaleType="centerInside"
+                        android:src="@drawable/trophy_result" />
+
+                </RelativeLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginBottom="@dimen/_3sdp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/whiteColor" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/padel_vu"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="centerCrop"
+                android:src="@drawable/home_result_bg" />
+
+            <LinearLayout
+                android:id="@+id/ln"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/tv_padel_date"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="@dimen/_2sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ae.oleapp.util.OlePadelProfileView
+                    android:id="@+id/my_profile_vu"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="match_parent"
+                    app:p_p_image="@drawable/player_active"
+                    app:p_p_name="Name" />
+
+                <ae.oleapp.util.OlePadelProfileView
+                    android:id="@+id/my_partner_profile_vu"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="match_parent"
+                    app:p_p_image="@drawable/player_active"
+                    app:p_p_name="Name" />
+
+                <ImageView
+                    android:id="@+id/p1_win"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/match_winner_badge" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/tv_padel_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignStart="@id/ln"
+                android:layout_alignEnd="@id/ln"
+                android:layout_centerVertical="true"
+                android:layout_marginEnd="@dimen/_20sdp"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:text="date"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/whiteColor" />
+
+            <ImageView
+                android:id="@+id/vs"
+                android:layout_width="@dimen/_20sdp"
+                android:layout_height="@dimen/_20sdp"
+                android:layout_alignEnd="@id/ln"
+                android:layout_centerVertical="true"
+                android:scaleType="centerInside"
+                android:src="@drawable/vs_big" />
+
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_below="@+id/tv_padel_date"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="@dimen/_2sdp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <ae.oleapp.util.OlePadelProfileView
+                    android:id="@+id/opponent_profile_vu"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="match_parent"
+                    app:p_p_image="@drawable/player_active"
+                    app:p_p_name="Name" />
+
+                <ae.oleapp.util.OlePadelProfileView
+                    android:id="@+id/opponent_partner_profile_vu"
+                    android:layout_width="@dimen/_50sdp"
+                    android:layout_height="match_parent"
+                    app:p_p_image="@drawable/player_active"
+                    app:p_p_name="Name" />
+
+                <ImageView
+                    android:id="@+id/p2_win"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/match_loser_badge" />
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

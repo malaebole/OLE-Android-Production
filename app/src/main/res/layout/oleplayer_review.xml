@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardElevation="0dp"
+        android:layout_marginStart="@dimen/_15sdp"
+        android:layout_marginEnd="@dimen/_15sdp"
+        android:layout_marginTop="@dimen/_5sdp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/_5sdp">
+
+            <ae.oleapp.util.OleProfileView
+                android:id="@+id/profile_vu"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_80sdp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:layout_toEndOf="@id/profile_vu"
+                android:layout_toStartOf="@id/rel2"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:layout_marginEnd="@dimen/_10sdp"
+                android:layout_centerVertical="true">
+
+                <io.github.rockerhieu.emojicon.EmojiconTextView
+                    android:id="@+id/tv_reach_time"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Reach time"
+                    android:fontFamily="sans-serif"
+                    android:textColor="@color/darkTextColor"/>
+
+                <TextView
+                    android:id="@+id/tv_feedback"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="feedback"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/subTextColor"/>
+
+                <TextView
+                    android:id="@+id/tv_date"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="date"
+                    android:fontFamily="sans-serif"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:textColor="@color/subTextColor"/>
+
+
+            </LinearLayout>
+
+            <RelativeLayout
+                android:id="@+id/rel2"
+                android:layout_width="@dimen/_60sdp"
+                android:layout_height="@dimen/_60sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true">
+
+                <io.feeeei.circleseekbar.CircleSeekBar
+                    android:id="@+id/circular"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="@dimen/_5sdp"
+                    android:layoutDirection="ltr"
+                    app:wheel_reached_width="@dimen/_3sdp"
+                    app:wheel_unreached_width="@dimen/_3sdp"
+                    app:wheel_pointer_radius="@dimen/_3sdp"
+                    app:wheel_can_touch="false"
+                    app:wheel_max_process="100"
+                    app:wheel_reached_color="@color/greenColor"
+                    app:wheel_pointer_color="@color/greenColor"
+                    app:wheel_unreached_color="@color/separatorColor"
+                    app:wheel_scroll_only_one_circle="true"/>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:layout_centerInParent="true">
+
+                    <TextView
+                        android:id="@+id/tv_perc"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:text="50%"
+                        android:textColor="@color/darkTextColor"
+                        android:fontFamily="sans-serif"/>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                        android:text="@string/playing_level"
+                        android:textColor="@color/darkTextColor"
+                        android:textSize="@dimen/_6sdp"
+                        android:fontFamily="sans-serif"/>
+
+                </LinearLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</RelativeLayout>

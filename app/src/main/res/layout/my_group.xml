@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardBackgroundColor="#69000000"
+    android:id="@+id/main_layout"
+    app:cardElevation="0dp"
+    android:layout_marginTop="@dimen/_7sdp"
+    android:layout_marginStart="@dimen/_15sdp"
+    android:layout_marginEnd="@dimen/_15sdp">
+
+    <RelativeLayout
+        android:id="@+id/rel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/_10sdp">
+
+        <ImageView
+            android:id="@+id/captain_ic"
+            android:layout_width="@dimen/_30sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:scaleType="centerInside"
+            android:layout_centerVertical="true"
+            android:src="@drawable/captain_icl"
+            android:layout_alignParentEnd="true"/>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/img_card"
+            android:layout_width="@dimen/_60sdp"
+            android:layout_height="@dimen/_60sdp"
+            app:cardBackgroundColor="#A3006471"
+            app:cardCornerRadius="@dimen/_40sdp"
+            app:cardElevation="0dp">
+
+            <LinearLayout
+                android:id="@+id/emoji_vu"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:id="@+id/emoji_img_vu"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:elevation="4dp"
+                    android:scaleType="centerInside" />
+
+                <ImageView
+                    android:id="@+id/shirt_img_vu"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_30sdp"
+                    android:layout_marginTop="@dimen/_minus7sdp"
+                    android:elevation="2dp"
+                    android:scaleType="centerInside" />
+
+            </LinearLayout>
+
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/dot_vu"
+            android:layout_width="@dimen/_14sdp"
+            android:layout_height="@dimen/_14sdp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            app:cardBackgroundColor="@color/yellowColor"
+            app:cardCornerRadius="@dimen/_7sdp"
+            app:cardElevation="0dp"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_toStartOf="@+id/captain_ic"
+            android:layout_toEndOf="@+id/img_card"
+            android:layout_marginStart="@dimen/_10sdp"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/tv_group_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Bilal’s group"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="@color/whiteColor" />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:text="time"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:textColor="#91FFFFFF" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

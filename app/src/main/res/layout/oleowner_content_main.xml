@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".owner.OleOwnerMainTabsActivity"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:showIn="@layout/oleowner_content_main_lay">
+
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/view_pager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/tab_bar"
+        android:background="@color/whiteColor" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:layout_above="@+id/tab_bar"
+        android:background="@color/grayColor"/>
+
+    <com.jpeng.jptabbar.JPTabBar
+        android:id="@+id/tab_bar"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_50sdp"
+        android:layout_alignParentBottom="true"
+        android:background="@color/whiteColor"
+        android:layoutDirection="ltr"
+        app:TabMiddleView="@layout/oletab_middle_vu"
+        app:TabNormalColor="@color/separatorColor"
+        app:TabSelectColor="@color/blueColorNew"
+        app:TabAnimate="Scale"/>
+
+</RelativeLayout>

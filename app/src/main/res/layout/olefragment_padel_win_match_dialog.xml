@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".dialogs.OlePadelWinMatchDialogFragment">
+
+    <ImageButton
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_alignParentEnd="true"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:src="@drawable/close_btn" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_close"
+        android:layout_marginTop="@dimen/_5sdp"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardBackgroundColor="@color/whiteColor"
+        app:cardElevation="0dp">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scrollbars="none">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingStart="@dimen/_20sdp"
+                android:paddingEnd="@dimen/_20sdp">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_150sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:scaleType="centerInside"
+                    android:src="@drawable/win_match_img" />
+
+                <TextView
+                    android:id="@+id/tv_club_name"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="@string/club_name"
+                    android:textAlignment="center"
+                    android:textColor="@color/darkTextColor"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Medium"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:theme="@style/Theme.MaterialComponents.Light"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    app:cardBackgroundColor="@color/whiteColor"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    app:cardElevation="0dp"
+                    app:strokeColor="@color/greenColor"
+                    app:strokeWidth="@dimen/_1sdp"
+                    app:contentPadding="@dimen/_8sdp">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <LinearLayout
+                            android:id="@+id/ln"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_toStartOf="@+id/rel"
+                            android:orientation="horizontal"
+                            android:layout_marginEnd="@dimen/_5sdp">
+
+                            <ae.oleapp.util.OleProfileView
+                                android:id="@+id/my_profile_vu"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="@dimen/_70sdp"
+                                app:p_image="@drawable/player_active"
+                                app:p_name="Name"/>
+
+                            <ae.oleapp.util.OleProfileView
+                                android:id="@+id/my_partner_profile_vu"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="@dimen/_70sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                app:p_image="@drawable/player_active"
+                                app:p_name="Name"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ln2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_toStartOf="@+id/rel"
+                            android:layout_marginEnd="@dimen/_5sdp"
+                            android:layout_below="@id/ln"
+                            android:layout_marginTop="@dimen/_15sdp">
+
+                            <ae.oleapp.util.OleProfileView
+                                android:id="@+id/opponent_profile_vu"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="@dimen/_70sdp"
+                                app:p_image="@drawable/player_active"
+                                app:p_name="Name"/>
+
+                            <ae.oleapp.util.OleProfileView
+                                android:id="@+id/opponent_partner_profile_vu"
+                                android:layout_width="0dp"
+                                android:layout_weight="1"
+                                android:layout_height="@dimen/_70sdp"
+                                android:layout_marginStart="@dimen/_5sdp"
+                                app:p_image="@drawable/player_active"
+                                app:p_name="Name"/>
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:id="@+id/rel"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_centerHorizontal="true"
+                            android:layout_alignTop="@id/ln"
+                            android:layout_alignBottom="@id/ln2">
+
+                            <ImageView
+                                android:id="@+id/winner_badge_1"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/match_winner_badge"
+                                android:scaleType="centerInside"
+                                android:layout_above="@id/vs"/>
+
+                            <ImageView
+                                android:id="@+id/vs"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:src="@drawable/vs_big"
+                                android:scaleType="centerInside"
+                                android:layout_centerVertical="true"
+                                android:alpha="0.4"/>
+
+                            <ImageView
+                                android:id="@+id/winner_badge_2"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="match_parent"
+                                android:src="@drawable/match_loser_badge"
+                                android:scaleType="centerInside"
+                                android:layout_below="@id/vs"/>
+
+                        </RelativeLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ln_score1"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_alignTop="@id/ln"
+                            android:layout_alignBottom="@id/ln"
+                            android:layout_toEndOf="@+id/rel"
+                            android:gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp">
+
+                            <ImageView
+                                android:id="@+id/img_team_a_set_1"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_weight="1"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/set_one_green"/>
+
+                            <ImageView
+                                android:id="@+id/img_team_a_set_2"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_weight="1"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/set_two_green"/>
+
+                            <ImageView
+                                android:id="@+id/img_team_a_set_3"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_weight="1"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/set_three_green"/>
+
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:id="@+id/ln_score2"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:layout_alignTop="@id/ln2"
+                            android:layout_alignBottom="@id/ln2"
+                            android:layout_toEndOf="@+id/rel"
+                            android:gravity="center_vertical"
+                            android:layout_marginStart="@dimen/_10sdp">
+
+                            <ImageView
+                                android:id="@+id/img_team_b_set_1"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_weight="1"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/set_one_red"/>
+
+                            <ImageView
+                                android:id="@+id/img_team_b_set_2"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_weight="1"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/set_two_red"/>
+
+                            <ImageView
+                                android:id="@+id/img_team_b_set_3"
+                                android:layout_width="0dp"
+                                android:layout_height="@dimen/_25sdp"
+                                android:layout_weight="1"
+                                android:scaleType="centerInside"
+                                android:src="@drawable/set_three_red"/>
+
+                        </LinearLayout>
+
+                        <TextView
+                            android:id="@+id/tv_date"
+                            android:layout_width="match_parent"
+                            android:layout_height="@dimen/_30sdp"
+                            android:text="Today | 12:30-14:00"
+                            android:textColor="@color/subTextColor"
+                            android:fontFamily="sans-serif-medium"
+                            android:maxLines="1"
+                            android:gravity="center"
+                            android:layout_centerVertical="true"
+                            android:layout_toEndOf="@+id/rel"
+                            android:layout_marginStart="@dimen/_10sdp"
+                            android:textAppearance="@style/TextAppearance.AppCompat.Small" />
+
+                    </RelativeLayout>
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <TextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_15sdp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="@string/congratulation"
+                    android:textAppearance="@style/TextAppearance.AppCompat.Large"
+                    android:textColor="@color/blueColorNew" />
+
+                <TextView
+                    android:id="@+id/tv_msg"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/_10sdp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="center"
+                    android:text=""
+                    android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                    android:textColor="@color/darkTextColor" />
+
+                <androidx.cardview.widget.CardView
+                    android:id="@+id/btn_share"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_40sdp"
+                    app:cardElevation="0dp"
+                    app:cardCornerRadius="@dimen/_5sdp"
+                    android:layout_marginTop="@dimen/_20sdp"
+                    android:layout_marginBottom="@dimen/_20sdp"
+                    android:layout_alignParentBottom="true">
+
+                    <ImageView
+                        android:id="@+id/btn_img"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:src="@drawable/green_btn_bg"
+                        android:scaleType="centerCrop"/>
+
+                    <TextView
+                        android:id="@+id/tv_dismiss"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                        android:text="@string/share"
+                        android:textColor="@color/whiteColor"
+                        android:fontFamily="sans-serif"
+                        android:layout_gravity="center"/>
+
+                </androidx.cardview.widget.CardView>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

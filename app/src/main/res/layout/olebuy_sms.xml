@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardvu"
+        android:theme="@style/Theme.MaterialComponents.Light"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_80sdp"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        app:cardBackgroundColor="@color/whiteColor"
+        app:cardElevation="0dp"
+        app:cardCornerRadius="@dimen/_50sdp"
+        app:strokeWidth="@dimen/_1sdp"
+        app:strokeColor="@color/separatorColor">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center_vertical">
+
+            <TextView
+                android:id="@+id/tv_qty"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:textColor="@color/darkTextColor"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="1000"/>
+
+            <TextView
+                android:id="@+id/tv_sms"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="sans-serif"
+                android:gravity="center"
+                android:textColor="@color/subTextColor"
+                android:layout_marginTop="@dimen/_3sdp"
+                android:textAppearance="@style/TextAppearance.AppCompat.Medium"
+                android:text="@string/sms"/>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</RelativeLayout>

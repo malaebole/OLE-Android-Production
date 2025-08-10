@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/transparent">
+
+    <ImageView
+        android:id="@+id/circle"
+        android:layout_width="@dimen/_55sdp"
+        android:layout_height="@dimen/_55sdp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/captain_circle"
+        android:scaleType="center" />
+
+
+    <LinearLayout
+        android:id="@+id/layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:orientation="vertical"
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_5sdp"
+        android:gravity="center_horizontal">
+
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/_minus1sdp">
+                <ImageView
+                    android:id="@+id/chair"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="@dimen/_50sdp"
+                    android:scaleType="fitXY"
+                    android:paddingStart="@dimen/_3sdp"
+                    android:paddingEnd="@dimen/_3sdp"
+                    android:layout_marginTop="@dimen/_5sdp"
+                    android:src="@drawable/chairl" />
+
+
+                <LinearLayout
+                    android:id="@+id/emoji_vu"
+                    android:layout_width="@dimen/_40sdp"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/player_img_vu"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:scaleType="centerInside"
+                        android:layout_centerHorizontal="true"
+                        android:elevation="3dp"
+                        android:src="@drawable/playerl" />
+
+                    <ImageView
+                        android:id="@+id/shirt"
+                        android:layout_width="@dimen/_30sdp"
+                        android:layout_height="@dimen/_30sdp"
+                        android:layout_centerHorizontal="true"
+                        android:scaleType="fitXY"
+                        android:layout_marginTop="@dimen/_minus6sdp"
+                        android:src="@drawable/bibl" />
+
+                </LinearLayout>
+
+            </RelativeLayout>
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/name_vu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minWidth="@dimen/_40sdp"
+                android:theme="@style/Theme.MaterialComponents.Light"
+                app:cardBackgroundColor="@color/transparent"
+                app:cardCornerRadius="@dimen/_1sdp"
+                app:strokeColor="@color/black"
+                app:strokeWidth="@dimen/_1sdp">
+
+                <TextView
+                    android:id="@+id/tv_name"
+                    android:layout_width="48dp"
+                    android:layout_height="20dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/textbgl"
+                    android:paddingEnd="@dimen/_2sdp"
+                    android:paddingStart="@dimen/_2sdp"
+                    android:fontFamily="@font/dubai_bold"
+                    android:gravity="center"
+                    android:text="@string/add"
+                    android:letterSpacing="0.1"
+                    android:textColor="@color/yellowColor"
+                    android:ellipsize="marquee"
+                    android:marqueeRepeatLimit="marquee_forever"
+                    android:singleLine="true"
+                    android:scrollHorizontally="true"
+                    android:textSize="10sp"
+                    android:layoutDirection="rtl" />
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+    </LinearLayout>
+
+    <ImageView
+        android:layout_width="@dimen/_22sdp"
+        android:layout_height="@dimen/_22sdp"
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="@dimen/_minus6sdp"
+        android:padding="@dimen/_3sdp"
+        android:scaleType="centerInside"
+        android:src="@drawable/plus_icon_comparison" />
+
+</RelativeLayout>

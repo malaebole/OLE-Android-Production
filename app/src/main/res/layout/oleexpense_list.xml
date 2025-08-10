@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/whiteColor">
+
+    <RelativeLayout
+        android:id="@+id/rl_main"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="@dimen/_7sdp"
+        android:paddingBottom="@dimen/_7sdp"
+        android:paddingStart="@dimen/_10sdp"
+        android:paddingEnd="@dimen/_10sdp">
+
+        <LinearLayout
+            android:id="@+id/ln"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginEnd="@dimen/_10sdp"
+            android:layout_toStartOf="@id/ln2"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkTextColor"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:fontFamily="sans-serif-medium"
+                android:text="title"/>
+
+            <TextView
+                android:id="@+id/tv_added_by"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/subTextColor"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:fontFamily="sans-serif"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Added by: " />
+
+            <TextView
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textColor="@color/subTextColor"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:fontFamily="sans-serif"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:text="Added date: " />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/ln2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true">
+
+            <TextView
+                android:id="@+id/tv_amount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/blueColorNew"
+                android:textAppearance="@style/TextAppearance.AppCompat.Small"
+                android:fontFamily="sans-serif"
+                android:text="0 AED" />
+
+            <ImageButton
+                android:id="@+id/btn_attach"
+                android:layout_width="@dimen/_30sdp"
+                android:layout_height="@dimen/_30sdp"
+                android:background="@null"
+                android:layout_gravity="end"
+                android:src="@drawable/attach_ic"
+                android:scaleType="centerInside"
+                android:layout_marginTop="@dimen/_5sdp"
+                android:padding="@dimen/_6sdp" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/_1sdp"
+        android:background="@color/separatorColor"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:layout_below="@+id/rl_main"/>
+
+</RelativeLayout>

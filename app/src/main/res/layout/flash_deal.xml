@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:cardCornerRadius="@dimen/_5sdp"
+    app:cardUseCompatPadding="true"
+    app:cardBackgroundColor="@color/whiteColor"
+    android:id="@+id/main_layout">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/vu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/_5sdp">
+
+            <com.makeramen.roundedimageview.RoundedImageView
+                android:id="@+id/img_vu"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:scaleType="centerInside"
+                app:riv_corner_radius="@dimen/_5sdp"
+                app:layout_constraintDimensionRatio="1:1"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <RelativeLayout
+            android:id="@+id/perc_vu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginTop="@dimen/_5sdp"
+            android:background="@drawable/shop_discount_bgl">
+
+            <TextView
+                android:id="@+id/tv_perc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:layout_marginEnd="@dimen/_5sdp"
+                android:fontFamily="sans-serif-medium"
+                android:text="5 AED"
+                android:textColor="#FE5517" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:id="@+id/fast_delivery_vu"
+            android:layout_width="@dimen/_40sdp"
+            android:layout_height="@dimen/_30sdp"
+            android:src="@drawable/fast_deliveryl"
+            android:scaleType="centerInside"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_alignParentEnd="true"/>
+
+        <TextView
+            android:id="@+id/tv_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_below="@+id/vu"
+            android:gravity="center_vertical"
+            android:textColor="@color/subTextColor"
+            android:fontFamily="sans-serif"
+            android:autoSizeMinTextSize="@dimen/_10sdp"
+            android:autoSizeMaxTextSize="@dimen/_12sdp"
+            android:autoSizeTextType="uniform"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="fdsafdsafdsafds"
+            android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+        <LinearLayout
+            android:id="@+id/linear"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_below="@id/tv_name"
+            android:gravity="center_vertical"
+            android:layout_marginTop="@dimen/_3sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginEnd="@dimen/_5sdp">
+
+            <TextView
+                android:id="@+id/tv_price"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/darkTextColor"
+                android:fontFamily="sans-serif"
+                android:autoSizeMinTextSize="@dimen/_8sdp"
+                android:autoSizeTextType="uniform"
+                android:ellipsize="marquee"
+                android:text="100 AED"
+                android:gravity="center_vertical"
+                android:textSize="@dimen/_10sdp"
+                android:singleLine="true" />
+
+            <TextView
+                android:id="@+id/tv_sold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/_5sdp"
+                android:textColor="@color/darkTextColor"
+                android:fontFamily="sans-serif"
+                android:autoSizeMinTextSize="@dimen/_5sdp"
+                android:autoSizeTextType="uniform"
+                android:ellipsize="end"
+                android:lines="1"
+                android:gravity="center_vertical"
+                android:text="0 Sold"
+                android:textSize="@dimen/_8sdp"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/linear"
+            android:layout_marginEnd="@dimen/_5sdp"
+            android:layout_marginStart="@dimen/_5sdp"
+            android:layout_marginBottom="@dimen/_3sdp"
+            android:layout_marginTop="@dimen/_3sdp">
+
+            <com.akexorcist.roundcornerprogressbar.RoundCornerProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/_15sdp"
+                android:layout_centerVertical="true"
+                app:rcBackgroundColor="#F2F2F2"
+                app:rcMax="100"
+                app:rcProgress="70"
+                app:rcProgressColor="@color/yellowColor"
+                app:rcRadius="@dimen/_5sdp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginStart="@dimen/_10sdp"
+                android:fontFamily="sans-serif"
+                android:text="@string/hot_selling"
+                android:textColor="#FE5517"
+                android:textSize="@dimen/_8sdp" />
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+</androidx.cardview.widget.CardView>

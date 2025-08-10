@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".dialogs.SwapPlayerDialogFragment">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="@dimen/_5sdp"
+        app:cardBackgroundColor="#18707B"
+        app:cardElevation="0dp">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/share_vu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/btm_vu">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:visibility="visible"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
+
+            <ImageView
+                android:id="@+id/bg_img_vu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scaleType="fitXY"
+                android:src="@drawable/bgl" />
+
+            <ae.oleapp.util.MagicTextView
+                android:id="@+id/tv_title"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/banner"
+                android:layout_marginBottom="@dimen/_10sdp"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="@string/team_a"
+                app:strokeColor="@color/whiteColor"
+                app:strokeJoinStyle="miter"
+                app:strokeWidth="@dimen/_1sdp" />
+
+            <LinearLayout
+                android:id="@+id/banner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_alignTop="@+id/field_img_vu"
+                android:layout_marginTop="@dimen/_minus50sdp">
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <RelativeLayout
+                        android:id="@+id/banner_right"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:background="@drawable/black_dotted_borderl"
+                        android:layout_centerHorizontal="true">
+
+                        <ImageView
+                            android:id="@+id/banner_img_vu_right"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/official_logoll" />
+
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_85sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="@dimen/_minus2sdp"
+                        android:layout_below="@id/banner_right">
+
+                        <View
+                            android:layout_width="@dimen/_3sdp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="@dimen/_15sdp"/>
+
+                        <View
+                            android:layout_width="@dimen/_3sdp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/_15sdp"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <RelativeLayout
+                        android:id="@+id/banner_left"
+                        android:layout_width="@dimen/_80sdp"
+                        android:layout_height="@dimen/_35sdp"
+                        android:layout_centerHorizontal="true">
+                        <ImageView
+                            android:id="@+id/banner_img_vu_left"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:scaleType="fitXY"
+                            android:src="@drawable/official_logoll" />
+                    </RelativeLayout>
+
+                    <RelativeLayout
+                        android:layout_width="@dimen/_70sdp"
+                        android:layout_height="@dimen/_85sdp"
+                        android:layout_marginTop="@dimen/_minus2sdp"
+                        android:layout_centerHorizontal="true"
+                        android:layout_below="@id/banner_left">
+
+                        <View
+                            android:layout_width="@dimen/_3sdp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC"
+                            android:layout_alignParentStart="true"
+                            android:layout_marginStart="@dimen/_15sdp"/>
+
+                        <View
+                            android:layout_width="@dimen/_3sdp"
+                            android:layout_height="match_parent"
+                            android:background="#CCCCCC"
+                            android:layout_alignParentEnd="true"
+                            android:layout_marginEnd="@dimen/_15sdp"/>
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/field_img_vu"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/tab_vu"
+                android:layout_marginTop="@dimen/_60sdp"
+                android:scaleType="fitXY"
+                android:src="@drawable/test1l" />
+
+            <RelativeLayout
+                android:id="@+id/vu_team_a"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="@dimen/_40sdp" />
+
+        </RelativeLayout>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <ImageButton
+        android:id="@+id/btn_close"
+        android:layout_width="@dimen/_35sdp"
+        android:layout_height="@dimen/_35sdp"
+        android:layout_alignParentEnd="true"
+        android:background="@null"
+        android:scaleType="centerInside"
+        android:layout_gravity="end"
+        android:layout_marginTop="@dimen/_10sdp"
+        android:layout_marginEnd="@dimen/_10sdp"
+        android:src="@drawable/close_btnl" />
+
+</RelativeLayout>

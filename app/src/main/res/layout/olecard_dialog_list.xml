@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/_40sdp"
+    android:paddingStart="@dimen/_10sdp"
+    android:paddingEnd="@dimen/_10sdp"
+    android:id="@+id/main">
+
+    <ImageView
+        android:id="@+id/img_vu_type"
+        android:layout_width="@dimen/_50sdp"
+        android:layout_height="@dimen/_25sdp"
+        android:layout_centerVertical="true"
+        android:src="@drawable/visa_ic"
+        android:scaleType="centerInside"/>
+
+    <TextView
+        android:id="@+id/tv_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toEndOf="@+id/img_vu_type"
+        android:text="XXXX XXXX XXXX XXXX"
+        android:layout_marginStart="@dimen/_10sdp"
+        android:fontFamily="sans-serif-medium"
+        android:textAppearance="@style/TextAppearance.AppCompat.Small"/>
+
+</RelativeLayout>
