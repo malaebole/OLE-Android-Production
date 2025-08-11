@@ -267,7 +267,7 @@ public class ShopOrderDetailActivity extends BaseActivity implements View.OnClic
     private void getOrderAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getOrderDetail(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), orderId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -309,7 +309,7 @@ public class ShopOrderDetailActivity extends BaseActivity implements View.OnClic
     private void cancelOrderAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.cancelOrder(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), orderId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

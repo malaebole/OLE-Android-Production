@@ -163,7 +163,7 @@ public class OleFieldListActivity extends BaseActivity {
     private void getAllFieldsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getAllFields(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), club.getId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -210,7 +210,7 @@ public class OleFieldListActivity extends BaseActivity {
     private void deleteFieldAPI(boolean isLoader, String fieldId, int pos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteField(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), fieldId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

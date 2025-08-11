@@ -172,7 +172,7 @@ public class OlePlayerInfoDialogFragment extends DialogFragment implements View.
     private void getProfileAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(context, "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(context), playerId,"", Functions.getPrefValue(getContext(),Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

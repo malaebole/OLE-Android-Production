@@ -8,10 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +15,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -40,14 +40,10 @@ import java.util.Locale;
 
 import ae.oleapp.R;
 import ae.oleapp.databinding.FragmentExpenseHistoryBottomSheetDialogBinding;
-import ae.oleapp.databinding.FragmentIncomeHistoryBottomSheetDialogBinding;
 import ae.oleapp.models.ExpenseDetailsModel;
-import ae.oleapp.models.IncomeDetailsModel;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -57,11 +53,10 @@ import retrofit2.Response;
 public class ExpenseHistoryBottomSheetDialogFragment extends DialogFragment {
 
     private FragmentExpenseHistoryBottomSheetDialogBinding binding;
-    private String recordId = "", expenseId="";
+    private String recordId = "", expenseId = "";
     private ResultDialogCallback dialogCallback;
     private ExpenseDetailsModel expenseDetailsModel;
     Dialog dialog;
-
 
 
     public ExpenseHistoryBottomSheetDialogFragment(String recordId, String expenseId) {
@@ -110,7 +105,7 @@ public class ExpenseHistoryBottomSheetDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
 
-                if (!expenseDetailsModel.getReceipt().isEmpty()){
+                if (!expenseDetailsModel.getReceipt().isEmpty()) {
                     showImageDialog();
                 }
             }
@@ -121,9 +116,9 @@ public class ExpenseHistoryBottomSheetDialogFragment extends DialogFragment {
 
     private void getExpenseDetails(String expenseId) {
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
-        if (userId!=null){
+        if (userId != null) {
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.expenseDetails(Functions.getAppLang(getContext()), expenseId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -137,12 +132,12 @@ public class ExpenseHistoryBottomSheetDialogFragment extends DialogFragment {
                                 binding.paymentMethodTv.setText(expenseDetailsModel.getBankName());
                                 binding.noteTv.setText(expenseDetailsModel.getNotes());
                                 binding.amountTv.setText(expenseDetailsModel.getAmount());
-                                if (!expenseDetailsModel.getReceipt().isEmpty()){
+                                if (!expenseDetailsModel.getReceipt().isEmpty()) {
                                     Glide.with(getActivity()).load(expenseDetailsModel.getReceipt()).into(binding.invoiceImgVu);
                                 }
 
                             }
-                        }  catch (Exception e) {
+                        } catch (Exception e) {
                             e.printStackTrace();
                         }
                     }
@@ -152,8 +147,7 @@ public class ExpenseHistoryBottomSheetDialogFragment extends DialogFragment {
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     if (t instanceof UnknownHostException) {
                         Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                    }
-                    else {
+                    } else {
                         Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                     }
                 }
@@ -207,7 +201,7 @@ public class ExpenseHistoryBottomSheetDialogFragment extends DialogFragment {
         Permissions.check(getContext(), permissions, null, null, new PermissionHandler() {
             @Override
             public void onGranted() {
-                Glide.with(getContext())
+                Glide.with(requireActivity())
                         .asBitmap()
                         .load(fileUrl)
                         .into(new CustomTarget<Bitmap>() {

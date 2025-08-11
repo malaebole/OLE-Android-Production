@@ -9,10 +9,9 @@ import android.view.View;
 import android.view.Window;
 
 import androidx.annotation.NonNull;
-
-import com.hedgehog.ratingbar.RatingBar;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
+import com.willy.ratingbar.BaseRatingBar;
 
 import org.json.JSONObject;
 
@@ -51,21 +50,16 @@ public class OleClubRateDialog extends Dialog {
             getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
 
-        binding.ratingBar.setStar(rating);
-
-        binding.ratingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+        binding.ratingBar.setRating(rating);
+        binding.ratingBar.setOnRatingChangeListener(new BaseRatingBar.OnRatingChangeListener() {
             @Override
-            public void onRatingChange(float RatingCount) {
-                rating = RatingCount;
+            public void onRatingChange(BaseRatingBar ratingBar, float ratings, boolean fromUser) {
+                rating = ratings;
+
             }
         });
 
-        binding.btnSubmit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                submitClicked();
-            }
-        });
+        binding.btnSubmit.setOnClickListener(v -> submitClicked());
     }
 
     private void submitClicked() {
@@ -81,7 +75,7 @@ public class OleClubRateDialog extends Dialog {
         String userId = Functions.getPrefValue(context, Constants.kUserID);
         KProgressHUD hud = Functions.showLoader(context, "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.rateClub(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), clubId, rating);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

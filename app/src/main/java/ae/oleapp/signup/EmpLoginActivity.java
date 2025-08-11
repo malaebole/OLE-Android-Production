@@ -186,7 +186,7 @@ public class EmpLoginActivity extends BaseActivity implements View.OnClickListen
     private void loginApi(String username, String pass) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.login(Functions.getAppLang(getContext()), username, pass, "1");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

@@ -151,7 +151,7 @@ public class AddFromContactsActivity extends BaseActivity implements View.OnClic
         }
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.phoneBookPlayer(Functions.getAppLang(getContext()),formattedContactList);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -193,7 +193,7 @@ public class AddFromContactsActivity extends BaseActivity implements View.OnClic
     private void linkPlayersAPI(boolean isLoader, String ids,String msg) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.linkPlayers(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID),msg, ids);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

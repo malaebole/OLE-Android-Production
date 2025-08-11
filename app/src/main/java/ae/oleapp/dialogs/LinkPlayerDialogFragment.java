@@ -113,7 +113,7 @@ public class LinkPlayerDialogFragment extends DialogFragment implements View.OnC
     private void searchPlayerAPI(boolean isLoader, String phone, String countryCode) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.manualPhoneSearch(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), playerId, phone, countryCode);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -128,8 +128,8 @@ public class LinkPlayerDialogFragment extends DialogFragment implements View.OnC
                                 profileInfo = new Gson().fromJson(obj.toString(), PlayerInfo.class);
                                 binding.tvName.setText(profileInfo.getNickName());
                                 binding.tvPhone.setText(profileInfo.getPhone());
-                                Glide.with(getContext()).load(profileInfo.getEmojiUrl()).into(binding.pEmojiImgVu);
-                                Glide.with(getContext()).load(profileInfo.getBibUrl()).into(binding.pShirtImgVu);
+                                Glide.with(requireActivity()).load(profileInfo.getEmojiUrl()).into(binding.pEmojiImgVu);
+                                Glide.with(requireActivity()).load(profileInfo.getBibUrl()).into(binding.pShirtImgVu);
                             }
                             else {
                                 Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
@@ -165,7 +165,7 @@ public class LinkPlayerDialogFragment extends DialogFragment implements View.OnC
     private void linkPlayerAPI(boolean isLoader, String phone, String countryCode) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.linkPlayer(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), playerId, phone, countryCode);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

@@ -211,8 +211,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
                         editor.apply();
                         binding.btnHideFace.setImageResource(R.drawable.face_active);
                         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                            if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView) {
-                                LineupRealPreviewFieldView vu = (LineupRealPreviewFieldView) binding.vuTeamA.getChildAt(i);
+                            if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView vu) {
                                 vu.hideShowface(true);
                             }
                         }
@@ -223,8 +222,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
                         editor.apply();
                         binding.btnHideFace.setImageResource(R.drawable.face_inactive);
                         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                            if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView) {
-                                LineupRealPreviewFieldView vu = (LineupRealPreviewFieldView) binding.vuTeamA.getChildAt(i);
+                            if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView vu) {
                                 vu.hideShowface(false);
                             }
                         }
@@ -247,8 +245,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
                     editor.apply();
                     binding.btnChangeName.setImageResource(R.drawable.change_name_ar);
                     for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                        if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView) {
-                            LineupRealPreviewFieldView vu = (LineupRealPreviewFieldView) binding.vuTeamA.getChildAt(i);
+                        if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView vu) {
                             vu.hideShowName(true);
                         }
                     }
@@ -259,8 +256,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
                     editor.apply();
                     binding.btnChangeName.setImageResource(R.drawable.change_name_en);
                     for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                        if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView) {
-                            LineupRealPreviewFieldView vu = (LineupRealPreviewFieldView) binding.vuTeamA.getChildAt(i);
+                        if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView vu) {
                             vu.hideShowName(false);
                         }
                     }
@@ -386,7 +382,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void unlockOneJersey(String shrtId, String shirt) {
         KProgressHUD hud = Functions.showLoader(getContext());
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.unlockOneJersey(Functions.getAppLang(getContext()), shrtId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -522,8 +518,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
                                 lineupRealGameTeam.setTeamShirt(shirt.getPhotoUrl());
                             }
                         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                            if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView) {
-                                LineupRealPreviewFieldView vu = (LineupRealPreviewFieldView) binding.vuTeamA.getChildAt(i);
+                            if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView vu) {
                                 if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                     vu.setImage(shirt.getPhotoUrl());
                                 }
@@ -552,8 +547,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
                 lineupRealGameTeam.setTeamGkShirt(shirt.getPhotoUrl());
             }
             for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView) {
-                    LineupRealPreviewFieldView vu = (LineupRealPreviewFieldView) binding.vuTeamA.getChildAt(i);
+                if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView vu) {
                     if (vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                         vu.setImage(shirt.getPhotoUrl());
                         break;
@@ -656,7 +650,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
         }
         if (country != null) {
             binding.tvCountry.setText(country.getShortName());
-            Glide.with(getContext()).load(country.getFlag()).into(binding.flagImgVu);
+            Glide.with(getApplicationContext()).load(country.getFlag()).into(binding.flagImgVu);
             shirtList.clear();
             if (selectedTeamId.equalsIgnoreCase("") && teamList.size() > 0) {
                 selectedTeamId = teamList.get(0).getId();
@@ -844,8 +838,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private LineupRealPreviewFieldView checkTeamAGkExist() {
         LineupRealPreviewFieldView view = null;
         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-            if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView) {
-                LineupRealPreviewFieldView vu = (LineupRealPreviewFieldView) binding.vuTeamA.getChildAt(i);
+            if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView vu) {
                 if (vu.getPlayerInfo().getIsGoalkeeper() != null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                     view = vu;
                     break;
@@ -867,7 +860,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void saveRealLineupPlayerPositions(boolean isLoader, String matchId, String playerId, float xCoordinate, float yCoordinate, String isGoalKeeper, boolean isAdd) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.saveRealLineupPlayerPositions(matchId, playerId, xCoordinate, yCoordinate, isGoalKeeper);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -904,7 +897,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void removeRealLineupPlayer(boolean isLoader, String matchId, String pId, LineupRealPreviewFieldView view) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.removeRealLineupPlayer(matchId, pId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -956,7 +949,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void getAllCountries(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.realLineupCountries();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -997,7 +990,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void getGoalKeeperShirts(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getGoalKeeperShirts();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1039,7 +1032,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void getAllFields(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getAllFields();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1081,7 +1074,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void getAllChairs(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getAllChairs();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1123,7 +1116,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void getTeamAndShirtDetails(boolean isLoader, String countryId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getTeamAndShirtDetails(countryId,"android");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1175,7 +1168,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void lineupGlobalTeamPlayers(boolean isLoader, Boolean startlineup, String teamId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.lineupGlobalTeamPlayers(teamId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1230,7 +1223,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void startRealLineup(boolean isLoader, String teamId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.startRealLineup(teamId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1247,8 +1240,8 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
             //                            selectedChairId = lineupRealGameTeam.getChair();
             //                            selectedFieldId = lineupRealGameTeam.getBackground();
             //                            selectedGkShirtId = lineupRealGameTeam.getGoalkeeper();
-                            Glide.with(getContext()).load(lineupRealGameTeam.getBgImageUrl()).into(binding.fieldBgImgVu);
-                            Glide.with(getContext()).load(lineupRealGameTeam.getFieldImageUrl()).into(binding.fieldImgVu);
+                            Glide.with(getApplicationContext()).load(lineupRealGameTeam.getBgImageUrl()).into(binding.fieldBgImgVu);
+                            Glide.with(getApplicationContext()).load(lineupRealGameTeam.getFieldImageUrl()).into(binding.fieldImgVu);
                             populateTeamData();
                         } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
@@ -1276,7 +1269,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void getLineupSelections(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getLineupSelections();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1292,8 +1285,8 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
                             selectedChairId = lineupSelections.getChair();
                             selectedFieldId = lineupSelections.getBackground();
                             selectedGkShirtId = lineupSelections.getGoalkeeper();
-                            Glide.with(getContext()).load(lineupSelections.getBgImageUrl()).into(binding.fieldBgImgVu);
-                            Glide.with(getContext()).load(lineupSelections.getFieldImageUrl()).into(binding.fieldImgVu);
+                            Glide.with(getApplicationContext()).load(lineupSelections.getBgImageUrl()).into(binding.fieldBgImgVu);
+                            Glide.with(getApplicationContext()).load(lineupSelections.getFieldImageUrl()).into(binding.fieldImgVu);
                             getAllCountries(false);
                         } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
@@ -1321,7 +1314,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void resetGameAPI(boolean isLoader, String matchId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.resetRealLineup(matchId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1361,7 +1354,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void saveAppSettings(boolean isLoader, String targetId, String type, String chairUrl, String fieldBgImg, String fieldImg) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.lineupSettings(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), targetId, type);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1374,8 +1367,8 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
                             }
                             else {
                                 if (!fieldBgImg.isEmpty() && !fieldImg.isEmpty()){
-                                    Glide.with(getContext()).load(fieldBgImg).into(binding.fieldBgImgVu);
-                                    Glide.with(getContext()).load(fieldImg).into(binding.fieldImgVu);
+                                    Glide.with(getApplicationContext()).load(fieldBgImg).into(binding.fieldBgImgVu);
+                                    Glide.with(getApplicationContext()).load(fieldImg).into(binding.fieldImgVu);
                                 }
                             }
                             if (type.equalsIgnoreCase("team")){
@@ -1412,7 +1405,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
     private void saveRealLineupMatchShirts(boolean isLoader, String matchId, String teamShirtId, String goalkeeperShirtId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.saveRealLineupMatchShirts(matchId,teamShirtId,goalkeeperShirtId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

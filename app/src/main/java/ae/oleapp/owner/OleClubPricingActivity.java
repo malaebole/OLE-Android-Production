@@ -145,7 +145,7 @@ public class OleClubPricingActivity extends BaseActivity implements View.OnClick
     private void getPlansAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.olePlans(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -191,7 +191,7 @@ public class OleClubPricingActivity extends BaseActivity implements View.OnClick
     private void paymentPlansAPI(boolean isLoader, String planId, String paymentMethod, String orderRef, String couponId, String discount) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.planPayment(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, planId, paymentMethod, Functions.getIPAddress(), orderRef, couponId, discount);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

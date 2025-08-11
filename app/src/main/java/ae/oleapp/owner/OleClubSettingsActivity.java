@@ -107,7 +107,7 @@ public class OleClubSettingsActivity extends BaseActivity implements View.OnClic
         Call<ResponseBody> call;
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         call = AppManager.getInstance().apiInterface.deleteClub(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

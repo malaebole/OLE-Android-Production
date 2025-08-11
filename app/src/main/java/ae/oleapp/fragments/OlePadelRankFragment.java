@@ -384,7 +384,7 @@ public class OlePadelRankFragment extends BaseFragment implements View.OnClickLi
     private void getRanksAPI(boolean isLoader, String type) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getRanking(Functions.getAppLang(getActivity()), Functions.getPrefValue(getActivity(), Constants.kUserID), type, "1", fromDate, toDate, minAge, maxAge, clubId, levelId, Constants.kPadelModule);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -433,7 +433,7 @@ public class OlePadelRankFragment extends BaseFragment implements View.OnClickLi
     private void getClubList(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getMyClubs(Functions.getAppLang(getActivity()),Functions.getPrefValue(getActivity(), Constants.kUserID), Functions.getPrefValue(getActivity(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -483,7 +483,7 @@ public class OlePadelRankFragment extends BaseFragment implements View.OnClickLi
     private void getLevelsAPi(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getLevels(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

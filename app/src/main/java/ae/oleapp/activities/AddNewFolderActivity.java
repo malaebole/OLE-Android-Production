@@ -139,7 +139,7 @@ public class AddNewFolderActivity extends BaseActivity implements View.OnClickLi
                     RequestBody.create(MediaType.parse("multipart/form-data"), Functions.getAppLang(getContext())),
                     RequestBody.create(MediaType.parse("multipart/form-data"),clubId),
                     RequestBody.create(MediaType.parse("multipart/form-data"),name));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -178,7 +178,7 @@ public class AddNewFolderActivity extends BaseActivity implements View.OnClickLi
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteFolder(Functions.getAppLang(getContext()), clubId, typeID);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -228,7 +228,7 @@ public class AddNewFolderActivity extends BaseActivity implements View.OnClickLi
                     RequestBody.create(MediaType.parse("multipart/form-data"),clubId),
                     RequestBody.create(MediaType.parse("multipart/form-data"),name),
                     RequestBody.create(MediaType.parse("multipart/form-data"),typeId));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -292,7 +292,7 @@ public class AddNewFolderActivity extends BaseActivity implements View.OnClickLi
                 //file = new File(resultUri.getPath());
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.fileImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.fileImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -332,9 +332,9 @@ public class AddNewFolderActivity extends BaseActivity implements View.OnClickLi
             binding.etFolderName.setText(docDetails.getName());
 
             if (!docDetails.getPhotoUrl().isEmpty()){
-                Glide.with(getContext()).load(docDetails.getPhotoUrl()).into(binding.fileImgVu);
+                Glide.with(getApplicationContext()).load(docDetails.getPhotoUrl()).into(binding.fileImgVu);
             }else{
-                Glide.with(getContext()).load(R.drawable.attachment_img).into(binding.fileImgVu);
+                Glide.with(getApplicationContext()).load(R.drawable.attachment_img).into(binding.fileImgVu);
             }
             binding.deleteFolder.setVisibility(View.VISIBLE);
 

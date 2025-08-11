@@ -125,7 +125,7 @@ public class OwnerSignupActivity extends BaseActivity implements View.OnClickLis
     private void signUpApi(String fullName, String email, String type) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.register(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID),  fullName, email, type, "android"); // Functions.getPrefValue(getContext(), Constants.kUserID),
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

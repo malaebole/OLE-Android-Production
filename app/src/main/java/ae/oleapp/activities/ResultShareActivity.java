@@ -90,10 +90,10 @@ public class ResultShareActivity extends BaseActivity implements View.OnClickLis
         binding.tvTeamBP.setText(result.getTeamBPlayer().getNickName());
         binding.tvP1Player.setText(result.getTeamAPlayer().getNickName());
         binding.tvP2Player.setText(result.getTeamBPlayer().getNickName());
-        Glide.with(getContext()).load(result.getTeamAPlayer().getEmojiUrl()).into(binding.emojiImgVuP1);
-        Glide.with(getContext()).load(result.getTeamBPlayer().getEmojiUrl()).into(binding.emojiImgVuP2);
-        Glide.with(getContext()).load(result.getTeamAPlayer().getBibUrl()).into(binding.shirtImgVuP1);
-        Glide.with(getContext()).load(result.getTeamBPlayer().getBibUrl()).into(binding.shirtImgVuP2);
+        Glide.with(getApplicationContext()).load(result.getTeamAPlayer().getEmojiUrl()).into(binding.emojiImgVuP1);
+        Glide.with(getApplicationContext()).load(result.getTeamBPlayer().getEmojiUrl()).into(binding.emojiImgVuP2);
+        Glide.with(getApplicationContext()).load(result.getTeamAPlayer().getBibUrl()).into(binding.shirtImgVuP1);
+        Glide.with(getApplicationContext()).load(result.getTeamBPlayer().getBibUrl()).into(binding.shirtImgVuP2);
         if (result.getTeamAPlayer().getIsCaptain().equalsIgnoreCase("1")) {
             binding.teamACaptain.setVisibility(View.VISIBLE);
         }

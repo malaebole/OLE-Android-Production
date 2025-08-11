@@ -125,7 +125,7 @@ public class NotificationsActivityLineup extends BaseActivity implements View.On
     private void getNotifications(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.notificationList(Functions.getAppLang(getContext()),  Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -171,7 +171,7 @@ public class NotificationsActivityLineup extends BaseActivity implements View.On
     private void deleteAllNotificationAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteAllNotification(Functions.getAppLang(getContext()),  Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -211,7 +211,7 @@ public class NotificationsActivityLineup extends BaseActivity implements View.On
     private void readAllNotificationAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.readAllNotification(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -250,7 +250,7 @@ public class NotificationsActivityLineup extends BaseActivity implements View.On
 
     private void readNotificationAPI(String notId) {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.readNotification(Functions.getAppLang(getContext()), notId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {

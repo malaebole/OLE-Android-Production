@@ -281,7 +281,7 @@ public class AddUpcomingExpenseActivity  extends BaseActivity implements View.On
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClubBanksList(Functions.getAppLang(getContext()), clubId,"");
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -336,7 +336,7 @@ public class AddUpcomingExpenseActivity  extends BaseActivity implements View.On
                     RequestBody.create(MediaType.parse("multipart/form-data"), note),
                     RequestBody.create(MediaType.parse("multipart/form-data"), upComingPaymentType),
                     RequestBody.create(MediaType.parse("multipart/form-data"), recurringDate));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -386,7 +386,7 @@ public class AddUpcomingExpenseActivity  extends BaseActivity implements View.On
                     RequestBody.create(MediaType.parse("multipart/form-data"), note),
                     RequestBody.create(MediaType.parse("multipart/form-data"), upComingPaymentType),
                     RequestBody.create(MediaType.parse("multipart/form-data"), recurringDate));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -427,7 +427,7 @@ public class AddUpcomingExpenseActivity  extends BaseActivity implements View.On
                 //file = new File(resultUri.getPath());
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.invoiceImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -462,7 +462,7 @@ public class AddUpcomingExpenseActivity  extends BaseActivity implements View.On
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId != null) {
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getExpenseList(Functions.getAppLang(getContext()));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -506,9 +506,9 @@ public class AddUpcomingExpenseActivity  extends BaseActivity implements View.On
             binding.etNote.setText(upcomingExpenseDetailsModel.getNotes());
             binding.etDate.setText(upcomingExpenseDetailsModel.getRecurringDate());
             if (!upcomingExpenseDetailsModel.getReceipt().isEmpty()){
-                Glide.with(getContext()).load(upcomingExpenseDetailsModel.getReceipt()).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(upcomingExpenseDetailsModel.getReceipt()).into(binding.invoiceImgVu);
             }else{
-                Glide.with(getContext()).load(R.drawable.attachment_img).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(R.drawable.attachment_img).into(binding.invoiceImgVu);
             }
 
             if (upcomingExpenseDetailsModel.getRecurringType().equalsIgnoreCase("one_time")){

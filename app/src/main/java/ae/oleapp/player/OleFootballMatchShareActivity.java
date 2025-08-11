@@ -57,12 +57,12 @@ public class OleFootballMatchShareActivity extends BaseActivity implements View.
     }
 
     private void populateData() {
-        Glide.with(getContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1ImgVu);
+        Glide.with(getApplicationContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1ImgVu);
         binding.tvP1Name.setText(String.format(" %s ", playerOne.getNickName()));
         if (playerTwo != null) {
             binding.tvQMark.setVisibility(View.INVISIBLE);
             binding.p2ImgVu.setVisibility(View.VISIBLE);
-            Glide.with(getContext()).load(playerTwo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p2ImgVu);
+            Glide.with(getApplicationContext()).load(playerTwo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p2ImgVu);
             binding.tvP2Name.setText(String.format(" %s ", playerTwo.getNickName()));
             if (playerTwo.getLevel() != null && !playerTwo.getLevel().isEmpty() && !playerTwo.getLevel().getValue().equalsIgnoreCase("")) {
                 binding.tvP2Level.setVisibility(View.VISIBLE);

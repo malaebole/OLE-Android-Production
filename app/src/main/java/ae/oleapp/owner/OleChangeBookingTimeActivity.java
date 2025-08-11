@@ -201,7 +201,7 @@ public class OleChangeBookingTimeActivity extends BaseActivity implements View.O
     private void getSlotsAPI() {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getSlotsForChangeTime(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, duration);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -254,7 +254,7 @@ public class OleChangeBookingTimeActivity extends BaseActivity implements View.O
     private void updateTimeAPI(String timeStart, String timeEnd, String shift) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateBookingTime(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, timeStart, timeEnd, selectedSlotDuration, shift);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

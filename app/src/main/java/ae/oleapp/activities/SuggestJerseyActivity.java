@@ -115,7 +115,7 @@ public class SuggestJerseyActivity extends BaseActivity implements View.OnClickL
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
                 photoFilePath = resultUri.getPath();
-                Glide.with(getContext()).load(new File(photoFilePath)).into(binding.shirtImgVu);
+                Glide.with(getApplicationContext()).load(new File(photoFilePath)).into(binding.shirtImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -126,7 +126,7 @@ public class SuggestJerseyActivity extends BaseActivity implements View.OnClickL
                 public void onMediaFilesPicked(MediaFile[] mediaFiles, MediaSource mediaSource) {
                     if (mediaFiles.length > 0) {
                         photoFilePath = mediaFiles[0].getFile().getPath();
-                        Glide.with(getContext()).load(new File(photoFilePath)).into(binding.shirtImgVu);
+                        Glide.with(getApplicationContext()).load(new File(photoFilePath)).into(binding.shirtImgVu);
 //                        CropImage.activity(Uri.fromFile(mediaFiles[0].getFile()))
 //                                .setGuidelines(CropImageView.Guidelines.ON)
 //                                .setCropShape(CropImageView.CropShape.RECTANGLE)
@@ -163,7 +163,7 @@ public class SuggestJerseyActivity extends BaseActivity implements View.OnClickL
                 RequestBody.create(name, MediaType.parse("multipart/form-data")),
                 RequestBody.create(country, MediaType.parse("multipart/form-data")),
                 RequestBody.create(year, MediaType.parse("multipart/form-data")));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

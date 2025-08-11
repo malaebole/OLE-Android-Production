@@ -125,7 +125,7 @@ public class OleGroupListActivity extends BaseActivity implements View.OnClickLi
     private void getGroupListAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getGroupList(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -171,7 +171,7 @@ public class OleGroupListActivity extends BaseActivity implements View.OnClickLi
     private void deleteGroupAPI(boolean isLoader, String groupId, int pos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteGroup(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), groupId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

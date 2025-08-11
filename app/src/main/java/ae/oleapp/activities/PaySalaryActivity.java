@@ -181,7 +181,7 @@ public class PaySalaryActivity extends BaseActivity implements View.OnClickListe
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClubBanksList(Functions.getAppLang(getContext()), clubId,"");
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -249,7 +249,7 @@ public class PaySalaryActivity extends BaseActivity implements View.OnClickListe
                 //file = new File(resultUri.getPath());
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.invoiceImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -301,7 +301,7 @@ public class PaySalaryActivity extends BaseActivity implements View.OnClickListe
                     RequestBody.create(MediaType.parse("multipart/form-data"),salary),
                     RequestBody.create(MediaType.parse("multipart/form-data"),month),
                     RequestBody.create(MediaType.parse("multipart/form-data"),note));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -338,7 +338,7 @@ public class PaySalaryActivity extends BaseActivity implements View.OnClickListe
     private void getEmployeesAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getEmployees(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, "");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

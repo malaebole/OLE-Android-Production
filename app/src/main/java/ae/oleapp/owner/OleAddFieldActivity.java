@@ -601,7 +601,7 @@ public class OleAddFieldActivity extends BaseActivity implements View.OnClickLis
                 Uri resultUri = result.getUri();
                 File file = new File(resultUri.getPath());
                 coverImage = file;
-                Glide.with(getContext()).load(file).into(binding.imgVuBanner);
+                Glide.with(getApplicationContext()).load(file).into(binding.imgVuBanner);
             }
             else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
@@ -844,7 +844,7 @@ public class OleAddFieldActivity extends BaseActivity implements View.OnClickLis
             isMerge = field.getIsMerge();
         }
         if (isPadelUpdate && field.getImages() != null && field.getImages().size() > 0) {
-            Glide.with(getContext()).load(field.getImages().get(0).getPhotoPath()).into(binding.imgVuBanner);
+            Glide.with(getApplicationContext()).load(field.getImages().get(0).getPhotoPath()).into(binding.imgVuBanner);
         }
         binding.etFieldName.setText(field.getName());
         fieldTypeId = field.getFieldType().getId();
@@ -880,7 +880,7 @@ public class OleAddFieldActivity extends BaseActivity implements View.OnClickLis
     private void getAllFieldsAPI(boolean isLoader, String clubId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getAllFields(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), clubId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -932,7 +932,7 @@ public class OleAddFieldActivity extends BaseActivity implements View.OnClickLis
     private void getOneFieldAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getOneField(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), fieldId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -974,7 +974,7 @@ public class OleAddFieldActivity extends BaseActivity implements View.OnClickLis
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addField(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID),
                 club.getId(), name, fieldTypeId, sizeId, grassTypeId, color, isMerge, field1Id, field2Id, field3Id, price);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1025,7 +1025,7 @@ public class OleAddFieldActivity extends BaseActivity implements View.OnClickLis
                 RequestBody.create(MediaType.parse("text/plain"), fieldTypeId),
                 RequestBody.create(MediaType.parse("text/plain"), color),
                 RequestBody.create(MediaType.parse("text/plain"), price));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1078,7 +1078,7 @@ public class OleAddFieldActivity extends BaseActivity implements View.OnClickLis
                 RequestBody.create(MediaType.parse("text/plain"), fieldTypeId),
                 RequestBody.create(MediaType.parse("text/plain"), color),
                 RequestBody.create(MediaType.parse("text/plain"), price));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1120,7 +1120,7 @@ public class OleAddFieldActivity extends BaseActivity implements View.OnClickLis
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateField(Functions.getAppLang(getContext()),
                 Functions.getPrefValue(getContext(), Constants.kUserID),
                 clubId, fieldId, name, fieldTypeId, sizeId, grassTypeId, color, price);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1160,7 +1160,7 @@ public class OleAddFieldActivity extends BaseActivity implements View.OnClickLis
         Call<ResponseBody> call;
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         call = AppManager.getInstance().apiInterface.getMyClubs(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), "");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

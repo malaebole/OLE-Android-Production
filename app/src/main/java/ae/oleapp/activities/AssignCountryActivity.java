@@ -105,7 +105,7 @@ public class AssignCountryActivity extends BaseActivity implements View.OnClickL
     private void getAllCountries(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getAllCountries();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -216,7 +216,7 @@ public class AssignCountryActivity extends BaseActivity implements View.OnClickL
     private void UpdatePlayerAsEmployee(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(this, "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.addUpdatePlayerAsEmployee(empId, clubId, countryArray);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -257,7 +257,7 @@ public class AssignCountryActivity extends BaseActivity implements View.OnClickL
     private void removePlayerAsEmployee(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(this, "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.removePlayerAsEmployee(empId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

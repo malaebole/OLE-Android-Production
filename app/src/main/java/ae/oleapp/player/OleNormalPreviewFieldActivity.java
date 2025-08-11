@@ -9,6 +9,7 @@ import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -18,6 +19,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -28,6 +30,7 @@ import android.widget.Toast;
 
 import com.baoyz.actionsheet.ActionSheet;
 import com.bumptech.glide.Glide;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -60,9 +63,7 @@ import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
 import ae.oleapp.util.OleNormalPreviewFieldView;
-import droidninja.filepicker.FilePickerBuilder;
-import droidninja.filepicker.FilePickerConst;
-import droidninja.filepicker.utils.ContentUriUtils;
+
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -184,8 +185,7 @@ public class OleNormalPreviewFieldActivity extends BaseActivity implements View.
                     oleGameTeam.setTeamAColor(color);
                     updateTeamAPI(oleGameTeam.getTeamAId(), "", color, "", "", "");
                     for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                        if (binding.vuTeamA.getChildAt(i) instanceof OleNormalPreviewFieldView) {
-                            OleNormalPreviewFieldView vu = (OleNormalPreviewFieldView) binding.vuTeamA.getChildAt(i);
+                        if (binding.vuTeamA.getChildAt(i) instanceof OleNormalPreviewFieldView vu) {
                             vu.setImage(name);
                         }
                     }
@@ -195,8 +195,7 @@ public class OleNormalPreviewFieldActivity extends BaseActivity implements View.
                     oleGameTeam.setTeamBColor(color);
                     updateTeamAPI("", oleGameTeam.getTeamBId(), "", color, "", "");
                     for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                        if (binding.vuTeamB.getChildAt(i) instanceof OleNormalPreviewFieldView) {
-                            OleNormalPreviewFieldView vu = (OleNormalPreviewFieldView) binding.vuTeamB.getChildAt(i);
+                        if (binding.vuTeamB.getChildAt(i) instanceof OleNormalPreviewFieldView vu) {
                             vu.setImage(name);
                         }
                     }
@@ -638,62 +637,126 @@ public class OleNormalPreviewFieldActivity extends BaseActivity implements View.
     }
 
     private void pickImage(boolean isGallery) {
-        String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        String[] permissions = new String[0];
+        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES};
+        }else {
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+        }
+//        String[] permissions = {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
         Permissions.check(getContext(), permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
             @Override
             public void onGranted() {
                 // do your task.
+
                 if (isGallery) {
-                    FilePickerBuilder.getInstance()
-                            .setMaxCount(1)
-                            .setActivityTheme(R.style.AppThemePlayer)
-                            .setActivityTitle(getString(R.string.image))
-                            .setSpan(FilePickerConst.SPAN_TYPE.FOLDER_SPAN, 3)
-                            .setSpan(FilePickerConst.SPAN_TYPE.DETAIL_SPAN, 4)
-                            .enableVideoPicker(false)
-                            .enableCameraSupport(false)
-                            .showGifs(false)
-                            .showFolderView(false)
-                            .enableSelectAll(false)
-                            .enableImagePicker(true)
-                            .withOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                            .pickPhoto(OleNormalPreviewFieldActivity.this, 1121);
-                }
-                else {
+                    ImagePicker.with(OleNormalPreviewFieldActivity.this)
+                            .crop() // Optionally crop the image
+                            .compress(1024) // Compress image to a maximum of 1024 KB
+                            .maxResultSize(1080, 1080) // Limit image size to 1080x1080
+                            .start(); // Launch the image picker
+                } else {
                     Intent intent = new Intent(getContext(), OleCustomCameraActivity.class);
                     intent.putExtra("is_gallery", false);
-                    startActivityForResult(intent, 1122);
+                    startActivityForResult(intent, 1122); // Start custom camera activity for result
                 }
+//                if (isGallery) {
+//                    FilePickerBuilder.getInstance()
+//                            .setMaxCount(1) // Set the maximum number of images to select
+//                            .setActivityTheme(R.style.AppThemePlayer) // Set the theme for the picker activity
+//                            .setActivityTitle(getString(R.string.image)) // Set the title for the picker activity
+//                            .setSpanCount(3) // Number of columns in the grid
+//                            .enableVideoPicker(false) // Disable video picker
+//                            .enableCameraSupport(false) // Disable camera support
+//                            .showGifs(false) // Hide GIFs
+//                            .showFolderView(false) // Hide folder view
+//                            .enableSelectAll(false) // Disable the select all option
+//                            .enableImagePicker(true) // Enable image picker
+//                            .withOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED) // Set orientation
+//                            .pickPhoto(OleNormalPreviewFieldActivity.this, 1121); // Launch the picke
+//                }
+//                else {
+//                    Intent intent = new Intent(getContext(), OleCustomCameraActivity.class);
+//                    intent.putExtra("is_gallery", false);
+//                    startActivityForResult(intent, 1122);
+//                }
             }
         });
     }
-
-    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1122 && resultCode == RESULT_OK) {
-            String filePath = data.getExtras().getString("file_path");
-            File file = new File(filePath);
-            if (selectedView != null) {
-                Glide.with(getContext()).load(file).into(selectedView.getProfileImgVu());
-                updatePlayerAPI(true, file, selectedView.getPlayerInfo().getId());
-            }
-        }
-        else if (requestCode == 1121 && resultCode == RESULT_OK) {
-            ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
-            if (dataList != null && dataList.size() > 0) {
-                Uri uri = dataList.get(0);
+
+        if (requestCode == ImagePicker.REQUEST_CODE && resultCode == RESULT_OK) {
+            // Get the URI of the picked image
+            Uri imageUri = data.getData();
+            if (imageUri != null) {
                 try {
-                    String filePath = ContentUriUtils.INSTANCE.getFilePath(getContext(), uri);
-                    Intent intent = new Intent(getContext(), OleCustomCameraActivity.class);
-                    intent.putExtra("is_gallery", true);
-                    intent.putExtra("file_path", filePath);
-                    startActivityForResult(intent, 1122);
-                } catch (URISyntaxException e) {
+                    // Obtain the file path from the URI using the utility method
+                    String filePath = getFilePathFromUri(getContext(), imageUri);
+                    if (filePath != null) {
+                        Intent intent = new Intent(getContext(), OleCustomCameraActivity.class);
+                        intent.putExtra("is_gallery", true);
+                        intent.putExtra("file_path", filePath);
+                        startActivityForResult(intent, 1122);
+                    }
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
+        } else if (requestCode == 1122 && resultCode == RESULT_OK) {
+            // Handle result from OleCustomCameraActivity
+            String filePath = data.getStringExtra("file_path");
+            File file = new File(filePath);
+            if (selectedView != null) {
+                Glide.with(getApplicationContext()).load(file).into(selectedView.getProfileImgVu());
+                updatePlayerAPI(true, file, selectedView.getPlayerInfo().getId());
+            }
         }
     }
+
+    public String getFilePathFromUri(Context context, Uri uri) {
+        String[] projection = { MediaStore.Images.Media.DATA };
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            String filePath = cursor.getString(column_index);
+            cursor.close();
+            return filePath;
+        }
+        return null;
+    }
+
+
+
+
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1122 && resultCode == RESULT_OK) {
+//            String filePath = data.getExtras().getString("file_path");
+//            File file = new File(filePath);
+//            if (selectedView != null) {
+//                Glide.with(getApplicationContext()).load(file).into(selectedView.getProfileImgVu());
+//                updatePlayerAPI(true, file, selectedView.getPlayerInfo().getId());
+//            }
+//        }
+//        else if (requestCode == 1121 && resultCode == RESULT_OK) {
+//            ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
+//            if (dataList != null && dataList.size() > 0) {
+//                Uri uri = dataList.get(0);
+//                try {
+//                    String filePath = ContentUriUtils.INSTANCE.getFilePath(getContext(), uri);
+//                    Intent intent = new Intent(getContext(), OleCustomCameraActivity.class);
+//                    intent.putExtra("is_gallery", true);
+//                    intent.putExtra("file_path", filePath);
+//                    startActivityForResult(intent, 1122);
+//                } catch (URISyntaxException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
     public int getRandomX(int viewWidth, float subVuW) {
         Random random = new Random();
@@ -720,7 +783,7 @@ public class OleNormalPreviewFieldActivity extends BaseActivity implements View.
     private void getTeamAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getFriendsCoord(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -777,7 +840,7 @@ public class OleNormalPreviewFieldActivity extends BaseActivity implements View.
         }
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.saveFriendsCoord(Functions.getAppLang(getContext()), data);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -816,7 +879,7 @@ public class OleNormalPreviewFieldActivity extends BaseActivity implements View.
     private void updateTeamAPI(String teamAId, String teamBId, String teamAColor, String teamBColor, String teamAImage, String teamBImage) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateTeamImage(Functions.getAppLang(getContext()), teamAId, teamBId, teamAColor, teamBColor, teamAImage, teamBImage);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -862,7 +925,7 @@ public class OleNormalPreviewFieldActivity extends BaseActivity implements View.
                 RequestBody.create(MediaType.parse("multipart/form-data"), ""),
                 RequestBody.create(MediaType.parse("multipart/form-data"), ""),
                 RequestBody.create(MediaType.parse("multipart/form-data"), "update"));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -901,7 +964,7 @@ public class OleNormalPreviewFieldActivity extends BaseActivity implements View.
     private void removePhotoAPI(String playerId) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removeFriendPhoto(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

@@ -1,25 +1,13 @@
 package ae.oleapp.activities;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.IntentSenderRequest;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.core.content.ContextCompat;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
-import com.google.android.gms.tasks.Task;
-import com.google.android.play.core.appupdate.AppUpdateInfo;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
-import com.google.android.play.core.appupdate.AppUpdateOptions;
-import com.google.android.play.core.install.model.AppUpdateType;
-import com.google.android.play.core.install.model.UpdateAvailability;
+import androidx.core.content.ContextCompat;
+
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ae.oleapp.BuildConfig;
@@ -52,12 +40,7 @@ public class OleUpdateAppActivity extends BaseActivity implements View.OnClickLi
         binding.btnUpdate.setVisibility(View.GONE);
         binding.btnNotNow.setVisibility(View.GONE);
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                inAppUpdates();
-            }
-        }, 1000);
+        new Handler().postDelayed(this::inAppUpdates, 1000);
 
 
         binding.btnUpdate.setOnClickListener(this);
@@ -81,8 +64,7 @@ public class OleUpdateAppActivity extends BaseActivity implements View.OnClickLi
     public void onClick(View v) {
         if (v == binding.btnUpdate) {
 //            updateClicked();
-        }
-        else if (v == binding.btnNotNow) {
+        } else if (v == binding.btnNotNow) {
             notNowClicked();
         }
     }
@@ -100,8 +82,7 @@ public class OleUpdateAppActivity extends BaseActivity implements View.OnClickLi
         if (forceUpdate.equalsIgnoreCase("1")) {
             Functions.showToast(getContext(), getString(R.string.major_changes_in_app), FancyToast.ERROR);
 //            inAppUpdates(true);
-        }
-        else {
+        } else {
             finish();
         }
     }

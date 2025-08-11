@@ -138,7 +138,7 @@ public class OleCreditActivity extends BaseActivity implements OleWalletSection.
     private void getWalletAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getWallet(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -185,7 +185,7 @@ public class OleCreditActivity extends BaseActivity implements OleWalletSection.
     private void topupWalletAPI(boolean isLoader, String amount, String paymentMethod, String orderRef) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addAmountInWallet(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), orderRef, paymentMethod, amount, Functions.getIPAddress());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

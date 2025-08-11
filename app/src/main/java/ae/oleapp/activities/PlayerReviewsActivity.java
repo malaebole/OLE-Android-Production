@@ -72,7 +72,7 @@ public class PlayerReviewsActivity extends BaseActivity implements View.OnClickL
     private void getReviewsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.ratingsList(Functions.getAppLang(getContext()), playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

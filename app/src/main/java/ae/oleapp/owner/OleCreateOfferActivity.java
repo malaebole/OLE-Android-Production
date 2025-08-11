@@ -424,7 +424,7 @@ public class OleCreateOfferActivity extends BaseActivity implements View.OnClick
     private void getAllFieldsAPI(boolean isLoader, String clubId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getAllFields(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -483,7 +483,7 @@ public class OleCreateOfferActivity extends BaseActivity implements View.OnClick
     private void addOfferAPI(String title, String from, String to, String startTime, String endTime, String value, String type, String fieldIds) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addOffer(Functions.getAppLang(getContext()), title, Functions.getPrefValue(getContext(), Constants.kUserID), clubId, fieldIds, startTime, endTime, dayIds, type, value, from, to);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -522,7 +522,7 @@ public class OleCreateOfferActivity extends BaseActivity implements View.OnClick
     private void deleteOfferAPI() {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteOffer(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), oleOfferData.getId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

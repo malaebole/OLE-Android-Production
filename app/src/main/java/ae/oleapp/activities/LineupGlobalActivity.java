@@ -91,7 +91,7 @@ public class LineupGlobalActivity extends BaseActivity implements View.OnClickLi
     private void getAssignedCountries(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getAssignedCountries();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

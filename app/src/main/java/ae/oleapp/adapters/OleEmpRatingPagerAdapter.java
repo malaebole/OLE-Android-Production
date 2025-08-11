@@ -17,7 +17,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.google.android.material.card.MaterialCardView;
-import com.hedgehog.ratingbar.RatingBar;
+import com.willy.ratingbar.BaseRatingBar;
+import com.willy.ratingbar.ScaleRatingBar;
 
 import java.util.List;
 
@@ -51,7 +52,7 @@ public class OleEmpRatingPagerAdapter extends RecyclerView.Adapter<OleEmpRatingP
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Employee employee = list.get(position);
-       // Glide.with(context).load(employee.getEmployeePhoto()).placeholder(R.drawable.emp_ic).into(holder.imageView);
+        // Glide.with(context).load(employee.getEmployeePhoto()).placeholder(R.drawable.emp_ic).into(holder.imageView);
         Glide.with(context).load(employee.getEmployeePhoto()).apply(RequestOptions.circleCropTransform()).into(holder.imageView);
         holder.tvName.setText(employee.getName());
 
@@ -59,65 +60,63 @@ public class OleEmpRatingPagerAdapter extends RecyclerView.Adapter<OleEmpRatingP
         holder.tvRateDesc.setTextColor(context.getResources().getColor(R.color.greenColor));
         holder.tvRateDesc.setText(R.string.excellent);
 
-
-        holder.ratingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+        holder.ratingBar.setOnRatingChangeListener(new BaseRatingBar.OnRatingChangeListener() {
             @Override
-            public void onRatingChange(float ratingCount) {
-                holder.rating = ratingCount;
-                ratingScor = (int) ratingCount;
+            public void onRatingChange(BaseRatingBar ratingBar, float ratings, boolean fromUser) {
+                holder.rating = ratings;
+                ratingScor = (int) ratings;
                 switch (ratingScor) {
                     case 1:
-                        holder.ratingBar.setStarFillDrawable(context.getResources().getDrawable(R.drawable.red_star));
-                        holder.ratingBar.setStar(1);
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.red_star));
+                        holder.ratingBar.setRating(1);
                         holder.imgVuEmoji.setImageResource(R.drawable.angry_emoji);
                         holder.tvRateDesc.setTextColor(context.getResources().getColor(R.color.redColor));
                         holder.tvRateDesc.setText(context.getString(R.string.angry));
-                        holder.ratingBar.setStarFillDrawable(context.getResources().getDrawable(R.drawable.red_star));
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.red_star));
                         break;
                     case 2:
-                        holder.ratingBar.setStarFillDrawable(context.getResources().getDrawable(R.drawable.red_star));
-                        holder.ratingBar.setStar(2);
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.red_star));
+                        holder.ratingBar.setRating(2);
                         holder.imgVuEmoji.setImageResource(R.drawable.sad_emoji);
                         holder.tvRateDesc.setTextColor(context.getResources().getColor(R.color.redColor));
                         holder.tvRateDesc.setText(context.getString(R.string.sad));
-                        holder.ratingBar.setStarFillDrawable(context.getResources().getDrawable(R.drawable.red_star));
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.red_star));
                         break;
                     case 3:
-                        holder.ratingBar.setStarFillDrawable(context.getResources().getDrawable(R.drawable.green_star));
-                        holder.ratingBar.setStar(3);
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.green_star));
+                        holder.ratingBar.setRating(3);
                         holder.imgVuEmoji.setImageResource(R.drawable.wow_emoji);
                         holder.tvRateDesc.setTextColor(context.getResources().getColor(R.color.greenColor));
                         holder.tvRateDesc.setText(context.getString(R.string.wow));
-                        holder.ratingBar.setStarFillDrawable(context.getResources().getDrawable(R.drawable.green_star));
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.green_star));
                         break;
                     case 4:
-                        holder.ratingBar.setStarFillDrawable(context.getResources().getDrawable(R.drawable.green_star));
-                        holder.ratingBar.setStar(4);
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.green_star));
+                        holder.ratingBar.setRating(4);
                         holder.imgVuEmoji.setImageResource(R.drawable.awesome_emoji);
                         holder.tvRateDesc.setTextColor(context.getResources().getColor(R.color.greenColor));
                         holder.tvRateDesc.setText(context.getString(R.string.awesome));
-                        holder.ratingBar.setStarFillDrawable(context.getResources().getDrawable(R.drawable.green_star));
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.green_star));
                         break;
                     case 5:
-                        holder.ratingBar.setStarFillDrawable(context.getResources().getDrawable(R.drawable.green_star));
-                        holder.ratingBar.setStar(5);
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.green_star));
+                        holder.ratingBar.setRating(5);
                         holder.imgVuEmoji.setImageResource(R.drawable.excellent_emoji);
                         holder.tvRateDesc.setTextColor(context.getResources().getColor(R.color.greenColor));
                         holder.tvRateDesc.setText(R.string.excellent);
-                        holder.ratingBar.setStarFillDrawable(context.getResources().getDrawable(R.drawable.green_star));
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.green_star));
 
                         break;
                     default:
-                        holder.ratingBar.setStarEmptyDrawable(context.getResources().getDrawable(R.drawable.empty_star));
-                        holder.ratingBar.setStar(0);
-                        holder.ratingBar.setStarEmptyDrawable(context.getResources().getDrawable(R.drawable.empty_star));
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.empty_star));
+                        holder.ratingBar.setRating(0);
+                        holder.ratingBar.setFilledDrawable(context.getResources().getDrawable(R.drawable.empty_star));
                         break;
                 }
                 holder.ratingBar.refreshDrawableState();
-
             }
-
         });
+
 
         holder.fiveVu.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -178,7 +177,7 @@ public class OleEmpRatingPagerAdapter extends RecyclerView.Adapter<OleEmpRatingP
 
         ImageView imageView, imgVuEmoji;
         TextView tvName, tvRateDesc, tvFive, tvTen;
-        RatingBar ratingBar;
+        ScaleRatingBar ratingBar;
         EditText etMsg, etTip;
         CardView btnSubmit;
         MaterialCardView fiveVu, tenVu;
@@ -201,7 +200,7 @@ public class OleEmpRatingPagerAdapter extends RecyclerView.Adapter<OleEmpRatingP
             tenVu = itemView.findViewById(R.id.ten_vu);
 
             etMsg.setText("");
-            ratingBar.setStar(rating);
+            ratingBar.setRating(rating);
         }
     }
 

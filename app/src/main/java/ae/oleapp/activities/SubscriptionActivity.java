@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import android.window.OnBackInvokedDispatcher;
+
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -18,12 +21,14 @@ import com.android.billingclient.api.BillingClient;
 import com.android.billingclient.api.BillingClientStateListener;
 import com.android.billingclient.api.BillingFlowParams;
 import com.android.billingclient.api.BillingResult;
+import com.android.billingclient.api.PendingPurchasesParams;
 import com.android.billingclient.api.ProductDetails;
 import com.android.billingclient.api.ProductDetailsResponseListener;
 import com.android.billingclient.api.Purchase;
 import com.android.billingclient.api.PurchasesResponseListener;
 import com.android.billingclient.api.PurchasesUpdatedListener;
 import com.android.billingclient.api.QueryProductDetailsParams;
+import com.android.billingclient.api.QueryProductDetailsResult;
 import com.android.billingclient.api.QueryPurchasesParams;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -207,7 +212,7 @@ public class SubscriptionActivity extends BaseActivity implements PurchasesUpdat
 
         //Establish connection to billing client
         //check purchase status from google play store cache on every app start
-        billingClient = BillingClient.newBuilder(this).enablePendingPurchases().setListener(this).build();
+        billingClient = BillingClient.newBuilder(this).enablePendingPurchases(PendingPurchasesParams.newBuilder().build()).setListener(this).build();
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
@@ -328,12 +333,22 @@ public class SubscriptionActivity extends BaseActivity implements PurchasesUpdat
         premiumShirtListAdapter = new PremiumShirtListAdapter(getContext(), shirtList);
         binding.shirtRecyclerVu.setAdapter(premiumShirtListAdapter);
 
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                Intent intent = new Intent();
+                intent.putExtra("is_added", false);
+                setResult(RESULT_OK, intent);
+                finish();
+            }
+        });
+
     }
 
     private void getTeamData(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.teamsData(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID),"android");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -383,7 +398,7 @@ public class SubscriptionActivity extends BaseActivity implements PurchasesUpdat
     private void checkUserSubscription(boolean isLoader, String subscriptionid, String subscriptiontoken, String subscriptionpackage) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.checkUserSubscription(Functions.getAppLang(getContext()), subscriptionid,subscriptiontoken,subscriptionpackage, "google");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -465,7 +480,7 @@ public class SubscriptionActivity extends BaseActivity implements PurchasesUpdat
         }
         //else reconnect service
         else{
-            billingClient = BillingClient.newBuilder(SubscriptionActivity.this).enablePendingPurchases().setListener(SubscriptionActivity.this).build();
+            billingClient = BillingClient.newBuilder(SubscriptionActivity.this).enablePendingPurchases(PendingPurchasesParams.newBuilder().build()).setListener(SubscriptionActivity.this).build();
             billingClient.startConnection(new BillingClientStateListener() {
                 @Override
                 public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
@@ -509,63 +524,195 @@ public class SubscriptionActivity extends BaseActivity implements PurchasesUpdat
                 .setProductList(queryProductDetailsParamsList)
                 .build();
 
-        billingClient.queryProductDetailsAsync(params, new ProductDetailsResponseListener() {
-            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> productDetailsList) {
-                // Process the result
-                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                    if (productDetailsList.size() > 0) {
+        billingClient.queryProductDetailsAsync(params, (billingResult, queryProductDetailsResult) -> {
+            // Process the result
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                // Get product details from query result
+                List<ProductDetails> productDetailsList = queryProductDetailsResult.getProductDetailsList();
 
-                        // in the billing flow creating separate productDetailsParamsList variable
-                        List<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = new ArrayList<>();
+                if (!productDetailsList.isEmpty()) {
+                    // in the billing flow creating separate productDetailsParamsList variable
+                    List<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = new ArrayList<>();
 
-                        BillingFlowParams.ProductDetailsParams productDetailsParams = null;
+                    // Retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+                    ProductDetails productDetails = productDetailsList.get(0);
 
-                        // Retrieve a value for "productDetails" by calling queryProductDetailsAsync()
-                        // Get the offerToken of the selected offer
-                        String offerToken = productDetailsList.get(0)
-                                .getSubscriptionOfferDetails().get(0)
-                                .getOfferToken();
-                        // Set the parameters for the offer that will be presented
-                        productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder()
-                                .setProductDetails(productDetailsList.get(0))
-                                .setOfferToken(offerToken)
-                                .build();
+                    // Check if subscription offers exist
+                    if (productDetails.getSubscriptionOfferDetails() == null ||
+                            productDetails.getSubscriptionOfferDetails().isEmpty()) {
+                        runOnUiThread(() -> Functions.showToast(
+                                SubscriptionActivity.this,
+                                "No offers available for " + PRODUCT_ID,
+                                FancyToast.ERROR
+                        ));
+                        return;
+                    }
 
+                    // Get the offerToken of the first offer
+                    String offerToken = productDetails.getSubscriptionOfferDetails().get(0).getOfferToken();
 
-                        productDetailsParamsList.add(productDetailsParams);
+                    // Set the parameters for the offer that will be presented
+                    BillingFlowParams.ProductDetailsParams productDetailsParams =
+                            BillingFlowParams.ProductDetailsParams.newBuilder()
+                                    .setProductDetails(productDetails)
+                                    .setOfferToken(offerToken)
+                                    .build();
 
-                        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
-                                .setProductDetailsParamsList(productDetailsParamsList)
-                                .build();
+                    productDetailsParamsList.add(productDetailsParams);
 
-                        // Launch the billing flow
-                        billingClient.launchBillingFlow(SubscriptionActivity.this, billingFlowParams);
-                    } else {
-                        //try to add item/product id in google play console
+                    BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+                            .setProductDetailsParamsList(productDetailsParamsList)
+                            .build();
 
+                    // Launch the billing flow
+                    BillingResult launchResult = billingClient.launchBillingFlow(
+                            SubscriptionActivity.this,
+                            billingFlowParams
+                    );
 
-                        SubscriptionActivity.this.runOnUiThread(new Runnable() {
-                            public void run() {
-                                Functions.showToast(getApplicationContext(), "Purchase Item " + PRODUCT_ID + " not Found", FancyToast.ERROR);
-
-//                                Toast.makeText(getApplicationContext(), "Purchase Item " + PRODUCT_ID + " not Found", Toast.LENGTH_SHORT).show();
-
-                            }
-                        });
+                    // Check if launch was successful
+                    if (launchResult.getResponseCode() != BillingClient.BillingResponseCode.OK) {
+                        runOnUiThread(() -> Functions.showToast(
+                                SubscriptionActivity.this,
+                                "Billing error: " + launchResult.getDebugMessage(),
+                                FancyToast.ERROR
+                        ));
                     }
                 } else {
-
-
-                    SubscriptionActivity.this.runOnUiThread(new Runnable() {
-                        public void run() {
-//                            Toast.makeText(getApplicationContext(), " Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
-                            Functions.showToast(getApplicationContext(), " Error " + billingResult.getDebugMessage(), FancyToast.ERROR);
-
-                        }
-                    });
+                    // Item not found in Play Store
+                    runOnUiThread(() -> Functions.showToast(
+                            SubscriptionActivity.this,
+                            "Purchase Item " + PRODUCT_ID + " not Found",
+                            FancyToast.ERROR
+                    ));
                 }
+            } else {
+                // Query failed
+                runOnUiThread(() -> Functions.showToast(
+                        SubscriptionActivity.this,
+                        "Error: " + billingResult.getDebugMessage(),
+                        FancyToast.ERROR
+                ));
             }
         });
+
+
+//        billingClient.queryProductDetailsAsync(params, new ProductDetailsResponseListener() {
+//            @Override
+//            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull QueryProductDetailsResult queryProductDetailsResult) {
+//                // Process the result
+//                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+//                    // Get product details from query result
+//                    List<ProductDetails> productDetailsList = queryProductDetailsResult.getProductDetailsList();
+//                    if (!productDetailsList.isEmpty()) {
+//
+//                        // in the billing flow creating separate productDetailsParamsList variable
+//                        List<BillingFlowParams.ProductDetailsParams> productDetailsParamsList = new ArrayList<>();
+//
+//                        BillingFlowParams.ProductDetailsParams productDetailsParams = null;
+//
+//                        // Retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+//                        // Get the offerToken of the selected offer
+//                        String offerToken = productDetailsList.get(0)
+//                                .getSubscriptionOfferDetails().get(0)
+//                                .getOfferToken();
+//                        // Set the parameters for the offer that will be presented
+//                        productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder()
+//                                .setProductDetails(productDetailsList.get(0))
+//                                .setOfferToken(offerToken)
+//                                .build();
+//
+//
+//                        productDetailsParamsList.add(productDetailsParams);
+//
+//                        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+//                                .setProductDetailsParamsList(productDetailsParamsList)
+//                                .build();
+//
+//                        // Launch the billing flow
+//                        billingClient.launchBillingFlow(SubscriptionActivity.this, billingFlowParams);
+//                    } else {
+//                        //try to add item/product id in google play console
+//
+//
+//                        SubscriptionActivity.this.runOnUiThread(new Runnable() {
+//                            public void run() {
+//                                Functions.showToast(getApplicationContext(), "Purchase Item " + PRODUCT_ID + " not Found", FancyToast.ERROR);
+//
+////                                Toast.makeText(getApplicationContext(), "Purchase Item " + PRODUCT_ID + " not Found", Toast.LENGTH_SHORT).show();
+//
+//                            }
+//                        });
+//                    }
+//                } else {
+//
+//
+//                    SubscriptionActivity.this.runOnUiThread(new Runnable() {
+//                        public void run() {
+////                            Toast.makeText(getApplicationContext(), " Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
+//                            Functions.showToast(getApplicationContext(), " Error " + billingResult.getDebugMessage(), FancyToast.ERROR);
+//
+//                        }
+//                    });
+//                }
+//            }
+//
+////            public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> productDetailsList) {
+////                // Process the result
+////                if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+////                    if (productDetailsList.size() > 0) {
+////
+////                        // in the billing flow creating separate productDetailsParamsList variable
+////                        List<BillingFlowParams.ProductDetailsParams> productDe  tailsParamsList = new ArrayList<>();
+////
+////                        BillingFlowParams.ProductDetailsParams productDetailsParams = null;
+////
+////                        // Retrieve a value for "productDetails" by calling queryProductDetailsAsync()
+////                        // Get the offerToken of the selected offer
+////                        String offerToken = productDetailsList.get(0)
+////                                .getSubscriptionOfferDetails().get(0)
+////                                .getOfferToken();
+////                        // Set the parameters for the offer that will be presented
+////                        productDetailsParams = BillingFlowParams.ProductDetailsParams.newBuilder()
+////                                .setProductDetails(productDetailsList.get(0))
+////                                .setOfferToken(offerToken)
+////                                .build();
+////
+////
+////                        productDetailsParamsList.add(productDetailsParams);
+////
+////                        BillingFlowParams billingFlowParams = BillingFlowParams.newBuilder()
+////                                .setProductDetailsParamsList(productDetailsParamsList)
+////                                .build();
+////
+////                        // Launch the billing flow
+////                        billingClient.launchBillingFlow(SubscriptionActivity.this, billingFlowParams);
+////                    } else {
+////                        //try to add item/product id in google play console
+////
+////
+////                        SubscriptionActivity.this.runOnUiThread(new Runnable() {
+////                            public void run() {
+////                                Functions.showToast(getApplicationContext(), "Purchase Item " + PRODUCT_ID + " not Found", FancyToast.ERROR);
+////
+//////                                Toast.makeText(getApplicationContext(), "Purchase Item " + PRODUCT_ID + " not Found", Toast.LENGTH_SHORT).show();
+////
+////                            }
+////                        });
+////                    }
+////                } else {
+////
+////
+////                    SubscriptionActivity.this.runOnUiThread(new Runnable() {
+////                        public void run() {
+//////                            Toast.makeText(getApplicationContext(), " Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
+////                            Functions.showToast(getApplicationContext(), " Error " + billingResult.getDebugMessage(), FancyToast.ERROR);
+////
+////                        }
+////                    });
+////                }
+////            }
+//        });
 
     }
 
@@ -858,66 +1005,126 @@ public class SubscriptionActivity extends BaseActivity implements PurchasesUpdat
                 .setProductList(queryProductDetailsParamsList)
                 .build();
 
-        billingClient.queryProductDetailsAsync(params, new ProductDetailsResponseListener() {
-                    public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> productDetailsList) {
-                        // Process the result
-                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
-                            if (productDetailsList.size() > 0) {
-                                for(ProductDetails productDetail:productDetailsList) {
-//                                    if(productDetail.getProductId().equals(subscribetestItemID)){
-//                                        priceSubcribetest = productDetail.getSubscriptionOfferDetails().get(0)
+        //                    public void onProductDetailsResponse(@NonNull BillingResult billingResult, @NonNull List<ProductDetails> productDetailsList) {
+//                        // Process the result
+//                        if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+//                            if (productDetailsList.size() > 0) {
+//                                for(ProductDetails productDetail:productDetailsList) {
+////                                    if(productDetail.getProductId().equals(subscribetestItemID)){
+////                                        priceSubcribetest = productDetail.getSubscriptionOfferDetails().get(0)
+////                                                .getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
+////                                    }
+////                                    else
+//                                    if(productDetail.getProductId().equals(subscribeItem1ID)){
+//                                        priceSubcribe1 = productDetail.getSubscriptionOfferDetails().get(0)
 //                                                .getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
 //                                    }
-//                                    else
-                                    if(productDetail.getProductId().equals(subscribeItem1ID)){
-                                        priceSubcribe1 = productDetail.getSubscriptionOfferDetails().get(0)
-                                                .getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
-                                    }
-                                    else if(productDetail.getProductId().equals(subscribeItem2ID)){
-                                        priceSubcribe2 = productDetail.getSubscriptionOfferDetails().get(0)
-                                                .getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
-                                    }
-                                    else if(productDetail.getProductId().equals(subscribeItem3ID)){
-                                        priceSubcribe3 = productDetail.getSubscriptionOfferDetails().get(0)
-                                                .getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
-                                    }
-                                    else if(productDetail.getProductId().equals(subscribeItem4ID)){
-                                        priceSubcribe4 = productDetail.getSubscriptionOfferDetails().get(0)
-                                                .getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
-                                    }
-                                }
+//                                    else if(productDetail.getProductId().equals(subscribeItem2ID)){
+//                                        priceSubcribe2 = productDetail.getSubscriptionOfferDetails().get(0)
+//                                                .getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
+//                                    }
+//                                    else if(productDetail.getProductId().equals(subscribeItem3ID)){
+//                                        priceSubcribe3 = productDetail.getSubscriptionOfferDetails().get(0)
+//                                                .getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
+//                                    }
+//                                    else if(productDetail.getProductId().equals(subscribeItem4ID)){
+//                                        priceSubcribe4 = productDetail.getSubscriptionOfferDetails().get(0)
+//                                                .getPricingPhases().getPricingPhaseList().get(0).getFormattedPrice();
+//                                    }
+//                                }
+//
+//                                SubscriptionActivity.this.runOnUiThread(new Runnable() {
+//                                    public void run() {
+//                                        updateTextViews();
+//                                        //here price is filled you can call text updateTextViews method to show item with price
+//                                    }
+//                                });
+//
+//                            } else {
+//                                //try to add item/product id in google play console
+//
+//                                SubscriptionActivity.this.runOnUiThread(new Runnable() {
+//                                    public void run() {
+////                                        Toast.makeText(getApplicationContext(), "Purchase Items not Found", Toast.LENGTH_SHORT).show();
+//                                        Functions.showToast(getApplicationContext(), "Purchase Items not Found", FancyToast.ERROR);
+//                                    }
+//                                });
+//
+//                            }
+//                        } else {
+//                            SubscriptionActivity.this.runOnUiThread(new Runnable() {
+//                                public void run() {
+////                                    Toast.makeText(getApplicationContext(),
+////                                            " Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
+//                         Functions.showToast(getApplicationContext(), " Error " + billingResult.getDebugMessage(), FancyToast.ERROR);
+//                                }
+//                            });
+//
+//                        }
+//                    }
+        billingClient.queryProductDetailsAsync(params, (billingResult, queryProductDetailsResult) -> {
+            // Process the result
+            if (billingResult.getResponseCode() == BillingClient.BillingResponseCode.OK) {
+                // Get the actual product details from the query result
+                List<ProductDetails> productDetailsList = queryProductDetailsResult.getProductDetailsList();
 
-                                SubscriptionActivity.this.runOnUiThread(new Runnable() {
-                                    public void run() {
-                                        updateTextViews();
-                                        //here price is filled you can call text updateTextViews method to show item with price
-                                    }
-                                });
+                if (!productDetailsList.isEmpty()) {
+                    for (ProductDetails productDetail : productDetailsList) {
+                        // Check if offers exist before accessing
+                        if (productDetail.getSubscriptionOfferDetails() == null ||
+                                productDetail.getSubscriptionOfferDetails().isEmpty()) {
+                            continue;
+                        }
 
-                            } else {
-                                //try to add item/product id in google play console
+                        // Get the first pricing phase
+                        List<ProductDetails.PricingPhase> pricingPhases = productDetail.getSubscriptionOfferDetails()
+                                .get(0)
+                                .getPricingPhases()
+                                .getPricingPhaseList();
 
-                                SubscriptionActivity.this.runOnUiThread(new Runnable() {
-                                    public void run() {
-//                                        Toast.makeText(getApplicationContext(), "Purchase Items not Found", Toast.LENGTH_SHORT).show();
-                                        Functions.showToast(getApplicationContext(), "Purchase Items not Found", FancyToast.ERROR);
-                                    }
-                                });
+                        if (pricingPhases.isEmpty()) {
+                            continue;
+                        }
 
-                            }
-                        } else {
-                            SubscriptionActivity.this.runOnUiThread(new Runnable() {
-                                public void run() {
-//                                    Toast.makeText(getApplicationContext(),
-//                                            " Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
-                         Functions.showToast(getApplicationContext(), " Error " + billingResult.getDebugMessage(), FancyToast.ERROR);
-                                }
-                            });
+                        String formattedPrice = pricingPhases.get(0).getFormattedPrice();
+                        String productId = productDetail.getProductId();
 
+                        // Update prices based on product ID
+                        if (productId.equals(subscribeItem1ID)) {
+                            priceSubcribe1 = formattedPrice;
+                        } else if (productId.equals(subscribeItem2ID)) {
+                            priceSubcribe2 = formattedPrice;
+                        } else if (productId.equals(subscribeItem3ID)) {
+                            priceSubcribe3 = formattedPrice;
+                        } else if (productId.equals(subscribeItem4ID)) {
+                            priceSubcribe4 = formattedPrice;
                         }
                     }
+
+                    // Update UI on main thread
+                    // Here price is filled - update UI
+                    runOnUiThread(this::updateTextViews);
+                } else {
+                    // No products found
+                    runOnUiThread(() ->
+                            Functions.showToast(
+                                    getApplicationContext(),
+                                    "Purchase Items not Found",
+                                    FancyToast.ERROR
+                            )
+                    );
                 }
-        );
+            } else {
+                // Query failed
+                runOnUiThread(() ->
+                        Functions.showToast(
+                                getApplicationContext(),
+                                "Error: " + billingResult.getDebugMessage(),
+                                FancyToast.ERROR
+                        )
+                );
+            }
+        });
 
     }
 
@@ -962,14 +1169,6 @@ public class SubscriptionActivity extends BaseActivity implements PurchasesUpdat
             binding.plan3.setBackground(getDrawable(R.drawable.subs_price_bg));
             binding.plan4.setBackground(getDrawable(R.drawable.subs_price_bg_active));
         }
-    }
-
-    @Override
-    public void onBackPressed() {
-        Intent intent = new Intent();
-        intent.putExtra("is_added", false);
-        setResult(RESULT_OK, intent);
-        finish();
     }
 
 }

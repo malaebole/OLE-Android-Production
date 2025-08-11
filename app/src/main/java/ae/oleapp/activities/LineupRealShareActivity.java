@@ -420,8 +420,7 @@ public class LineupRealShareActivity extends BaseActivity implements View.OnClic
     private LineupRealPreviewFieldView checkTeamAGkExist() {
         LineupRealPreviewFieldView view = null;
         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-            if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView) {
-                LineupRealPreviewFieldView vu = (LineupRealPreviewFieldView) binding.vuTeamA.getChildAt(i);
+            if (binding.vuTeamA.getChildAt(i) instanceof LineupRealPreviewFieldView vu) {
                 if (vu.getPlayerInfo().getIsGoalkeeper() != null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                     view = vu;
                     break;
@@ -487,7 +486,7 @@ public class LineupRealShareActivity extends BaseActivity implements View.OnClic
     private void startRealLineup(boolean isLoader, String teamId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.startRealLineup(teamId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -499,9 +498,9 @@ public class LineupRealShareActivity extends BaseActivity implements View.OnClic
                            // binding.vuTeamA.removeAllViews();
                             binding.fullTeamAVu.removeAllViews();
                             populateTeamData();
-                            Glide.with(getContext()).load(gameTeam.getBgImageUrl()).into(binding.fieldBgImgVu);
-                            Glide.with(getContext()).load(gameTeam.getFieldImageUrl()).into(binding.fieldImgVu);
-                            Glide.with(getContext()).load(gameTeam.getShareImageUrl()).into(binding.finalshare);
+                            Glide.with(getApplicationContext()).load(gameTeam.getBgImageUrl()).into(binding.fieldBgImgVu);
+                            Glide.with(getApplicationContext()).load(gameTeam.getFieldImageUrl()).into(binding.fieldImgVu);
+                            Glide.with(getApplicationContext()).load(gameTeam.getShareImageUrl()).into(binding.finalshare);
 
                         } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);

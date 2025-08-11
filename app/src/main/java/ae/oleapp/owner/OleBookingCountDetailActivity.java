@@ -557,7 +557,7 @@ public class OleBookingCountDetailActivity extends BaseActivity implements View.
                 binding.tvAge.setText(String.format("%s: %s", getString(R.string.age), olePlayerStat.getAge()));
             }
         }
-        Glide.with(getContext()).load(olePlayerStat.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.playerImage);
+        Glide.with(getApplicationContext()).load(olePlayerStat.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.playerImage);
         if (olePlayerStat.getLevel() != null && !olePlayerStat.getLevel().isEmpty() && !olePlayerStat.getLevel().getValue().equalsIgnoreCase("")) {
             binding.tvRank.setVisibility(View.VISIBLE);
             binding.tvRank.setText(String.format("LV: %s", olePlayerStat.getLevel().getValue()));
@@ -709,7 +709,7 @@ public class OleBookingCountDetailActivity extends BaseActivity implements View.
             pPhone = "";
         }
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.profileForOwner(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, pId, pPhone);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -751,7 +751,7 @@ public class OleBookingCountDetailActivity extends BaseActivity implements View.
     private void updatePlayerMethodAPI(boolean isLoader, String paymentMethod, String days, String id) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updatePlayerPayment(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, id, days, paymentMethod);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -790,7 +790,7 @@ public class OleBookingCountDetailActivity extends BaseActivity implements View.
     private void updateBookingLimitAPI(boolean isLoader, String limit, String id, String phone) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.manageBookingsRestriction(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, id, phone, limit);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -829,7 +829,7 @@ public class OleBookingCountDetailActivity extends BaseActivity implements View.
     private void updateContinuousBookingAPI(boolean isLoader, String id, String flag) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.managePlayerContinuous(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, id, flag);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -868,7 +868,7 @@ public class OleBookingCountDetailActivity extends BaseActivity implements View.
     private void blockUnblockUserAPI(boolean isLoader, String status, String userId, String reason, String phone) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.blockUnblockUser(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), userId, status, reason, phone);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -929,7 +929,7 @@ public class OleBookingCountDetailActivity extends BaseActivity implements View.
                 RequestBody.create(MediaType.parse("text/plain"), bookingId),
                 RequestBody.create(MediaType.parse("text/plain"), amount),
                 RequestBody.create(MediaType.parse("text/plain"), isDiscount));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

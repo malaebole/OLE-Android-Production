@@ -8,13 +8,7 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.constraintlayout.widget.ConstraintLayout;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.os.Environment;
-import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,66 +16,46 @@ import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
-import com.google.android.material.bottomsheet.BottomSheetDialogFragment;
-import com.google.gson.Gson;
 import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 import java.io.File;
 import java.io.FileOutputStream;
-import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import ae.oleapp.R;
-import ae.oleapp.databinding.FragmentBestPlayerDialogBinding;
 import ae.oleapp.databinding.FragmentIncomeHistoryBottomSheetDialogBinding;
-import ae.oleapp.models.BankEarning;
-import ae.oleapp.models.EmployeeSalary;
-import ae.oleapp.models.FinanceHome;
 import ae.oleapp.models.IncomeDetailsModel;
-import ae.oleapp.models.IncomeHistory;
-import ae.oleapp.models.PartnerEarning;
-import ae.oleapp.models.PlayerInfo;
-import ae.oleapp.util.AppManager;
-import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
-import ae.oleapp.util.OleKeyboardUtils;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
-import okhttp3.ResponseBody;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
-public class IncomeHistoryBottomSheetDialogFragment extends DialogFragment implements View.OnClickListener{
+public class IncomeHistoryBottomSheetDialogFragment extends DialogFragment implements View.OnClickListener {
 
-            private FragmentIncomeHistoryBottomSheetDialogBinding binding;
-//            private String incomeId = "";
-            private ResultDialogCallback dialogCallback;
-            private IncomeDetailsModel incomeDetailsModel;
-            private String IncomeId = "";
-            private String incomeFrom = "";
-            private String Amount = "";
-            private String Note = "";
-            private String ReceiptUrl = "";
-            private String bankName = "";
-            private boolean paymentmethod;
-            Dialog dialog;
+    private FragmentIncomeHistoryBottomSheetDialogBinding binding;
+    //            private String incomeId = "";
+    private ResultDialogCallback dialogCallback;
+    private IncomeDetailsModel incomeDetailsModel;
+    private String IncomeId = "";
+    private String incomeFrom = "";
+    private String Amount = "";
+    private String Note = "";
+    private String ReceiptUrl = "";
+    private String bankName = "";
+    private boolean paymentmethod;
+    Dialog dialog;
 
 
-
-    public IncomeHistoryBottomSheetDialogFragment(String IncomeId, String incomeFrom, String Amount, String Note, String ReceiptUrl, Boolean paymentmethod,String bankName) {
+    public IncomeHistoryBottomSheetDialogFragment(String IncomeId, String incomeFrom, String Amount, String Note, String ReceiptUrl, Boolean paymentmethod, String bankName) {
 //        this.incomeDetailsModel = incomeDetailsModel;
         this.IncomeId = IncomeId;
         this.incomeFrom = incomeFrom;
@@ -117,10 +91,10 @@ public class IncomeHistoryBottomSheetDialogFragment extends DialogFragment imple
         }
         //getincomeDetails(incomeId);
 
-        if (paymentmethod){
+        if (paymentmethod) {
             binding.paymentMethodLayout.setVisibility(View.VISIBLE);
             binding.paymentMethodTv.setText(bankName);
-        }else {
+        } else {
             binding.paymentMethodLayout.setVisibility(View.GONE);
         }
 
@@ -128,7 +102,7 @@ public class IncomeHistoryBottomSheetDialogFragment extends DialogFragment imple
         binding.sourceTv.setText(incomeFrom);
         binding.noteTv.setText(Note);
         binding.amountTv.setText(Amount);
-        if (!ReceiptUrl.isEmpty()){
+        if (!ReceiptUrl.isEmpty()) {
             Glide.with(getActivity()).load(ReceiptUrl).into(binding.invoiceImgVu);
         }
         binding.btnClose.setOnClickListener(this);
@@ -185,7 +159,7 @@ public class IncomeHistoryBottomSheetDialogFragment extends DialogFragment imple
         Permissions.check(getContext(), permissions, null, null, new PermissionHandler() {
             @Override
             public void onGranted() {
-                Glide.with(getContext())
+                Glide.with(requireActivity())
                         .asBitmap()
                         .load(fileUrl)
                         .into(new CustomTarget<Bitmap>() {
@@ -237,16 +211,14 @@ public class IncomeHistoryBottomSheetDialogFragment extends DialogFragment imple
     @Override
     public void onClick(View v) {
 
-        if (v == binding.btnClose){
+        if (v == binding.btnClose) {
             dismiss();
 
-        }
-        else if (v == binding.invoiceImgVu) {
-            if (!ReceiptUrl.isEmpty()){
+        } else if (v == binding.invoiceImgVu) {
+            if (!ReceiptUrl.isEmpty()) {
                 showImageDialog();
             }
-        }
-        else if (v == binding.btnEdit){
+        } else if (v == binding.btnEdit) {
             dialogCallback.didSubmitResult(IncomeHistoryBottomSheetDialogFragment.this, true);
         }
 

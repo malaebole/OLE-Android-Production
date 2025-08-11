@@ -63,15 +63,15 @@ public class OlePadelMatchShareActivity extends BaseActivity implements View.OnC
     }
 
     private void populateData() {
-        Glide.with(getContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1ImgVu);
+        Glide.with(getApplicationContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1ImgVu);
         binding.tvP1Name.setText(String.format(" %s ", playerOne.getNickName()));
-        Glide.with(getContext()).load(playerOnePartner.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1PartnerImgVu);
+        Glide.with(getApplicationContext()).load(playerOnePartner.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1PartnerImgVu);
         binding.tvP1PartnerName.setText(String.format(" %s ", playerOnePartner.getNickName()));
         binding.tvP1Skill.setText(playerOne.getSkillLevel());
         if (playerTwo != null) {
             binding.tvOpponentQMark.setVisibility(View.INVISIBLE);
             binding.opponentImgVu.setVisibility(View.VISIBLE);
-            Glide.with(getContext()).load(playerTwo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.opponentImgVu);
+            Glide.with(getApplicationContext()).load(playerTwo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.opponentImgVu);
             binding.tvOpponentName.setText(String.format(" %s ", playerTwo.getNickName()));
             if (playerTwo.getLevel() != null && !playerTwo.getLevel().isEmpty() && !playerTwo.getLevel().getValue().equalsIgnoreCase("")) {
                 binding.tvOpponentLevel.setVisibility(View.VISIBLE);
@@ -92,7 +92,7 @@ public class OlePadelMatchShareActivity extends BaseActivity implements View.OnC
         if (playerTwoPartner != null) {
             binding.tvOpponentPartnerQMark.setVisibility(View.INVISIBLE);
             binding.opponentPartnerImgVu.setVisibility(View.VISIBLE);
-            Glide.with(getContext()).load(playerTwoPartner.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.opponentPartnerImgVu);
+            Glide.with(getApplicationContext()).load(playerTwoPartner.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.opponentPartnerImgVu);
             binding.tvOpponentPartnerName.setText(String.format(" %s ", playerTwoPartner.getNickName()));
             if (playerTwoPartner.getLevel() != null && !playerTwoPartner.getLevel().isEmpty() && !playerTwoPartner.getLevel().getValue().equalsIgnoreCase("")) {
                 binding.tvOpponentPartnerLevel.setVisibility(View.VISIBLE);

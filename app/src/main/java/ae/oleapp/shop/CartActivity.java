@@ -172,7 +172,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     private void getCartAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getCart(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -230,7 +230,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     private void deleteCartAPI(boolean isLoader, String prodId, String cartId, int pos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteCart(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), prodId, cartId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -278,7 +278,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
     private void updateCartAPI(boolean isLoader, String prodId, String cartId, int qty, int pos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateCart(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), prodId, cartId, qty);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

@@ -232,7 +232,7 @@ public class OleProfilePadelMatchHistoryDetailsActivity extends BaseActivity imp
     private void getMatchHistoryAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.profileMatchHistroy(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), playerId, fromDate, toDate, Constants.kPadelModule);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

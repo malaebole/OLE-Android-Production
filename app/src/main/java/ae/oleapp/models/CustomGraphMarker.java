@@ -56,7 +56,7 @@ public class CustomGraphMarker extends MarkerView {
         pImage.setImageDrawable(null);
 
         if (player.getImage() != null) {
-            Glide.with(getContext())
+            Glide.with(this)
                     .asBitmap()
                     .load(player.getImage())
                     .apply(RequestOptions.circleCropTransform().centerInside()) // Apply circleCrop transformation
@@ -80,7 +80,7 @@ public class CustomGraphMarker extends MarkerView {
                     .into(Target.SIZE_ORIGINAL, Target.SIZE_ORIGINAL);  // Load the original image size
         } else {
             // Load a placeholder image
-            Glide.with(getContext())
+            Glide.with(this)
                     .load(R.drawable.face_inactive)
                     .apply(RequestOptions.circleCropTransform())
                     .placeholder(R.drawable.face_inactive)
@@ -129,7 +129,7 @@ public class CustomGraphMarker extends MarkerView {
 //
 //            tvName.setText(player.getName());
 //            if (!player.getEmojiUrl().isEmpty()) {
-//                Glide.with(getContext()).load(player.getEmojiUrl()).placeholder(R.drawable.face_inactive)
+//                Glide.with(getApplicationContext()).load(player.getEmojiUrl()).placeholder(R.drawable.face_inactive)
 //                        .apply(RequestOptions.circleCropTransform()).into(pImage);
 //            }
 //            String value = String.valueOf((int) e.getY());

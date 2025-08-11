@@ -136,8 +136,8 @@ public class PlayerComparisonActivity extends BaseActivity implements View.OnCli
                         else {
                             binding.tvP1Name.setText(playerInfo1.getNickName());
                         }
-                        Glide.with(getContext()).load(playerInfo1.getEmojiUrl()).into(binding.emojiImgVuP1);
-                        Glide.with(getContext()).load(playerInfo1.getBibUrl()).into(binding.shirtImgVuP1);
+                        Glide.with(getApplicationContext()).load(playerInfo1.getEmojiUrl()).into(binding.emojiImgVuP1);
+                        Glide.with(getApplicationContext()).load(playerInfo1.getBibUrl()).into(binding.shirtImgVuP1);
                         playerList.remove(pos);
                         adapter.notifyDataSetChanged();
                         callApi();
@@ -158,8 +158,8 @@ public class PlayerComparisonActivity extends BaseActivity implements View.OnCli
                         else {
                             binding.tvP2Name.setText(playerInfo2.getNickName());
                         }
-                        Glide.with(getContext()).load(playerInfo2.getEmojiUrl()).into(binding.emojiImgVuP2);
-                        Glide.with(getContext()).load(playerInfo2.getBibUrl()).into(binding.shirtImgVuP2);
+                        Glide.with(getApplicationContext()).load(playerInfo2.getEmojiUrl()).into(binding.emojiImgVuP2);
+                        Glide.with(getApplicationContext()).load(playerInfo2.getBibUrl()).into(binding.shirtImgVuP2);
                         playerList.remove(pos);
                         adapter.notifyDataSetChanged();
                         callApi();
@@ -188,7 +188,7 @@ public class PlayerComparisonActivity extends BaseActivity implements View.OnCli
     private void getPlayers(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.lineupPlayersList(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -230,7 +230,7 @@ public class PlayerComparisonActivity extends BaseActivity implements View.OnCli
     private void playerComparisonAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.compareTwoPlayers(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), playerInfo1.getId(), playerInfo2.getId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

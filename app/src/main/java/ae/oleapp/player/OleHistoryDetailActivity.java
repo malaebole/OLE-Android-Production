@@ -119,7 +119,7 @@ public class OleHistoryDetailActivity extends BaseActivity implements View.OnCli
 
         binding.profileVu1.populateData(playerOne.getNickName(), playerOne.getPhotoUrl(), playerOne.getLevel(), true);
         binding.tvP1Win.setText(playerOne.getMatchWon());
-        Glide.with(getContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1SmallImg);
+        Glide.with(getApplicationContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1SmallImg);
 
         binding.tvDraw.setText(drawMatch);
         binding.tvPlayed.setText(getResources().getString(R.string.total_played_place, totalMatch));
@@ -135,13 +135,13 @@ public class OleHistoryDetailActivity extends BaseActivity implements View.OnCli
 
         binding.profileVu2.populateData(playerTwo.getNickName(), playerTwo.getPhotoUrl(), playerTwo.getLevel(), true);
         binding.tvP2Win.setText(playerTwo.getMatchWon());
-        Glide.with(getContext()).load(playerTwo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p2SmallImg);
+        Glide.with(getApplicationContext()).load(playerTwo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p2SmallImg);
     }
 
     private void matchHistoryDeatilAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.matchHistoryDetail(Functions.getAppLang(getContext()), playerId1, playerId2);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

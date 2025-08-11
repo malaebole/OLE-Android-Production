@@ -1,21 +1,19 @@
 package ae.oleapp.inventory;
 
+import android.Manifest;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.view.View;
+
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
-
-import android.Manifest;
-import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.view.View;
 
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
@@ -32,7 +30,6 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.io.IOException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
@@ -50,9 +47,6 @@ import ae.oleapp.models.OleSelectionList;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
-import droidninja.filepicker.FilePickerBuilder;
-import droidninja.filepicker.FilePickerConst;
-import id.zelory.compressor.Compressor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -86,7 +80,8 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
-            itemList = new Gson().fromJson(bundle.getString("data", ""), new TypeToken<List<OleInventoryItem>>(){}.getType());
+            itemList = new Gson().fromJson(bundle.getString("data", ""), new TypeToken<List<OleInventoryItem>>() {
+            }.getType());
             clubId = bundle.getString("club_id", "");
         }
 
@@ -134,13 +129,11 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
                 binding.etDiscount.setText(String.valueOf(itemTotal));
                 binding.tvDiscount.setText(String.format(Locale.ENGLISH, "%.2f %s", itemTotal, currency));
                 binding.tvGrandTotal.setText(String.format("0 %s", currency));
-            }
-            else {
+            } else {
                 binding.tvDiscount.setText(String.format("%s %s", binding.etDiscount.getText().toString(), currency));
                 binding.tvGrandTotal.setText(String.format(Locale.ENGLISH, "%.2f %s", itemTotal - discount, currency));
             }
-        }
-        else {
+        } else {
             binding.tvDiscount.setText(String.format("0 %s", currency));
             binding.tvGrandTotal.setText(String.format(Locale.ENGLISH, "%.2f %s", itemTotal, currency));
         }
@@ -157,14 +150,11 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
         if (v == binding.bar.backBtn) {
             setResult(RESULT_CANCELED);
             finish();
-        }
-        else if (v == binding.relCash || v == binding.relPos || v == binding.relStaff) {
+        } else if (v == binding.relCash || v == binding.relPos || v == binding.relStaff) {
             selectPaymentMethod(v);
-        }
-        else if (v == binding.imgVuReceipt) {
+        } else if (v == binding.imgVuReceipt) {
             receiptClicked();
-        }
-        else if (v == binding.etEmployee) {
+        } else if (v == binding.etEmployee) {
             if (!employeeList.isEmpty()) {
                 List<OleSelectionList> oleSelectionList = new ArrayList<>();
                 for (Employee employee : employeeList) {
@@ -182,8 +172,7 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
                 });
                 dialog.show();
             }
-        }
-        else if (v == binding.btnConfirm) {
+        } else if (v == binding.btnConfirm) {
             confirmClicked();
         }
     }
@@ -192,8 +181,7 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
         if (paymentMethod.equalsIgnoreCase("pos") && filePath.isEmpty()) {
             Functions.showToast(getContext(), getString(R.string.take_receipt_photo), FancyToast.ERROR);
             return;
-        }
-        else if (paymentMethod.equalsIgnoreCase("staff") && empId.isEmpty() && binding.etMsg.getText().toString().isEmpty()) {
+        } else if (paymentMethod.equalsIgnoreCase("staff") && empId.isEmpty() && binding.etMsg.getText().toString().isEmpty()) {
             Functions.showToast(getContext(), getString(R.string.write_note), FancyToast.ERROR);
             return;
         }
@@ -256,7 +244,7 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
         String[] permissions = new String[0];
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES};
-        }else {
+        } else {
             permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
         }
         Permissions.check(getContext(), permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
@@ -280,7 +268,7 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
                 Uri resultUri = result.getUri();
                 filePath = resultUri.getPath();
                 file = new File(filePath);
-                Glide.with(getContext()).load(file).into(binding.imgVuReceipt);
+                Glide.with(getApplicationContext()).load(file).into(binding.imgVuReceipt);
                 //updatePhotoAPI(true, file);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
@@ -336,15 +324,13 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
             binding.relCash.setBackgroundResource(R.drawable.rounded_corner_bg_blue_border);
             binding.imgVuCash.setImageResource(R.drawable.check);
             binding.tvCash.setTextColor(getResources().getColor(R.color.blueColorNew));
-        }
-        else if (view == binding.relPos) {
+        } else if (view == binding.relPos) {
             paymentMethod = "pos";
             binding.relPos.setBackgroundResource(R.drawable.rounded_corner_bg_blue_border);
             binding.imgVuPos.setImageResource(R.drawable.check);
             binding.tvPos.setTextColor(getResources().getColor(R.color.blueColorNew));
             binding.receiptVu.setVisibility(View.VISIBLE);
-        }
-        else if (view == binding.relStaff) {
+        } else if (view == binding.relStaff) {
             paymentMethod = "staff";
             binding.relStaff.setBackgroundResource(R.drawable.rounded_corner_bg_blue_border);
             binding.imgVuStaff.setImageResource(R.drawable.check);
@@ -387,7 +373,7 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
 //                            .setCompressFormat(Bitmap.CompressFormat.JPEG)
 //                            .compressToFile(file);
 //                    filePath = file.getAbsolutePath();
-//                    Glide.with(getContext()).load(file).into(binding.imgVuReceipt);
+//                    Glide.with(getApplicationContext()).load(file).into(binding.imgVuReceipt);
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                    Functions.showToast(getContext(), "Error in image compression", FancyToast.ERROR);
@@ -411,9 +397,9 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
 //    }
 
     private void getEmployeesAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.getEmployees(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), clubId, "");
-        call.enqueue(new Callback<ResponseBody>() {
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.getEmployees(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, "");
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -427,26 +413,24 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
                             for (int i = 0; i < arr.length(); i++) {
                                 employeeList.add(gson.fromJson(arr.get(i).toString(), Employee.class));
                             }
-                        }
-                        else {
+                        } else {
                             employeeList.clear();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -454,7 +438,7 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
     }
 
     private void newSaleAPI(boolean isLoader, String discount, String json, String note) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         MultipartBody.Part filePart = null;
         if (!filePath.isEmpty()) {
             File photoFile = new File(filePath);
@@ -470,7 +454,7 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
                 RequestBody.create(MediaType.parse("text/plain"), note),
                 RequestBody.create(MediaType.parse("text/plain"), clubId),
                 RequestBody.create(MediaType.parse("text/plain"), json));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -479,26 +463,24 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             showSuccessDialog();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }

@@ -1,12 +1,5 @@
 package ae.oleapp.owner;
 
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AlertDialog;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -15,7 +8,15 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AlertDialog;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.baoyz.actionsheet.ActionSheet;
+import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
 import com.denzcoskun.imageslider.interfaces.ItemClickListener;
 import com.denzcoskun.imageslider.models.SlideModel;
@@ -23,7 +24,7 @@ import com.github.florent37.viewtooltip.ViewTooltip;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.stfalcon.frescoimageviewer.ImageViewer;
+import com.stfalcon.imageviewer.StfalconImageViewer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -42,8 +43,6 @@ import java.util.Locale;
 import java.util.TimeZone;
 
 import ae.oleapp.R;
-import ae.oleapp.activities.AddIncomeActivity;
-import ae.oleapp.activities.IncomeHistoryActivity;
 import ae.oleapp.activities.MainActivity;
 import ae.oleapp.adapters.OleBookingDateAdapter;
 import ae.oleapp.adapters.OleBookingDurationAdapter;
@@ -57,20 +56,17 @@ import ae.oleapp.dialogs.OleBookingDoneDialog;
 import ae.oleapp.dialogs.OleClubListDialogFragment;
 import ae.oleapp.dialogs.OleCustomAlertDialog;
 import ae.oleapp.fragments.AddWaitingUserDialogFragment;
-import ae.oleapp.fragments.IncomeHistoryBottomSheetDialogFragment;
-import ae.oleapp.fragments.UnlockedJerseyPopupFragment;
 import ae.oleapp.fragments.showWaitingUsersListDialogFragment;
+import ae.oleapp.models.Club;
+import ae.oleapp.models.Field;
 import ae.oleapp.models.OleBookingListDate;
 import ae.oleapp.models.OleBookingSlot;
-import ae.oleapp.models.Club;
 import ae.oleapp.models.OleClubFacility;
-import ae.oleapp.models.Field;
 import ae.oleapp.models.OleFieldPrice;
 import ae.oleapp.models.OleImageData;
 import ae.oleapp.models.OleKeyValuePair;
 import ae.oleapp.models.OleOfferData;
 import ae.oleapp.padel.OleCreatePadelMatchActivity;
-import ae.oleapp.player.OleBookingFormationActivity;
 import ae.oleapp.player.OleCreateMatchActivity;
 import ae.oleapp.player.OlePBookingInfoActivity;
 import ae.oleapp.player.OlePlayerMainTabsActivity;
@@ -120,8 +116,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
             setTheme(R.style.AppThemePlayer);
-        }
-        else {
+        } else {
             setTheme(R.style.AppTheme);
         }
         super.onCreate(savedInstanceState);
@@ -130,7 +125,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
         binding.bar.toolbarTitle.setText(getString(R.string.booking));
 
         Bundle bundle = getIntent().getExtras();
-        if (bundle!=null) {
+        if (bundle != null) {
             fieldId = bundle.getString("field_id", "");
             Gson gson = new Gson();
             club = gson.fromJson(bundle.getString("club", ""), Club.class);
@@ -162,15 +157,14 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             if (!fieldId.isEmpty()) {
                 getFieldAPI(true);
             }
-        }
-        else {
+        } else {
             binding.relLoc.setVisibility(View.VISIBLE);
             binding.relClub.setVisibility(View.GONE);
             if (!fieldId.isEmpty()) {
                 getFieldAPI(true);
             }
 
-            for (OleClubFacility facility: facilityList) {
+            for (OleClubFacility facility : facilityList) {
                 if (facility.getPrice().equalsIgnoreCase("")) {
                     oleFacilityAdapter.selectedFacility.add(facility);
                 }
@@ -227,8 +221,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             oleFacilityAdapter.setSelectedFacility(facility);
             if (selectedSlotDuration.isEmpty()) {
                 setButtonText(selectedDuration);
-            }
-            else {
+            } else {
                 setButtonText(selectedSlotDuration);
             }
         }
@@ -238,16 +231,14 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             OleClubFacility facility = club.getFacilities().get(pos);
             int maxQty = Integer.parseInt(facility.getMaxQuantity());
             if (facility.getQty() < maxQty) {
-                facility.setQty(facility.getQty()+1);
+                facility.setQty(facility.getQty() + 1);
                 if (selectedSlotDuration.isEmpty()) {
                     setButtonText(selectedDuration);
-                }
-                else {
+                } else {
                     setButtonText(selectedSlotDuration);
                 }
                 oleFacilityAdapter.notifyDataSetChanged();
-            }
-            else {
+            } else {
                 Functions.showToast(getContext(), String.format(getResources().getString(R.string.you_select_max_qty_place), maxQty), FancyToast.ERROR);
             }
         }
@@ -255,7 +246,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
         @Override
         public void OnMinusClick(View v, int pos) {
             OleClubFacility facility = club.getFacilities().get(pos);
-            facility.setQty(facility.getQty()-1);
+            facility.setQty(facility.getQty() - 1);
             if (facility.getQty() == 0) {
                 int index = oleFacilityAdapter.isExistInSelected(facility.getId());
                 if (index != -1) {
@@ -264,8 +255,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             }
             if (selectedSlotDuration.isEmpty()) {
                 setButtonText(selectedDuration);
-            }
-            else {
+            } else {
                 setButtonText(selectedSlotDuration);
             }
             oleFacilityAdapter.notifyDataSetChanged();
@@ -309,8 +299,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                 setButtonText(selectedDuration);
                 selectedDate = date;
                 getSlotsAPI(selectedDate);
-            }
-            else {
+            } else {
                 Functions.showToast(getContext(), getString(R.string.select_duration), FancyToast.ERROR);
             }
         }
@@ -331,11 +320,10 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                 } else if (slot.getStatus().equalsIgnoreCase("available") && !slot.getWaitingList().isEmpty()) {
                     showWaitingUsersList(slot);
                 }
-            }
-            else {
+            } else {
                 if (!slot.getUserName().equalsIgnoreCase("")) {
                     String msg = getResources().getString(R.string.has_booked_this_time, slot.getUserName());
-                    ViewTooltip.on(getContext(), v.relBorder)
+                    ViewTooltip.on(v.relBorder)
                             .autoHide(true, 3000).clickToHide(true)
                             .corner(30).position(ViewTooltip.Position.TOP)
                             .text(msg).textColor(Color.WHITE).color(getResources().getColor(R.color.blueColorNew))
@@ -355,16 +343,14 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                     offerDiscount = checkOfferForSlot(slot.getStart(), slot.getEnd());
                     if (selectedSlotDuration.isEmpty()) {
                         setButtonText(selectedDuration);
-                    }
-                    else {
+                    } else {
                         setButtonText(selectedSlotDuration);
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 slotAdapter.setSelectedSlotIndex(pos, selectedDate);
-            }
-            else {
+            } else {
                 String msg = getResources().getString(R.string.slot_selected_dur_msg, selectedDuration, v.slotDuration, v.slotDuration);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle(getResources().getString(R.string.confirmation))
@@ -384,8 +370,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                                     offerDiscount = checkOfferForSlot(slot.getStart(), slot.getEnd());
                                     if (selectedSlotDuration.isEmpty()) {
                                         setButtonText(selectedDuration);
-                                    }
-                                    else {
+                                    } else {
                                         setButtonText(selectedSlotDuration);
                                     }
                                 } catch (ParseException e) {
@@ -414,8 +399,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             if (slot.getStatus().equalsIgnoreCase("booked")) {
                 if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
                     confirmCancelBookingAlert(slot.getBookingId(), pos, slot.getBookingStatus());
-                }
-                else {
+                } else {
                     showBookingAlert(slot.getStart(), slot.getEnd());
                 }
                 return;
@@ -423,8 +407,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             if (slot.getStatus().equalsIgnoreCase("hidden")) {
                 if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
                     Functions.showToast(getContext(), getString(R.string.you_hide_this_slot), FancyToast.SUCCESS);
-                }
-                else {
+                } else {
                     showBookingAlert(slot.getStart(), slot.getEnd());
                 }
                 return;
@@ -442,16 +425,14 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                     offerDiscount = checkOfferForSlot(slot.getStart(), slot.getEnd());
                     if (selectedSlotDuration.isEmpty()) {
                         setButtonText(selectedDuration);
-                    }
-                    else {
+                    } else {
                         setButtonText(selectedSlotDuration);
                     }
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
                 slotAdapter.setSelectedSlotIndex(pos, selectedDate);
-            }
-            else {
+            } else {
                 String msg = getResources().getString(R.string.slot_selected_dur_msg, selectedDuration, viewHolder.slotDuration, viewHolder.slotDuration);
                 AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
                 builder.setTitle(getResources().getString(R.string.confirmation))
@@ -471,8 +452,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                                     offerDiscount = checkOfferForSlot(slot.getStart(), slot.getEnd());
                                     if (selectedSlotDuration.isEmpty()) {
                                         setButtonText(selectedDuration);
-                                    }
-                                    else {
+                                    } else {
                                         setButtonText(selectedSlotDuration);
                                     }
                                 } catch (ParseException e) {
@@ -515,9 +495,8 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
     private void confirmCancelBookingAlert(String bookingId, int position, String bookingStatus) {
         String[] arr;
         if (!bookingStatus.equalsIgnoreCase("1")) {
-            arr = new String[]{getResources().getString(R.string.add_waiting_user),getResources().getString(R.string.confirm_booking), getResources().getString(R.string.cancel_booking)};
-        }
-        else {
+            arr = new String[]{getResources().getString(R.string.add_waiting_user), getResources().getString(R.string.confirm_booking), getResources().getString(R.string.cancel_booking)};
+        } else {
             arr = new String[]{getResources().getString(R.string.add_waiting_user), getResources().getString(R.string.cancel_booking)};
         }
         ActionSheet.createBuilder(this, getSupportFragmentManager())
@@ -541,8 +520,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                             } else {
                                 cancelConfirmBookingAPI(true, "cancel", bookingId, position);
                             }
-                        }
-                        else {
+                        } else {
                             if (index == 0) {
                                 actionSheet.dismiss();
                                 new Handler().postDelayed(() -> showWaitingUserSheet(bookingId), 200); // Adjust delay as needed
@@ -582,17 +560,16 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
         showWaitingUsersListDialogFragment dialogFragment = new showWaitingUsersListDialogFragment(slot);
         dialogFragment.setDialogCallback((df, type, id, name, phone) -> {
             df.dismiss();
-            if (type.equalsIgnoreCase("booking")){
-                if (!phone.isEmpty()){
+            if (type.equalsIgnoreCase("booking")) {
+                if (!phone.isEmpty()) {
                     isWaitingUser = "1";
                     bookClicked(name, phone);
                 }
-            }else{
-                if (id !=null){
+            } else {
+                if (id != null) {
                     removeWaitingUser(id);
                 }
             }
-
 
 
         });
@@ -602,7 +579,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
     private void removeWaitingUser(String id) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removeWaitingUser(id);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -617,18 +594,17 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -637,8 +613,8 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
 
     private void addUserToWaitingList(String bookingId, String clubId, String name, String phone) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.addUserToWaitingList(bookingId,clubId, name, phone);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.addUserToWaitingList(bookingId, clubId, name, phone);
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -653,18 +629,17 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -676,22 +651,19 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
     public void onClick(View v) {
         if (v == binding.bar.backBtn) {
             finish();
-        }
-        else if (v == binding.relLoc) {
+        } else if (v == binding.relLoc) {
             locationClicked();
-        }
-        else if (v == binding.relClub) {
+        } else if (v == binding.relClub) {
             clubClicked();
-        }
-        else if (v == binding.btnBook) {
+        } else if (v == binding.btnBook) {
             isWaitingUser = "0";
-            bookClicked("","");
+            bookClicked("", "");
 
         }
     }
 
     private void locationClicked() {
-        String uri = "http://maps.google.com/maps?daddr="+club.getLatitude()+","+club.getLongitude();
+        String uri = "http://maps.google.com/maps?daddr=" + club.getLatitude() + "," + club.getLongitude();
         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
         startActivity(intent);
     }
@@ -779,51 +751,47 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
         if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
             Intent intent = new Intent(getContext(), OlePBookingInfoActivity.class);
             if (offerDiscountType.equalsIgnoreCase("") || offerDiscountType.equalsIgnoreCase("amount")) {
-                intent.putExtra("price",String.valueOf(Double.parseDouble(price)-offerDiscount+selectedFacilityPrice));
-            }
-            else {
+                intent.putExtra("price", String.valueOf(Double.parseDouble(price) - offerDiscount + selectedFacilityPrice));
+            } else {
                 double p = Double.parseDouble(price);
                 p = p - ((offerDiscount / 100) * p);
-                intent.putExtra("price",String.valueOf(p+selectedFacilityPrice));
+                intent.putExtra("price", String.valueOf(p + selectedFacilityPrice));
             }
 
-            intent.putExtra("booking_price",price);
-            intent.putExtra("duration",selectedSlotDuration);
+            intent.putExtra("booking_price", price);
+            intent.putExtra("duration", selectedSlotDuration);
             if (club.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
                 intent.putExtra("size", "");
-            }
-            else {
+            } else {
                 intent.putExtra("size", fieldDetail.getFieldSize().getName());
             }
-            intent.putExtra("club_name",club.getName());
-            intent.putExtra("field_name",fieldDetail.getName());
-            intent.putExtra("currency",fieldDetail.getCurrency());
-            intent.putExtra("continuous_allowed",fieldDetail.getContinuousAllowed());
-            intent.putExtra("club_id",club.getId());
-            intent.putExtra("field_id",fieldId);
-            intent.putExtra("date",selectedDate);
-            intent.putExtra("time",arrSlot.get(selectedSlotIndex).getSlot());
-            intent.putExtra("fac_price",selectedFacilityPrice);
+            intent.putExtra("club_name", club.getName());
+            intent.putExtra("field_name", fieldDetail.getName());
+            intent.putExtra("currency", fieldDetail.getCurrency());
+            intent.putExtra("continuous_allowed", fieldDetail.getContinuousAllowed());
+            intent.putExtra("club_id", club.getId());
+            intent.putExtra("field_id", fieldId);
+            intent.putExtra("date", selectedDate);
+            intent.putExtra("time", arrSlot.get(selectedSlotIndex).getSlot());
+            intent.putExtra("fac_price", selectedFacilityPrice);
             intent.putExtra("is_offer", offerDiscount > 0);
             startActivityForResult(intent, 100);
-        }
-        else {
+        } else {
             Intent intent = new Intent(getContext(), OleBookingInfoActivity.class);
-            intent.putExtra("price",String.valueOf(Double.parseDouble(price)-offerDiscount+selectedFacilityPrice));
-            intent.putExtra("duration",selectedSlotDuration);
+            intent.putExtra("price", String.valueOf(Double.parseDouble(price) - offerDiscount + selectedFacilityPrice));
+            intent.putExtra("duration", selectedSlotDuration);
             if (club.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
                 intent.putExtra("size", "");
+            } else {
+                intent.putExtra("size", fieldDetail.getFieldSize().getName());
             }
-            else {
-                intent.putExtra("size",fieldDetail.getFieldSize().getName());
-            }
-            intent.putExtra("club_name",club.getName());
-            intent.putExtra("field_name",fieldDetail.getName());
-            intent.putExtra("currency",fieldDetail.getCurrency());
-            intent.putExtra("club_id",club.getId());
-            intent.putExtra("field_id",fieldId);
-            intent.putExtra("date",selectedDate);
-            intent.putExtra("time",arrSlot.get(selectedSlotIndex).getSlot());
+            intent.putExtra("club_name", club.getName());
+            intent.putExtra("field_name", fieldDetail.getName());
+            intent.putExtra("currency", fieldDetail.getCurrency());
+            intent.putExtra("club_id", club.getId());
+            intent.putExtra("field_id", fieldId);
+            intent.putExtra("date", selectedDate);
+            intent.putExtra("time", arrSlot.get(selectedSlotIndex).getSlot());
             intent.putExtra("name", name);
             intent.putExtra("phone", phone);
             startActivityForResult(intent, 1001);
@@ -846,13 +814,11 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             String padelPlayersPayment = bundle.getString("padel_players_payment");
             bookingPaymentMethod = paymentType;
             if (cardDiscount.isEmpty()) {
-                addBookingAPI("",name, phone, "", paymentType, "", "", "", "", promoDiscount, promoId, offerDiscount, padelPlayers, padelPlayersPayment);
+                addBookingAPI("", name, phone, "", paymentType, "", "", "", "", promoDiscount, promoId, offerDiscount, padelPlayers, padelPlayersPayment);
+            } else {
+                addBookingAPI("", name, phone, cardDiscount, paymentType, "", "", "", "", promoDiscount, promoId, 0, padelPlayers, padelPlayersPayment);
             }
-            else {
-                addBookingAPI("",name, phone, cardDiscount, paymentType, "", "", "", "", promoDiscount, promoId, 0, padelPlayers, padelPlayersPayment);
-            }
-        }
-        else if (requestCode == 1001 && resultCode == RESULT_OK) {
+        } else if (requestCode == 1001 && resultCode == RESULT_OK) {
             // from owner booking info
             Bundle bundle = data.getExtras();
             String userId = bundle.getString("user_id");
@@ -874,12 +840,10 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
         if (club.getSlots60().equalsIgnoreCase("1")) {
             selectedDuration = "1";
             price = field.getOneHour();
-        }
-        else if (club.getSlots90().equalsIgnoreCase("1")) {
+        } else if (club.getSlots90().equalsIgnoreCase("1")) {
             selectedDuration = "1.5";
             price = field.getOneHalfHours();
-        }
-        else if (club.getSlots120().equalsIgnoreCase("1")) {
+        } else if (club.getSlots120().equalsIgnoreCase("1")) {
             selectedDuration = "2";
             price = field.getTwoHours();
         }
@@ -888,8 +852,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             if (club.getSlots90().equalsIgnoreCase("1")) {
                 selectedDuration = "1.5";
                 price = field.getOneHalfHours();
-            }
-            else if (club.getSlots120().equalsIgnoreCase("1")) {
+            } else if (club.getSlots120().equalsIgnoreCase("1")) {
                 selectedDuration = "2";
                 price = field.getTwoHours();
             }
@@ -898,15 +861,13 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
 
         if (arrDate.size() > 0) {
             setFieldPriceByDay(arrDate.get(selectedDateIndex).getDate());
-        }
-        else {
+        } else {
             SimpleDateFormat dateFormat = new SimpleDateFormat(kBookingFormat, Locale.ENGLISH);
             setFieldPriceByDay(dateFormat.format(new Date()));
         }
         if (Functions.getAppLang(getContext()).equalsIgnoreCase(Constants.kArLang)) {
             binding.btnBook.setTitle(String.format("%s %s %s", getString(R.string.book_now), price, fieldDetail.getCurrency()));
-        }
-        else {
+        } else {
             binding.btnBook.setTitle(String.format("%s %s %s", getString(R.string.book_now), fieldDetail.getCurrency(), price));
         }
         checkOfferAvailable();
@@ -965,8 +926,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                 for (String id : dayIdArr) {
                     if (days.isEmpty()) {
                         days = Functions.getDayById(getContext(), id);
-                    }
-                    else {
+                    } else {
                         days = String.format("%s, %s", days, Functions.getDayById(getContext(), id));
                     }
                 }
@@ -974,24 +934,20 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                 String endTime = oleOfferData.getTimingEnd().split(" ")[1];
                 String str = "";
                 if (oleOfferData.getDiscountType().equalsIgnoreCase("amount")) {
-                     str = getResources().getString(R.string.offer_desc_place, days, startTime, endTime, oleOfferData.getDiscount(), oleOfferData.getCurrency());
-                }
-                else {
+                    str = getResources().getString(R.string.offer_desc_place, days, startTime, endTime, oleOfferData.getDiscount(), oleOfferData.getCurrency());
+                } else {
                     str = getResources().getString(R.string.offer_desc_place, days, startTime, endTime, oleOfferData.getDiscount(), "%");
                 }
 
                 binding.tvOfferDetail.setText(str);
-            }
-            else if (fieldDetail.getOffers().size() > 1) {
+            } else if (fieldDetail.getOffers().size() > 1) {
                 binding.offerVu.setVisibility(View.VISIBLE);
                 binding.tvOfferName.setText(getString(R.string.offer));
                 binding.tvOfferDetail.setText(getString(R.string.offer_desc));
-            }
-            else {
+            } else {
                 binding.offerVu.setVisibility(View.GONE);
             }
-        }
-        else {
+        } else {
             binding.offerVu.setVisibility(View.GONE);
         }
     }
@@ -1038,23 +994,21 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                     dateFormat.applyPattern("dd/MM/yyyy hh:mma");
                     offerStartDate = dateFormat.parse(String.format("%s %s", todayDate, oleOfferData.getTimimgStart().split(" ")[1]));
                     offerEndDate = dateFormat.parse(String.format("%s %s", nextDate, oleOfferData.getTimingEnd().split(" ")[1]));
-                }
-                else {
+                } else {
                     dateFormat.applyPattern("dd/MM/yyyy hh:mma");
                     offerStartDate = dateFormat.parse(String.format("%s %s", todayDate, oleOfferData.getTimimgStart().split(" ")[1]));
                     offerEndDate = dateFormat.parse(String.format("%s %s", todayDate, oleOfferData.getTimingEnd().split(" ")[1]));
                 }
 
-                if (((offerStartDate.compareTo(slot1DT)<0 || offerStartDate.compareTo(slot1DT) == 0)
+                if (((offerStartDate.compareTo(slot1DT) < 0 || offerStartDate.compareTo(slot1DT) == 0)
                         && (slot1DT.compareTo(offerEndDate) < 0 || slot1DT.compareTo(offerEndDate) == 0))
-                        && (offerStartDate.compareTo(slot2DT)<0 || offerStartDate.compareTo(slot2DT) == 0)
+                        && (offerStartDate.compareTo(slot2DT) < 0 || offerStartDate.compareTo(slot2DT) == 0)
                         && (slot2DT.compareTo(offerEndDate) < 0 || slot2DT.compareTo(offerEndDate) == 0)
                         && isFound && !isExpired) {
                     if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
                         result = 0;
                         offerDiscountType = "";
-                    }
-                    else {
+                    } else {
                         result = Double.parseDouble(oleOfferData.getDiscount());
                         offerDiscountType = oleOfferData.getDiscountType();
                     }
@@ -1069,35 +1023,29 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             selectedFacilityPrice = calculateFacPrice();
             if (duration.equalsIgnoreCase("1")) {
                 price = fieldDetail.getOneHour();
-            }
-            else if (duration.equalsIgnoreCase("1.5")) {
+            } else if (duration.equalsIgnoreCase("1.5")) {
                 price = fieldDetail.getOneHalfHours();
-            }
-            else if (duration.equalsIgnoreCase("2")) {
+            } else if (duration.equalsIgnoreCase("2")) {
                 price = fieldDetail.getTwoHours();
-            }
-            else {
+            } else {
                 price = "";
             }
 
             if (price.isEmpty()) {
                 binding.btnBook.setTitle(getString(R.string.book_now));
-            }
-            else {
+            } else {
                 double p = 0;
                 if (offerDiscountType.isEmpty() || offerDiscountType.equalsIgnoreCase("amount")) {
                     p = Double.parseDouble(price) - offerDiscount;
                     p = p + selectedFacilityPrice;
-                }
-                else {
+                } else {
                     p = Double.parseDouble(price);
                     p = p - ((offerDiscount / 100) * p);
                     p = p + selectedFacilityPrice;
                 }
                 if (Functions.getAppLang(getContext()).equalsIgnoreCase(Constants.kArLang)) {
                     binding.btnBook.setTitle(String.format("%s %s %s", getString(R.string.book_now), p, fieldDetail.getCurrency()));
-                }
-                else {
+                } else {
                     binding.btnBook.setTitle(String.format("%s %s %s", getString(R.string.book_now), fieldDetail.getCurrency(), p));
                 }
             }
@@ -1110,8 +1058,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             if (!facility.getPrice().isEmpty()) {
                 if (facility.getType().equalsIgnoreCase("countable")) {
                     p = p + (Double.parseDouble(facility.getPrice()) * facility.getQty());
-                }
-                else {
+                } else {
                     p = p + Double.parseDouble(facility.getPrice());
                 }
             }
@@ -1134,20 +1081,21 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
 
             @Override
             public void onItemSelected(int i) {
-                new ImageViewer.Builder<OleImageData>(getContext(), oleImageDataList).setFormatter(new ImageViewer.Formatter<OleImageData>() {
-                    @Override
-                    public String format(OleImageData oleImageData) {
-                        return oleImageData.getPhotoPath();
-                    }
-                }).setStartPosition(i).show();
+
+                new StfalconImageViewer.Builder<>(getContext(), oleImageDataList, (imageView, oleImageData) -> {
+                    // Use Glide to load the image from the OleImageData
+                    Glide.with(getApplicationContext())
+                            .load(oleImageData.getPhotoPath())
+                            .into(imageView);
+                }).withStartPosition(i).show();
             }
         });
     }
 
     private void getAllFieldsAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getAllFields(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), club.getId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1174,8 +1122,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                             if (selectedPos != -1) {
                                 binding.fieldRecyclerVu.scrollToPosition(selectedPos);
                             }
-                        }
-                        else {
+                        } else {
                             fieldList.clear();
                             fieldAdapter.notifyDataSetChanged();
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
@@ -1184,18 +1131,17 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1203,9 +1149,9 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
     }
 
     private void getFieldAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getOneField(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), fieldId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1217,26 +1163,24 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                             Gson gson = new Gson();
                             fieldDetail = gson.fromJson(obj.toString(), Field.class);
                             populateData(fieldDetail);
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1250,7 +1194,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
         }
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getSlots(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), fieldId, club.getId(), selectedDuration, date, "1", Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1272,8 +1216,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                                 arrDate.add(gson.fromJson(arrD.get(i).toString(), OleBookingListDate.class));
                             }
                             daysAdapter.setDataSource(arrDate.toArray());
-                        }
-                        else {
+                        } else {
                             arrSlot.clear();
                             slotAdapter.notifyDataSetChanged();
                             Functions.showAlert(getContext(), getString(R.string.alert), object.getString(Constants.kMsg), null);
@@ -1284,13 +1227,13 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                         slotAdapter.notifyDataSetChanged();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     arrSlot.clear();
                     slotAdapter.notifyDataSetChanged();
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
@@ -1298,8 +1241,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                 slotAdapter.notifyDataSetChanged();
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1309,7 +1251,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
     private void notificationAPI(String start, String end, String phone) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.notifyAvailability(Functions.getAppLang(getContext()), fieldId, club.getId(), start, end, phone, Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1318,26 +1260,24 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1348,8 +1288,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
         double totalP = 0;
         if (!addPrice.isEmpty()) {
             totalP = Double.parseDouble(price) + Double.parseDouble(addPrice);
-        }
-        else {
+        } else {
             totalP = Double.parseDouble(price);
         }
 
@@ -1357,8 +1296,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
         if (promoDiscount > 0) {
             offerDis = 0;
             discount = "";
-        }
-        else {
+        } else {
             if (offerDiscountType.equalsIgnoreCase("percent")) {
                 double p = Double.parseDouble(price);
                 offerDis = (offerDis / 100) * p;
@@ -1378,8 +1316,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                 object.put("fac_id", facility.getId());
                 if (facility.getQty() > 0) {
                     object.put("qty", String.valueOf(facility.getQty()));
-                }
-                else {
+                } else {
                     object.put("qty", "");
                 }
                 array.put(object);
@@ -1398,7 +1335,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                 selectedStartTime, selectedEndTime, selectedShift, paymentType, userName, phone,
                 facilities, selectedFacilityPrice, offerDis, "0", promoDiscount, promoId,
                 days, fromDate, toDate, Functions.getIPAddress(), fieldType, padelPlayers, padelPlayersForPayment, ladySlot, isWaitingUser, registeredUserId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1409,21 +1346,18 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                             if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
                                 Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                                 finish();
-                            }
-                            else if (paymentType.equalsIgnoreCase("cash")) {
+                            } else if (paymentType.equalsIgnoreCase("cash")) {
                                 if (!club.getMatchAllowed().equalsIgnoreCase("1") && !club.getGamesAllowed().equalsIgnoreCase("1")) {
                                     Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                                     finish();
-                                }
-                                else {
+                                } else {
                                     // go to booking done dialog
                                     String bookingId = object.getJSONObject(Constants.kData).getString("id");
                                     OleBookingDoneDialog dialog = new OleBookingDoneDialog(getContext(), club.getName(), selectedDate, selectedSlotTime, bookingId);
                                     dialog.setDialogCallback(callback);
                                     dialog.show();
                                 }
-                            }
-                            else if (paymentType.equalsIgnoreCase("wallet")) {
+                            } else if (paymentType.equalsIgnoreCase("wallet")) {
                                 String bookingId = object.getJSONObject(Constants.kData).getString("id");
                                 String price = object.getJSONObject(Constants.kData).getString("price");
                                 String currency = object.getJSONObject(Constants.kData).getString("currency");
@@ -1431,15 +1365,13 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                                     if (!club.getMatchAllowed().equalsIgnoreCase("1") && !club.getGamesAllowed().equalsIgnoreCase("1")) {
                                         Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                                         finish();
-                                    }
-                                    else {
+                                    } else {
                                         // go to booking done dialog
                                         OleBookingDoneDialog dialog = new OleBookingDoneDialog(getContext(), club.getName(), selectedDate, selectedSlotTime, bookingId);
                                         dialog.setDialogCallback(callback);
                                         dialog.show();
                                     }
-                                }
-                                else {
+                                } else {
                                     makePayment(bookingId, "card", price, currency, new PaymentCallback() {
                                         @Override
                                         public void paymentStatus(boolean status, String orderRef) {
@@ -1453,15 +1385,13 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                                                     dialog.setDialogCallback(callback);
                                                     dialog.show();
                                                 }
-                                            }
-                                            else {
+                                            } else {
                                                 Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                                             }
                                         }
                                     });
                                 }
-                            }
-                            else {
+                            } else {
                                 String bookingId = object.getJSONObject(Constants.kData).getString("id");
                                 String price = object.getJSONObject(Constants.kData).getString("price");
                                 String currency = object.getJSONObject(Constants.kData).getString("currency");
@@ -1478,23 +1408,20 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                                                 dialog.setDialogCallback(callback);
                                                 dialog.show();
                                             }
-                                        }
-                                        else {
+                                        } else {
                                             Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                                         }
                                     }
                                 });
                             }
-                        }
-                        else if (object.getInt(Constants.kStatus) == 409 && Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
+                        } else if (object.getInt(Constants.kStatus) == 409 && Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
                             Functions.showAlert(getContext(), getString(R.string.success), object.getString(Constants.kMsg), new OleCustomAlertDialog.OnDismiss() {
                                 @Override
                                 public void dismiss() {
                                     finish();
                                 }
                             });
-                        }
-                        else {
+                        } else {
                             arrSlot.clear();
                             slotAdapter.setSelectedSlotIndex(-1, selectedDate);
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
@@ -1503,18 +1430,17 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1523,7 +1449,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
 
     private void checkPaymentStatusApi(String bookingId, String paymentOrderRef) {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.checkPaymentStatus(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, paymentOrderRef);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -1537,6 +1463,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                     }
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
@@ -1545,9 +1472,9 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
     }
 
     private void cancelConfirmBookingAPI(boolean isLoader, String status, String bookingId, int pos) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.cancelConfirmBooking(Functions.getAppLang(getContext()), bookingId, status, "", "", "", "", "", Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1561,16 +1488,14 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                                 arrSlot.get(pos).setUserName("");
                                 slotAdapter.notifyItemChanged(pos);
                             }
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -1580,8 +1505,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1617,8 +1541,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
                 intent.putExtra("payment_method", bookingPaymentMethod);
                 intent.putExtra("match_allow", club.getMatchAllowed());
                 startActivity(intent);
-            }
-            else {
+            } else {
                 Intent intent = new Intent(getContext(), OleCreateMatchActivity.class);
                 intent.putExtra("booking_id", bookingId);
                 intent.putExtra("payment_method", bookingPaymentMethod);
@@ -1651,7 +1574,6 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
             finish();
         }
     };
-
 
 
 }

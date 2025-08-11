@@ -66,7 +66,7 @@ public class ModuleOptionsActivity extends BaseActivity implements View.OnClickL
 
         UserInfo userInfo = Functions.getUserinfo(getContext());
         if (userInfo != null) {
-            Glide.with(getContext()).load(userInfo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.imgVu);
+            Glide.with(getApplicationContext()).load(userInfo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.imgVu);
             binding.tvName.setText(String.format("%s %s", getString(R.string.hello), userInfo.getFirstName()));
         }
 
@@ -155,7 +155,7 @@ public class ModuleOptionsActivity extends BaseActivity implements View.OnClickL
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
                 File file = new File(resultUri.getPath());
-                Glide.with(getContext()).load(file).into(binding.imgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.imgVu);
                 updatePhotoAPI(true, file);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
@@ -194,7 +194,7 @@ public class ModuleOptionsActivity extends BaseActivity implements View.OnClickL
         RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("photo", file.getName(), fileReqBody);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateProfilePhoto(part, RequestBody.create(MediaType.parse("multipart/form-data"), Functions.getAppLang(getContext())), RequestBody.create(MediaType.parse("multipart/form-data"), Functions.getPrefValue(getContext(), Constants.kUserID)));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -204,7 +204,7 @@ public class ModuleOptionsActivity extends BaseActivity implements View.OnClickL
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             String url = object.getJSONObject(Constants.kData).getString("photo_url");
-                            Glide.with(getContext()).load(url).into(binding.imgVu);
+                            Glide.with(getApplicationContext()).load(url).into(binding.imgVu);
                             UserInfo userInfo = Functions.getUserinfo(getContext());
                             userInfo.setPhotoUrl(url);
                             Functions.saveUserinfo(getContext(), userInfo);

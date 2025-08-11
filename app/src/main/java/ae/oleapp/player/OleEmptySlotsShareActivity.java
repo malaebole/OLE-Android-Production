@@ -77,7 +77,7 @@ public class OleEmptySlotsShareActivity extends BaseActivity implements View.OnC
 
     private void populateData() {
         if (!club.getCoverPath().isEmpty()) {
-            Glide.with(getContext()).load(club.getCoverPath()).into(binding.imgVu);
+            Glide.with(getApplicationContext()).load(club.getCoverPath()).into(binding.imgVu);
         }
         binding.tvName.setText(club.getName());
         binding.tvLoc.setText(club.getCity().getName());

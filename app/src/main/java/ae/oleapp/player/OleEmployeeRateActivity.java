@@ -1,18 +1,18 @@
 package ae.oleapp.player;
 
+import android.os.Bundle;
+import android.view.View;
+
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.LinearLayoutManager;
 
-import android.os.Bundle;
-import android.view.View;
-
 import com.bumptech.glide.Glide;
 import com.google.gson.Gson;
-import com.hedgehog.ratingbar.RatingBar;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
+import com.willy.ratingbar.BaseRatingBar;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -48,6 +48,7 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityEmployeeRateBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -62,46 +63,55 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
         adapter.setItemClickListener(itemClickListener);
         binding.recyclerVu.setAdapter(adapter);
 
-        binding.ratingBar.setmClickable(isRated.equalsIgnoreCase("0"));
+        binding.ratingBar.setClickable(isRated.equalsIgnoreCase("0"));
 
-
-        binding.ratingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+        binding.ratingBar.setOnRatingChangeListener(new BaseRatingBar.OnRatingChangeListener() {
             @Override
-            public void onRatingChange(float ratingCount) {
-                ratingScore = (int) ratingCount;
-//                switch (ratingScore){
-//                    case 1:
-//                        Glide.with(getContext()).load(R.drawable.upset_star).into(binding.starImg);
-//                        binding.ratingText.setText("Upset!");
-//                        binding.ratingText.setTextColor(getResources().getColor(R.color.red));
-//                        break;
-//                    case 2:
-//                        Glide.with(getContext()).load(R.drawable.sad_star).into(binding.starImg);
-//                        binding.ratingText.setTextColor(getResources().getColor(R.color.red));
-//                        binding.ratingText.setText("Sad!");
-//                        break;
-//                    case 3:
-//                        Glide.with(getContext()).load(R.drawable.wow_star).into(binding.starImg);
-//                        binding.ratingText.setTextColor(getResources().getColor(R.color.red));
-//                        binding.ratingText.setText("Wow!");
-//                        break;
-//                    case 4:
-//                        Glide.with(getContext()).load(R.drawable.awesome_star).into(binding.starImg);
-//                        binding.ratingText.setTextColor(getResources().getColor(R.color.greenColor));
-//                        binding.ratingText.setText("Awesome!");
-//                        break;
-//                    case 5:
-//                        Glide.with(getContext()).load(R.drawable.excellent_star).into(binding.starImg);
-//                        binding.ratingText.setTextColor(getResources().getColor(R.color.greenColor));
-//                        binding.ratingText.setText("Excellent!");
-//                        break;
-//                    default:
-//                        break;
-//                }
+            public void onRatingChange(BaseRatingBar ratingBar, float rating, boolean fromUser) {
+                ratingScore = (int) rating;
                 populateRatingData(ratingScore);
-                //rateClubAPI(ratingCount);
             }
         });
+
+
+//
+//        binding.ratingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
+//            @Override
+//            public void onRatingChange(float ratingCount) {
+//                ratingScore = (int) ratingCount;
+////                switch (ratingScore){
+////                    case 1:
+////                        Glide.with(getApplicationContext()).load(R.drawable.upset_star).into(binding.starImg);
+////                        binding.ratingText.setText("Upset!");
+////                        binding.ratingText.setTextColor(getResources().getColor(R.color.red));
+////                        break;
+////                    case 2:
+////                        Glide.with(getApplicationContext()).load(R.drawable.sad_star).into(binding.starImg);
+////                        binding.ratingText.setTextColor(getResources().getColor(R.color.red));
+////                        binding.ratingText.setText("Sad!");
+////                        break;
+////                    case 3:
+////                        Glide.with(getApplicationContext()).load(R.drawable.wow_star).into(binding.starImg);
+////                        binding.ratingText.setTextColor(getResources().getColor(R.color.red));
+////                        binding.ratingText.setText("Wow!");
+////                        break;
+////                    case 4:
+////                        Glide.with(getApplicationContext()).load(R.drawable.awesome_star).into(binding.starImg);
+////                        binding.ratingText.setTextColor(getResources().getColor(R.color.greenColor));
+////                        binding.ratingText.setText("Awesome!");
+////                        break;
+////                    case 5:
+////                        Glide.with(getApplicationContext()).load(R.drawable.excellent_star).into(binding.starImg);
+////                        binding.ratingText.setTextColor(getResources().getColor(R.color.greenColor));
+////                        binding.ratingText.setText("Excellent!");
+////                        break;
+////                    default:
+////                        break;
+////                }
+//                populateRatingData(ratingScore);
+//                //rateClubAPI(ratingCount);
+//            }
+//        });
 
         getEmployeesAPI(true);
 
@@ -109,53 +119,52 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
         binding.btnContinue.setOnClickListener(this);
     }
 
-   private void populateRatingData(int rating){
-            switch (rating){
-                case 1:
-                    binding.ratingBar.setStar(1);
-                    Glide.with(getContext()).load(R.drawable.upset_star).into(binding.starImg);
-                    binding.ratingText.setText(getString(R.string.upset));
-                    binding.ratingText.setTextColor(getResources().getColor(R.color.red));
-                    break;
-                case 2:
-                    binding.ratingBar.setStar(2);
-                    Glide.with(getContext()).load(R.drawable.sad_star).into(binding.starImg);
-                    binding.ratingText.setTextColor(getResources().getColor(R.color.red));
-                    binding.ratingText.setText(getString(R.string.sad));
-                    break;
-                case 3:
-                    binding.ratingBar.setStar(3);
-                    Glide.with(getContext()).load(R.drawable.wow_star).into(binding.starImg);
-                    binding.ratingText.setTextColor(getResources().getColor(R.color.red));
-                    binding.ratingText.setText(getString(R.string.wow));
-                    break;
-                case 4:
-                    binding.ratingBar.setStar(4);
-                    Glide.with(getContext()).load(R.drawable.awesome_star).into(binding.starImg);
-                    binding.ratingText.setTextColor(getResources().getColor(R.color.greenColor));
-                    binding.ratingText.setText(getString(R.string.awesome));
-                    break;
-                case 5:
-                    binding.ratingBar.setStar(5);
-                    Glide.with(getContext()).load(R.drawable.excellent_star).into(binding.starImg);
-                    binding.ratingText.setTextColor(getResources().getColor(R.color.greenColor));
-                    binding.ratingText.setText(getString(R.string.excellent));
-                    break;
-                default:
-                    break;
-            }
-            binding.ratingBar.refreshDrawableState();
-            if (isRated.equalsIgnoreCase("0")){
-               rateClubAPI(rating);
-            }
+    private void populateRatingData(int rating) {
+        switch (rating) {
+            case 1:
+                binding.ratingBar.setRating(1);
+                Glide.with(getApplicationContext()).load(R.drawable.upset_star).into(binding.starImg);
+                binding.ratingText.setText(getString(R.string.upset));
+                binding.ratingText.setTextColor(getResources().getColor(R.color.red));
+                break;
+            case 2:
+                binding.ratingBar.setRating(2);
+                Glide.with(getApplicationContext()).load(R.drawable.sad_star).into(binding.starImg);
+                binding.ratingText.setTextColor(getResources().getColor(R.color.red));
+                binding.ratingText.setText(getString(R.string.sad));
+                break;
+            case 3:
+                binding.ratingBar.setRating(3);
+                Glide.with(getApplicationContext()).load(R.drawable.wow_star).into(binding.starImg);
+                binding.ratingText.setTextColor(getResources().getColor(R.color.red));
+                binding.ratingText.setText(getString(R.string.wow));
+                break;
+            case 4:
+                binding.ratingBar.setRating(4);
+                Glide.with(getApplicationContext()).load(R.drawable.awesome_star).into(binding.starImg);
+                binding.ratingText.setTextColor(getResources().getColor(R.color.greenColor));
+                binding.ratingText.setText(getString(R.string.awesome));
+                break;
+            case 5:
+                binding.ratingBar.setRating(6);
+                Glide.with(getApplicationContext()).load(R.drawable.excellent_star).into(binding.starImg);
+                binding.ratingText.setTextColor(getResources().getColor(R.color.greenColor));
+                binding.ratingText.setText(getString(R.string.excellent));
+                break;
+            default:
+                break;
+        }
+        binding.ratingBar.refreshDrawableState();
+        if (isRated.equalsIgnoreCase("0")) {
+            rateClubAPI(rating);
+        }
     }
 
     @Override
     public void onClick(View v) {
         if (v == binding.btnClose) {
             finish();
-        }
-        else if (v == binding.btnContinue) {
+        } else if (v == binding.btnContinue) {
             if (adapter.getSelectedList().isEmpty()) {
                 Functions.showToast(getContext(), getString(R.string.select_employee), FancyToast.ERROR, FancyToast.LENGTH_SHORT);
                 return;
@@ -186,9 +195,9 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
     };
 
     private void getEmployeesAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getEmployees(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, "");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -205,21 +214,20 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
                             binding.rating.setVisibility(View.VISIBLE);
                             binding.ratingDesc.setVisibility(View.VISIBLE);
                             binding.btnContinue.setVisibility(View.VISIBLE);
-                        }
-                        else {
+                        } else {
                             employeeList.clear();
                             binding.rating.setVisibility(View.GONE);
                             binding.ratingDesc.setVisibility(View.GONE);
                             binding.btnContinue.setVisibility(View.GONE);
                         }
-                        binding.clubText.setText(getString(R.string.how_was_your_exp)+" "+object.getString("club_name")+" ?");
+                        binding.clubText.setText(getString(R.string.how_was_your_exp) + " " + object.getString("club_name") + " ?");
                         rating = object.getString("rating");
                         populateRatingData(Integer.parseInt(rating));
 
 //                        if (isRated.equalsIgnoreCase("1")) {
 //                            //binding.clubRateVu.setVisibility(View.GONE);
 //                            binding.ratingBar.setEnabled(false);
-//                            Glide.with(getContext()).load(R.drawable.excellent_star).into(binding.starImg);
+//                            Glide.with(getApplicationContext()).load(R.drawable.excellent_star).into(binding.starImg);
 //                            binding.ratingText.setTextColor(getResources().getColor(R.color.greenColor));
 //                            binding.ratingText.setText("Excellent!");
 //                            binding.ratingBar.setStar(Float.parseFloat(rating));
@@ -227,7 +235,7 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
 //
 //                        }
 //                        else {
-//                            Glide.with(getContext()).load(R.drawable.excellent_star).into(binding.starImg);
+//                            Glide.with(getApplicationContext()).load(R.drawable.excellent_star).into(binding.starImg);
 //                            binding.ratingText.setTextColor(getResources().getColor(R.color.greenColor));
 //                            binding.ratingText.setText("Excellent!");
 //                            binding.ratingBar.setStar(5);
@@ -240,18 +248,17 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -262,7 +269,7 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.rateClub(Functions.getAppLang(getContext()), userId, clubId, rating);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -271,16 +278,14 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
 //                            Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getContext().getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -290,8 +295,7 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getContext().getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }

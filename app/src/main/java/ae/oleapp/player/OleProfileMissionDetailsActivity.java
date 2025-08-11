@@ -76,7 +76,7 @@ public class OleProfileMissionDetailsActivity extends BaseActivity implements Vi
         binding.toolbarTitle.setText(oleProfileMission.getTitle());
         binding.tvRewardsName.setText(oleProfileMission.getRewardName());
         binding.tvRewardsDesc.setText(oleProfileMission.getRewardDesc());
-        Glide.with(getContext()).load(oleProfileMission.getRewardPhoto()).into(binding.rewardsImgVu);
+        Glide.with(getApplicationContext()).load(oleProfileMission.getRewardPhoto()).into(binding.rewardsImgVu);
 
         boolean isCompleted = true;
         for (OleLevelsTarget target : oleProfileMission.getTargets()) {

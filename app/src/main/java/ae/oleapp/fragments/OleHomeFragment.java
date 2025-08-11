@@ -277,7 +277,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
 
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendAppLang(userId,Functions.getAppLang(getContext()));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -371,9 +371,9 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
         if (!Functions.getPrefValue(getContext(), Constants.kIsSignIn).equalsIgnoreCase("1")) {
             return;
         }else{
-            Glide.with(getContext()).load(userInfo.getEmojiUrl()).into(binding.emojiImgVu);
+            Glide.with(requireActivity()).load(userInfo.getEmojiUrl()).into(binding.emojiImgVu);
         }
-        Glide.with(getContext()).load(userInfo.getBibUrl()).placeholder(R.drawable.bibl).into(binding.shirtImgVu);
+        Glide.with(requireActivity()).load(userInfo.getBibUrl()).placeholder(R.drawable.bibl).into(binding.shirtImgVu);
 
     }
 
@@ -972,7 +972,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
         else {
             call = AppManager.getInstance().apiInterface.getClubList(Functions.getAppLang(getActivity()), Functions.getPrefValue(getActivity(), Constants.kUserID),   location.getLatitude(), location.getLongitude(), pageNo, offer, name, date, openTime, closeTime, cityId, grassType, fieldType, fieldSize, nearby, Functions.getPrefValue(getContext(), Constants.kAppModule));
         }
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1033,7 +1033,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     private void getPromotionsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getPromotions(Functions.getAppLang(getActivity()),Functions.getPrefValue(getActivity(), Constants.kUserID), Functions.getPrefValue(getActivity(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1128,7 +1128,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     private void getResultListAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.allMatches(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), 0, 0, "", "", "", "", "1", Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1147,8 +1147,8 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             for (int i = 0; i < arrPR.length(); i++) {
                                 olePadelMatchResults.add(gson.fromJson(arrPR.get(i).toString(), OlePadelMatchResults.class));
                             }
-//                            Glide.with(getContext()).load(userInfo.getEmojiUrl()).into(binding.emojiImgVu);
-//                            Glide.with(getContext()).load(userInfo.getBibUrl()).placeholder(R.drawable.bibl).into(binding.shirtImgVu);
+//                            Glide.with(getApplicationContext()).load(userInfo.getEmojiUrl()).into(binding.emojiImgVu);
+//                            Glide.with(getApplicationContext()).load(userInfo.getBibUrl()).placeholder(R.drawable.bibl).into(binding.shirtImgVu);
                         }
                         else {
                             resultList.clear();
@@ -1215,7 +1215,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     private void acceptChallengeAPI(boolean isLoader, String bookingId, String matchType, String requestStatus, String flag, int pos, String paymentMethod, String orderRef, String joinFee, String cardPaid, String walletPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptRejectChallenge(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID),  bookingId, "", matchType, requestStatus, flag, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress(), joinFee);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1256,7 +1256,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     private void acceptRequestAPI(boolean isLoader, String bookingId, String playerId, String matchType, String requestStatus, String flag, int pos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptRejectChallenge(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId, matchType, requestStatus, flag);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1297,7 +1297,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     private void acceptPadelChallengeAPI(boolean isLoader, String bookingId, String playerId, int pos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptChallenge(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1338,7 +1338,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     private void joinChallengeAPI(boolean isLoader, String bookingId, String matchType, int pos, String paymentMethod, String orderRef, String joinFee, String cardPaid, String walletPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.joinChallenge(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, matchType, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress(), joinFee);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1379,7 +1379,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     private void joinGameAPI(boolean isLoader, String bookingId, String position, String fee, int pos, String paymentMethod, String orderRef, String cardPaid, String walletPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.joinGame(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, position, fee, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

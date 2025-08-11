@@ -235,7 +235,7 @@ public class SwapPlayerDialogFragment extends DialogFragment {
 //
 //        KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
 //        Call<ResponseBody> call = AppManager.getInstance().apiInterface.swapPlayer(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), teamAId, pAId, teamBId, pBId);
-//        call.enqueue(new Callback<ResponseBody>() {
+//        call.enqueue(new Callback<>() {
 //            @Override
 //            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 //                Functions.hideLoader(hud);

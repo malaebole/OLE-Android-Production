@@ -135,7 +135,7 @@ public class DocumentHomeActivity extends BaseActivity implements View.OnClickLi
     private void documentsHome(boolean isLoader, String clubId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(this, "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.documentsHome(Functions.getAppLang(this), clubId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

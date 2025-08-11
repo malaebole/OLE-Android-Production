@@ -251,7 +251,7 @@ public class ProductListActivity extends BaseActivity implements View.OnClickLis
         }
         KProgressHUD hud = pageNo == 1 && isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getProducts(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), typeId, keyword, type, sortType, filterStr, minPrice, maxPrice, pageNo, subCatId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -324,7 +324,7 @@ public class ProductListActivity extends BaseActivity implements View.OnClickLis
     private void getSubCategoriesAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getSubCategories(Functions.getAppLang(getContext()), typeId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -372,7 +372,7 @@ public class ProductListActivity extends BaseActivity implements View.OnClickLis
     private void getBrandsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getBrands(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

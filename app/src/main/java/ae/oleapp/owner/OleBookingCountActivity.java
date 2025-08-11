@@ -200,7 +200,7 @@ public class OleBookingCountActivity extends BaseActivity implements View.OnClic
     private void getPlayerListAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getBookingsCount(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), from, to, filter, days, name, clubId, pageNo);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

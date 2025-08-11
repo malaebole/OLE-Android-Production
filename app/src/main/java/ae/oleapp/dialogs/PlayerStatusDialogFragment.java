@@ -138,7 +138,7 @@ public class PlayerStatusDialogFragment extends DialogFragment implements View.O
     private void setPlayerStatusAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.playerStatus(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), playerInfo.getId(), playerInfo.getFriendShipId(), selectedStatus);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

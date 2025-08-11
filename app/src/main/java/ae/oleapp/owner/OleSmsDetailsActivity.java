@@ -102,7 +102,7 @@ public class OleSmsDetailsActivity extends BaseActivity {
     private void updateSmsAPI(boolean isLoader, String clubId, String fieldOwner, String player, String gap, String booking) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateSMS(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, oleSmsData.getSmsId(), "", "", "", fieldOwner, player, gap, booking);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

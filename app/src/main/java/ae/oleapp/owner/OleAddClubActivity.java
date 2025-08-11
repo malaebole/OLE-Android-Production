@@ -216,10 +216,10 @@ public class OleAddClubActivity extends BaseActivity implements View.OnClickList
 
     private void populateData() {
         if (!club.getLogoPath().isEmpty()) {
-            Glide.with(getContext()).load(club.getLogoPath()).into(binding.imgVuLogo);
+            Glide.with(getApplicationContext()).load(club.getLogoPath()).into(binding.imgVuLogo);
         }
         if (!club.getCoverPath().isEmpty()) {
-            Glide.with(getContext()).load(club.getCoverPath()).into(binding.imgVuBanner);
+            Glide.with(getApplicationContext()).load(club.getCoverPath()).into(binding.imgVuBanner);
         }
         binding.etClubName.setText(club.getName());
         countryId = club.getCountry().getId();
@@ -1028,11 +1028,11 @@ public class OleAddClubActivity extends BaseActivity implements View.OnClickList
                 File file = new File(resultUri.getPath());
                 if (imageType == ImageType.logo) {
                     logoImage = file;
-                    Glide.with(getContext()).load(file).into(binding.imgVuLogo);
+                    Glide.with(getApplicationContext()).load(file).into(binding.imgVuLogo);
                 }
                 else {
                     coverImage = file;
-                    Glide.with(getContext()).load(file).into(binding.imgVuBanner);
+                    Glide.with(getApplicationContext()).load(file).into(binding.imgVuBanner);
                 }
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
@@ -1119,7 +1119,7 @@ public class OleAddClubActivity extends BaseActivity implements View.OnClickList
                 RequestBody.create(MediaType.parse("text/plain"), "1"),
                 RequestBody.create(MediaType.parse("text/plain"), clubId),
                 RequestBody.create(MediaType.parse("text/plain"), clubType));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

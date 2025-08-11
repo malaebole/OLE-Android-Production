@@ -248,7 +248,7 @@ public class OleMatchesFragment extends BaseFragment implements View.OnClickList
     private void getMatchListAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getMatchesList(Functions.getAppLang(getActivity()),Functions.getPrefValue(getActivity(), Constants.kUserID), Functions.getPrefValue(getActivity(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

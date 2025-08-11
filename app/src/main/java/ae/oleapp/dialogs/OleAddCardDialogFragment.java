@@ -101,7 +101,7 @@ public class OleAddCardDialogFragment extends DialogFragment {
     private void addCardAPI(String cardNumber, String expiry, String cvv) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addCard(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), cardNumber, expiry, cvv, Functions.getIPAddress());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

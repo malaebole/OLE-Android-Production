@@ -144,7 +144,7 @@ public class MarkPaidActivity extends BaseActivity implements View.OnClickListen
                     RequestBody.create(MediaType.parse("multipart/form-data"), Functions.getAppLang(getContext())),
                     RequestBody.create(MediaType.parse("multipart/form-data"), upcomingExpenseId),
                     RequestBody.create(MediaType.parse("multipart/form-data"), clubId));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -185,7 +185,7 @@ public class MarkPaidActivity extends BaseActivity implements View.OnClickListen
                 //file = new File(resultUri.getPath());
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.invoiceImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -222,7 +222,7 @@ public class MarkPaidActivity extends BaseActivity implements View.OnClickListen
             binding.etAmount.setText(upcomingExpenseDetailsModel.getAmount());
             binding.etNote.setText(upcomingExpenseDetailsModel.getNotes());
             if (!upcomingExpenseDetailsModel.getReceipt().isEmpty()){
-                Glide.with(getContext()).load(upcomingExpenseDetailsModel.getReceipt()).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(upcomingExpenseDetailsModel.getReceipt()).into(binding.invoiceImgVu);
             }
 
 

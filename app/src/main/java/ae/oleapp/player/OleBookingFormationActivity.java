@@ -233,6 +233,16 @@ public class OleBookingFormationActivity extends BaseActivity implements View.On
         public boolean canDropItemAtPosition(int oldColumn, int oldRow, int newColumn, int newRow) {
             return !bookingStatus.equalsIgnoreCase(Constants.kFinishedBooking);
         }
+
+        @Override
+        public boolean canDragColumnAtPosition(int index) { //any issue check these
+            return false;
+        }
+
+        @Override
+        public boolean canDropColumnAtPosition(int oldIndex, int newIndex) { //any issue check these
+            return false;
+        }
     };
 
     private void addAllPlayerList() {
@@ -349,7 +359,7 @@ public class OleBookingFormationActivity extends BaseActivity implements View.On
     private void checkTeamAPI() {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.checkTeamExist(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -395,7 +405,7 @@ public class OleBookingFormationActivity extends BaseActivity implements View.On
     private void removePlayerFromGame(boolean isLoader, String playerId, int pos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removePlayerFromBooking(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -436,7 +446,7 @@ public class OleBookingFormationActivity extends BaseActivity implements View.On
     private void addRemovePlayerToTeam(boolean isLoader, String teamAId, String teamBId, String targetTeamId, String playerId, String type) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.friendsToTeams(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), teamAId, teamBId, targetTeamId, playerId, type);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

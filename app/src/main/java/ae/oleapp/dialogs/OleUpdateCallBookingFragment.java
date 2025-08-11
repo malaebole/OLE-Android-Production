@@ -165,7 +165,7 @@ public class OleUpdateCallBookingFragment extends DialogFragment {
     private void updateBookingAPI(boolean isLoader, String name, String phone, String pricePlus, String priceMinus) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateCallBookingDetail(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, name, phone, pricePlus, priceMinus);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

@@ -147,7 +147,7 @@ public class OleCreatePadelMatchActivity extends BaseActivity implements View.On
             binding.btnSelectPartner.setBackgroundResource(R.drawable.blue_dotted_border);
             return;
         }
-        Glide.with(getContext()).load(partner.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.playerImage);
+        Glide.with(getApplicationContext()).load(partner.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.playerImage);
         binding.tvName.setText(partner.getNickName());
         if (partner.getLevel() != null && !partner.getLevel().isEmpty() && !partner.getLevel().getValue().equalsIgnoreCase("")) {
             binding.tvRank.setVisibility(View.VISIBLE);
@@ -219,7 +219,7 @@ public class OleCreatePadelMatchActivity extends BaseActivity implements View.On
     private void createMatchAPI(boolean isLoader, String partnerId, String minAge, String maxAge, String orderRef, String paymentMethod, String cardPaid, String walletPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.createPadelMatch(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, partnerId, minAge, maxAge, orderRef, cardPaid, walletPaid, selectedLevelId, paymentMethod, Functions.getIPAddress());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -261,7 +261,7 @@ public class OleCreatePadelMatchActivity extends BaseActivity implements View.On
     private void getLevelsAPi(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getLevels(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

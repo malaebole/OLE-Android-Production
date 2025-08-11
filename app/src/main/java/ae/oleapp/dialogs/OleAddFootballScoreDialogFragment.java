@@ -100,7 +100,7 @@ public class OleAddFootballScoreDialogFragment extends DialogFragment implements
     private void addScoreAPI(boolean isLoader, String teamAScore, String teamBScore) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addFootballScore(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), playerOne.getId(), playerTwo.getId(), bookingId, teamAScore, teamBScore);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

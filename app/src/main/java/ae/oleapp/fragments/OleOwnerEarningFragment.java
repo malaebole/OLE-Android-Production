@@ -311,7 +311,7 @@ public class OleOwnerEarningFragment extends BaseFragment implements View.OnClic
     private void getEarningsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getOwnerEarnings(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID),  clubId, "", fromDate, toDate);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -426,7 +426,7 @@ public class OleOwnerEarningFragment extends BaseFragment implements View.OnClic
     private void exportEarningsAPI(boolean isLoader, String email) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.exportEarnings(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), "", "", fromDate, toDate, email);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

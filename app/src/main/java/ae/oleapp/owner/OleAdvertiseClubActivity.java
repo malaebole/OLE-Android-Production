@@ -231,7 +231,7 @@ public class OleAdvertiseClubActivity extends BaseActivity implements View.OnCli
     private void addFeatureAPI(boolean isLoader, String fromDate, String toDate) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addFeaturedClub(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, fromDate, toDate, totalPrice, cityIds, featuredId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

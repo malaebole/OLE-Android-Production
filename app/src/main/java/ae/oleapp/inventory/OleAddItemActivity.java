@@ -64,7 +64,7 @@ public class OleAddItemActivity extends BaseActivity implements View.OnClickList
         }
 
         if (item != null) {
-            Glide.with(getContext()).load(item.getPhoto()).into(binding.imgVu);
+            Glide.with(getApplicationContext()).load(item.getPhoto()).into(binding.imgVu);
             binding.etItemName.setText(item.getName());
             binding.etPurchasePrice.setText(item.getPurchasedPrice());
             binding.etSalePrice.setText(item.getSalePrice());
@@ -146,7 +146,7 @@ public class OleAddItemActivity extends BaseActivity implements View.OnClickList
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
                 photoFile = new File(resultUri.getPath());
-                Glide.with(getContext()).load(photoFile).into(binding.imgVu);
+                Glide.with(getApplicationContext()).load(photoFile).into(binding.imgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -193,7 +193,7 @@ public class OleAddItemActivity extends BaseActivity implements View.OnClickList
                 RequestBody.create(MediaType.parse("text/plain"), purchasePrice),
                 RequestBody.create(MediaType.parse("text/plain"), salePrice),
                 RequestBody.create(MediaType.parse("text/plain"), stock));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -245,7 +245,7 @@ public class OleAddItemActivity extends BaseActivity implements View.OnClickList
                 RequestBody.create(MediaType.parse("text/plain"), salePrice),
                 RequestBody.create(MediaType.parse("text/plain"), stock),
                 RequestBody.create(MediaType.parse("text/plain"), id));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

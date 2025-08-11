@@ -263,7 +263,7 @@ public class EditGameDialogFragment extends DialogFragment implements View.OnCli
     private void updateTeamAPI(boolean isLoader, String newTeamAName, String newTeamBName, String date, String time, String stadiumName, String cityName) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateGame(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), teamA.getId(), newTeamAName, teamB.getId(), newTeamBName, gameTeam.getGameId(), date, time, noOfPlayers,stadiumName,cityName );
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

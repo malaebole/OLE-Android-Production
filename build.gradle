@@ -1,23 +1,20 @@
 buildscript {
+    // Update Kotlin to latest stable version (2.1.0 is valid as of Aug 2025)
     ext.kotlin_version = '2.1.0'
 
     repositories {
         google()
         mavenCentral()
-        jcenter()
         maven { url "https://jitpack.io" }
-        flatDir {
-            dirs 'libs'
-        }
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.4.2'
-        classpath 'org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.0'
-        classpath 'com.google.gms:google-services:4.4.3'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.4'
-        classpath 'io.realm:realm-gradle-plugin:10.19.0'
-        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.9.1'
+        classpath 'com.android.tools.build:gradle:8.4.2'  // Latest stable
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath 'com.google.gms:google-services:4.4.3'  // Update to latest
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:3.0.6'  // Update to latest
+        classpath 'io.realm:realm-gradle-plugin:10.19.0'  // Latest as of Aug 2025
+        classpath 'androidx.navigation:navigation-safe-args-gradle-plugin:2.9.3'  // Latest
     }
 }
 
@@ -25,11 +22,7 @@ allprojects {
     repositories {
         google()
         mavenCentral()
-        jcenter()
         maven { url "https://jitpack.io" }
-        flatDir {
-            dirs 'libs'
-        }
     }
 }
 

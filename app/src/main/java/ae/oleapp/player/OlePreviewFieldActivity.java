@@ -216,8 +216,7 @@ public class OlePreviewFieldActivity extends BaseActivity implements View.OnClic
                         oleGameTeam.setTeamAColor(color);
                         updateTeamAPI(oleGameTeam.getTeamAId(), "", color, "", "", "");
                         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                            if (binding.vuTeamA.getChildAt(i) instanceof OlePreviewFieldViewA) {
-                                OlePreviewFieldViewA vu = (OlePreviewFieldViewA) binding.vuTeamA.getChildAt(i);
+                            if (binding.vuTeamA.getChildAt(i) instanceof OlePreviewFieldViewA vu) {
                                 vu.setImage(name);
                             }
                         }
@@ -231,8 +230,7 @@ public class OlePreviewFieldActivity extends BaseActivity implements View.OnClic
                         oleGameTeam.setTeamBColor(color);
                         updateTeamAPI("", oleGameTeam.getTeamBId(), "", color, "", "");
                         for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                            if (binding.vuTeamB.getChildAt(i) instanceof OlePreviewFieldViewB) {
-                                OlePreviewFieldViewB vu = (OlePreviewFieldViewB) binding.vuTeamB.getChildAt(i);
+                            if (binding.vuTeamB.getChildAt(i) instanceof OlePreviewFieldViewB vu) {
                                 vu.setImage(name);
                             }
                         }
@@ -727,7 +725,7 @@ public class OlePreviewFieldActivity extends BaseActivity implements View.OnClic
     public void getTeamAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getTeam(Functions.getAppLang(getContext()), bookingId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -784,7 +782,7 @@ public class OlePreviewFieldActivity extends BaseActivity implements View.OnClic
         }
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.saveCoordinates(Functions.getAppLang(getContext()), data);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -824,7 +822,7 @@ public class OlePreviewFieldActivity extends BaseActivity implements View.OnClic
     private void updateTeamAPI(String teamAId, String teamBId, String teamAColor, String teamBColor, String teamAImage, String teamBImage) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateTeamImage(Functions.getAppLang(getContext()), teamAId, teamBId, teamAColor, teamBColor, teamAImage, teamBImage);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

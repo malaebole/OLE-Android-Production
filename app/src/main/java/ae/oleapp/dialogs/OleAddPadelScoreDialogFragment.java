@@ -176,7 +176,7 @@ public class OleAddPadelScoreDialogFragment extends DialogFragment implements Vi
     private void addScoreAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addPadelScore(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerOne.getId(), playerTwo.getId(), teamASet1Score, teamASet2Score, teamASet3Score, teamBSet1Score, teamBSet2Score, teamBSet3Score);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

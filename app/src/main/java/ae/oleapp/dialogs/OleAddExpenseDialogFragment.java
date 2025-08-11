@@ -48,9 +48,6 @@ import ae.oleapp.models.OleClubExpense;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
-import droidninja.filepicker.FilePickerBuilder;
-import droidninja.filepicker.FilePickerConst;
-import id.zelory.compressor.Compressor;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -197,7 +194,7 @@ public class OleAddExpenseDialogFragment extends DialogFragment implements View.
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
                 file = new File(resultUri.getPath());
-                Glide.with(getContext()).load(file).into(binding.imgVuReceipt);
+                Glide.with(requireActivity()).load(file).into(binding.imgVuReceipt);
                 //updatePhotoAPI(true, file);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
@@ -281,7 +278,7 @@ public class OleAddExpenseDialogFragment extends DialogFragment implements View.
 //                            .setQuality(75)
 //                            .setCompressFormat(Bitmap.CompressFormat.JPEG)
 //                            .compressToFile(file);
-//                    Glide.with(getContext()).load(photoFile).into(binding.imgVuReceipt);
+//                    Glide.with(getApplicationContext()).load(photoFile).into(binding.imgVuReceipt);
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                    Functions.showToast(getContext(), "Error in image compression", FancyToast.ERROR);
@@ -308,7 +305,7 @@ public class OleAddExpenseDialogFragment extends DialogFragment implements View.
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClubBanksList(Functions.getAppLang(getContext()), clubId,"");
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -359,7 +356,7 @@ public class OleAddExpenseDialogFragment extends DialogFragment implements View.
                 RequestBody.create(MediaType.parse("text/plain"), expenseId),
                 RequestBody.create(MediaType.parse("text/plain"), amount),
                 RequestBody.create(MediaType.parse("text/plain"), date));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

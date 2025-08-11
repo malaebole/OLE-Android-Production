@@ -135,7 +135,7 @@ public class OleEmployeeActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void populateData() {
-        Glide.with(getContext()).load(employee.getEmployeePhoto()).placeholder(R.drawable.emp_ic).into(binding.imgVu);
+        Glide.with(getApplicationContext()).load(employee.getEmployeePhoto()).placeholder(R.drawable.emp_ic).into(binding.imgVu);
         binding.tvClubName.setText(employee.getClubName());
         binding.tvName.setText(employee.getName());
         binding.tvPhone.setText(employee.getPhone());
@@ -143,7 +143,8 @@ public class OleEmployeeActivity extends BaseActivity implements View.OnClickLis
         binding.tvEmail.setText(employee.getEmail());
         binding.tvRole.setText(employee.getRoleName());
         binding.tvRate.setText(String.format("%s (%s)", employee.getRating(), employee.getReviewsCount()));
-        binding.ratingBar.setStar(Float.parseFloat(employee.getRating()));
+        binding.ratingBar.setRating(Float.parseFloat(employee.getRating()));
+
 
         binding.tvPayableTip.setText(String.format("%s %s", employee.getPayable(), employee.getCurrency()));
         binding.tvTodayTip.setText(String.format("%s %s", employee.getTodayTip(), employee.getCurrency()));
@@ -185,7 +186,7 @@ public class OleEmployeeActivity extends BaseActivity implements View.OnClickLis
     private void getEmployeeAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getEmployee(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), empId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -224,7 +225,7 @@ public class OleEmployeeActivity extends BaseActivity implements View.OnClickLis
     private void deleteEmployeeAPI(boolean isLoader, String empId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteEmployee(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), empId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -263,7 +264,7 @@ public class OleEmployeeActivity extends BaseActivity implements View.OnClickLis
     private void payTipPaymentsAPI(boolean isLoader, String amount) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.employeeTipPayment(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), empId, amount);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

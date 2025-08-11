@@ -161,7 +161,7 @@ public class LineupGlobalTeamsActivity extends BaseActivity implements View.OnCl
     private void getTeamAndShirtDetails(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getTeamAndShirtDetails(selectedCountryId,"android");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -206,7 +206,7 @@ public class LineupGlobalTeamsActivity extends BaseActivity implements View.OnCl
     private void lineupGlobalTeamPlayers(boolean isLoader, String teamId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.lineupGlobalTeamPlayers(teamId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

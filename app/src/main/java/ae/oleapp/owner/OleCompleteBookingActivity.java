@@ -1,17 +1,16 @@
 package ae.oleapp.owner;
 
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import android.Manifest;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 
 import com.bumptech.glide.Glide;
 import com.nabinbhandari.android.permissions.PermissionHandler;
@@ -21,17 +20,11 @@ import com.theartofdev.edmodo.cropper.CropImage;
 import com.theartofdev.edmodo.cropper.CropImageView;
 
 import java.io.File;
-import java.io.IOException;
-import java.util.ArrayList;
 
 import ae.oleapp.R;
 import ae.oleapp.base.BaseActivity;
-
 import ae.oleapp.databinding.OleactivityCompleteBookingBinding;
 import ae.oleapp.util.Functions;
-import droidninja.filepicker.FilePickerBuilder;
-import droidninja.filepicker.FilePickerConst;
-import id.zelory.compressor.Compressor;
 import pl.aprilapps.easyphotopicker.ChooserType;
 import pl.aprilapps.easyphotopicker.EasyImage;
 import pl.aprilapps.easyphotopicker.MediaFile;
@@ -94,21 +87,17 @@ public class OleCompleteBookingActivity extends BaseActivity implements View.OnC
     public void onClick(View v) {
         if (v == binding.bar.backBtn) {
             finish();
-        }
-        else if (v == binding.btnComplete) {
+        } else if (v == binding.btnComplete) {
             completeClicked();
-        }
-        else if (v == binding.imgVuReceipt) {
+        } else if (v == binding.imgVuReceipt) {
             receiptClicked();
-        }
-        else if (v == binding.card30Minute) {
+        } else if (v == binding.card30Minute) {
             if (extraTime.equalsIgnoreCase("30")) {
                 extraTime = "";
                 binding.card30Minute.setCardBackgroundColor(Color.WHITE);
                 binding.card30Minute.setStrokeColor(getResources().getColor(R.color.separatorColor));
                 binding.tv30.setTextColor(getResources().getColor(R.color.darkTextColor));
-            }
-            else {
+            } else {
                 extraTime = "30";
                 binding.card30Minute.setCardBackgroundColor(getResources().getColor(R.color.blueColorNew));
                 binding.card30Minute.setStrokeColor(Color.TRANSPARENT);
@@ -117,15 +106,13 @@ public class OleCompleteBookingActivity extends BaseActivity implements View.OnC
                 binding.card60Minute.setStrokeColor(getResources().getColor(R.color.separatorColor));
                 binding.tv60.setTextColor(getResources().getColor(R.color.darkTextColor));
             }
-        }
-        else if (v == binding.card60Minute) {
+        } else if (v == binding.card60Minute) {
             if (extraTime.equalsIgnoreCase("60")) {
                 extraTime = "";
                 binding.card60Minute.setCardBackgroundColor(Color.WHITE);
                 binding.card60Minute.setStrokeColor(getResources().getColor(R.color.separatorColor));
                 binding.tv60.setTextColor(getResources().getColor(R.color.darkTextColor));
-            }
-            else {
+            } else {
                 extraTime = "60";
                 binding.card60Minute.setCardBackgroundColor(getResources().getColor(R.color.blueColorNew));
                 binding.card60Minute.setStrokeColor(Color.TRANSPARENT);
@@ -138,19 +125,16 @@ public class OleCompleteBookingActivity extends BaseActivity implements View.OnC
     }
 
 
-
     private void discountTextChanged() {
         if (binding.etDiscount.getText().toString().isEmpty()) {
             binding.tvPrice.setText(String.format("%s %s", price, currency));
-        }
-        else {
+        } else {
             double val = Double.parseDouble(binding.etDiscount.getText().toString());
             double total = Double.parseDouble(price) - val;
             if (val > Double.parseDouble(price)) {
                 binding.etDiscount.setText(price);
                 binding.tvPrice.setText(String.format("%s %s", "0", currency));
-            }
-            else {
+            } else {
                 binding.tvPrice.setText(String.format("%s %s", total, currency));
             }
         }
@@ -184,7 +168,7 @@ public class OleCompleteBookingActivity extends BaseActivity implements View.OnC
         String[] permissions = new String[0];
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES};
-        }else {
+        } else {
             permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
         }
         Permissions.check(getContext(), permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
@@ -208,13 +192,13 @@ public class OleCompleteBookingActivity extends BaseActivity implements View.OnC
                 Uri resultUri = result.getUri();
                 filePath = resultUri.getPath();
                 file = new File(filePath);
-                Glide.with(getContext()).load(file).into(binding.imgVuReceipt);
+                Glide.with(getApplicationContext()).load(file).into(binding.imgVuReceipt);
                 //updatePhotoAPI(true, file);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
         } else {
-            if (easyImage != null){
+            if (easyImage != null) {
                 easyImage.handleActivityResult(requestCode, resultCode, data, getContext(), new EasyImage.Callbacks() {
                     @Override
                     public void onMediaFilesPicked(MediaFile[] mediaFiles, MediaSource mediaSource) {
@@ -264,7 +248,7 @@ public class OleCompleteBookingActivity extends BaseActivity implements View.OnC
 //                            .setCompressFormat(Bitmap.CompressFormat.JPEG)
 //                            .compressToFile(file);
 //                    filePath = file.getAbsolutePath();
-//                    Glide.with(getContext()).load(new File(filePath)).into(binding.imgVuReceipt);
+//                    Glide.with(getApplicationContext()).load(new File(filePath)).into(binding.imgVuReceipt);
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                    Functions.showToast(getContext(), "Error in image compression", FancyToast.ERROR);

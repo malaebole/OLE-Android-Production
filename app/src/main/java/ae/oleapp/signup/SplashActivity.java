@@ -3,7 +3,6 @@ package ae.oleapp.signup;
 
 import android.annotation.SuppressLint;
 import android.content.Intent;
-import android.content.IntentSender;
 import android.content.SharedPreferences;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
@@ -12,23 +11,12 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.IntentSenderRequest;
-import androidx.activity.result.contract.ActivityResultContracts;
-
-import com.google.android.gms.tasks.Task;
-import com.google.android.play.core.appupdate.AppUpdateInfo;
-import com.google.android.play.core.appupdate.AppUpdateManager;
-import com.google.android.play.core.appupdate.AppUpdateManagerFactory;
-import com.google.android.play.core.appupdate.AppUpdateOptions;
-import com.google.android.play.core.install.model.AppUpdateType;
-import com.google.android.play.core.install.model.UpdateAvailability;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
+
 import org.json.JSONObject;
+
 import ae.oleapp.BuildConfig;
 import ae.oleapp.R;
 import ae.oleapp.activities.MainActivity;
@@ -54,7 +42,6 @@ public class SplashActivity extends BaseActivity {
     private Handler handler;
     private Uri deepLinkUri;
     TextView version_name;
-    private static final int REQUEST_CODE = 100;
 
 
     @Override
@@ -62,31 +49,16 @@ public class SplashActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
-
         if (Functions.getAppLangStr(getContext()).isEmpty()) {
             Functions.setAppLang(getContext(), "en");
         }
-
-        version_name = findViewById(R.id.version_text);
-        PackageManager pm = getApplicationContext().getPackageManager();
-        String pkgName = getApplicationContext().getPackageName();
-        PackageInfo pkgInfo = null;
-        try {
-            pkgInfo = pm.getPackageInfo(pkgName, 0);
-            String ver = BuildConfig.VERSION_NAME;
-            version_name.setText("Version "+ver);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-
+        String ver = BuildConfig.VERSION_NAME;
+        binding.versionText.setText("Version " + ver);
         deepLinkUri = getIntent().getData();
 
-
-        //version_name.setText(pkgInfo.versionName);
-
     }
-
 
 
     @Override
@@ -108,11 +80,12 @@ public class SplashActivity extends BaseActivity {
             }
         }
     }
+
     public void devicesLoginLimit() {
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         String uniqueID = Functions.getPrefValue(this, Constants.kDeviceUniqueId);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.devicesLoginLimit(userId, uniqueID, "ole");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -122,8 +95,7 @@ public class SplashActivity extends BaseActivity {
                             Intent i = new Intent(getContext(), OleOwnerMainTabsActivity.class);
                             startActivity(i);
                             finish();
-                        }
-                        else{
+                        } else {
                             Intent i = new Intent(getContext(), IntroSliderActivity.class);
                             startActivity(i);
                             finish();
@@ -142,39 +114,39 @@ public class SplashActivity extends BaseActivity {
             }
         });
     }
+
     Runnable runnable = new Runnable() {
         @Override
         public void run() {
             if (Functions.getPrefValue(getContext(), Constants.kIsSignIn).equalsIgnoreCase("1")) {
                 if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
-                    if (deepLinkUri !=null){
+                    if (deepLinkUri != null) {
                         if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kFootballModule)) {
                             SharedPreferences.Editor editor = getContext().getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE).edit();
                             editor.putString(Constants.kAppModule, Constants.kLineupModule);
                             editor.apply();
                         }
-                            Functions.setAppLang(getContext(), "en");
-                            Functions.changeLanguage(getContext(),"en");
-                            sendAppLangApi();
-                            Intent i = new Intent(getContext(), MainActivity.class);
-                            i.putExtra("invite_url", deepLinkUri);
-                            startActivity(i);
-                            finish();
+                        Functions.setAppLang(getContext(), "en");
+                        Functions.changeLanguage(getContext(), "en");
+                        sendAppLangApi();
+                        Intent i = new Intent(getContext(), MainActivity.class);
+                        i.putExtra("invite_url", deepLinkUri);
+                        startActivity(i);
+                        finish();
 
-                    }else{
+                    } else {
                         if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase("")) {
                             Intent intent = new Intent(getContext(), ModuleOptionsActivity.class);
                             startActivity(intent);
-                        }
-                        else if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule))  {
+                        } else if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)) {
                             Functions.setAppLang(getContext(), "en");
-                            Functions.changeLanguage(getContext(),"en");
+                            Functions.changeLanguage(getContext(), "en");
                             sendAppLangApi();
                             Intent i = new Intent(getContext(), MainActivity.class);
                             startActivity(i);
                             finish();
 
-                        }else{
+                        } else {
                             Intent i = new Intent(getContext(), OlePlayerMainTabsActivity.class);
                             startActivity(i);
                             finish();
@@ -185,16 +157,15 @@ public class SplashActivity extends BaseActivity {
                     }
 
                 } else if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
-                    if (deepLinkUri != null){
+                    if (deepLinkUri != null) {
                         Functions.showToast(getContext(), "You are currently logged in as Owner\nPlease login as player first.", FancyToast.ERROR);
                     }
                     devicesLoginLimit();
                 }
 
                 getProfileAPI(false);
-            }
-            else {
-                if (deepLinkUri != null){
+            } else {
+                if (deepLinkUri != null) {
                     Functions.showToast(getContext(), "Please login first to join the game.", FancyToast.ERROR);
                 }
                 Intent i = new Intent(getContext(), IntroSliderActivity.class);
@@ -208,7 +179,7 @@ public class SplashActivity extends BaseActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        if(handler != null) {
+        if (handler != null) {
             handler.removeCallbacks(runnable);
         }
 
@@ -216,9 +187,9 @@ public class SplashActivity extends BaseActivity {
 
     protected void sendAppLangApi() {
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
-        if (userId!=null){
-            Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendAppLang(userId,Functions.getAppLang(getContext()));
-            call.enqueue(new Callback<ResponseBody>() {
+        if (userId != null) {
+            Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendAppLang(userId, Functions.getAppLang(getContext()));
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -243,7 +214,7 @@ public class SplashActivity extends BaseActivity {
 
     private void checkUpdatesApi() {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.checkUpdate("android");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -273,9 +244,9 @@ public class SplashActivity extends BaseActivity {
     }
 
     private void getProfileAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(),Constants.kUserID),"", Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), "", Functions.getPrefValue(getContext(), Constants.kAppModule));
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -297,10 +268,10 @@ public class SplashActivity extends BaseActivity {
                         e.printStackTrace();
 
                     }
-                }
-                else {
+                } else {
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);

@@ -191,7 +191,7 @@ public class OleScheduleDetailActivity extends BaseActivity implements View.OnCl
     private void removeSelectedSchedule(boolean isLoader, String ids) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removeSelectedSchedule(Functions.getAppLang(getContext()), ids);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -230,7 +230,7 @@ public class OleScheduleDetailActivity extends BaseActivity implements View.OnCl
     private void getScheduleDetailAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getScheduleDetail(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), scheduleIds, fromDate, toDate);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

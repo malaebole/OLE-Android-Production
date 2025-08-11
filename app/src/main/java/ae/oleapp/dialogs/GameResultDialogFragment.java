@@ -188,7 +188,7 @@ public class GameResultDialogFragment extends DialogFragment implements View.OnC
 
 //        KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
 //        Call<ResponseBody> call = AppManager.getInstance().apiInterface.addScore(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), gameTeam.getGameId(), winnerTeamId, loserTeamId, isDraw, cancel);
-//        call.enqueue(new Callback<ResponseBody>() {
+//        call.enqueue(new Callback<>() {
 //            @Override
 //            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 //                Functions.hideLoader(hud);

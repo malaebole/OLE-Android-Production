@@ -57,8 +57,7 @@ public class OleBookingDateAdapter extends RecyclerView.Adapter<OleBookingDateAd
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (list[position] instanceof Date) {
-            Date date = (Date) list[position];
+        if (list[position] instanceof Date date) {
             SimpleDateFormat dateFormat = new SimpleDateFormat("EEE", new Locale(Functions.getAppLangStr(context)));
             holder.tvDayName.setText(dateFormat.format(date));
             dateFormat.applyPattern("MMM");

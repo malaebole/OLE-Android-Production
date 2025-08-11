@@ -230,7 +230,7 @@ public class AddBankActivity extends BaseActivity implements View.OnClickListene
                     RequestBody.create(MediaType.parse("multipart/form-data"), branchName),
                     RequestBody.create(MediaType.parse("multipart/form-data"), bankCity),
                     RequestBody.create(MediaType.parse("multipart/form-data"), depositType));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -286,7 +286,7 @@ public class AddBankActivity extends BaseActivity implements View.OnClickListene
                     RequestBody.create(MediaType.parse("multipart/form-data"), branchName),
                     RequestBody.create(MediaType.parse("multipart/form-data"), bankCity),
                     RequestBody.create(MediaType.parse("multipart/form-data"), depositType));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -327,7 +327,7 @@ public class AddBankActivity extends BaseActivity implements View.OnClickListene
                 //file = new File(resultUri.getPath());
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.invoiceImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -362,7 +362,7 @@ public class AddBankActivity extends BaseActivity implements View.OnClickListene
 //        String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
 //        if (userId!=null){
 //            Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClubBanksList(Functions.getAppLang(getContext()), clubId, bankId);
-//            call.enqueue(new Callback<ResponseBody>() {
+//            call.enqueue(new Callback<>() {
 //                @Override
 //                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 //                    if (response.body() != null) {
@@ -402,7 +402,7 @@ public class AddBankActivity extends BaseActivity implements View.OnClickListene
         if (userId!=null){
             KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteBank(Functions.getAppLang(getContext()), clubId, bankId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -452,7 +452,7 @@ public class AddBankActivity extends BaseActivity implements View.OnClickListene
             binding.etAccountType.setText(bank.getAccountType());
 
             if (!bank.getPhoto().isEmpty()){
-                Glide.with(getContext()).load(bank.getPhoto()).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(bank.getPhoto()).into(binding.invoiceImgVu);
             }
 
         }else{

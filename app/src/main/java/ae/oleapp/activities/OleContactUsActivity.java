@@ -79,7 +79,7 @@ public class OleContactUsActivity extends BaseActivity implements View.OnClickLi
     private void getContactDetailsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getContactDetails(Functions.getAppLang(getContext()));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -122,7 +122,7 @@ public class OleContactUsActivity extends BaseActivity implements View.OnClickLi
     private void postContactAPI(boolean isLoader, String name, String phone, String email, String msg) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addContactUs(Functions.getAppLang(getContext()), name, email, phone, msg);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

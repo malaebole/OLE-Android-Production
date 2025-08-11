@@ -201,7 +201,7 @@ public class OlePlayerRateDialogFragment extends DialogFragment implements View.
     private void getProfileAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(getContext()), playerId,"",  Functions.getPrefValue(getContext(),Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -242,7 +242,7 @@ public class OlePlayerRateDialogFragment extends DialogFragment implements View.
     private void rateProfileAPI(boolean isLoader, String feedback, int rate) {
         binding.progressVu.setVisibility(View.VISIBLE);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addGameRating(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), playerId, bookingId, reachTime, feedback, rate);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 binding.progressVu.setVisibility(View.GONE);

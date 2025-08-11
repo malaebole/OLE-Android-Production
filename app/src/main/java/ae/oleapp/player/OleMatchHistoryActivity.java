@@ -140,7 +140,7 @@ public class OleMatchHistoryActivity extends BaseActivity implements View.OnClic
     private void populateData(OlePlayerInfo olePlayerInfo) {
         binding.tvName.setText(olePlayerInfo.getName());
         phone = olePlayerInfo.getPhone();
-        Glide.with(getContext()).load(olePlayerInfo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.imgVu);
+        Glide.with(getApplicationContext()).load(olePlayerInfo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.imgVu);
         if (olePlayerInfo.getLevel() != null && !olePlayerInfo.getLevel().isEmpty() && !olePlayerInfo.getLevel().getValue().equalsIgnoreCase("")) {
             binding.tvRank.setVisibility(View.VISIBLE);
             binding.tvRank.setText(String.format("LV: %s", olePlayerInfo.getLevel().getValue()));
@@ -153,7 +153,7 @@ public class OleMatchHistoryActivity extends BaseActivity implements View.OnClic
     private void matchHistoryAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.matchHistory(Functions.getAppLang(getContext()), playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -204,7 +204,7 @@ public class OleMatchHistoryActivity extends BaseActivity implements View.OnClic
     private void acceptRejectChallengeAPI(boolean isLoader, String flag) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptRejectChallenge(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId, matchType, requestStatus, flag);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

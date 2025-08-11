@@ -12,6 +12,9 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.os.Build;
 import android.os.Bundle;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.DialogFragment;
 
 import android.os.Environment;
@@ -46,8 +49,6 @@ import ae.oleapp.models.DocList;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -109,7 +110,7 @@ public class DocDetailsBottomSheetDialogFragment extends DialogFragment implemen
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getFile(Functions.getAppLang(getContext()), clubId, fileId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -139,7 +140,7 @@ public class DocDetailsBottomSheetDialogFragment extends DialogFragment implemen
             });
         }
     }
-//    private void showImageDialog() {
+    //    private void showImageDialog() {
 //        Dialog dialog = new Dialog(getActivity());
 //        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
 //        dialog.setContentView(R.layout.dialog_invoice_vu); // Custom dialog layout with an ImageView
@@ -221,7 +222,7 @@ public class DocDetailsBottomSheetDialogFragment extends DialogFragment implemen
             }
         }
 
-}
+    }
 
     private boolean isImageFile(String fileUrl) {
         String[] imageExtensions = {".jpg", ".jpeg", ".png", ".gif"};
@@ -248,7 +249,7 @@ public class DocDetailsBottomSheetDialogFragment extends DialogFragment implemen
         Permissions.check(getContext(), permissions, null, null, new PermissionHandler() {
             @Override
             public void onGranted() {
-                Glide.with(getContext())
+                Glide.with(requireActivity())
                         .asBitmap()
                         .load(fileUrl)
                         .into(new CustomTarget<Bitmap>() {

@@ -1,39 +1,25 @@
 package ae.oleapp.fragments;
 
-import android.app.Dialog;
-import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.widget.ImageView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.transition.Transition;
+import androidx.fragment.app.DialogFragment;
+
 import com.shashank.sony.fancytoastlib.FancyToast;
 
 import ae.oleapp.R;
 import ae.oleapp.databinding.FragmentAddWaitingUserDialogBinding;
-import ae.oleapp.databinding.FragmentIncomeHistoryBottomSheetDialogBinding;
-import ae.oleapp.models.IncomeDetailsModel;
 import ae.oleapp.util.Functions;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
 
 
-public class AddWaitingUserDialogFragment extends DialogFragment implements View.OnClickListener{
+public class AddWaitingUserDialogFragment extends DialogFragment implements View.OnClickListener {
 
     private FragmentAddWaitingUserDialogBinding binding;
     private ResultDialogCallback dialogCallback;
     private final String bookingId;
-
 
 
     public void setDialogCallback(ResultDialogCallback dialogCallback) {
@@ -69,16 +55,14 @@ public class AddWaitingUserDialogFragment extends DialogFragment implements View
     }
 
 
-
     @Override
     public void onClick(View v) {
 
-        if (v == binding.btnClose){
+        if (v == binding.btnClose) {
             dismiss();
 
-        }
-        else if (v == binding.btnDone){
-            if (binding.etPhone.getText().toString().isEmpty()){
+        } else if (v == binding.btnDone) {
+            if (binding.etPhone.getText().toString().isEmpty()) {
                 Functions.showToast(getContext(), "Phone number cannot be empty!", FancyToast.ERROR);
                 return;
             }

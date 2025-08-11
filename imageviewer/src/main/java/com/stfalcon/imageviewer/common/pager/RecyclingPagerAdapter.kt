@@ -85,13 +85,13 @@ internal abstract class RecyclingPagerAdapter<VH : RecyclingPagerAdapter.ViewHol
         return attachedViewHolders
     }
 
-    private class RecycleCache internal constructor(
+    private class RecycleCache(
             private val adapter: RecyclingPagerAdapter<*>
     ) {
 
-        internal val caches = mutableListOf<ViewHolder>()
+        val caches = mutableListOf<ViewHolder>()
 
-        internal fun getFreeViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
+        fun getFreeViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
             var iterationsCount = 0
             var viewHolder: ViewHolder
 

@@ -25,13 +25,13 @@ android {
             file("../secure.properties")?.withInputStream { secureProps.load(it) }
         }
         resValue "string", "maps_api_key", (secureProps.getProperty("MAPS_API_KEY") ?: "")
+
+        tasks.withType(JavaCompile).tap {
+            configureEach {
+                options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
+            }
+        }
     }
-//
-//    packagingOptions {
-//        jniLibs {
-//            useLegacyPackaging = false
-//        }
-//    }
 
     buildTypes {
         release {
@@ -58,6 +58,7 @@ android {
     }
 
     buildFeatures {
+        buildConfig = true
         viewBinding true
         dataBinding true
     }
@@ -80,25 +81,22 @@ android {
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'androidx.appcompat:appcompat:1.7.0'
+    implementation 'androidx.appcompat:appcompat:1.7.1'
     implementation 'androidx.constraintlayout:constraintlayout:2.2.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     implementation 'com.google.android.material:material:1.12.0'
     implementation 'androidx.vectordrawable:vectordrawable:1.2.0'
     implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
-    implementation 'androidx.activity:activity:1.9.2'
-    implementation 'androidx.media3:media3-ui:1.6.1'
+    implementation 'androidx.activity:activity-ktx:1.10.1'
+    implementation 'androidx.media3:media3-ui:1.8.0'
     implementation 'com.google.firebase:protolite-well-known-types:18.0.1'
     testImplementation 'junit:junit:4.13.2'
-    androidTestImplementation 'androidx.test.ext:junit:1.2.1'
-    androidTestImplementation 'androidx.test.espresso:espresso-core:3.6.1'
+    androidTestImplementation 'androidx.test.ext:junit:1.3.0'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.7.0'
     implementation 'com.android.support:multidex:1.0.3'
-    implementation 'androidx.navigation:navigation-fragment-ktx:2.8.9'
-    implementation 'androidx.navigation:navigation-ui-ktx:2.8.9'
-//    implementation 'org.jetbrains.kotlin:kotlin-stdlib-jdk7:2.0.20'
-    implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.0.20'
-
-    implementation 'androidx.activity:activity-ktx:1.7.0'  // or latest
+    implementation 'androidx.navigation:navigation-fragment-ktx:2.9.3'
+    implementation 'androidx.navigation:navigation-ui-ktx:2.9.3'
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib:2.1.0'
 
 
     //Showcase library
@@ -277,32 +275,61 @@ dependencies {
     // image compressor
     implementation 'id.zelory:compressor:3.0.1'
 
-    // Expandable recycler view
-//    implementation 'com.hgDendi:expandable-recyclerview-adapter:1.0.1'
-//    implementation 'com.github.bignerdranch:expandable-recycler-view:v2.1.1'
-//    implementation 'com.github.hgDendi:ExpandableRecyclerView:-SNAPSHOT'
-
-    // Google Libraries
-    implementation 'com.google.android.play:asset-delivery:2.3.0'
+    // Play Core Libraries (Dynamic Delivery/In-App Updates)
+    implementation 'com.google.android.play:asset-delivery:2.1.0'
     implementation 'com.google.android.play:feature-delivery:2.1.0'
     implementation 'com.google.android.play:review:2.0.2'
     implementation 'com.google.android.play:app-update:2.1.0'
 
-    implementation 'com.google.android.gms:play-services-maps:19.1.0'
-    implementation 'com.google.android.libraries.places:places:2.7.0'
-//    implementation 'com.google.android.gms:play-services-location:21.3.0'
-    // 2.7.0 issue with this library
+    // Play Services
+    implementation 'com.google.android.gms:play-services-maps:19.2.0'     // Official recommendation
+    implementation 'com.google.android.libraries.places:places:4.4.1'     // Latest stable (Places SDK v2)
+    implementation 'com.google.android.gms:play-services-ads:24.5.0'      // Latest production-ready version
+    // implementation 'com.google.android.gms:play-services-location:21.2.0'
 
-    implementation 'com.google.android.gms:play-services-ads:24.0.0'
+    // Billing
+    implementation "com.android.billingclient:billing:8.0.0"              // Official recommendation
 
-    implementation "com.android.billingclient:billing:7.1.1"
+    // Update these Firebase dependencies (you're using BoM but also specifying versions)
+    implementation platform('com.google.firebase:firebase-bom:34.1.0') // Newer version
+    implementation 'com.google.firebase:firebase-messaging'
+    implementation 'com.google.firebase:firebase-analytics'
+    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-database'
+
+    // Update Maps and Places
+    implementation 'com.google.android.gms:play-services-maps:18.2.0'
+    implementation 'com.google.android.libraries.places:places:3.3.0'
+
+    // Guava
     implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
-    implementation 'com.google.guava:guava:33.3.0-jre'
+    implementation 'com.google.guava:guava:33.3.1-android'                // Android-specific version
 
-    implementation 'com.google.firebase:firebase-messaging:24.1.0'
-    implementation 'com.google.firebase:firebase-analytics:22.3.0'
-    implementation 'com.google.firebase:firebase-crashlytics:19.4.1'
-    implementation 'com.google.firebase:firebase-database:21.0.0'
+//    // Play Core Libraries (Dynamic Delivery/In-App Updates)
+//    implementation 'com.google.android.play:asset-delivery:2.3.0'
+//    implementation 'com.google.android.play:feature-delivery:2.1.0'
+//    implementation 'com.google.android.play:review:2.0.2'
+//    implementation 'com.google.android.play:app-update:2.1.0'
+//
+//    // Play Services
+//    implementation 'com.google.android.gms:play-services-maps:19.2.0'
+//    implementation 'com.google.android.libraries.places:places:4.4.1'
+//    implementation 'com.google.android.gms:play-services-ads:24.5.0'
+//    // implementation 'com.google.android.gms:play-services-location:21.2.0'  // Stable version
+//
+//    // Billing
+//    implementation "com.android.billingclient:billing:8.0.0"
+//
+//    // Firebase BoM (Recommended - manages versions automatically)
+//    implementation platform('com.google.firebase:firebase-bom:34.1.0')
+//
+//    implementation 'com.google.guava:listenablefuture:9999.0-empty-to-avoid-conflict-with-guava'
+//    implementation 'com.google.guava:guava:33.3.0-jre'
+//
+//    implementation 'com.google.firebase:firebase-messaging:25.0.0'
+//    implementation 'com.google.firebase:firebase-analytics:23.0.0'
+//    implementation 'com.google.firebase:firebase-crashlytics:20.0.0'
+//    implementation 'com.google.firebase:firebase-database:22.0.0'
 
     // facebook sdk
     implementation 'com.facebook.android:facebook-android-sdk:17.0.1'
@@ -319,11 +346,6 @@ dependencies {
     //BarChart
     implementation 'com.github.PhilJay:MPAndroidChart:v3.1.0'
 
-    implementation 'com.facebook.android:facebook-login:17.0.1'
-
-    implementation "androidx.credentials:credentials:1.5.0"
-    implementation "androidx.credentials:credentials-play-services-auth:1.3.0"
-    implementation "com.google.android.libraries.identity.googleid:googleid:1.1.1"
 
     //StepviewLibrary
     implementation 'com.github.shuhart:StepView:v1.5.1'
@@ -335,22 +357,14 @@ dependencies {
     implementation 'com.github.AleSpero:ExpandableCardView:0.6_beta'
 
 
-    //Kotlin Card
-
-    //ssp
-    implementation "com.intuit.ssp:ssp-android:1.1.1"
-
-    //sdp
-    implementation "com.intuit.sdp:sdp-android:1.1.1"
-
     // Koin Android features
     implementation ("io.insert-koin:koin-core:3.4.3")
     implementation ("io.insert-koin:koin-android-compat:3.4.3")
     implementation ("io.insert-koin:koin-core:3.4.3")
-//    implementation "io.insert-koin:koin-androidx-viewmodel:3.1.2"
+    //implementation "io.insert-koin:koin-androidx-viewmodel:3.1.2"
 
     // ViewModel
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.8.7")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.9.2")
 
     //RTSP streaming Camera
     implementation 'org.videolan.android:libvlc-all:3.5.1'

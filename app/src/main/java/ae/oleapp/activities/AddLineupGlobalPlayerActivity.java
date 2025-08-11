@@ -121,7 +121,7 @@ public class AddLineupGlobalPlayerActivity extends BaseActivity implements View.
         @Override
         public void itemClicked(View view, int pos) {
             Shirt shirt = shirtList.get(pos);
-            Glide.with(getContext()).load(shirt.getPhotoUrl()).into(binding.shirt);
+            Glide.with(getApplicationContext()).load(shirt.getPhotoUrl()).into(binding.shirt);
             selectedShirtId = shirt.getId();
 
         }
@@ -184,8 +184,8 @@ public class AddLineupGlobalPlayerActivity extends BaseActivity implements View.
             }else{
                 binding.imgVuPlace.setVisibility(View.GONE);
             }
-            Glide.with(getContext()).load(lineupGlobalPlayer.getEmojiUrl()).into(binding.playerImgVu);
-            Glide.with(getContext()).load(lineupGlobalPlayer.getBibUrl()).into(binding.shirt);
+            Glide.with(getApplicationContext()).load(lineupGlobalPlayer.getEmojiUrl()).into(binding.playerImgVu);
+            Glide.with(getApplicationContext()).load(lineupGlobalPlayer.getBibUrl()).into(binding.shirt);
             if (lineupGlobalPlayer.getAddedBy().equalsIgnoreCase(Functions.getPrefValue(getContext(),Constants.kUserID))){
                 binding.deleteBtn.setVisibility(View.VISIBLE);
             }else{
@@ -270,7 +270,7 @@ public class AddLineupGlobalPlayerActivity extends BaseActivity implements View.
     private void addGlobalPlayer(boolean isLoader, String name, String arabicName, String teamId, String countryId, String bibId, String photo) {
         KProgressHUD hud = isLoader ? Functions.showLoader(this, "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.addGlobalLineupPlayer(name,arabicName,teamId,countryId,bibId,photo);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -307,7 +307,7 @@ public class AddLineupGlobalPlayerActivity extends BaseActivity implements View.
     private void updateGlobalPlayer(boolean isLoader, String name, String arabicName, String teamId, String countryId, String bibId, String photo, String playerId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(this, "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.updateGlobalLineupPlayer(name,arabicName,teamId,countryId,bibId,photo,playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -344,7 +344,7 @@ public class AddLineupGlobalPlayerActivity extends BaseActivity implements View.
     private void removeGlobalLineupPlayer(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(this, "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.removeGlobalLineupPlayer(playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -423,7 +423,7 @@ public class AddLineupGlobalPlayerActivity extends BaseActivity implements View.
         RequestBody fileReqBody = RequestBody.create(file, MediaType.parse("image/*"));
         MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface2.cutFace("https://www.cutout.pro/api/v1/matting?mattingType=3", part, RequestBody.create("true", MediaType.parse("multipart/form-data")), RequestBody.create("true", MediaType.parse("multipart/form-data")));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -433,7 +433,7 @@ public class AddLineupGlobalPlayerActivity extends BaseActivity implements View.
                         Bitmap bmp = BitmapFactory.decodeStream(new BufferedInputStream(inputStream));
                         photoFilePath = ((BaseActivity)getContext()).saveBitmap(bmp);
                         File file = new File(photoFilePath);
-                        Glide.with(getContext()).load(file).into(binding.playerImgVu);
+                        Glide.with(getApplicationContext()).load(file).into(binding.playerImgVu);
                         savePlayerPhoto(true,file);
 
                     } catch (Exception e) {
@@ -463,7 +463,7 @@ public class AddLineupGlobalPlayerActivity extends BaseActivity implements View.
         RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("photo", file.getName(), fileReqBody);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.savePlayerPhoto(part);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

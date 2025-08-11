@@ -367,7 +367,7 @@ public class OleBookingListFragment extends BaseFragment implements View.OnClick
     private void addUserToWaitingList(String bookingId, String clubId, String name, String phone) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addUserToWaitingList(bookingId,clubId, name, phone);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -559,7 +559,7 @@ public class OleBookingListFragment extends BaseFragment implements View.OnClick
     private void getAllFieldsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getAllFields(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID),  clubId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -610,7 +610,7 @@ public class OleBookingListFragment extends BaseFragment implements View.OnClick
     private void getBookingsAPI(boolean isLoader, String isDateNeeded, String date) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.userBookings(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), fromDate, toDate, clubId, fieldId, isDateNeeded, date, "");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -685,7 +685,7 @@ public class OleBookingListFragment extends BaseFragment implements View.OnClick
     private void getPastAndFutureBookingsAPI(boolean isLoader, String date, String type) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getPastAndFutureBookingsAPI(Functions.getAppLang(getContext()), clubId, fieldId, date, type); //prev/next
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

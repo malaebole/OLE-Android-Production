@@ -12,15 +12,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter;
-
 import java.util.List;
 
 import ae.oleapp.R;
 import ae.oleapp.models.Earning;
 import ae.oleapp.models.OleEarningData;
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
-public class OleOwnerEarningAdapter extends SectionedRecyclerViewAdapter<RecyclerView.ViewHolder> {
+public class OleOwnerEarningAdapter extends SectionedRecyclerViewAdapter {
 
     private final List<OleEarningData> list;
     private final Context context;
@@ -41,18 +40,16 @@ public class OleOwnerEarningAdapter extends SectionedRecyclerViewAdapter<Recycle
         return list.size();
     }
 
-    @Override
+
     public int getItemCount(int section) {
         return list.get(section).getEarnings().size();
     }
 
-    @Override
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder viewHolder, int section) {
         HeaderViewHolder holder = (HeaderViewHolder)viewHolder;
         holder.tvDate.setText("");
     }
 
-    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int section, int relativePosition, int absolutePosition) {
         ViewHolder holder = (ViewHolder)viewHolder;
         Earning earning = list.get(section).getEarnings().get(relativePosition);

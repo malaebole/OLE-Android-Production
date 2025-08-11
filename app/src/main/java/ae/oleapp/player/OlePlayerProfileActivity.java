@@ -349,8 +349,8 @@ public class OlePlayerProfileActivity extends BaseActivity implements View.OnCli
                 binding.balanceVu.setVisibility(View.VISIBLE);
             }
         }
-        Glide.with(getContext()).load(olePlayerInfo.getEmojiUrl()).into(binding.pEmojiImgVu);
-        Glide.with(getContext()).load(olePlayerInfo.getBibUrl()).into(binding.pShirtImgVu);
+        Glide.with(getApplicationContext()).load(olePlayerInfo.getEmojiUrl()).into(binding.pEmojiImgVu);
+        Glide.with(getApplicationContext()).load(olePlayerInfo.getBibUrl()).into(binding.pShirtImgVu);
         
         if (olePlayerInfo.getId().equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID))) {
             userInfo = Functions.getUserinfo(getContext());
@@ -507,7 +507,7 @@ public class OlePlayerProfileActivity extends BaseActivity implements View.OnCli
             binding.missionVu.setVisibility(View.VISIBLE);
             binding.tvMissionTitle.setText(oleProfileMission.getTitle());
             binding.tvMissionDesc.setText(oleProfileMission.getRewardDesc());
-            Glide.with(getContext()).load(oleProfileMission.getRewardPhoto()).into(binding.imgVuMission);
+            Glide.with(getApplicationContext()).load(oleProfileMission.getRewardPhoto()).into(binding.imgVuMission);
             LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
             binding.missionRecyclerVu.setLayoutManager(layoutManager);
             OleLevelAttributeAdapter adapter = new OleLevelAttributeAdapter(getContext(), oleProfileMission.getTargets(), selectedModule, false);
@@ -533,7 +533,7 @@ public class OlePlayerProfileActivity extends BaseActivity implements View.OnCli
                 binding.tvRemaining.setText(String.format(Locale.ENGLISH, "%d/%d %s", completed, oleLevelsTarget.getTotal(), getString(R.string.completed)));
                 binding.missionCircular.setCurProcess((completed*100)/ oleLevelsTarget.getTotal());
                 binding.tvNextTitle.setText(oleLevelsTarget.getTitle());
-                Glide.with(getContext()).load(oleLevelsTarget.getActiveIcon()).into(binding.nextAttrImgVu);
+                Glide.with(getApplicationContext()).load(oleLevelsTarget.getActiveIcon()).into(binding.nextAttrImgVu);
             }
             else {
                 // completed
@@ -560,7 +560,7 @@ public class OlePlayerProfileActivity extends BaseActivity implements View.OnCli
     private void getProfileAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(getContext()), playerId,"", selectedModule);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -585,8 +585,8 @@ public class OlePlayerProfileActivity extends BaseActivity implements View.OnCli
 //                                else {
 //                                    binding.invitationVu.setVisibility(View.VISIBLE);
 //                                    binding.tvInvitation.setText("");
-//                                    Glide.with(getContext()).load("").into(binding.shirtImgVu);
-//                                    Glide.with(getContext()).load("").into(binding.emojiImgVu);
+//                                    Glide.with(getApplicationContext()).load("").into(binding.shirtImgVu);
+//                                    Glide.with(getApplicationContext()).load("").into(binding.emojiImgVu);
 //                                    binding.tvPerc.setText("0%");
 //                                    binding.tvLineupGames.setText("");
 //                                }
@@ -623,7 +623,7 @@ public class OlePlayerProfileActivity extends BaseActivity implements View.OnCli
     private void getMissionsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.oelMission(Functions.getAppLang(getContext()), playerId, selectedModule);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

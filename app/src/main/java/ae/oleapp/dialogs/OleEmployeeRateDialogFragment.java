@@ -124,7 +124,7 @@ public class OleEmployeeRateDialogFragment extends DialogFragment implements Vie
     private void rateEmployeeAPI(boolean isLoader, String empId, String feedback, float rate, String amount, String paymentMethod, String orderRef, int pos) {
         binding.progressVu.setVisibility(View.VISIBLE);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addEmployeeRating(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), empId, clubId, bookingId, rate, feedback, amount, paymentMethod, orderRef, Functions.getIPAddress());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 binding.progressVu.setVisibility(View.GONE);

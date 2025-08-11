@@ -177,7 +177,7 @@ public class OleGameHistoryActivity extends BaseActivity implements View.OnClick
         if (oleGameHistory == null) { return; }
         binding.tvName.setText(oleGameHistory.getName());
         binding.tvAge.setText(oleGameHistory.getAge());
-        Glide.with(getContext()).load(oleGameHistory.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.imgVu);
+        Glide.with(getApplicationContext()).load(oleGameHistory.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.imgVu);
 
         binding.tvFriendly.setText(oleGameHistory.getRatingData().getTotalGames());
         binding.tvBeforeTime.setText(oleGameHistory.getRatingData().getBeforTime());
@@ -201,7 +201,7 @@ public class OleGameHistoryActivity extends BaseActivity implements View.OnClick
     private void gameHistoryAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.gameHistoryOle(Functions.getAppLang(getContext()), playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -243,7 +243,7 @@ public class OleGameHistoryActivity extends BaseActivity implements View.OnClick
     private void acceptRejectChallengeAPI(boolean isLoader, String flag) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptRejectChallenge(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId, matchType, requestStatus, flag);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -283,7 +283,7 @@ public class OleGameHistoryActivity extends BaseActivity implements View.OnClick
     private void confirmPlayerAPI(boolean isLoader, String pId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.confirmPlayer(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, pId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

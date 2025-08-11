@@ -89,7 +89,7 @@ public class GameCaptainDialogFragment extends DialogFragment implements View.On
     private void dismissPopupAPI(boolean isLoader, boolean isGame) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.dismissPopup(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), popupId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

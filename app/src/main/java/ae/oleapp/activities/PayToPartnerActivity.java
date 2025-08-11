@@ -130,7 +130,7 @@ public class PayToPartnerActivity extends BaseActivity implements View.OnClickLi
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClubBanksList(Functions.getAppLang(getContext()), clubId,"");
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -172,7 +172,7 @@ public class PayToPartnerActivity extends BaseActivity implements View.OnClickLi
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClubPartnersList(Functions.getAppLang(getContext()), clubId,"");
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -241,7 +241,7 @@ public class PayToPartnerActivity extends BaseActivity implements View.OnClickLi
                 //file = new File(resultUri.getPath());
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.invoiceImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -292,7 +292,7 @@ public class PayToPartnerActivity extends BaseActivity implements View.OnClickLi
                     RequestBody.create(MediaType.parse("multipart/form-data"),amount),
                     RequestBody.create(MediaType.parse("multipart/form-data"),month),
                     RequestBody.create(MediaType.parse("multipart/form-data"),note));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);

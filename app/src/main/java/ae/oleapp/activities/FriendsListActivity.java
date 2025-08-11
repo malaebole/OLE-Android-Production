@@ -423,7 +423,7 @@ public class FriendsListActivity extends BaseActivity implements View.OnClickLis
 
 //        KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
 //        Call<ResponseBody> call = AppManager.getInstance().apiInterface.addToGame(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), ids,friendShipIds, gameId);
-//        call.enqueue(new Callback<ResponseBody>() {
+//        call.enqueue(new Callback<>() {
 //            @Override
 //            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 //                Functions.hideLoader(hud);
@@ -466,7 +466,7 @@ public class FriendsListActivity extends BaseActivity implements View.OnClickLis
     private void removeFromGameAPI(boolean isLoader, String ids) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removeFromGame(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), ids, gameId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -509,7 +509,7 @@ public class FriendsListActivity extends BaseActivity implements View.OnClickLis
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getFriendsNodeApi(Functions.getPrefValue(getContext(), Constants.kUserID));
         // Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getFriendsNodeApi(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), name);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

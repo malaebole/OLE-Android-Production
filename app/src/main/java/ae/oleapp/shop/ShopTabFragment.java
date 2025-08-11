@@ -361,7 +361,7 @@ public class ShopTabFragment extends BaseFragment implements View.OnClickListene
     private void getHomeDataAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getShopHome(Functions.getAppLang(getActivity()), Functions.getPrefValue(getActivity(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -443,7 +443,7 @@ public class ShopTabFragment extends BaseFragment implements View.OnClickListene
     private void getDealsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getShopDeals(Functions.getAppLang(getActivity()), Functions.getPrefValue(getActivity(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

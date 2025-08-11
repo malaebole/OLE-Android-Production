@@ -83,7 +83,7 @@ public class ExpenseHistoryActivity extends BaseActivity implements View.OnClick
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.expenseHistory(Functions.getAppLang(getContext()), clubId,filterBy,bankId,"",from,to);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);

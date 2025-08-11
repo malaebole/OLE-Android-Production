@@ -49,18 +49,15 @@ public class SocketManager {
             opts.extraHeaders = extraHeaders;
             opts.reconnectionAttempts = 3;
             opts.reconnectionDelay = 200;
-            socket = IO.socket("http://api.ole-app.ae:3000/lineup", opts); //Test Socket Url
-//            socket = IO.socket("http://node.ole-sports.com:5000/lineup", opts);  //Live Socket Url
+//            socket = IO.socket("http://api.ole-app.ae:3000/lineup", opts); //Test Socket Url
+            socket = IO.socket("http://node.ole-sports.com:5000/lineup", opts);  //Live Socket Url
             socket.connect();
 
             socket.on(Socket.EVENT_CONNECT, new Emitter.Listener() {
                 @Override
                 public void call(Object... args) {
-                    handler.post(new Runnable() {
-                        @Override
-                        public void run() {
-                           // Functions.showToast(getContext(),"Connected to Socket.io",FancyToast.SUCCESS);
-                        }
+                    handler.post(() -> {
+                       // Functions.showToast(getContext(),"Connected to Socket.io",FancyToast.SUCCESS);
                     });
 
                 }

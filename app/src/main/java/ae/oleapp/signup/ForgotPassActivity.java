@@ -127,7 +127,7 @@ public class ForgotPassActivity extends BaseActivity implements View.OnClickList
     private void resetPassApi(String username) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.resetPass(Functions.getAppLang(getContext()), username);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

@@ -193,7 +193,7 @@ public class AddCashDepositFileActivity extends BaseActivity implements View.OnC
 
             if (filePath != null && !filePath.isEmpty()) {
                 photoFilePath = filePath;
-                Glide.with(getContext()).load(R.drawable.xlsx).into(binding.fileImgVu);
+                Glide.with(getApplicationContext()).load(R.drawable.xlsx).into(binding.fileImgVu);
                 //Functions.showToast(getContext(),getString(R.string.file_uploaded), FancyToast.SUCCESS);
                 //binding.uploadPdf.setText("Selected File: " + filePath);
             }
@@ -265,7 +265,7 @@ public class AddCashDepositFileActivity extends BaseActivity implements View.OnC
                     RequestBody.create(MediaType.parse("multipart/form-data"),clubId),
                     RequestBody.create(MediaType.parse("multipart/form-data"),date),
                     RequestBody.create(MediaType.parse("multipart/form-data"),note));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -318,7 +318,7 @@ public class AddCashDepositFileActivity extends BaseActivity implements View.OnC
                     RequestBody.create(MediaType.parse("multipart/form-data"),clubId),
                     RequestBody.create(MediaType.parse("multipart/form-data"),fileId),
                     RequestBody.create(MediaType.parse("multipart/form-data"),note));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -355,7 +355,7 @@ public class AddCashDepositFileActivity extends BaseActivity implements View.OnC
     private void depositReportByDate(boolean isLoader, String clubId, String date) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.depositReportByDate(Functions.getAppLang(getContext()),date, clubId );
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -366,7 +366,7 @@ public class AddCashDepositFileActivity extends BaseActivity implements View.OnC
                             JSONObject obj = object.getJSONObject(Constants.kData);
                             reportData = new Gson().fromJson(obj.toString(), ReportData.class);
                             binding.etNote.setText(reportData.getNote());
-                            Glide.with(getContext()).load(R.drawable.xlsx).into(binding.fileImgVu);
+                            Glide.with(getApplicationContext()).load(R.drawable.xlsx).into(binding.fileImgVu);
                            // populateData();
                         }
                         else {

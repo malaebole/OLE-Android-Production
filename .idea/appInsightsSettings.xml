@@ -18,6 +18,23 @@
             </InsightsFilterSettings>
           </value>
         </entry>
+        <entry key="Firebase Crashlytics">
+          <value>
+            <InsightsFilterSettings>
+              <option name="connection">
+                <ConnectionSetting>
+                  <option name="appId" value="ae.oleapp" />
+                  <option name="mobileSdkAppId" value="1:239623316271:android:41c7dc5f7000d2255f37da" />
+                  <option name="projectId" value="malaebole-248119" />
+                  <option name="projectNumber" value="239623316271" />
+                </ConnectionSetting>
+              </option>
+              <option name="signal" value="SIGNAL_UNSPECIFIED" />
+              <option name="timeIntervalDays" value="THIRTY_DAYS" />
+              <option name="visibilityType" value="ALL" />
+            </InsightsFilterSettings>
+          </value>
+        </entry>
       </map>
     </option>
   </component>

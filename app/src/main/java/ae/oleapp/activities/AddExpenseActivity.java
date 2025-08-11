@@ -196,7 +196,7 @@ public class AddExpenseActivity extends BaseActivity implements View.OnClickList
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClubBanksList(Functions.getAppLang(getContext()), clubId,"");
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -250,7 +250,7 @@ public class AddExpenseActivity extends BaseActivity implements View.OnClickList
                     RequestBody.create(MediaType.parse("multipart/form-data"),bankid),
                     RequestBody.create(MediaType.parse("multipart/form-data"),amount),
                     RequestBody.create(MediaType.parse("multipart/form-data"),note));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -302,7 +302,7 @@ public class AddExpenseActivity extends BaseActivity implements View.OnClickList
                     RequestBody.create(MediaType.parse("multipart/form-data"),bankid),
                     RequestBody.create(MediaType.parse("multipart/form-data"),amount),
                     RequestBody.create(MediaType.parse("multipart/form-data"),note));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -345,7 +345,7 @@ public class AddExpenseActivity extends BaseActivity implements View.OnClickList
                 //file = new File(resultUri.getPath());
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.invoiceImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -381,7 +381,7 @@ public class AddExpenseActivity extends BaseActivity implements View.OnClickList
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId != null) {
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getExpenseList(Functions.getAppLang(getContext()));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -425,9 +425,9 @@ public class AddExpenseActivity extends BaseActivity implements View.OnClickList
             binding.etBankName.setText(expenseDetailsModel.getBankName());
             binding.etNote.setText(expenseDetailsModel.getNotes());
             if (!expenseDetailsModel.getReceipt().isEmpty()){
-                Glide.with(getContext()).load(expenseDetailsModel.getReceipt()).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(expenseDetailsModel.getReceipt()).into(binding.invoiceImgVu);
             }else{
-                Glide.with(getContext()).load(R.drawable.attachment_img).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(R.drawable.attachment_img).into(binding.invoiceImgVu);
             }
 
         } else {

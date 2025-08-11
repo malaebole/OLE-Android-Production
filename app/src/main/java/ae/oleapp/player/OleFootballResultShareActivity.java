@@ -71,7 +71,7 @@ public class OleFootballResultShareActivity extends BaseActivity implements View
             e.printStackTrace();
         }
         OlePlayerInfo playerOne = result.getPlayerOne();
-        Glide.with(getContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1ImgVu);
+        Glide.with(getApplicationContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1ImgVu);
         binding.tvP1Name.setText(String.format(" %s ", playerOne.getNickName()));
         binding.tvP1Player.setText(String.format(" %s ", playerOne.getNickName()));
         binding.tvP1Score.setText(playerOne.getGoals());
@@ -83,7 +83,7 @@ public class OleFootballResultShareActivity extends BaseActivity implements View
             binding.tvP1Level.setVisibility(View.INVISIBLE);
         }
         OlePlayerInfo playerTwo = result.getPlayerTwo();
-        Glide.with(getContext()).load(playerTwo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p2ImgVu);
+        Glide.with(getApplicationContext()).load(playerTwo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p2ImgVu);
         binding.tvP2Name.setText(String.format(" %s ", playerTwo.getNickName()));
         binding.tvP2Player.setText(String.format(" %s ", playerTwo.getNickName()));
         binding.tvP2Score.setText(playerTwo.getGoals());

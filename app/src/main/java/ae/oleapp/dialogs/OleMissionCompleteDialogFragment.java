@@ -60,7 +60,7 @@ public class OleMissionCompleteDialogFragment extends DialogFragment implements 
 
         binding.tvRewardsName.setText(oleProfileMission.getRewardName());
         binding.tvRewardsDesc.setText(oleProfileMission.getRewardDesc());
-        Glide.with(getContext()).load(oleProfileMission.getRewardPhoto()).into(binding.rewardsImgVu);
+        Glide.with(requireActivity()).load(oleProfileMission.getRewardPhoto()).into(binding.rewardsImgVu);
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.HORIZONTAL, false);
         binding.missionRecyclerVu.setLayoutManager(layoutManager);
         OleLevelAttributeAdapter adapter = new OleLevelAttributeAdapter(getContext(), oleProfileMission.getTargets(), module, false);

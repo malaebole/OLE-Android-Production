@@ -153,7 +153,7 @@ public class OleOwnerMainTabsActivity extends BaseTabActivity {
         //yeh server py unique id bhej rhi haii
         Log.d("uniqueIDDDDDDD", uniqueID);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.devicesLoginLimit(userId, uniqueID, "ole");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -209,8 +209,8 @@ public class OleOwnerMainTabsActivity extends BaseTabActivity {
                 userImageVu.setImageResource(R.drawable.owner_active);
             }
             else {
-                //Glide.with(getContext()).load(userInfo.getPhotoUrl()).placeholder(R.drawable.owner_active).into(userImageVu);
-                Glide.with(getContext())
+                //Glide.with(getApplicationContext()).load(userInfo.getPhotoUrl()).placeholder(R.drawable.owner_active).into(userImageVu);
+                Glide.with(getApplicationContext())
                         .load(userInfo.getPhotoUrl()).placeholder(R.drawable.owner_active)
                         .apply(RequestOptions.circleCropTransform())
                         .into(userImageVu);

@@ -842,7 +842,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void getProfileAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(),Constants.kUserID),"", Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -916,7 +916,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendAppLang(userId, Functions.getAppLang(getContext()));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -1156,8 +1156,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             }
                             // saveData("", "team_a_shirt", "", "", "", "", shirt.getPhotoUrl(), "", "", "");
                             for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                                if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                    PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                                if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                                     if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                         vu.setImage(shirt.getPhotoUrl());
                                     }
@@ -1176,8 +1175,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             teamA.setTeamShirt(shirt.getPhotoUrl());
                         }
                         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                                 if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                     vu.setImage(shirt.getPhotoUrl());
                                 }
@@ -1197,8 +1195,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             }
 //                            saveData("", "team_b_shirt", "", "", "", "", "", "", shirt.getPhotoUrl(), "");
                             for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                                if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                    PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                                if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                                     if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                         vu.setImage(shirt.getPhotoUrl());
                                     }
@@ -1217,8 +1214,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             teamB.setTeamShirt(shirt.getPhotoUrl());
                         }
                         for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                                 if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                     vu.setImage(shirt.getPhotoUrl());
                                 }
@@ -1348,7 +1344,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void unlockOneJersey(String shrtId, String shirt) {
         KProgressHUD hud = Functions.showLoader(getContext());
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.unlockOneJersey(Functions.getAppLang(getContext()), shrtId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1469,8 +1465,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                 teamA.setTeamGkShirt(shirt.getPhotoUrl());
                             }
                             for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                                if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                    PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                                if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                                     if (vu.getPlayerInfo().getIsGoalkeeper() !=null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                         vu.setImage(shirt.getPhotoUrl());
                                         break;
@@ -1490,8 +1485,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             teamA.setTeamGkShirt(shirt.getPhotoUrl());
                         }
                         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                                 if (vu.getPlayerInfo().getIsGoalkeeper()!=null){ //checkx
                                     if (vu.getPlayerInfo().getIsGoalkeeper() !=null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                         vu.setImage(shirt.getPhotoUrl());
@@ -1514,8 +1508,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                 teamB.setTeamGkShirt(shirt.getPhotoUrl());
                             }
                             for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                                if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                    PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                                if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                                     if (vu.getPlayerInfo().getIsGoalkeeper() !=null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                         vu.setImage(shirt.getPhotoUrl());
                                         break;
@@ -1535,8 +1528,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             teamB.setTeamGkShirt(shirt.getPhotoUrl());
                         }
                         for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                                 if (vu.getPlayerInfo().getIsGoalkeeper() !=null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                     vu.setImage(shirt.getPhotoUrl());
                                     break;
@@ -2436,14 +2428,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         editor.apply();
                         binding.btnHideFace.setImageResource(R.drawable.face_active);
                         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                                 vu.hideShowface(true);
                             }
                         }
                         for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                                 vu.hideShowface(true);
                             }
                         }
@@ -2454,14 +2444,12 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                         editor.apply();
                         binding.btnHideFace.setImageResource(R.drawable.face_inactive);
                         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                                 vu.hideShowface(false);
                             }
                         }
                         for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                                 vu.hideShowface(false);
                             }
                         }
@@ -2979,7 +2967,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void disableUserAccountApi() {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.disableUserAccountApi(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -3151,7 +3139,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         }
         if (country != null) {
             binding.tvCountry.setText(country.getShortName());
-            Glide.with(getContext()).load(country.getFlag()).into(binding.flagImgVu);
+            Glide.with(getApplicationContext()).load(country.getFlag()).into(binding.flagImgVu);
             //teamList.clear();
             shirtList.clear();
             //teamList.addAll(country.getTeams());
@@ -3664,8 +3652,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private PreviewFieldView checkTeamAGkExist() {
         PreviewFieldView view = null;
         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                 if (vu.getPlayerInfo().getIsGoalkeeper() != null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                     view = vu;
                     break;
@@ -3677,8 +3664,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private PreviewFieldView checkTeamBGkExist() {
         PreviewFieldView view = null;
         for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                 if (vu.getPlayerInfo().getIsGoalkeeper() != null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                     view = vu;
                     break;
@@ -3829,7 +3815,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         KProgressHUD hud = Functions.showLoader(getContext());
         String uniqueID = Functions.getPrefValue(this, Constants.kDeviceUniqueId);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.logout(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), uniqueID);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -3872,7 +3858,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void ipdetails(Boolean isLoader, String ip) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody>  call = AppManager.getInstance().apiInterfaceNode.getIpDetails(ip,Functions.getAppLang(getContext()));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -3950,7 +3936,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void getAllCountries(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getAllCountries();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -3990,7 +3976,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void getTeamAndShirtDetails(boolean isLoader, String countryId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getTeamAndShirtDetails(countryId,"android");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -4042,7 +4028,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void getGoalKeeperShirts(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getGoalKeeperShirts();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -4084,7 +4070,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void getAllFields(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getAllFields();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -4126,7 +4112,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void getAllChairs(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getAllChairs();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -4183,7 +4169,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     private void saveAppSettings(boolean isLoader, String targetId, String type, String chairUrl, String fieldBgImg, String fieldImg) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.lineupSettings(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), targetId, type);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -4196,8 +4182,8 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             }
                             else {
                                 if (!fieldBgImg.isEmpty() && !fieldImg.isEmpty()){
-                                    Glide.with(getContext()).load(fieldBgImg).into(binding.fieldBgImgVu);
-                                    Glide.with(getContext()).load(fieldImg).into(binding.fieldImgVu);
+                                    Glide.with(getApplicationContext()).load(fieldBgImg).into(binding.fieldBgImgVu);
+                                    Glide.with(getApplicationContext()).load(fieldImg).into(binding.fieldImgVu);
                                 }
                             }
                         } else {
@@ -4318,7 +4304,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
     private void checkWinMatchAPI() {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.showWinMatchPopup(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -4347,7 +4333,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
     }
     private void checkCaptainAPI() {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.showCaptainPopup(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -5008,8 +4994,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             if (gameId.equalsIgnoreCase(GameID)){
                                 if (teamId.equalsIgnoreCase(teamA.getId())){
                                     for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                                        if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                            PreviewFieldView vuA = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                                        if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vuA) {
                                             if (vuA.getPlayerInfo().getId().equalsIgnoreCase(playerId) && gameId.equalsIgnoreCase(GameID)) {
                                                 vuA.getPlayerInfo().setIsGoalkeeper(isGoalKeeper);
                                                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -5033,8 +5018,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                 }
                                 else {
                                     for (int j = 0; j < binding.vuTeamB.getChildCount(); j++) {
-                                        if (binding.vuTeamB.getChildAt(j) instanceof PreviewFieldView) {
-                                            PreviewFieldView vuB = (PreviewFieldView) binding.vuTeamB.getChildAt(j);
+                                        if (binding.vuTeamB.getChildAt(j) instanceof PreviewFieldView vuB) {
                                             if (vuB.getPlayerInfo().getId().equalsIgnoreCase(playerId) && gameId.equalsIgnoreCase(GameID)) {
                                                 vuB.getPlayerInfo().setIsGoalkeeper(isGoalKeeper);
                                                 RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -5080,8 +5064,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                             String teamId = data.getString("team_id");
                             if (gameId.equalsIgnoreCase(GameID)){
                                 for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                                    if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                        PreviewFieldView vuA = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                                    if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vuA) {
                                         if (vuA.getPlayerInfo().getId().equalsIgnoreCase(friendId) && gameId.equalsIgnoreCase(GameID)) {
                                             runOnUiThread(new Runnable() {
                                                 @Override
@@ -5128,8 +5111,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                 }
 
                                 for (int j = 0; j < binding.vuTeamB.getChildCount(); j++) {
-                                    if (binding.vuTeamB.getChildAt(j) instanceof PreviewFieldView) {
-                                        PreviewFieldView vuB = (PreviewFieldView) binding.vuTeamB.getChildAt(j);
+                                    if (binding.vuTeamB.getChildAt(j) instanceof PreviewFieldView vuB) {
                                         if (vuB.getPlayerInfo().getId().equalsIgnoreCase(friendId) && gameId.equalsIgnoreCase(GameID)) {
                                             runOnUiThread(new Runnable() {
                                                 @Override
@@ -5216,8 +5198,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                     playerAdapter.notifyDataSetChanged();
                                 }else{
                                     for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                                        if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                            PreviewFieldView vuA = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                                        if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vuA) {
                                             if (vuA.getPlayerInfo().getId().equalsIgnoreCase(oldFriendId) && gameId.equalsIgnoreCase(GameID)) {
                                                 runOnUiThread(new Runnable() {
                                                     @Override
@@ -5296,8 +5277,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                     }
 
                                     for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                                        if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                            PreviewFieldView vuB = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                                        if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vuB) {
                                             if (vuB.getPlayerInfo().getId().equalsIgnoreCase(oldFriendId) && gameId.equalsIgnoreCase(GameID)) {
                                                 runOnUiThread(new Runnable() {
                                                     @Override
@@ -5867,8 +5847,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                     if (type.equalsIgnoreCase("team")){
                                         teamA.setTeamShirt(teamShirt);
                                         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                                                 if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                                     vu.setImage(teamShirt);
                                                 }
@@ -5877,8 +5856,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                     }else{
                                         teamA.setTeamGkShirt(teamShirt);
                                         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                                            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                                                 if (vu.getPlayerInfo().getIsGoalkeeper() !=null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                                     vu.setImage(teamA.getTeamGkShirt());
                                                     break;
@@ -5892,8 +5870,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                     if (type.equalsIgnoreCase("team")){
                                         teamB.setTeamShirt(teamShirt);
                                         for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                                                 if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                                     vu.setImage(teamShirt);
                                                 }
@@ -5902,8 +5879,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
                                     }else{
                                         teamB.setTeamGkShirt(teamShirt);
                                         for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                                            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                                                 if (vu.getPlayerInfo().getIsGoalkeeper() !=null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                                     vu.setImage(teamB.getTeamGkShirt());
                                                     break;

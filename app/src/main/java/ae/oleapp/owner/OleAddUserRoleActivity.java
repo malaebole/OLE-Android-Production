@@ -158,7 +158,7 @@ public class OleAddUserRoleActivity extends BaseActivity implements View.OnClick
     private void getPermissionsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getPermissions(Functions.getAppLang(getContext()));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -202,7 +202,7 @@ public class OleAddUserRoleActivity extends BaseActivity implements View.OnClick
     private void addUserRoleAPI(boolean isLoader, String title, String ids, String roleId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addUserRole(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), title, ids, roleId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -241,7 +241,7 @@ public class OleAddUserRoleActivity extends BaseActivity implements View.OnClick
     private void deleteUserRoleAPI(boolean isLoader, String roleId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteUserRole(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), roleId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

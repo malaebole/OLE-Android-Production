@@ -111,7 +111,7 @@ public class OleSavedCardsActivity extends BaseActivity implements View.OnClickL
     private void getCardsAPI() {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.userCards(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -155,7 +155,7 @@ public class OleSavedCardsActivity extends BaseActivity implements View.OnClickL
     private void deleteCardAPI(String cardId, int pos) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteCard(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), cardId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

@@ -71,7 +71,7 @@ public class OlePadelResultShareActivity extends BaseActivity implements View.On
             e.printStackTrace();
         }
         OlePlayerInfo playerOne = result.getCreatedBy();
-        Glide.with(getContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1ImgVu);
+        Glide.with(getApplicationContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1ImgVu);
         binding.tvP1Name.setText(String.format(" %s ", playerOne.getNickName()));
         if (playerOne.getLevel() != null && !playerOne.getLevel().isEmpty() && !playerOne.getLevel().getValue().equalsIgnoreCase("")) {
             binding.tvP1Level.setVisibility(View.VISIBLE);
@@ -87,7 +87,7 @@ public class OlePadelResultShareActivity extends BaseActivity implements View.On
             binding.p1StatusImgVu.setImageResource(R.drawable.lost_padel);
         }
         OlePlayerInfo playerOnePartner = result.getCreatorPartner();
-        Glide.with(getContext()).load(playerOnePartner.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1PartnerImgVu);
+        Glide.with(getApplicationContext()).load(playerOnePartner.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1PartnerImgVu);
         binding.tvP1PartnerName.setText(String.format(" %s ", playerOnePartner.getNickName()));
         if (playerOnePartner.getLevel() != null && !playerOnePartner.getLevel().isEmpty() && !playerOnePartner.getLevel().getValue().equalsIgnoreCase("")) {
             binding.tvP1PartnerLevel.setVisibility(View.VISIBLE);
@@ -98,7 +98,7 @@ public class OlePadelResultShareActivity extends BaseActivity implements View.On
         }
 
         OlePlayerInfo playerTwo = result.getPlayerTwo();
-        Glide.with(getContext()).load(playerTwo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p2ImgVu);
+        Glide.with(getApplicationContext()).load(playerTwo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p2ImgVu);
         binding.tvP2Name.setText(String.format(" %s ", playerTwo.getNickName()));
         if (result.getPlayerTwoWin().equalsIgnoreCase("1")) {
             binding.p2StatusImgVu.setImageResource(R.drawable.win_padel);
@@ -114,7 +114,7 @@ public class OlePadelResultShareActivity extends BaseActivity implements View.On
             binding.tvP2Level.setVisibility(View.INVISIBLE);
         }
         OlePlayerInfo playerTwoPartner = result.getPlayerTwoPartner();
-        Glide.with(getContext()).load(playerTwoPartner.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p2PartnerImgVu);
+        Glide.with(getApplicationContext()).load(playerTwoPartner.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p2PartnerImgVu);
         binding.tvP2PartnerName.setText(String.format(" %s ", playerTwoPartner.getNickName()));
         if (result.getPlayerTwoWin().equalsIgnoreCase("1")) {
             binding.p2StatusImgVu.setImageResource(R.drawable.win_padel);

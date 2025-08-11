@@ -12,7 +12,6 @@ import android.net.Uri;
 import android.os.Build;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.NotificationCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -48,7 +47,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String bookingType = stringMap.get("booking_type");
         String isRated = stringMap.get("is_rated");
 
-        if(Functions.getPrefValue(getApplicationContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)){
+        if (Functions.getPrefValue(getApplicationContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)) {
             String gameId = stringMap.get("game_id");
             Intent intent = new Intent("receive_push");
             intent.putExtra("type", notType);
@@ -63,11 +62,11 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
 //                    || notType.equalsIgnoreCase("oleUserRemovedAsFriend")
 //                    || notType.equalsIgnoreCase("lineupEmployeeAdded")
 //                    || notType.equalsIgnoreCase("lineupEmployeeRemoved")
-                    || notType.equalsIgnoreCase("lineupGameEnd")){
-            }else{
+                    || notType.equalsIgnoreCase("lineupGameEnd")) {
+            } else {
                 sendMyNotification(remoteMessage.getNotification().getBody(), notType, gameId);
             }
-        } else{
+        } else {
             if (Functions.getPrefValue(this, Constants.kIsSignIn).equalsIgnoreCase("1")) {
                 moveToRatingScreen(notType, bookingId, clubId, bookingType, isRated);
 
@@ -121,13 +120,13 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
     }
 
     private void sendMyNotification(String message, String notType, String bookingId) {
-        if(Functions.getPrefValue(getApplicationContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)){
+        if (Functions.getPrefValue(getApplicationContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)) {
             Intent intent1 = new Intent(getApplicationContext(), NotificationsActivityLineup.class);
             intent1.putExtra("from_notif", true);
-            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent1.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent pendingIntent1 = PendingIntent.getActivity(this, 0, intent1, PendingIntent.FLAG_IMMUTABLE);
 
-            Uri soundUri1= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Uri soundUri1 = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             String NOTIFICATION_CHANNEL_ID1 = "my_channel_id_01";
 
             NotificationManager notificationManager1 =
@@ -151,14 +150,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     .setSound(soundUri1);
             notificationBuilder1.setContentIntent(pendingIntent1);
             notificationManager1.notify(1, notificationBuilder1.build());
-        }else{
+        } else {
             //On click of notification it redirect to this Activity
             Intent intent = new Intent(getApplicationContext(), OleNotificationsActivity.class);
             intent.putExtra("from_notif", true);
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NEW_TASK);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
             PendingIntent pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_IMMUTABLE);
 
-            Uri soundUri= RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+            Uri soundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
             String NOTIFICATION_CHANNEL_ID = "my_channel_id_01";
 
             NotificationManager notificationManager =
@@ -187,8 +186,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
                     chatIntent.putExtra("booking_id", bookingId);
                     PendingIntent chatPintent = PendingIntent.getActivity(this, 0, chatIntent, PendingIntent.FLAG_IMMUTABLE);
                     notificationBuilder.setContentIntent(chatPintent);
-                }
-                else {
+                } else {
                     notificationBuilder.setContentIntent(pendingIntent);
                 }
             }
@@ -202,7 +200,7 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         String userId = Functions.getPrefValue(this, Constants.kUserID);
         String uniqueID = Functions.getPrefValue(this, Constants.kDeviceUniqueId);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendFcmToken(Functions.getAppLang(this), userId, uniqueID, "android", token, BuildConfig.VERSION_NAME);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {

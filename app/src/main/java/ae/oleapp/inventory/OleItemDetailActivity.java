@@ -71,7 +71,7 @@ public class OleItemDetailActivity extends BaseActivity implements View.OnClickL
 
     private void populateData() {
         binding.vu.setVisibility(View.VISIBLE);
-        Glide.with(getContext()).load(item.getPhoto()).into(binding.imgVu);
+        Glide.with(getApplicationContext()).load(item.getPhoto()).into(binding.imgVu);
         binding.tvItemName.setText(item.getName());
         binding.tvStock.setText(String.format("%s: %s", getString(R.string.current_stock), item.getCurrentStock()));
         historyList.clear();
@@ -82,7 +82,7 @@ public class OleItemDetailActivity extends BaseActivity implements View.OnClickL
     private void getItemDetailAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getStockHistory(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), itemId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

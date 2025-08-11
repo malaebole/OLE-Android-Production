@@ -102,7 +102,7 @@ public class SalaryHistoryBottomSheetDialogFragment extends DialogFragment imple
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.expenseDetails(Functions.getAppLang(getContext()), employeeId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {

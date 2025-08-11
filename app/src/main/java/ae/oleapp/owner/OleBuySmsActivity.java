@@ -336,7 +336,7 @@ public class OleBuySmsActivity extends BaseActivity implements View.OnClickListe
     private void customerCountAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.customerCountForSms(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -382,7 +382,7 @@ public class OleBuySmsActivity extends BaseActivity implements View.OnClickListe
     private void sendSmsAPI(boolean isLoader, String msg, String date, String time, String price, String method, String orderRef) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendSMS(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, smsFor, msg, String.valueOf(msgCount), date, time, price, method, Functions.getIPAddress(), orderRef);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

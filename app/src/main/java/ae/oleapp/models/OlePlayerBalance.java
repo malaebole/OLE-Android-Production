@@ -2,9 +2,10 @@ package ae.oleapp.models;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.hgdendi.expandablerecycleradapter.BaseExpandableRecyclerViewAdapter;
 
 import java.util.List;
+
+import ae.oleapp.util.expandablerecyclerviewadapter.BaseExpandableRecyclerViewAdapter;
 
 public class OlePlayerBalance implements BaseExpandableRecyclerViewAdapter.BaseGroupBean<OlePlayerBalanceDetail> {
 

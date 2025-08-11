@@ -103,7 +103,7 @@ public class OleSalesOrderDetailActivity extends BaseActivity implements View.On
         }
         else {
             binding.imgVuReceipt.setVisibility(View.VISIBLE);
-            Glide.with(getContext()).load(orderDetail.getReceiptPhoto()).into(binding.imgVuReceipt);
+            Glide.with(getApplicationContext()).load(orderDetail.getReceiptPhoto()).into(binding.imgVuReceipt);
         }
         if (orderDetail.getNote().isEmpty()) {
             binding.tvNote.setVisibility(View.GONE);
@@ -119,7 +119,7 @@ public class OleSalesOrderDetailActivity extends BaseActivity implements View.On
     private void getOrderDetailAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getInventoryOrderDetail(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), orderId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

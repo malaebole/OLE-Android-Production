@@ -110,7 +110,7 @@ public class RatingPagerDialogFragment extends DialogFragment {
     private void getGamePlayersAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.friendsInGame(Functions.getAppLang(getContext()),  Functions.getPrefValue(getContext(), Constants.kUserID), gameId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -158,7 +158,7 @@ public class RatingPagerDialogFragment extends DialogFragment {
         binding.progressVu.setVisibility(View.VISIBLE);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addPlayerRating(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID),
                 playerId, friendShipID, gameId, reachTime, feedback, Speed, Shooting, Dribble, Iq, Fitness, Defence, Speed,gotCard);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 binding.progressVu.setVisibility(View.GONE);

@@ -8,16 +8,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.hgdendi.expandablerecycleradapter.BaseExpandableRecyclerViewAdapter;
-
 import java.util.List;
-
 import ae.oleapp.R;
 import ae.oleapp.models.OlePlayerBalance;
 import ae.oleapp.models.OlePlayerBalanceDetail;
+import ae.oleapp.util.expandablerecyclerviewadapter.BaseExpandableRecyclerViewAdapter;
 
 public class OlePlayerBalanceAdapter extends BaseExpandableRecyclerViewAdapter<OlePlayerBalance, OlePlayerBalanceDetail, OlePlayerBalanceAdapter.GroupViewHolder, OlePlayerBalanceAdapter.ChildViewHolder> {
 

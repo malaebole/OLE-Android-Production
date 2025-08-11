@@ -187,20 +187,27 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content">
 
-                    <com.hedgehog.ratingbar.RatingBar
+                    <com.willy.ratingbar.ScaleRatingBar
                         android:id="@+id/rating_bar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        app:clickable="false"
-                        android:focusable="false"
-                        app:halfstart="true"
-                        app:starCount="5"
-                        app:starEmpty="@drawable/empty_star"
-                        app:starFill="@drawable/full_star"
-                        app:starHalf="@drawable/half_star"
-                        app:starImageHeight="@dimen/_20sdp"
-                        app:starImageWidth="@dimen/_20sdp"/>
+                        android:layout_marginTop="@dimen/_10sdp"
+                        android:layout_marginBottom="@dimen/_10sdp"
+                        app:srb_numStars="5"
+                        app:srb_minimumStars="1"
+                        app:srb_rating="0"
+                        app:srb_starWidth="@dimen/_20sdp"
+                        app:srb_starHeight="@dimen/_20sdp"
+                        app:srb_starPadding="5dp"
+                        app:srb_stepSize="1"
+                        app:srb_isIndicator="false"
+                        app:srb_clickable="false"
+                        app:srb_scrollable="false"
+                        app:srb_clearRatingEnabled="false"
+                        app:srb_drawableEmpty="@drawable/empty_starl"
+                        app:srb_drawableFilled="@drawable/full_starl" />
+
 
                     <TextView
                         android:id="@+id/tv_rating"

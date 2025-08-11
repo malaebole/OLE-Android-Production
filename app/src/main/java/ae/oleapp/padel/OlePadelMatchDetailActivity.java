@@ -375,7 +375,7 @@ public class OlePadelMatchDetailActivity extends BaseActivity implements View.On
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             int width = displayMetrics.widthPixels;
             String url = "https://maps.google.com/maps/api/staticmap?center=" + matchDetail.getClubLatitude() + "," + matchDetail.getClubLongitude() + "&zoom=16&size="+width+"x300&sensor=false&key="+getString(R.string.maps_api_key);
-            Glide.with(getContext()).load(url).into(binding.mapVu);
+            Glide.with(getApplicationContext()).load(url).into(binding.mapVu);
         }
 
         if (matchDetail.getPlayerTwo() != null && !matchDetail.getPlayerTwo().isEmpty() && matchDetail.getPlayerTwo().getId().equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID)) &&
@@ -465,7 +465,7 @@ public class OlePadelMatchDetailActivity extends BaseActivity implements View.On
     private void getMatchAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.matchDetail(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -507,7 +507,7 @@ public class OlePadelMatchDetailActivity extends BaseActivity implements View.On
     private void cancelRequestAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.cancelRequest(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -547,7 +547,7 @@ public class OlePadelMatchDetailActivity extends BaseActivity implements View.On
     private void cancelMatchAPI(boolean isLoader, String playerId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.cancelAcceptedChallenge(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -587,7 +587,7 @@ public class OlePadelMatchDetailActivity extends BaseActivity implements View.On
     private void changePartnerAPI(boolean isLoader, OlePlayerInfo partner, String oldPartnerId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.changePartner(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, partner.getId(), oldPartnerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -628,7 +628,7 @@ public class OlePadelMatchDetailActivity extends BaseActivity implements View.On
     private void opponentPaymentAPI(boolean isLoader, String paymentMethod, String orderRef, String paidPrice, String walletPaid, String cardPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.opponentPayment(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), orderRef, paymentMethod, paidPrice, walletPaid, cardPaid, bookingId, Functions.getIPAddress());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

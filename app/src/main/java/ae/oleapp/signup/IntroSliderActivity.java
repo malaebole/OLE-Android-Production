@@ -121,7 +121,7 @@ public class IntroSliderActivity extends BaseActivity implements View.OnClickLis
 
     private void getCarouselApi() {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getCarousel(Functions.getAppLang(getContext()));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {

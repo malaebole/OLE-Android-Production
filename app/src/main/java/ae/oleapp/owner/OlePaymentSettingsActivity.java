@@ -150,7 +150,7 @@ public class OlePaymentSettingsActivity extends BaseActivity implements View.OnC
     private void getPaymentSettingsAPI(boolean isLoader)  {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getPaymentDetails(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -191,7 +191,7 @@ public class OlePaymentSettingsActivity extends BaseActivity implements View.OnC
     private void setPaymentSettingsAPI(boolean isLoader, String cash, String card, String bankName, String accountNo, String accountTitle, String iban, String branch)  {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updatePaymentSettings(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, cash, card, bankName, accountTitle, iban, accountNo, branch);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

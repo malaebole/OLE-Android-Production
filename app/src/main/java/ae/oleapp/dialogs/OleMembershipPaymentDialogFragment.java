@@ -191,7 +191,7 @@ public class OleMembershipPaymentDialogFragment extends DialogFragment implement
     private void getCouponDiscountAPI(String promoCode) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.planCouponDiscount(Functions.getAppLang(getContext()), clubId, price, promoCode, Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

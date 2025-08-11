@@ -357,8 +357,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
                     gameTeam.setTeamAShirt(shirt.getPhotoUrl());
                     saveData("", "team_a_shirt", "", "", "", "", shirt.getPhotoUrl(), "", "", "");
                     for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                        if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                            PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                        if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                             if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                 vu.setImage(shirt.getPhotoUrl());
                             }
@@ -378,8 +377,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
                     gameTeam.setTeamBShirt(shirt.getPhotoUrl());
                     saveData("", "team_b_shirt", "", "", "", "", "", "", shirt.getPhotoUrl(), "");
                     for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                        if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                            PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                        if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                             if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                 vu.setImage(shirt.getPhotoUrl());
                             }
@@ -409,8 +407,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
                     gameTeam.setTeamAgkShirt(shirt.getPhotoUrl());
                     saveData("", "team_a_gk_shirt", "", "", "", "", "", shirt.getPhotoUrl(), "", "");
                     for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                        if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                            PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                        if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                             if (vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                 vu.setImage(shirt.getPhotoUrl());
                                 break;
@@ -431,8 +428,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
                     gameTeam.setTeamBgkShirt(shirt.getPhotoUrl());
                     saveData("", "team_b_gk_shirt", "", "", "", "", "", "", "", shirt.getPhotoUrl());
                     for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                        if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                            PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                        if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                             if (vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                 vu.setImage(shirt.getPhotoUrl());
                                 break;
@@ -477,7 +473,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
         }
         if (country != null) {
             binding.tvCountry.setText(country.getShortName());
-            Glide.with(getContext()).load(country.getFlag()).into(binding.flagImgVu);
+            Glide.with(getApplicationContext()).load(country.getFlag()).into(binding.flagImgVu);
             teamList.clear();
             shirtList.clear();
             teamList.addAll(country.getTeams());
@@ -1039,8 +1035,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
     private PreviewFieldView checkTeamAGkExist() {
         PreviewFieldView view = null;
         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                 if (vu.getPlayerInfo().getIsGoalkeeper() != null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                     view = vu;
                     break;
@@ -1053,8 +1048,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
     private PreviewFieldView checkTeamBGkExist() {
         PreviewFieldView view = null;
         for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                 if (vu.getPlayerInfo().getIsGoalkeeper() != null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                     view = vu;
                     vu.getPlayerInfo().getIsCaptain().equalsIgnoreCase("1");
@@ -1090,7 +1084,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
     private void getTeams(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.formationDetails(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), gameId, "", "", "", "");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1102,8 +1096,8 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
                             binding.vuTeamA.removeAllViews();
                             binding.vuTeamB.removeAllViews();
                             populateTeamData();
-                            Glide.with(getContext()).load(object.getJSONObject(Constants.kData).getString("bg_image")).into(binding.fieldBgImgVu);
-                            Glide.with(getContext()).load(object.getJSONObject(Constants.kData).getString("field_image")).into(binding.fieldImgVu);
+                            Glide.with(getApplicationContext()).load(object.getJSONObject(Constants.kData).getString("bg_image")).into(binding.fieldBgImgVu);
+                            Glide.with(getApplicationContext()).load(object.getJSONObject(Constants.kData).getString("field_image")).into(binding.fieldImgVu);
                         } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                             finish();
@@ -1132,7 +1126,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
     private void getPlayers(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.gamePlayers(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), gameTeam.getGameId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1194,7 +1188,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
     private void saveCoordinateAPI(boolean isLoader, String teamId, String friendId, float xCoordinate, float yCoordinate, String isGoalKeeper, boolean isAdd) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.saveCoordinate(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), teamId, gameTeam.getGameId(), friendId, xCoordinate, yCoordinate, isGoalKeeper);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1239,7 +1233,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
     private void removePlayerFromTeamAPI(boolean isLoader, String pId, String teamId, PreviewFieldView view) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removeFromTeam(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), teamId, pId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1311,7 +1305,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
     private void getTeamData(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.teamsData(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID),"android");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1373,7 +1367,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
     private void updateTeamShirtAPI(String teamAId, String teamBId, String teamAShirt, String teamBShirt, String teamAgkShirt, String teamBgkShirt) {
         KProgressHUD hud = Functions.showLoader(getContext());
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateTeamShirt(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), teamAId, teamAShirt, teamAgkShirt, teamBId, teamBShirt, teamBgkShirt);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1716,8 +1710,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
                         else if (type.equalsIgnoreCase("team_a_shirt")) {
                             gameTeam.setTeamAShirt(object.getTeam_a_shirt());
                             for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                                if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                    PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                                if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                                     if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                         vu.setImage(object.getTeam_a_shirt());
                                     }
@@ -1727,8 +1720,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
                         else if (type.equalsIgnoreCase("team_a_gk_shirt")) {
                             gameTeam.setTeamAgkShirt(object.getTeam_a_gk_shirt());
                             for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-                                if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                                    PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+                                if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                                     if (vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                         vu.setImage(object.getTeam_a_gk_shirt());
                                         break;
@@ -1739,8 +1731,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
                         else if (type.equalsIgnoreCase("team_b_shirt")) {
                             gameTeam.setTeamBShirt(object.getTeam_b_shirt());
                             for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                                if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                    PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                                if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                                     if (vu.getPlayerInfo().getIsGoalkeeper() == null || !vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                         vu.setImage(object.getTeam_b_shirt());
                                     }
@@ -1750,8 +1741,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
                         else if (type.equalsIgnoreCase("team_b_gk_shirt")) {
                             gameTeam.setTeamBgkShirt(object.getTeam_b_gk_shirt());
                             for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-                                if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                                    PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+                                if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                                     if (vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                                         vu.setImage(object.getTeam_b_gk_shirt());
                                         break;

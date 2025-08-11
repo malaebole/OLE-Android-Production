@@ -95,7 +95,7 @@ public class BankHistoryActivity extends BaseActivity implements View.OnClickLis
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId != null) {
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.bankDepositReport(Functions.getAppLang(getContext()), clubId, filterBy, bankId, from, to);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -143,7 +143,7 @@ public class BankHistoryActivity extends BaseActivity implements View.OnClickLis
 //        String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
 //        if (userId!=null){
 //            Call<ResponseBody> call = AppManager.getInstance().apiInterface.incomeDetails(Functions.getAppLang(getContext()), income_id);
-//            call.enqueue(new Callback<ResponseBody>() {
+//            call.enqueue(new Callback<>() {
 //                @Override
 //                public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 //                    Functions.hideLoader(hud);

@@ -32,9 +32,6 @@ import java.util.ArrayList;
 import ae.oleapp.R;
 import ae.oleapp.databinding.OlefragmentPayBalanceDialogBinding;
 import ae.oleapp.util.Functions;
-import droidninja.filepicker.FilePickerBuilder;
-import droidninja.filepicker.FilePickerConst;
-import id.zelory.compressor.Compressor;
 import pl.aprilapps.easyphotopicker.ChooserType;
 import pl.aprilapps.easyphotopicker.EasyImage;
 import pl.aprilapps.easyphotopicker.MediaFile;
@@ -143,7 +140,7 @@ public class OlePayBalanceDialogFragment extends DialogFragment {
                 Uri resultUri = result.getUri();
                 filePath = resultUri.getPath();
                 file = new File(resultUri.getPath());
-                Glide.with(getContext()).load(file).into(binding.imgVuReceipt);
+                Glide.with(requireActivity()).load(file).into(binding.imgVuReceipt);
                 //updatePhotoAPI(true, file);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
@@ -222,7 +219,7 @@ public class OlePayBalanceDialogFragment extends DialogFragment {
 //                            .setCompressFormat(Bitmap.CompressFormat.JPEG)
 //                            .compressToFile(file);
 //                    filePath = file.getAbsolutePath();
-//                    Glide.with(getContext()).load(file).into(binding.imgVuReceipt);
+//                    Glide.with(getApplicationContext()).load(file).into(binding.imgVuReceipt);
 //                } catch (IOException e) {
 //                    e.printStackTrace();
 //                    Functions.showToast(getContext(), "Error in image compression", FancyToast.ERROR);

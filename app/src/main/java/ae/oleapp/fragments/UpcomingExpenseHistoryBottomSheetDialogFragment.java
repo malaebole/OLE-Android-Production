@@ -8,10 +8,6 @@ import android.graphics.drawable.Drawable;
 import android.media.MediaScannerConnection;
 import android.os.Build;
 import android.os.Bundle;
-
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-
 import android.os.Environment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,6 +15,10 @@ import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.fragment.app.DialogFragment;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.target.CustomTarget;
@@ -28,7 +28,6 @@ import com.nabinbhandari.android.permissions.PermissionHandler;
 import com.nabinbhandari.android.permissions.Permissions;
 import com.shashank.sony.fancytoastlib.FancyToast;
 
-import org.json.JSONArray;
 import org.json.JSONObject;
 
 import java.io.File;
@@ -37,20 +36,14 @@ import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import java.util.Locale;
 
 import ae.oleapp.R;
-import ae.oleapp.databinding.FragmentExpenseHistoryBottomSheetDialogBinding;
 import ae.oleapp.databinding.FragmentUpcomingExpenseHistoryBottomSheetDialogBinding;
-import ae.oleapp.models.ExpenseDetailsModel;
-import ae.oleapp.models.UpcomingExpense;
 import ae.oleapp.models.UpcomingExpenseDetailsModel;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
-import io.reactivex.annotations.NonNull;
-import io.reactivex.annotations.Nullable;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -60,13 +53,11 @@ import retrofit2.Response;
 public class UpcomingExpenseHistoryBottomSheetDialogFragment extends DialogFragment implements View.OnClickListener {
 
     private FragmentUpcomingExpenseHistoryBottomSheetDialogBinding binding;
-    private String upcomingExpenseId= "", clubId = "", expenseId="";
+    private String upcomingExpenseId = "", clubId = "", expenseId = "";
     private ResultDialogCallback dialogCallback;
 
     private UpcomingExpenseDetailsModel upcomingExpenseDetailsModel;
     Dialog dialog;
-
-
 
 
     public UpcomingExpenseHistoryBottomSheetDialogFragment(String upcomingExpenseId, String clubId, String expenseId) {
@@ -99,7 +90,7 @@ public class UpcomingExpenseHistoryBottomSheetDialogFragment extends DialogFragm
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             getDialog().getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
-        getUpcomingExpenseDetails(clubId,upcomingExpenseId);
+        getUpcomingExpenseDetails(clubId, upcomingExpenseId);
 
         binding.btnClose.setOnClickListener(this);
         binding.btnEdit.setOnClickListener(this);
@@ -111,9 +102,9 @@ public class UpcomingExpenseHistoryBottomSheetDialogFragment extends DialogFragm
 
     private void getUpcomingExpenseDetails(String clubId, String upcomingExpenseId) {
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
-        if (userId!=null){
-            Call<ResponseBody> call = AppManager.getInstance().apiInterface.upcomingExpenseHistory(Functions.getAppLang(getContext()), clubId,"","","","","",upcomingExpenseId);
-            call.enqueue(new Callback<ResponseBody>() {
+        if (userId != null) {
+            Call<ResponseBody> call = AppManager.getInstance().apiInterface.upcomingExpenseHistory(Functions.getAppLang(getContext()), clubId, "", "", "", "", "", upcomingExpenseId);
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -129,11 +120,10 @@ public class UpcomingExpenseHistoryBottomSheetDialogFragment extends DialogFragm
                                 binding.amountTv.setText(upcomingExpenseDetailsModel.getAmount());
                                 binding.upcomingDateTv.setText(upcomingExpenseDetailsModel.getRecurringDate());
                                 binding.paymentType.setText(upcomingExpenseDetailsModel.getRecurringType());
-                                if (!upcomingExpenseDetailsModel.getReceipt().isEmpty()){
+                                if (!upcomingExpenseDetailsModel.getReceipt().isEmpty()) {
                                     Glide.with(getActivity()).load(upcomingExpenseDetailsModel.getReceipt()).into(binding.invoiceImgVu);
                                 }
-                            }
-                            else {
+                            } else {
                                 Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                             }
                         } catch (Exception e) {
@@ -146,8 +136,7 @@ public class UpcomingExpenseHistoryBottomSheetDialogFragment extends DialogFragm
                 public void onFailure(Call<ResponseBody> call, Throwable t) {
                     if (t instanceof UnknownHostException) {
                         Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                    }
-                    else {
+                    } else {
                         Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                     }
                 }
@@ -180,13 +169,12 @@ public class UpcomingExpenseHistoryBottomSheetDialogFragment extends DialogFragm
                     }
                 });
 
-            downloadImgBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    saveToGallery(imageUrl);
-                }
-            });
-
+        downloadImgBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                saveToGallery(imageUrl);
+            }
+        });
 
 
         dialog.show();
@@ -194,24 +182,22 @@ public class UpcomingExpenseHistoryBottomSheetDialogFragment extends DialogFragm
 
     @Override
     public void onClick(View v) {
-        if (v == binding.btnClose){
+        if (v == binding.btnClose) {
             dismiss();
-        }
-        else if (v == binding.btnEdit) {
+        } else if (v == binding.btnEdit) {
             dialogCallback.didSubmitResult(UpcomingExpenseHistoryBottomSheetDialogFragment.this, true, upcomingExpenseDetailsModel);
-        }
-        else if (v == binding.invoiceImgVu) {
-            if (!upcomingExpenseDetailsModel.getReceipt().isEmpty()){
+        } else if (v == binding.invoiceImgVu) {
+            if (!upcomingExpenseDetailsModel.getReceipt().isEmpty()) {
                 showImageDialog();
             }
-        }
-        else if (v == binding.btnPaid) {
+        } else if (v == binding.btnPaid) {
             dialogCallback.didSubmitResult(UpcomingExpenseHistoryBottomSheetDialogFragment.this, false, upcomingExpenseDetailsModel);
 
         }
 
 
     }
+
     private void saveToGallery(String fileUrl) {
         String[] permissions;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
@@ -223,7 +209,7 @@ public class UpcomingExpenseHistoryBottomSheetDialogFragment extends DialogFragm
         Permissions.check(getContext(), permissions, null, null, new PermissionHandler() {
             @Override
             public void onGranted() {
-                Glide.with(getContext())
+                Glide.with(requireActivity())
                         .asBitmap()
                         .load(fileUrl)
                         .into(new CustomTarget<Bitmap>() {
@@ -271,7 +257,6 @@ public class UpcomingExpenseHistoryBottomSheetDialogFragment extends DialogFragm
         // Notify the gallery about the new image
         MediaScannerConnection.scanFile(context, new String[]{imageFile.getAbsolutePath()}, null, null);
     }
-
 
 
     public interface ResultDialogCallback {

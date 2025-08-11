@@ -12,7 +12,6 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.afollestad.sectionedrecyclerview.SectionedRecyclerViewAdapter;
 import com.bumptech.glide.Glide;
 
 import java.util.List;
@@ -22,9 +21,9 @@ import ae.oleapp.database.Chat;
 import ae.oleapp.database.Message;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
+import io.github.luizgrp.sectionedrecyclerviewadapter.SectionedRecyclerViewAdapter;
 
-public class OleChatAdapter extends SectionedRecyclerViewAdapter<RecyclerView.ViewHolder> {
-
+public class OleChatAdapter extends SectionedRecyclerViewAdapter{
     private final List<Chat> list;
     private final Context context;
     private ItemClickListener itemClickListener;
@@ -47,12 +46,12 @@ public class OleChatAdapter extends SectionedRecyclerViewAdapter<RecyclerView.Vi
         return list.size();
     }
 
-    @Override
+
     public int getItemCount(int section) {
         return list.get(section).getMessages().size();
     }
 
-    @Override
+
     public int getItemViewType(int section, int relativePosition, int absolutePosition) {
         if (list.get(section).getMessages().get(relativePosition).getSenderId().equalsIgnoreCase(Functions.getPrefValue(context, Constants.kUserID))) {
             return TYPE_SENDER;
@@ -62,13 +61,11 @@ public class OleChatAdapter extends SectionedRecyclerViewAdapter<RecyclerView.Vi
         }
     }
 
-    @Override
     public void onBindHeaderViewHolder(RecyclerView.ViewHolder viewHolder, int section) {
         HeaderViewHolder holder = (HeaderViewHolder)viewHolder;
         holder.tvDate.setText(list.get(section).getDate());
     }
 
-    @Override
     public void onBindViewHolder(RecyclerView.ViewHolder viewHolder, int section, int relativePosition, int absolutePosition) {
         Message message = list.get(section).getMessages().get(relativePosition);
         if (getItemViewType(section, relativePosition, absolutePosition) == TYPE_SENDER) {

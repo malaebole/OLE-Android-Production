@@ -296,7 +296,7 @@ public class PaymentDialogFragment extends DialogFragment implements View.OnClic
         binding.btnConfirm.setVisibility(View.INVISIBLE);
         KProgressHUD hud = Functions.showLoader(getContext());
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getMatchFee(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, isFromMatch, totalPlayers, method, payFullAmount, "");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

@@ -145,7 +145,7 @@ public class PlayerSignupActivity extends BaseActivity implements View.OnClickLi
         @Override
         public void itemClicked(View view, int pos) {
             Shirt shirt = shirtList.get(pos);
-            Glide.with(getContext()).load(shirt.getPhotoUrl()).into(binding.shirtImgVu);
+            Glide.with(getApplicationContext()).load(shirt.getPhotoUrl()).into(binding.shirtImgVu);
             selectedShirtId = shirt.getId();
             shirtAdapter.setSelectedId(selectedShirtId);
         }
@@ -212,7 +212,7 @@ public class PlayerSignupActivity extends BaseActivity implements View.OnClickLi
     private void ipdetails(Boolean isLoader, String ip) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(),"Image processing") : null;
         Call<ResponseBody>  call = AppManager.getInstance().apiInterfaceNode.getIpDetails(ip,Functions.getAppLang(getContext()));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -508,7 +508,7 @@ public class PlayerSignupActivity extends BaseActivity implements View.OnClickLi
                 RequestBody.create(type, MediaType.parse("multipart/form-data")),
                 RequestBody.create("android", MediaType.parse("multipart/form-data")),
                 RequestBody.create(selectedShirtId, MediaType.parse("multipart/form-data"))); //    RequestBody.create(password, MediaType.parse("multipart/form-data")))
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -574,7 +574,7 @@ public class PlayerSignupActivity extends BaseActivity implements View.OnClickLi
     public void getBibsAPI(BibsCallback callback) {
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getBibs();
 //        Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getBibs(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 List<Shirt> shirts = new ArrayList<>();
@@ -608,7 +608,7 @@ public class PlayerSignupActivity extends BaseActivity implements View.OnClickLi
         RequestBody fileReqBody = RequestBody.create(file, MediaType.parse("image/*"));
         MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface2.cutFace("https://www.cutout.pro/api/v1/matting?mattingType=3", part, RequestBody.create("true", MediaType.parse("multipart/form-data")), RequestBody.create("true", MediaType.parse("multipart/form-data")));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -618,7 +618,7 @@ public class PlayerSignupActivity extends BaseActivity implements View.OnClickLi
                         Bitmap bmp = BitmapFactory.decodeStream(new BufferedInputStream(inputStream));
                         photoFilePath = saveBitmap(bmp);
                         File file = new File(photoFilePath);
-                        Glide.with(getContext()).load(file).into(binding.emojiImgVu);
+                        Glide.with(getApplicationContext()).load(file).into(binding.emojiImgVu);
                         binding.imgVuPlace.setVisibility(View.GONE);
                     } catch (Exception e) {
                         e.printStackTrace();

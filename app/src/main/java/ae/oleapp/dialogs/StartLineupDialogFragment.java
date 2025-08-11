@@ -177,7 +177,7 @@ public class StartLineupDialogFragment extends DialogFragment implements View.On
 
 //        KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
 //        Call<ResponseBody> call = AppManager.getInstance().apiInterface.createGame(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), date, time, noOfPlayers, stadiumName, cityName);
-//        call.enqueue(new Callback<ResponseBody>() {
+//        call.enqueue(new Callback<>() {
 //            @Override
 //            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 //                Functions.hideLoader(hud);

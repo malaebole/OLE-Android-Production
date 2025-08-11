@@ -1,16 +1,16 @@
 package ae.oleapp.shop;
 
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.graphics.Paint;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -20,7 +20,7 @@ import com.google.android.material.tabs.TabLayout;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.stfalcon.frescoimageviewer.ImageViewer;
+import com.stfalcon.imageviewer.StfalconImageViewer;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -39,16 +39,16 @@ import ae.oleapp.adapters.OleProductSpecsAdapter;
 import ae.oleapp.base.BaseActivity;
 import ae.oleapp.databinding.ActivityProductDetailBinding;
 import ae.oleapp.dialogs.OleAddedCartDialogFragment;
-import ae.oleapp.dialogs.OleSelectionListDialog;
+import ae.oleapp.dialogs.SelectionListDialog;
 import ae.oleapp.models.OleAttributeCombination;
 import ae.oleapp.models.OleChoiceOption;
 import ae.oleapp.models.OleDeliveryCity;
-import ae.oleapp.models.Product;
 import ae.oleapp.models.OleProductColor;
 import ae.oleapp.models.OleProductReview;
 import ae.oleapp.models.OleProductSpecs;
 import ae.oleapp.models.OleProductVariant;
-import ae.oleapp.models.OleSelectionList;
+import ae.oleapp.models.Product;
+import ae.oleapp.models.SelectionList;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
@@ -57,6 +57,7 @@ import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
 
 public class ProductDetailActivity extends BaseActivity implements View.OnClickListener {
 
@@ -144,8 +145,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                     binding.specsRecyclerVu.setVisibility(View.GONE);
                     binding.reviewsRecyclerVu.setVisibility(View.VISIBLE);
                 }
-            }
-            else {
+            } else {
                 if (tab.getPosition() == 0) {
                     binding.detailVu.setVisibility(View.VISIBLE);
                     binding.specsRecyclerVu.setVisibility(View.GONE);
@@ -183,8 +183,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
             if (index != -1) {
                 selectedOptions.get(index).setValue(oleProductColor.getName());
                 selectedOptions.get(index).setTitle(oleProductColor.getCode());
-            }
-            else {
+            } else {
                 OleProductVariant variant = new OleProductVariant(0, "-1", oleProductColor.getCode(), oleProductColor.getName());
                 selectedOptions.add(variant);
             }
@@ -209,8 +208,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
             Product product = relatedProducts.get(pos);
             if (product.getIsFavorite().equalsIgnoreCase("1")) {
                 removeFromWishlist(true, product.getId(), pos);
-            }
-            else {
+            } else {
                 addToWishlist(true, product.getId(), pos);
             }
         }
@@ -220,26 +218,19 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         if (v == binding.bar.backBtn) {
             finish();
-        }
-        else if (v == binding.btnPlus) {
+        } else if (v == binding.btnPlus) {
             plusClicked();
-        }
-        else if (v == binding.btnMinus) {
+        } else if (v == binding.btnMinus) {
             minusClicked();
-        }
-        else if (v == binding.deliveryVu) {
+        } else if (v == binding.deliveryVu) {
             deliveryVuClicked();
-        }
-        else if (v == binding.whatsappVu) {
+        } else if (v == binding.whatsappVu) {
             whatsappClicked();
-        }
-        else if (v == binding.btnFav) {
+        } else if (v == binding.btnFav) {
             favClicked();
-        }
-        else if (v == binding.btnShare) {
+        } else if (v == binding.btnShare) {
             shareClicked();
-        }
-        else if (v == binding.btnAddCart) {
+        } else if (v == binding.btnAddCart) {
             addCartClicked();
         }
     }
@@ -248,8 +239,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
         int totalOption = 0;
         if (productDetail.getColors().isEmpty()) {
             totalOption = productDetail.getChoiceOptions().size();
-        }
-        else {
+        } else {
             totalOption = productDetail.getChoiceOptions().size() + 1;
         }
         if (productDetail.getVariantProduct().equalsIgnoreCase("1") && selectedOptions.size() != totalOption) {
@@ -271,16 +261,16 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
 
     private void deliveryVuClicked() {
         if (productDetail != null && productDetail.getDeliveryData().size() > 0) {
-            List<OleSelectionList> oleSelectionList = new ArrayList<>();
+            List<SelectionList> oleSelectionList = new ArrayList<>();
             for (int i = 0; i < productDetail.getDeliveryData().size(); i++) {
-                oleSelectionList.add(new OleSelectionList(String.valueOf(i), productDetail.getDeliveryData().get(i).getCityName()));
+                oleSelectionList.add(new SelectionList(String.valueOf(i), productDetail.getDeliveryData().get(i).getCityName()));
             }
-            OleSelectionListDialog dialog = new OleSelectionListDialog(getContext(), getString(R.string.select_city), false);
+            SelectionListDialog dialog = new SelectionListDialog(getContext(), getString(R.string.select_city), false);
             dialog.setLists(oleSelectionList);
-            dialog.setOnItemSelected(new OleSelectionListDialog.OnItemSelected() {
+            dialog.setOnItemSelected(new SelectionListDialog.OnItemSelected() {
                 @Override
-                public void selectedItem(List<OleSelectionList> selectedItems) {
-                    OleSelectionList item = selectedItems.get(0);
+                public void selectedItem(List<SelectionList> selectedItems) {
+                    SelectionList item = selectedItems.get(0);
                     binding.tvCity.setText(item.getValue());
                     OleDeliveryCity oleDeliveryCity = productDetail.getDeliveryData().get(Integer.parseInt(item.getId()));
                     binding.tvDate.setText(oleDeliveryCity.getDeliveryDate());
@@ -333,8 +323,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
         int totalOption = 0;
         if (productDetail.getColors().isEmpty()) {
             totalOption = productDetail.getChoiceOptions().size();
-        }
-        else {
+        } else {
             totalOption = productDetail.getChoiceOptions().size() + 1;
         }
         if (productDetail.getVariantProduct().equalsIgnoreCase("1") && selectedOptions.size() != totalOption) {
@@ -355,12 +344,10 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                 }
                 variantStr = array.toString();
                 addCartAPI(true, variantStr);
-            }
-            catch (Exception e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-        }
-        else {
+        } else {
             Functions.showToast(getContext(), getString(R.string.selected_qty_more_than_stock), FancyToast.ERROR, FancyToast.LENGTH_SHORT);
         }
     }
@@ -372,8 +359,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
         if (productDetail.getSpecifications().isEmpty()) {
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.details));
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.reviews));
-        }
-        else {
+        } else {
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.details));
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.specifications));
             binding.tabLayout.addTab(binding.tabLayout.newTab().setText(R.string.reviews));
@@ -391,18 +377,18 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
         setActualPrice(productDetail.getDiscount(), productDetail.getSalePrice(), productDetail.getDiscountType(), productDetail.getCurrency());
         if (productDetail.getIsFavorite().equalsIgnoreCase("1")) {
             binding.btnFav.setImageResource(R.drawable.shop_fav_ic);
-        }
-        else {
+        } else {
             binding.btnFav.setImageResource(R.drawable.shop_unfav_ic);
         }
         if (Float.parseFloat(productDetail.getRating()) > 0) {
             binding.tvRating.setText(productDetail.getRating());
-        }
-        else {
+        } else {
             binding.tvRating.setText("");
         }
         binding.tvRateCount.setText(getString(R.string.reviews_place, productDetail.getReviewsCount()));
-        binding.ratingBar.setStar(Float.parseFloat(productDetail.getRating()));
+//        binding.ratingBar.setStar(Float.parseFloat(productDetail.getRating()));
+        binding.ratingBar.setRating(Float.parseFloat(productDetail.getRating()));
+
         if (productDetail.getVariantProduct().equalsIgnoreCase("1")) {
             binding.tvStock.setText("");
             if (productDetail.getColors().size() > 0) {
@@ -410,8 +396,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                 colorList.clear();
                 colorList.addAll(productDetail.getColors());
                 colorAdapter.notifyDataSetChanged();
-            }
-            else {
+            } else {
                 binding.colorVu.setVisibility(View.GONE);
             }
             for (int i = 0; i < productDetail.getChoiceOptions().size(); i++) {
@@ -425,8 +410,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                         int index = findFromSelectedOptions(oleChoiceOption.getId());
                         if (index != -1) {
                             selectedOptions.get(index).setValue(value);
-                        }
-                        else {
+                        } else {
                             OleProductVariant variant = new OleProductVariant(Integer.parseInt(view.getTag().toString()), oleChoiceOption.getId(), oleChoiceOption.getTitle(), value);
                             selectedOptions.add(variant);
                         }
@@ -435,15 +419,13 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                 });
                 binding.variantVu.addView(view);
             }
-        }
-        else {
+        } else {
             binding.colorVu.setVisibility(View.GONE);
             currentStock = Integer.parseInt(productDetail.getCurrentStock());
             if (currentStock > 0) {
                 binding.tvStock.setText(String.format(Locale.ENGLISH, "%d %s", currentStock, getString(R.string.in_stock)));
                 binding.tvStock.setTextColor(getResources().getColor(R.color.greenColor));
-            }
-            else {
+            } else {
                 binding.tvStock.setText(R.string.out_of_stock);
                 binding.tvStock.setTextColor(getResources().getColor(R.color.redColor));
             }
@@ -451,15 +433,14 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
 
         if (productDetail.getFastDelivery().equalsIgnoreCase("1")) {
             binding.fastDeliveryVu.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             binding.fastDeliveryVu.setVisibility(View.GONE);
         }
 
         binding.tvCity.setText("");
         binding.tvDate.setText("");
         binding.tvOrderIn.setText("");
-        for (OleDeliveryCity city: productDetail.getDeliveryData()) {
+        for (OleDeliveryCity city : productDetail.getDeliveryData()) {
             if (city.getDefualt().equalsIgnoreCase("1")) {
                 binding.tvCity.setText(city.getCityName());
                 binding.tvDate.setText(city.getDeliveryDate());
@@ -482,23 +463,20 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
 
         if (productDetail.getDetailImg().equalsIgnoreCase("")) {
             binding.detailImgVu.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             binding.detailImgVu.setVisibility(View.VISIBLE);
             Glide.with(this).load(productDetail.getDetailImg()).into(binding.detailImgVu);
         }
 
         if (productDetail.getFreeReturn().equalsIgnoreCase("1")) {
             binding.tvFreeReturn.setText(R.string.free_returns);
-        }
-        else {
+        } else {
             binding.tvFreeReturn.setText(R.string.non_returns);
         }
 
         if (productDetail.getLeaveAtDoor().equalsIgnoreCase("1")) {
             binding.contactlessDeliveryVu.setVisibility(View.VISIBLE);
-        }
-        else {
+        } else {
             binding.contactlessDeliveryVu.setVisibility(View.GONE);
         }
     }
@@ -525,8 +503,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
             for (OleProductVariant variant : selectedOptions) {
                 if (joinTitle.equalsIgnoreCase("")) {
                     joinTitle = variant.getValue();
-                }
-                else {
+                } else {
                     joinTitle = String.format("%s-%s", joinTitle, variant.getValue());
                 }
             }
@@ -543,8 +520,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                 if (currentStock > 0) {
                     binding.tvStock.setText(String.format(Locale.ENGLISH, "%d %s", currentStock, getString(R.string.in_stock)));
                     binding.tvStock.setTextColor(getResources().getColor(R.color.greenColor));
-                }
-                else {
+                } else {
                     binding.tvStock.setText(R.string.out_of_stock);
                     binding.tvStock.setTextColor(getResources().getColor(R.color.redColor));
                 }
@@ -565,17 +541,15 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
             if (discountType.equalsIgnoreCase("amount")) {
                 binding.tvDiscount.setText(String.format("-%s %s", discountValue, currency));
                 double price = actualPrice - discount;
-                binding.tvPrice.setText(String.format(Locale.ENGLISH,"%.2f %s", price, currency));
-            }
-            else {
+                binding.tvPrice.setText(String.format(Locale.ENGLISH, "%.2f %s", price, currency));
+            } else {
                 binding.tvDiscount.setText(String.format("-%s%%", discountValue));
                 double price = actualPrice - ((discount / 100) * actualPrice);
-                binding.tvPrice.setText(String.format(Locale.ENGLISH,"%.2f %s", price, currency));
+                binding.tvPrice.setText(String.format(Locale.ENGLISH, "%.2f %s", price, currency));
             }
             binding.tvActualPrice.setText(salePrice);
             binding.tvActualPrice.setPaintFlags(binding.tvActualPrice.getPaintFlags() | Paint.STRIKE_THRU_TEXT_FLAG);
-        }
-        else {
+        } else {
             binding.tvActualPrice.setText("");
             binding.discountVu.setVisibility(View.GONE);
         }
@@ -583,8 +557,8 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
 
     private void setupSlider(List<String> imageDataList) {
         List<SlideModel> imageList = new ArrayList<>();
-        for (String str: imageDataList) {
-            imageList.add(new SlideModel(str,ScaleTypes.CENTER_CROP));
+        for (String str : imageDataList) {
+            imageList.add(new SlideModel(str, ScaleTypes.CENTER_CROP));
         }
         binding.slider.setImageList(imageList, ScaleTypes.FIT);
         binding.slider.setItemClickListener(new ItemClickListener() {
@@ -595,12 +569,25 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void onItemSelected(int i) {
-                new ImageViewer.Builder<>(getContext(), imageDataList).setFormatter(new ImageViewer.Formatter<String>() {
-                    @Override
-                    public String format(String s) {
-                        return s;
-                    }
-                }).setStartPosition(i).show();
+                //fix this code of line complete after finalizing all the other queries
+
+                String[] arr = new String[]{imageDataList.toString()};
+
+                new StfalconImageViewer.Builder<>(getContext(), arr, (imageView, imageUrl) -> {
+                    // Use Glide to load the image from the URL
+                    Glide.with(getApplicationContext())
+                            .load(imageUrl)
+                            .into(imageView);
+                }).withStartPosition(i).show();
+
+//
+//
+//                new ImageViewer.Builder<>(getContext(), imageDataList).setFormatter(new ImageViewer.Formatter<String>() {
+//                    @Override
+//                    public String format(String s) {
+//                        return s;
+//                    }
+//                }).setStartPosition(i).show();
             }
         });
     }
@@ -626,9 +613,9 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
 //    }
 
     private void getProductAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getProduct(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), productId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -640,16 +627,14 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                             Gson gson = new Gson();
                             productDetail = gson.fromJson(obj.toString(), Product.class);
                             populateData();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -659,8 +644,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -668,9 +652,9 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
     }
 
     private void addCartAPI(boolean isLoader, String variants) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addToCart(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), productId, selectedQty, selectedColor, selectedCombinationId, variants);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -682,22 +666,19 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                             if (currentStock > 0) {
                                 binding.tvStock.setText(String.format(Locale.ENGLISH, "%d %s", currentStock, getString(R.string.in_stock)));
                                 binding.tvStock.setTextColor(getResources().getColor(R.color.greenColor));
-                            }
-                            else {
+                            } else {
                                 binding.tvStock.setText(R.string.out_of_stock);
                                 binding.tvStock.setTextColor(getResources().getColor(R.color.redColor));
                             }
                             showCartDialog();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -707,8 +688,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -746,13 +726,11 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                     if (pos == -1) {
                         productDetail.setIsFavorite("1");
                         binding.btnFav.setImageResource(R.drawable.shop_fav_ic);
-                    }
-                    else {
+                    } else {
                         relatedProducts.get(pos).setIsFavorite("1");
                         productAdapter.notifyItemChanged(pos);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), msg, FancyToast.ERROR);
                 }
             }
@@ -769,13 +747,11 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
                     if (pos == -1) {
                         productDetail.setIsFavorite("0");
                         binding.btnFav.setImageResource(R.drawable.shop_unfav_ic);
-                    }
-                    else {
+                    } else {
                         relatedProducts.get(pos).setIsFavorite("0");
                         productAdapter.notifyItemChanged(pos);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), msg, FancyToast.ERROR);
                 }
             }

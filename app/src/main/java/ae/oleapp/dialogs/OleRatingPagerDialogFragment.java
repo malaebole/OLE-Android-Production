@@ -112,7 +112,7 @@ public class OleRatingPagerDialogFragment extends DialogFragment {
     private void getJoinedPlayersAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getJoinedPlayers(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -159,7 +159,7 @@ public class OleRatingPagerDialogFragment extends DialogFragment {
     private void ratePlayerAPI(boolean isLoader, String playerId, String feedback, String reachTime, int rate, int pos) {
         binding.progressVu.setVisibility(View.VISIBLE);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addGameRating(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), playerId, bookingId, reachTime, feedback, rate);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 binding.progressVu.setVisibility(View.GONE);

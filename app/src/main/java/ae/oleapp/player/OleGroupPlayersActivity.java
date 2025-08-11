@@ -141,7 +141,7 @@ public class OleGroupPlayersActivity extends BaseActivity implements View.OnClic
     private void getGroupAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getGroup(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), groupId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -184,7 +184,7 @@ public class OleGroupPlayersActivity extends BaseActivity implements View.OnClic
     private void addPlayersAPI(boolean isLoader, String ids) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addPlayerGroup(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), groupId, ids);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -224,7 +224,7 @@ public class OleGroupPlayersActivity extends BaseActivity implements View.OnClic
     private void removePlayerAPI(boolean isLoader, String playerId, int pos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removePlayerGroup(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), groupId, playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

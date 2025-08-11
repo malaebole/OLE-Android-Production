@@ -261,7 +261,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
     private void addPartnerAPI(boolean isLoader, String pIds) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addPartner(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingDetail.getBookingId(), pIds, "booking");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -314,7 +314,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
     private void removePartnerAPI(boolean isLoader, String pIds, int pos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removePartner(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingDetail.getBookingId(), pIds);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -361,7 +361,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
     private void updatePaymentStatusAPI(boolean isLoader, String pIds, String amount, String paymentMethod, String orderRef, String cardPaid, String walletPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updatePaymentStatus(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingDetail.getBookingId(), pIds, amount, paymentMethod, Functions.getIPAddress(), orderRef, cardPaid, walletPaid);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

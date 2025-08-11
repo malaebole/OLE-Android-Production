@@ -2,10 +2,10 @@ package ae.oleapp.util;
 
 public class Constants {
 
-    public static String BASE_URL = "https://api.ole-sports.com/";    // Test
-//     public static String BASE_URL = "https://www.ole-sports.com/";  // production
-    public static String NODE_BASE_URL = "https://api.ole-app.ae/api/";  // Node Test
-//     public static String NODE_BASE_URL = "https://node.ole-sports.com/api/";  // Node production
+//    public static String BASE_URL = "https://api.ole-sports.com/";    // Test
+     public static String BASE_URL = "https://www.ole-sports.com/";  // production
+//    public static String NODE_BASE_URL = "https://api.ole-app.ae/api/";  // Node Test
+     public static String NODE_BASE_URL = "https://node.ole-sports.com/api/";  // Node production
 
 
     public static String kStatus = "status";

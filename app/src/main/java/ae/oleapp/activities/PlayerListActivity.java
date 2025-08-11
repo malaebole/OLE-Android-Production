@@ -301,7 +301,7 @@ public class PlayerListActivity extends BaseActivity implements View.OnClickList
         @Override
         public void itemClicked(View view, int pos) {
             Shirt shirt = shirtList.get(pos);
-            Glide.with(getContext()).load(shirt.getPhotoUrl()).into(binding.shirtImgVu);
+            Glide.with(getApplicationContext()).load(shirt.getPhotoUrl()).into(binding.shirtImgVu);
             selectedShirtId = shirt.getId();
             shirtAdapter.setSelectedId(selectedShirtId);
         }
@@ -405,7 +405,7 @@ public class PlayerListActivity extends BaseActivity implements View.OnClickList
     private void getPlayerListAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getPlayerList(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), 0, 0, 1, name, "", "", "", "", "", "", "", "lineup");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -471,7 +471,7 @@ public class PlayerListActivity extends BaseActivity implements View.OnClickList
     private void linkPlayersAPI(boolean isLoader, String ids) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.linkPlayers(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), "", ids);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -525,7 +525,7 @@ public class PlayerListActivity extends BaseActivity implements View.OnClickList
                 RequestBody.create(selectedShirtId, MediaType.parse("multipart/form-data")),
                 RequestBody.create(countryCode, MediaType.parse("multipart/form-data")),
                 RequestBody.create(phone, MediaType.parse("multipart/form-data")));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -547,8 +547,8 @@ public class PlayerListActivity extends BaseActivity implements View.OnClickList
                             binding.tvProfileDesc.setVisibility(View.VISIBLE);
                             binding.tvName.setText(profileInfo.getNickName());
                             binding.tvPhone.setText(profileInfo.getPhone());
-                            Glide.with(getContext()).load(profileInfo.getEmojiUrl()).into(binding.pEmojiImgVu);
-                            Glide.with(getContext()).load(profileInfo.getBibUrl()).into(binding.pShirtImgVu);
+                            Glide.with(getApplicationContext()).load(profileInfo.getEmojiUrl()).into(binding.pEmojiImgVu);
+                            Glide.with(getApplicationContext()).load(profileInfo.getBibUrl()).into(binding.pShirtImgVu);
                         }
                         else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
@@ -579,7 +579,7 @@ public class PlayerListActivity extends BaseActivity implements View.OnClickList
     private void addLineupPlayerAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addLineupUser(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), profileInfo.getId(), profileInfo.getName(), profileInfo.getNickName(), profileInfo.getPhone(), profileInfo.getBibId(), profileInfo.getIsLink(), profileInfo.getEmojiName());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -626,7 +626,7 @@ public class PlayerListActivity extends BaseActivity implements View.OnClickList
         RequestBody fileReqBody = RequestBody.create(file, MediaType.parse("image/*"));
         MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface2.cutFace("https://www.cutout.pro/api/v1/matting?mattingType=3", part, RequestBody.create("true", MediaType.parse("multipart/form-data")), RequestBody.create("true", MediaType.parse("multipart/form-data")));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -636,7 +636,7 @@ public class PlayerListActivity extends BaseActivity implements View.OnClickList
                         Bitmap bmp = BitmapFactory.decodeStream(new BufferedInputStream(inputStream));
                         photoFilePath = saveBitmap(bmp);
                         File file = new File(photoFilePath);
-                        Glide.with(getContext()).load(file).into(binding.emojiImgVu);
+                        Glide.with(getApplicationContext()).load(file).into(binding.emojiImgVu);
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);

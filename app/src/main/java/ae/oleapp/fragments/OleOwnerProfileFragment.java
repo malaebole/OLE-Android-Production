@@ -226,7 +226,7 @@ public class OleOwnerProfileFragment extends BaseFragment implements View.OnClic
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
                 File file = new File(resultUri.getPath());
-                Glide.with(getContext()).load(file).into(binding.imgVu);
+                Glide.with(requireActivity()).load(file).into(binding.imgVu);
                 updatePhotoAPI(true, file);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
@@ -284,7 +284,7 @@ public class OleOwnerProfileFragment extends BaseFragment implements View.OnClic
     private void getProfileAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID),"", "");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -326,7 +326,7 @@ public class OleOwnerProfileFragment extends BaseFragment implements View.OnClic
     private void deletePhotoAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deletePhoto(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -373,7 +373,7 @@ public class OleOwnerProfileFragment extends BaseFragment implements View.OnClic
         RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("photo", file.getName(), fileReqBody);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateProfilePhoto(part, RequestBody.create(MediaType.parse("multipart/form-data"), Functions.getAppLang(getContext())), RequestBody.create(MediaType.parse("multipart/form-data"), Functions.getPrefValue(getContext(), Constants.kUserID)));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -383,7 +383,7 @@ public class OleOwnerProfileFragment extends BaseFragment implements View.OnClic
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             String url = object.getJSONObject(Constants.kData).getString("photo_url");
-                            Glide.with(getContext()).load(url).into(binding.imgVu);
+                            Glide.with(requireActivity()).load(url).into(binding.imgVu);
                             UserInfo userInfo = Functions.getUserinfo(getContext());
                             userInfo.setPhotoUrl(url);
                             Functions.saveUserinfo(getContext(), userInfo);
@@ -429,7 +429,7 @@ public class OleOwnerProfileFragment extends BaseFragment implements View.OnClic
         }
 
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateUser(Functions.getAppLang(getContext()), dynamicParams);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

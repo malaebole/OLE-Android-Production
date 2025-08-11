@@ -354,7 +354,7 @@ public class OlePBookingListFragment extends BaseFragment implements View.OnClic
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getPlayerBookings(Functions.getAppLang(getActivity()), Functions.getPrefValue(getActivity(), Constants.kUserID),
                 fromDate, toDate, isDateNeeded, date, isAllDates, "", "", Functions.getPrefValue(getActivity(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

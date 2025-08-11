@@ -170,7 +170,7 @@ public class OleMatchShareActivity extends BaseActivity implements View.OnClickL
             type = "friendly_game";
         }
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.userBookings(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), selectedDate, "", club.getId(), "", isDateNeeded, date, type);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -231,7 +231,7 @@ public class OleMatchShareActivity extends BaseActivity implements View.OnClickL
     private void getBookingDetail(boolean isLoader, String bookingId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getBookingDetail(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

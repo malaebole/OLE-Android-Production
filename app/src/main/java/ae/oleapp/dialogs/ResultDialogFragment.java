@@ -91,10 +91,10 @@ public class ResultDialogFragment extends DialogFragment implements View.OnClick
         binding.tvTeamB.setText(result.getTeamB().getTeamBName());
         binding.tvTeamAP.setText(result.getTeamAPlayer().getNickName());
         binding.tvTeamBP.setText(result.getTeamBPlayer().getNickName());
-        Glide.with(getContext()).load(result.getTeamAPlayer().getEmojiUrl()).into(binding.emojiImgVuP1);
-        Glide.with(getContext()).load(result.getTeamBPlayer().getEmojiUrl()).into(binding.emojiImgVuP2);
-        Glide.with(getContext()).load(result.getTeamAPlayer().getBibUrl()).into(binding.shirtImgVuP1);
-        Glide.with(getContext()).load(result.getTeamBPlayer().getBibUrl()).into(binding.shirtImgVuP2);
+        Glide.with(requireActivity()).load(result.getTeamAPlayer().getEmojiUrl()).into(binding.emojiImgVuP1);
+        Glide.with(requireActivity()).load(result.getTeamBPlayer().getEmojiUrl()).into(binding.emojiImgVuP2);
+        Glide.with(requireActivity()).load(result.getTeamAPlayer().getBibUrl()).into(binding.shirtImgVuP1);
+        Glide.with(requireActivity()).load(result.getTeamBPlayer().getBibUrl()).into(binding.shirtImgVuP2);
         if (result.getTeamAPlayer().getIsCaptain().equalsIgnoreCase("1")) {
             binding.teamACaptain.setVisibility(View.VISIBLE);
         }
@@ -144,7 +144,7 @@ public class ResultDialogFragment extends DialogFragment implements View.OnClick
     private void dismissPopupAPI(boolean isLoader, boolean isShare) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.dismissPopup(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), popupId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

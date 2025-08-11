@@ -605,7 +605,7 @@ public class OleCreateMatchActivity extends BaseActivity implements View.OnClick
     private void createMatchAPI(boolean isLoader, String reqPlayers, String totalPlayers, String playerIds, String minAge, String maxAge, String orderRef, String paymentMethod, String cardPaid, String walletPaid, String groupId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.createMatch(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, matchType, reqPlayers, totalPlayers, minAge, maxAge, playerIds, orderRef, cardPaid, walletPaid, paymentMethod, isFavourite, Functions.getIPAddress(), groupId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -647,7 +647,7 @@ public class OleCreateMatchActivity extends BaseActivity implements View.OnClick
     private void changePrivateMatchToPublicAPI(boolean isLoader, String minAge, String maxAge) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.changePrivateMatchToPublic(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, minAge, maxAge);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -686,7 +686,7 @@ public class OleCreateMatchActivity extends BaseActivity implements View.OnClick
     private void getFavListAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getFavList(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -732,7 +732,7 @@ public class OleCreateMatchActivity extends BaseActivity implements View.OnClick
     private void getGroupListAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getGroupList(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

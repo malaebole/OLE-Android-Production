@@ -487,7 +487,7 @@ public class OleMatchRequestsActivity extends BaseActivity implements View.OnCli
         else {
             call = AppManager.getInstance().apiInterface.allMatches(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), location.getLatitude(), location.getLongitude(), name, fromDate, toDate, clubId, Functions.getPrefValue(getContext(), Constants.kAppModule));
         }
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -561,7 +561,7 @@ public class OleMatchRequestsActivity extends BaseActivity implements View.OnCli
     private void acceptRejectChallengeAPI(boolean isLoader, String bookingId, String matchType, String requestStatus, String flag, int pos, String paymentMethod, String orderRef, String joinFee, String cardPaid, String walletPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptRejectChallenge(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, "", matchType, requestStatus, flag, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress(), joinFee);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -602,7 +602,7 @@ public class OleMatchRequestsActivity extends BaseActivity implements View.OnCli
     private void joinChallengeAPI(boolean isLoader, String bookingId, String matchType, int pos, String paymentMethod, String orderRef, String joinFee, String cardPaid, String walletPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.joinChallenge(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, matchType, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress(), joinFee);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -643,7 +643,7 @@ public class OleMatchRequestsActivity extends BaseActivity implements View.OnCli
     private void joinGameAPI(boolean isLoader, String bookingId, String position, String fee, int pos, String paymentMethod, String orderRef, String cardPaid, String walletPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.joinGame(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, position, fee, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

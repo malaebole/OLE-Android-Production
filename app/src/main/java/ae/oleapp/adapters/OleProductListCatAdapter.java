@@ -56,8 +56,7 @@ public class OleProductListCatAdapter extends RecyclerView.Adapter<OleProductLis
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        if (list.get(position) instanceof OleProductCategory) {
-            OleProductCategory category = (OleProductCategory)list.get(position);
+        if (list.get(position) instanceof OleProductCategory category) {
             holder.tvName.setText(category.getName());
             if (selectedIndex == position) {
                 holder.cardView.setStrokeColor(context.getResources().getColor(R.color.blueColorNew));

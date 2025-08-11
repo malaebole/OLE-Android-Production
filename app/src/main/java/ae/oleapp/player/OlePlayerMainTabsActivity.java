@@ -211,8 +211,8 @@ public class OlePlayerMainTabsActivity extends BaseTabActivity {
         UserInfo userInfo = Functions.getUserinfo(getContext());
         if (userInfo != null) {
             tvName.setText(userInfo.getName());
-            Glide.with(getContext()).load(userInfo.getBibUrl()).placeholder(R.drawable.bibl).into(shirtImgVu);  //(ImageView) menuVu.findViewById(R.id.shirt_img_vu));
-            Glide.with(getContext()).load(userInfo.getEmojiUrl()).into(emojiImgVu);
+            Glide.with(getApplicationContext()).load(userInfo.getBibUrl()).placeholder(R.drawable.bibl).into(shirtImgVu);  //(ImageView) menuVu.findViewById(R.id.shirt_img_vu));
+            Glide.with(getApplicationContext()).load(userInfo.getEmojiUrl()).into(emojiImgVu);
             if (userInfo.getLevel() != null && !userInfo.getLevel().isEmpty() && !userInfo.getLevel().getValue().equalsIgnoreCase("")) {
                 tvRank.setVisibility(View.VISIBLE);
                 tvRank.setText(String.format("LV: %s", userInfo.getLevel().getValue()));
@@ -344,7 +344,7 @@ public class OlePlayerMainTabsActivity extends BaseTabActivity {
 
     private void checkLevelAPI() {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.levelsTargetStatus(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -381,7 +381,7 @@ public class OlePlayerMainTabsActivity extends BaseTabActivity {
 
     private void checkLoyaltyAPI() {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.loyaltyTargetStatus(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -433,7 +433,7 @@ public class OlePlayerMainTabsActivity extends BaseTabActivity {
 
     private void checkRestrictionAPI() {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.showRestrictionPopup(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -460,7 +460,7 @@ public class OlePlayerMainTabsActivity extends BaseTabActivity {
 
     private void checkWinMatchAPI() {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.showWinMatchPopup(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), "", Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -526,7 +526,7 @@ public class OlePlayerMainTabsActivity extends BaseTabActivity {
 
     private void checkEmpRateAPI() {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.showEmpRatePopup(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {

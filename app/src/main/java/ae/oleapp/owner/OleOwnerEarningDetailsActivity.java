@@ -174,7 +174,7 @@ public class OleOwnerEarningDetailsActivity extends BaseActivity implements View
     private void getEarningsAPI(boolean isLoader, String type) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getOwnerCardEarnings( Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), fromDate, toDate, clubId, "", type);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

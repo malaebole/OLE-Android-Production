@@ -134,8 +134,8 @@ public class BestPlayerDialogFragment extends DialogFragment {
         @Override
         public void itemClicked(View v, int pos) {
 
-            Glide.with(getContext()).load(playerList.get(pos).getEmojiUrl()).into(binding.emojiImgVu);
-            Glide.with(getContext()).load(playerList.get(pos).getBibUrl()).into(binding.shirtImgVu);
+            Glide.with(requireActivity()).load(playerList.get(pos).getEmojiUrl()).into(binding.emojiImgVu);
+            Glide.with(requireActivity()).load(playerList.get(pos).getBibUrl()).into(binding.shirtImgVu);
                 binding.spark.setVisibility(View.VISIBLE);
                 if (playerList.get(pos).getEmojiUrl().equalsIgnoreCase("")){
                     binding.crownVu.setVisibility(View.INVISIBLE);
@@ -152,7 +152,7 @@ public class BestPlayerDialogFragment extends DialogFragment {
     private void getGamePlayersAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.friendsInGame(Functions.getAppLang(getContext()),  Functions.getPrefValue(getContext(), Constants.kUserID), gameId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -200,7 +200,7 @@ public class BestPlayerDialogFragment extends DialogFragment {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addBestPlayer(Functions.getAppLang(getContext()),
                 Functions.getPrefValue(getContext(), Constants.kUserID),
                  gameId, playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {

@@ -133,7 +133,7 @@ public class OleUpdatePassDialog extends Dialog implements View.OnClickListener 
     private void updatePassAPI(String oldPass, String newPass) {
         KProgressHUD hud = Functions.showLoader(context, "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updatePass(Functions.getAppLang(context),Functions.getPrefValue(context, Constants.kUserID), oldPass, newPass);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

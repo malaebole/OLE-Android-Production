@@ -790,7 +790,7 @@ public class OleFastBookingActivity extends BaseActivity implements View.OnClick
     private void getAllFieldsAPI(boolean isLoader, String date) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getAllFields(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), club.getId(), selectedDuration, date, "1", "1");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -850,7 +850,7 @@ public class OleFastBookingActivity extends BaseActivity implements View.OnClick
     private void notificationAPI(String start, String end, String phone) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.notifyAvailability(Functions.getAppLang(getContext()), fieldId, club.getId(), start, end, phone, Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -931,7 +931,7 @@ public class OleFastBookingActivity extends BaseActivity implements View.OnClick
                 selectedStartTime, selectedEndTime, selectedShift, paymentType, userName, phone,
                 facilities, selectedFacilityPrice, offerDis, "0", promoDiscount, promoId,
                 days, fromDate, toDate, Functions.getIPAddress(), fieldType, padelPlayers, padelPlayersForPayment, ladySlot, isWaitingUser, registeredUserId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -978,7 +978,7 @@ public class OleFastBookingActivity extends BaseActivity implements View.OnClick
     private void cancelConfirmBookingAPI(boolean isLoader, String status, String bookingId, int pos, int fieldPos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.cancelConfirmBooking(Functions.getAppLang(getContext()), bookingId, status, "", "", "", "", "", Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1071,7 +1071,7 @@ public class OleFastBookingActivity extends BaseActivity implements View.OnClick
     private void removeWaitingUser(String id) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removeWaitingUser(id);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1108,7 +1108,7 @@ public class OleFastBookingActivity extends BaseActivity implements View.OnClick
     private void addUserToWaitingList(String bookingId, String clubId, String name, String phone) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addUserToWaitingList(bookingId,clubId, name, phone);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

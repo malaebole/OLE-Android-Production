@@ -753,7 +753,7 @@ public class MakeCaptainActivity extends BaseActivity implements View.OnClickLis
     private void shareGameCount(boolean isLoader, String gameId, String type) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.shareGameCount(gameId,type);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

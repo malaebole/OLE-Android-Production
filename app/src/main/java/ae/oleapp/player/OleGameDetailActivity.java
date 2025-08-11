@@ -486,7 +486,7 @@ public class OleGameDetailActivity extends BaseActivity implements View.OnClickL
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             int width = displayMetrics.widthPixels;
             String url = "https://maps.google.com/maps/api/staticmap?center=" + matchDetail.getClubLatitude() + "," + matchDetail.getClubLongitude() + "&zoom=16&size="+width+"x300&sensor=false&key="+getString(R.string.maps_api_key);
-            Glide.with(getContext()).load(url).into(binding.mapVu);
+            Glide.with(getApplicationContext()).load(url).into(binding.mapVu);
         }
 
         checkTeamCreatedOrNot();
@@ -661,6 +661,16 @@ public class OleGameDetailActivity extends BaseActivity implements View.OnClickL
                 return false;
             }
         }
+
+        @Override
+        public boolean canDragColumnAtPosition(int index) {
+            return false;
+        }
+
+        @Override
+        public boolean canDropColumnAtPosition(int oldIndex, int newIndex) {
+            return false;
+        }
     };
 
     private void addAllPlayerList() {
@@ -763,7 +773,7 @@ public class OleGameDetailActivity extends BaseActivity implements View.OnClickL
     private void getMatchAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.matchDetail(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -830,7 +840,7 @@ public class OleGameDetailActivity extends BaseActivity implements View.OnClickL
     private void cancelMatchAPI(boolean isLoader, String playerId, String matchType) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.cancelAcceptedMatch(Functions.getAppLang(getContext()), playerId, bookingId, matchType, Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -870,7 +880,7 @@ public class OleGameDetailActivity extends BaseActivity implements View.OnClickL
     private void acceptRejectChallengeAPI(boolean isLoader, String playerId, String matchType, String requestStatus, String flag) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptRejectChallenge(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId, matchType, requestStatus, flag);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -910,7 +920,7 @@ public class OleGameDetailActivity extends BaseActivity implements View.OnClickL
     private void joinGameAPI(boolean isLoader, String bookingId, String position, String fee, String paymentMethod, String orderRef, String cardPaid, String walletPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.joinGame(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, position, fee, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -954,7 +964,7 @@ public class OleGameDetailActivity extends BaseActivity implements View.OnClickL
     private void addRemovePlayerToTeam(boolean isLoader, String teamAId, String teamBId, String targetTeamId, String playerId, String type) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addRemovePlayerFromTeam(Functions.getAppLang(getContext()), teamAId, teamBId, targetTeamId, playerId, "0", type);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

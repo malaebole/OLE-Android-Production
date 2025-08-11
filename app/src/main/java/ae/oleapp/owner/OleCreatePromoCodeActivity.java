@@ -217,7 +217,7 @@ public class OleCreatePromoCodeActivity extends BaseActivity implements View.OnC
             binding.etPerc.setText(olePromoCode.getDiscount());
         }
 
-        Glide.with(getContext()).load(olePromoCode.getPromoImage()).into(binding.imgVuBanner);
+        Glide.with(getApplicationContext()).load(olePromoCode.getPromoImage()).into(binding.imgVuBanner);
 
         playerList.clear();
         if (olePromoCode.getPlayerList() != null) {
@@ -335,7 +335,7 @@ public class OleCreatePromoCodeActivity extends BaseActivity implements View.OnC
                 Uri resultUri = result.getUri();
                 File file = new File(resultUri.getPath());
                 coverImage = file;
-                Glide.with(getContext()).load(file).into(binding.imgVuBanner);
+                Glide.with(getApplicationContext()).load(file).into(binding.imgVuBanner);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -583,7 +583,7 @@ public class OleCreatePromoCodeActivity extends BaseActivity implements View.OnC
     private void getAllFieldsAPI(boolean isLoader, String clubId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getAllFields(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -664,7 +664,7 @@ public class OleCreatePromoCodeActivity extends BaseActivity implements View.OnC
                 RequestBody.create(MediaType.parse("text/plain"), playerLimit),
                 RequestBody.create(MediaType.parse("text/plain"), pIds),
                 coverPart);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -726,7 +726,7 @@ public class OleCreatePromoCodeActivity extends BaseActivity implements View.OnC
                 RequestBody.create(MediaType.parse("text/plain"), playerLimit),
                 RequestBody.create(MediaType.parse("text/plain"), pIds),
                 coverPart);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -765,7 +765,7 @@ public class OleCreatePromoCodeActivity extends BaseActivity implements View.OnC
     private void deleteCouponAPI() {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteCoupon(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), "single", olePromoCode.getId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

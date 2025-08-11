@@ -190,12 +190,12 @@ public class OleClubListFragment extends BaseFragment implements View.OnClickLis
 
         UserInfo userInfo = Functions.getUserinfo(getContext());
         if (userInfo.getPhotoUrl().isEmpty()){
-            Glide.with(getContext())
+            Glide.with(requireActivity())
                     .load(R.drawable.partner_temp_img)
                     .apply(RequestOptions.circleCropTransform())
                     .into(binding.profileImgVu);
         }else{
-            Glide.with(getContext())
+            Glide.with(requireActivity())
                     .load(userInfo.getPhotoUrl())
                     .apply(RequestOptions.circleCropTransform())
                     .into(binding.profileImgVu);
@@ -476,7 +476,7 @@ public class OleClubListFragment extends BaseFragment implements View.OnClickLis
         Call<ResponseBody> call;
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         call = AppManager.getInstance().apiInterface.getMyClubs(Functions.getAppLang(getActivity()),Functions.getPrefValue(getContext(), Constants.kUserID), "");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

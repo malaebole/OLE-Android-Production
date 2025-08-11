@@ -742,7 +742,7 @@
                             android:layout_marginStart="@dimen/_20sdp"
                             android:background="@color/white"
                             android:translationZ="90dp"
-                            android:textColor="@color/transparent_black" />
+                            android:textColor="@color/mdtp_transparent_black" />
                         <RelativeLayout
                             android:id="@+id/et_msg_layout"
                             android:layout_width="match_parent"

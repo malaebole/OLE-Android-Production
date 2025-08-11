@@ -49,10 +49,9 @@ public class OleHomeResultAdapter extends RecyclerView.Adapter<OleHomeResultAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         Object object = list.get(position);
-        if (object instanceof OlePadelMatchResults) {
+        if (object instanceof OlePadelMatchResults results) {
             holder.footballVu.setVisibility(View.GONE);
             holder.padelVu.setVisibility(View.VISIBLE);
-            OlePadelMatchResults results = (OlePadelMatchResults) object;
             holder.tvPadelDate.setText(results.getMatchDate());
             holder.myProfileVu.populateData(results.getCreatedBy().getNickName(), results.getCreatedBy().getPhotoUrl(), results.getCreatedBy().getLevel(), true);
             holder.myPartnerProfileVu.populateData(results.getCreatorPartner().getNickName(), results.getCreatorPartner().getPhotoUrl(), results.getCreatorPartner().getLevel(), true);

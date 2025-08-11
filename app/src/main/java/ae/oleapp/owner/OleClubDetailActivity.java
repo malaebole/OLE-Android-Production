@@ -1,11 +1,11 @@
 package ae.oleapp.owner;
 
-import androidx.recyclerview.widget.GridLayoutManager;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.bumptech.glide.Glide;
 import com.denzcoskun.imageslider.constants.ScaleTypes;
@@ -14,7 +14,7 @@ import com.denzcoskun.imageslider.models.SlideModel;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
-import com.stfalcon.frescoimageviewer.ImageViewer;
+import com.stfalcon.imageviewer.StfalconImageViewer;
 
 import org.json.JSONObject;
 
@@ -26,11 +26,10 @@ import ae.oleapp.R;
 import ae.oleapp.adapters.OleClubDetailDayAdapter;
 import ae.oleapp.adapters.OleClubDetailFacAdapter;
 import ae.oleapp.base.BaseActivity;
-
 import ae.oleapp.databinding.OleactivityClubDetailBinding;
 import ae.oleapp.models.Club;
-import ae.oleapp.models.OleClubFacility;
 import ae.oleapp.models.Day;
+import ae.oleapp.models.OleClubFacility;
 import ae.oleapp.models.OleShiftTime;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
@@ -68,7 +67,7 @@ public class OleClubDetailActivity extends BaseActivity implements View.OnClickL
         dayAdapter.setOnItemClickListener(itemClickListener);
         binding.daysRecyclerVu.setAdapter(dayAdapter);
 
-        GridLayoutManager facLayoutManager  = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
+        GridLayoutManager facLayoutManager = new GridLayoutManager(getContext(), 2, GridLayoutManager.VERTICAL, false);
         binding.facRecyclerVu.setLayoutManager(facLayoutManager);
         facilityAdapter = new OleClubDetailFacAdapter(getContext(), clubFacilities);
         binding.facRecyclerVu.setAdapter(facilityAdapter);
@@ -98,15 +97,13 @@ public class OleClubDetailActivity extends BaseActivity implements View.OnClickL
             oleShiftTime = day.getShifting().get(1);
             binding.tvOpenTime2.setText(getString(R.string.open_place, oleShiftTime.getOpening()));
             binding.tvCloseTime2.setText(getString(R.string.close_place, oleShiftTime.getClosing()));
-        }
-        else if (day.getShifting().size() == 1) {
+        } else if (day.getShifting().size() == 1) {
             binding.vuShift1.setVisibility(View.VISIBLE);
             OleShiftTime oleShiftTime = day.getShifting().get(0);
             binding.tvOpenTime1.setText(getString(R.string.open_place, oleShiftTime.getOpening()));
             binding.tvCloseTime1.setText(getString(R.string.close_place, oleShiftTime.getClosing()));
             binding.vuShift2.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             binding.vuShift1.setVisibility(View.GONE);
             binding.vuShift2.setVisibility(View.GONE);
         }
@@ -122,8 +119,7 @@ public class OleClubDetailActivity extends BaseActivity implements View.OnClickL
     public void onClick(View v) {
         if (v == binding.bar.backBtn) {
             finish();
-        }
-        else if (v == binding.btnEdit) {
+        } else if (v == binding.btnEdit) {
             editClicked();
         }
     }
@@ -143,7 +139,7 @@ public class OleClubDetailActivity extends BaseActivity implements View.OnClickL
             setupSlider();
         }
         if (!club.getLogoPath().isEmpty()) {
-            Glide.with(getContext()).load(club.getLogoPath()).into(binding.imgVuLogo);
+            Glide.with(getApplicationContext()).load(club.getLogoPath()).into(binding.imgVuLogo);
         }
         binding.tvClubName.setText(club.getName());
         binding.tvLoc.setText(club.getCity().getName());
@@ -171,8 +167,7 @@ public class OleClubDetailActivity extends BaseActivity implements View.OnClickL
         dayAdapter.notifyDataSetChanged();
         if (club.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
             binding.tvType.setText(R.string.padel);
-        }
-        else {
+        } else {
             binding.tvType.setText(R.string.football);
         }
         clubFacilities.clear();
@@ -192,16 +187,45 @@ public class OleClubDetailActivity extends BaseActivity implements View.OnClickL
 
             @Override
             public void onItemSelected(int i) {
+//                String[] arr = new String[]{club.getCoverPath()};
+
                 String[] arr = new String[]{club.getCoverPath()};
-                new ImageViewer.Builder<>(getContext(), arr).setStartPosition(0).show();
+
+                new StfalconImageViewer.Builder<>(getContext(), arr, (imageView, imageUrl) -> {
+                    // Use Glide to load the image from the URL
+                    Glide.with(getApplicationContext())
+                            .load(imageUrl)
+                            .into(imageView);
+                }).withStartPosition(0).show();
+
+//                new ImageViewer.Builder<>(getContext(), arr).setStartPosition(0).show();
             }
         });
     }
 
+
+//    private void setupSlider() {
+//        List<SlideModel> imageList = new ArrayList<>();
+//        imageList.add(new SlideModel(club.getCoverPath(), ScaleTypes.FIT));
+//        binding.slider.setImageList(imageList, ScaleTypes.FIT);
+//        binding.slider.setItemClickListener(new ItemClickListener() {
+//            @Override
+//            public void doubleClick(int i) {
+//
+//            }
+//
+//            @Override
+//            public void onItemSelected(int i) {
+//                String[] arr = new String[]{club.getCoverPath()};
+//                new ImageViewer.Builder<>(getContext(), arr).setStartPosition(0).show();
+//            }
+//        });
+//    }
+
     private void getClubAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClub(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -213,26 +237,24 @@ public class OleClubDetailActivity extends BaseActivity implements View.OnClickL
                             Gson gson = new Gson();
                             club = gson.fromJson(obj.toString(), Club.class);
                             populateData();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }

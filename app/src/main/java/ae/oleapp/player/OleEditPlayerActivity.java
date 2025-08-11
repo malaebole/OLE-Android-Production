@@ -134,8 +134,8 @@ public class OleEditPlayerActivity extends BaseActivity implements View.OnClickL
         @Override
         public void itemClicked(View view, int pos) {
             Shirt shirt = shirtList.get(pos);
-            Glide.with(getContext()).load(shirt.getPhotoUrl()).into(binding.shirtImgVu);
-            //Glide.with(getContext()).load(shirt.getPhotoUrl()).into(binding.shirtImgVu);
+            Glide.with(getApplicationContext()).load(shirt.getPhotoUrl()).into(binding.shirtImgVu);
+            //Glide.with(getApplicationContext()).load(shirt.getPhotoUrl()).into(binding.shirtImgVu);
             selectedShirtId = shirt.getId();
             shirtAdapter.setSelectedId(selectedShirtId);
         }
@@ -400,8 +400,8 @@ private void pickImage() {
             return;
         }
         //Glide.with(this).load(userInfo.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.imgVu);
-        Glide.with(getContext()).load(userInfo.getEmojiUrl()).into(binding.emojiImgVu);
-        Glide.with(getContext()).load(userInfo.getBibUrl()).into(binding.shirtImgVu);
+        Glide.with(getApplicationContext()).load(userInfo.getEmojiUrl()).into(binding.emojiImgVu);
+        Glide.with(getApplicationContext()).load(userInfo.getBibUrl()).into(binding.shirtImgVu);
         binding.etFName.setText(userInfo.getFirstName());
         binding.etLName.setText(userInfo.getLastName());
         binding.etEmail.setText(userInfo.getEmail());
@@ -455,7 +455,7 @@ private void pickImage() {
 //            if (resultCode == RESULT_OK) {
 //                Uri resultUri = result.getUri();
 //                File file = new File(resultUri.getPath());
-//                //Glide.with(getContext()).load(file).into(binding.imgVu);
+//                //Glide.with(getApplicationContext()).load(file).into(binding.imgVu);
 //                //updatePhotoAPI(true, file);
 //            } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
 //                Exception error = result.getError();
@@ -533,7 +533,7 @@ private void pickImage() {
         RequestBody fileReqBody = RequestBody.create(MediaType.parse("image/*"), file);
         MultipartBody.Part part = MultipartBody.Part.createFormData("photo", file.getName(), fileReqBody);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateProfilePhoto(part, RequestBody.create(MediaType.parse("multipart/form-data"), Functions.getAppLang(getContext())), RequestBody.create(MediaType.parse("multipart/form-data"), Functions.getPrefValue(getContext(), Constants.kUserID)));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -543,7 +543,7 @@ private void pickImage() {
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             String url = object.getJSONObject(Constants.kData).getString("photo_url");
-                            Glide.with(getContext()).load(url).into(binding.emojiImgVu);
+                            Glide.with(getApplicationContext()).load(url).into(binding.emojiImgVu);
                             UserInfo userInfo = Functions.getUserinfo(getContext());
                             userInfo.setEmojiUrl(url);
                             Functions.saveUserinfo(getContext(), userInfo);
@@ -577,7 +577,7 @@ private void pickImage() {
         RequestBody fileReqBody = RequestBody.create(file, MediaType.parse("image/*"));
         MultipartBody.Part part = MultipartBody.Part.createFormData("file", file.getName(), fileReqBody);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface2.cutFace("https://www.cutout.pro/api/v1/matting?mattingType=3", part, RequestBody.create("true", MediaType.parse("multipart/form-data")), RequestBody.create("true", MediaType.parse("multipart/form-data")));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -587,7 +587,7 @@ private void pickImage() {
                         Bitmap bmp = BitmapFactory.decodeStream(new BufferedInputStream(inputStream));
                         photoFilePath = ((BaseActivity)getContext()).saveBitmap(bmp);
                         File file = new File(photoFilePath);
-                        Glide.with(getContext()).load(file).into(binding.emojiImgVu);
+                        Glide.with(getApplicationContext()).load(file).into(binding.emojiImgVu);
                         updatePhotoAPI(true,file);
 
                     } catch (Exception e) {
@@ -615,7 +615,7 @@ private void pickImage() {
 //    private void deletePhotoAPI(boolean isLoader) {
 //        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
 //        Call<ResponseBody> call = AppManager.getInstance().apiInterface.deletePhoto(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-//        call.enqueue(new Callback<ResponseBody>() {
+//        call.enqueue(new Callback<>() {
 //            @Override
 //            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 //                Functions.hideLoader(hud);
@@ -656,7 +656,7 @@ private void pickImage() {
     private void deletePhotoAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removePhoto(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), userInfo.getFriendShipId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -665,7 +665,7 @@ private void pickImage() {
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
-                            Glide.with(getContext()).load("").into(binding.emojiImgVu);
+                            Glide.with(getApplicationContext()).load("").into(binding.emojiImgVu);
                             userInfo = Functions.getUserinfo(getContext());
                             userInfo.setEmojiUrl("");
                             Functions.saveUserinfo(getContext(), userInfo);
@@ -700,7 +700,7 @@ private void pickImage() {
     private void getProfileAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID),"", Functions.getPrefValue(getContext(),Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -776,7 +776,7 @@ private void pickImage() {
         }
 
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateUser(Functions.getAppLang(getContext()), dynamicParams);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

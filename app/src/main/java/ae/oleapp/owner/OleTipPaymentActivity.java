@@ -121,7 +121,7 @@ public class OleTipPaymentActivity extends BaseActivity implements View.OnClickL
     private void getTipPaymentsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getEmployeeTipPayment(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), empId, fromDate, toDate);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -170,7 +170,7 @@ public class OleTipPaymentActivity extends BaseActivity implements View.OnClickL
     private void payTipPaymentsAPI(boolean isLoader, String amount) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.employeeTipPayment(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), empId, amount);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

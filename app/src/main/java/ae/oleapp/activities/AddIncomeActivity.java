@@ -223,7 +223,7 @@ public class AddIncomeActivity extends BaseActivity implements View.OnClickListe
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClubBanksList(Functions.getAppLang(getContext()), club_id,"");
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     binding.loader.setVisibility(View.GONE);
@@ -291,7 +291,7 @@ public class AddIncomeActivity extends BaseActivity implements View.OnClickListe
                 //file = new File(resultUri.getPath());
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.invoiceImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -345,7 +345,7 @@ public class AddIncomeActivity extends BaseActivity implements View.OnClickListe
                     RequestBody.create(MediaType.parse("multipart/form-data"),date),
                     RequestBody.create(MediaType.parse("multipart/form-data"),IncomeType),
                     RequestBody.create(MediaType.parse("multipart/form-data"),note));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -402,7 +402,7 @@ public class AddIncomeActivity extends BaseActivity implements View.OnClickListe
                     RequestBody.create(MediaType.parse("multipart/form-data"),date),
                     RequestBody.create(MediaType.parse("multipart/form-data"),IncomeType),
                     RequestBody.create(MediaType.parse("multipart/form-data"),note));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -441,7 +441,7 @@ public class AddIncomeActivity extends BaseActivity implements View.OnClickListe
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.incomeDetails(Functions.getAppLang(getContext()), income_id);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -506,9 +506,9 @@ public class AddIncomeActivity extends BaseActivity implements View.OnClickListe
 
             //binding.dateLayout.setVisibility(View.GONE);
             if (!incomeDetailsModel.getReceipt().isEmpty()){
-                Glide.with(getContext()).load(incomeDetailsModel.getReceipt()).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(incomeDetailsModel.getReceipt()).into(binding.invoiceImgVu);
             }else{
-                Glide.with(getContext()).load(R.drawable.attachment_img).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(R.drawable.attachment_img).into(binding.invoiceImgVu);
             }
 
         }

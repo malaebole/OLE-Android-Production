@@ -182,7 +182,7 @@ public class OleCreateTeamActivity extends BaseActivity implements View.OnClickL
     private void createTeamAPI(String teamAName, String teamBName) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.createTeam(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, teamAName, teamAColor, teamBName, teamBColor, "friendly_game");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -225,7 +225,7 @@ public class OleCreateTeamActivity extends BaseActivity implements View.OnClickL
     private void updateTeamAPI(String teamAId, String teamBId, String teamAName, String teamBName) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateTeam(Functions.getAppLang(getContext()), teamAId, teamBId, teamAName, teamAColor, teamBName, teamBColor);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

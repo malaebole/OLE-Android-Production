@@ -176,8 +176,8 @@ public class BaseTabActivity extends BaseActivity {
             signInVu.setVisibility(View.GONE);
             signOutVu.setVisibility(View.VISIBLE);
             deleteUserAccount.setVisibility(View.VISIBLE);
-                Glide.with(getContext()).load(info.getBibUrl()).placeholder(R.drawable.bibl).into(shirtImgVu);  //(ImageView) menuVu.findViewById(R.id.shirt_img_vu));
-                Glide.with(getContext()).load(info.getEmojiUrl()).into(emojiImgVu);
+                Glide.with(getApplicationContext()).load(info.getBibUrl()).placeholder(R.drawable.bibl).into(shirtImgVu);  //(ImageView) menuVu.findViewById(R.id.shirt_img_vu));
+                Glide.with(getApplicationContext()).load(info.getEmojiUrl()).into(emojiImgVu);
         }
         else {
             signInVu.setVisibility(View.VISIBLE);
@@ -396,7 +396,7 @@ public class BaseTabActivity extends BaseActivity {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         String uniqueID = Functions.getPrefValue(this, Constants.kDeviceUniqueId);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.logout(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), uniqueID);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -459,7 +459,7 @@ public class BaseTabActivity extends BaseActivity {
     private void disableUserAccountApi() {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.disableUserAccountApi(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

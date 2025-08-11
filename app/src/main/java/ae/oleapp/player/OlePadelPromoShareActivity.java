@@ -74,7 +74,7 @@ public class OlePadelPromoShareActivity extends BaseActivity implements View.OnC
         }
         else {
             binding.imgVuBanner.setVisibility(View.VISIBLE);
-            Glide.with(getContext()).load(olePromoCode.getPromoImage()).into(binding.imgVuBanner);
+            Glide.with(getApplicationContext()).load(olePromoCode.getPromoImage()).into(binding.imgVuBanner);
         }
         binding.tvDate.setText(getResources().getString(R.string.valid_till_place, olePromoCode.getExpiry()));
     }

@@ -168,7 +168,7 @@ public class RecoverPassActivity extends BaseActivity implements View.OnClickLis
     private void resendCodeAPI() {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.resetPass(Functions.getAppLang(getContext()), username);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -209,7 +209,7 @@ public class RecoverPassActivity extends BaseActivity implements View.OnClickLis
     private void recoverPassAPI(String code, String pass) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.recoverPass(Functions.getAppLang(getContext()), code, pass);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

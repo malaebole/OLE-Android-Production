@@ -158,7 +158,7 @@ public class VerifyPhoneActivity extends BaseActivity implements View.OnClickLis
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.resendCodeV2(Functions.getAppLang(getContext()), userId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -200,7 +200,7 @@ public class VerifyPhoneActivity extends BaseActivity implements View.OnClickLis
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.verifyCodeV2(Functions.getAppLang(getContext()), userId, code);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

@@ -365,7 +365,7 @@ public class CheckoutActivity extends BaseActivity implements View.OnClickListen
     private void getCartAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getCart(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -412,7 +412,7 @@ public class CheckoutActivity extends BaseActivity implements View.OnClickListen
     private void getShippingFeeAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getShippingFee(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), oleShopAddress.getCityId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -463,7 +463,7 @@ public class CheckoutActivity extends BaseActivity implements View.OnClickListen
     private void getCouponDiscountAPI(boolean isLoader, String code) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getCouponDis(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), code);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -508,7 +508,7 @@ public class CheckoutActivity extends BaseActivity implements View.OnClickListen
     private void placeOrderAPI(boolean isLoader, double price, double shipFee, double cod, String paymentMethod, String orderRef, String couponCode, double couponDiscount, String walletPaid, String cardPaid) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.placeOrder(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), oleShopAddress.getId(), price, shipFee, cod, paymentMethod, orderRef, couponCode, couponDiscount, walletPaid, cardPaid, Functions.getIPAddress());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

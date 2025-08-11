@@ -247,7 +247,7 @@ public class ShareFieldActivity extends BaseActivity implements View.OnClickList
     private void shareGameCount(boolean isLoader, String gameId, String type) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.shareGameCount(gameId,type);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -793,8 +793,7 @@ public class ShareFieldActivity extends BaseActivity implements View.OnClickList
     private PreviewFieldView checkTeamAGkExist() {
         PreviewFieldView view = null;
         for (int i = 0; i < binding.vuTeamA.getChildCount(); i++) {
-            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView) {
-                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamA.getChildAt(i);
+            if (binding.vuTeamA.getChildAt(i) instanceof PreviewFieldView vu) {
                 if (vu.getPlayerInfo().getIsGoalkeeper() != null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                     view = vu;
                     break;
@@ -807,8 +806,7 @@ public class ShareFieldActivity extends BaseActivity implements View.OnClickList
     private PreviewFieldView checkTeamBGkExist() {
         PreviewFieldView view = null;
         for (int i = 0; i < binding.vuTeamB.getChildCount(); i++) {
-            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView) {
-                PreviewFieldView vu = (PreviewFieldView) binding.vuTeamB.getChildAt(i);
+            if (binding.vuTeamB.getChildAt(i) instanceof PreviewFieldView vu) {
                 if (vu.getPlayerInfo().getIsGoalkeeper() != null && vu.getPlayerInfo().getIsGoalkeeper().equalsIgnoreCase("1")) {
                     view = vu;
                     break;
@@ -920,7 +918,7 @@ public class ShareFieldActivity extends BaseActivity implements View.OnClickList
     private void getTeams(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getFormationDetails(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), gameId, teamAId, teamAStatus, teamBId, teamBStatus);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -934,9 +932,9 @@ public class ShareFieldActivity extends BaseActivity implements View.OnClickList
                             binding.fullTeamAVu.removeAllViews();
                             binding.fullTeamBVu.removeAllViews();
                             populateTeamData();
-                            Glide.with(getContext()).load(object.getJSONObject(Constants.kData).getString("bg_image")).into(binding.fieldBgImgVu);
-                            Glide.with(getContext()).load(object.getJSONObject(Constants.kData).getString("field_image")).into(binding.fieldImgVu);
-                            Glide.with(getContext()).load(object.getJSONObject(Constants.kData).getString("share_image")).into(binding.finalshare);
+                            Glide.with(getApplicationContext()).load(object.getJSONObject(Constants.kData).getString("bg_image")).into(binding.fieldBgImgVu);
+                            Glide.with(getApplicationContext()).load(object.getJSONObject(Constants.kData).getString("field_image")).into(binding.fieldImgVu);
+                            Glide.with(getApplicationContext()).load(object.getJSONObject(Constants.kData).getString("share_image")).into(binding.finalshare);
 
                         } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);

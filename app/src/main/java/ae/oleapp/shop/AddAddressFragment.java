@@ -217,7 +217,7 @@ public class AddAddressFragment extends DialogFragment implements View.OnClickLi
     private void addAddressAPI(boolean isLoader, String name, String phone, String address, String city, String area, String number, String note) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addAddress(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), name, phone, lat, lng, address, city, area, number, isHome, note);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -257,7 +257,7 @@ public class AddAddressFragment extends DialogFragment implements View.OnClickLi
     private void updateAddressAPI(boolean isLoader, String name, String phone, String address, String city, String area, String number, String note, String addressId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateAddress(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), addressId, name, phone, address, city, area, number, isHome, note);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

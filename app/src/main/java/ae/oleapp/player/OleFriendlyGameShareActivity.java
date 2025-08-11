@@ -66,7 +66,7 @@ public class OleFriendlyGameShareActivity extends BaseActivity implements View.O
     }
 
     private void populateData() {
-        Glide.with(getContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1ImgVu);
+        Glide.with(getApplicationContext()).load(playerOne.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.p1ImgVu);
         binding.tvP1Name.setText(String.format(" %s ", playerOne.getNickName()));
         binding.tvClubName.setText(clubName);
         binding.tvTime.setText(time);

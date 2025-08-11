@@ -48,6 +48,7 @@ import kotlin.text.Regex;
 import static android.content.Context.MODE_PRIVATE;
 
 import androidx.annotation.RequiresApi;
+import androidx.core.content.ContextCompat;
 
 public class Functions {
 
@@ -179,7 +180,7 @@ public class Functions {
         return KProgressHUD.create(context)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setCancellable(false)
-                .setBackgroundColor(context.getResources().getColor(R.color.blueColorNew))
+//                .setBackgroundColor(context.getResources().getColor(R.color.blueColorNew))
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
                 .show();
@@ -198,7 +199,7 @@ public class Functions {
         return KProgressHUD.create(context)
                 .setStyle(KProgressHUD.Style.SPIN_INDETERMINATE)
                 .setCancellable(false)
-                .setBackgroundColor(Color.parseColor("#18707B"))
+//                .setBackgroundColor(Color.parseColor("#18707B"))
                 .setAnimationSpeed(2)
                 .setDimAmount(0.5f)
                 .show();

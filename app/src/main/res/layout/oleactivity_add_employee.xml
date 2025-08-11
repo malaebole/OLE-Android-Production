@@ -303,7 +303,7 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:hintTextAppearance="@style/TextInputLayout.HintText"
                     android:layout_marginTop="@dimen/_5sdp"
-                    app:endIconDrawable="@drawable/ic_arrow_folding"
+                    app:endIconDrawable="@drawable/ccp_ic_arrow_drop_down"
                     app:endIconMode="custom">
 
                     <com.google.android.material.textfield.TextInputEditText

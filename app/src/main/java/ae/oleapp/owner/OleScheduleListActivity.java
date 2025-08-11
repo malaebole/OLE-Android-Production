@@ -146,7 +146,7 @@ public class OleScheduleListActivity extends BaseActivity {
     private void getScheduleListAPI(boolean isLoader, String clubId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getScheduleList(Functions.getAppLang(getContext()), clubId, Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -193,7 +193,7 @@ public class OleScheduleListActivity extends BaseActivity {
     private void deleteScheduleAPI(boolean isLoader, String ids, int pos) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteSchedule(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), ids);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

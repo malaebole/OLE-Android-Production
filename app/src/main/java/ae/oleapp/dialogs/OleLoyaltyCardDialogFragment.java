@@ -109,8 +109,8 @@ public class OleLoyaltyCardDialogFragment extends DialogFragment implements View
 
         binding.tvClub.setText(club.getName());
         binding.tvLoc.setText(club.getCity().getName());
-        Glide.with(getContext()).load(club.getLogoPath()).into(binding.logoVu);
-        Glide.with(getContext()).load(club.getCoverPath()).into(binding.clubBanner);
+        Glide.with(requireActivity()).load(club.getLogoPath()).into(binding.logoVu);
+        Glide.with(requireActivity()).load(club.getCoverPath()).into(binding.clubBanner);
 
         binding.btnBook.setOnClickListener(this);
         binding.btnClose.setOnClickListener(this);
@@ -137,7 +137,7 @@ public class OleLoyaltyCardDialogFragment extends DialogFragment implements View
     private void dismissAPI(boolean isLoader, boolean isDismiss) {
             KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.dismissLoyaltyPopup(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), popupId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

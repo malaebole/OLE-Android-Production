@@ -284,7 +284,7 @@ public class OleCreateDiscountCardActivity extends BaseActivity implements View.
     private void addDiscountCardAPI(String title, String from, String to, String bookingReq, String value, String type) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addDiscountCard(Functions.getAppLang(getContext()), title, Functions.getPrefValue(getContext(), Constants.kUserID), clubId, bookingReq, type, value, from, to);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -323,7 +323,7 @@ public class OleCreateDiscountCardActivity extends BaseActivity implements View.
     private void updateDiscountCardAPI(String title, String from, String to, String bookingReq, String value, String type) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updateDiscountCard(Functions.getAppLang(getContext()), title, Functions.getPrefValue(getContext(), Constants.kUserID), clubId, bookingReq, type, value, from, to, oleDiscountCard.getId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -362,7 +362,7 @@ public class OleCreateDiscountCardActivity extends BaseActivity implements View.
     private void deleteDiscountCardAPI() {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteDiscountCard(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), oleDiscountCard.getId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

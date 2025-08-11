@@ -118,19 +118,24 @@
                     android:gravity="center_vertical"
                     android:orientation="horizontal">
 
-                    <com.hedgehog.ratingbar.RatingBar
+                    <com.willy.ratingbar.ScaleRatingBar
                         android:id="@+id/rating_bar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        app:clickable="false"
-                        app:halfstart="true"
-                        app:starCount="5"
-                        app:starEmpty="@drawable/empty_star"
-                        app:starFill="@drawable/full_star"
-                        app:starHalf="@drawable/half_star"
-                        app:starImageHeight="@dimen/_25sdp"
-                        app:starImageWidth="@dimen/_25sdp" />
+                        app:srb_numStars="5"
+                        app:srb_minimumStars="1"
+                        app:srb_rating="0"
+                        app:srb_starWidth="@dimen/_20sdp"
+                        app:srb_starHeight="@dimen/_20sdp"
+                        app:srb_starPadding="5dp"
+                        app:srb_stepSize="1"
+                        app:srb_isIndicator="false"
+                        app:srb_clickable="true"
+                        app:srb_scrollable="true"
+                        app:srb_clearRatingEnabled="true"
+                        app:srb_drawableEmpty="@drawable/empty_starl"
+                        app:srb_drawableFilled="@drawable/full_starl" />
 
                     <LinearLayout
                         android:layout_width="wrap_content"

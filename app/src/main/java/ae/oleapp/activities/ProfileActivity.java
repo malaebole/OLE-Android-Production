@@ -229,8 +229,8 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     }
 
     private void populateData() {
-        Glide.with(getContext()).load(playerInfo.getEmojiUrl()).into(binding.emojiImgVu);
-        Glide.with(getContext()).load(playerInfo.getBibUrl()).into(binding.shirtImgVu);
+        Glide.with(getApplicationContext()).load(playerInfo.getEmojiUrl()).into(binding.emojiImgVu);
+        Glide.with(getApplicationContext()).load(playerInfo.getBibUrl()).into(binding.shirtImgVu);
         binding.tvName.setText(playerInfo.getNickName());
         binding.tvLost.setText(playerInfo.getMatchLoss());
         binding.tvWin.setText(playerInfo.getMatchWon());
@@ -421,7 +421,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private void getProfileAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(getContext()), playerId,friendShipId, Functions.getPrefValue(getContext(),Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -466,7 +466,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private void addOtherFriendsToMyList(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addOtherFriendsToMyList(Functions.getAppLang(getContext()),  Functions.getPrefValue(getContext(), Constants.kUserID), playerId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -507,7 +507,7 @@ public class ProfileActivity extends BaseActivity implements View.OnClickListene
     private void deletePlayerAPI(boolean isLoader, String id, String friendShipId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deletePlayer(Functions.getAppLang(getContext()),  Functions.getPrefValue(getContext(), Constants.kUserID), id, friendShipId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

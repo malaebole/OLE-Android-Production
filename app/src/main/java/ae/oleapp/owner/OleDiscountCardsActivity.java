@@ -184,7 +184,7 @@ public class OleDiscountCardsActivity extends BaseActivity implements View.OnCli
     private void getDiscountCardsAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getDiscountCards(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, filter);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -251,7 +251,7 @@ public class OleDiscountCardsActivity extends BaseActivity implements View.OnCli
     private void deleteDiscountCardAPI(String discountCardId, int pos) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteDiscountCard(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), discountCardId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

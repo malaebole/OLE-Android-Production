@@ -1,18 +1,5 @@
 package ae.oleapp.base;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.IntentSenderRequest;
-import androidx.activity.result.contract.ActivityResultContracts;
-import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.DialogFragment;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.localbroadcastmanager.content.LocalBroadcastManager;
-
 import android.app.Activity;
 import android.content.BroadcastReceiver;
 import android.content.ContentResolver;
@@ -38,9 +25,26 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.IntentSenderRequest;
+import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
+import androidx.fragment.app.DialogFragment;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import com.baoyz.actionsheet.ActionSheet;
 import com.google.android.gms.tasks.Task;
@@ -56,30 +60,22 @@ import com.shashank.sony.fancytoastlib.FancyToast;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.io.FileDescriptor;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.net.UnknownHostException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import java.util.Random;
 
 import ae.oleapp.BuildConfig;
-import ae.oleapp.MyApp;
 import ae.oleapp.R;
-import ae.oleapp.activities.OleUpdateAppActivity;
-import ae.oleapp.activities.SliderAdapter;
 import ae.oleapp.dialogs.OleDateRangeFilterDialogFragment;
 import ae.oleapp.dialogs.OleLevelCompleteDialogFragment;
 import ae.oleapp.dialogs.OleLoyaltyCardDialogFragment;
@@ -100,21 +96,10 @@ import ae.oleapp.models.OlePadelMatchResults;
 import ae.oleapp.models.OlePlayerLevel;
 import ae.oleapp.models.Shirt;
 import ae.oleapp.player.OleEmployeeRateActivity;
-import ae.oleapp.socket.SocketManager;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
 import ae.oleapp.util.OleInAppReviewManager;
-import ae.oleapp.zegocloudexpress.AppCenter;
-import ae.oleapp.zegocloudexpress.ExpressManager;
-import ae.oleapp.zegocloudexpress.ZegoDeviceUpdateType;
-import ae.oleapp.zegocloudexpress.ZegoMediaOptions;
-import im.zego.zegoexpress.callback.IZegoRoomLoginCallback;
-import im.zego.zegoexpress.constants.ZegoUpdateType;
-import im.zego.zegoexpress.entity.ZegoUser;
-import io.socket.client.IO;
-import io.socket.client.Socket;
-import io.socket.emitter.Emitter;
 import okhttp3.ResponseBody;
 import payment.sdk.android.PaymentClient;
 import payment.sdk.android.cardpayment.CardPaymentData;
@@ -136,33 +121,30 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         Functions.changeLanguage(this, Functions.getPrefValue(this, Constants.kAppLang));
-
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
-        }
-
-        // Show a dialog if meets conditions
+//        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         OleInAppReviewManager.showRateDialogIfMeetsConditions(this);
-        //socket = SocketManager.getInstance().getSocket();
 
         activityResultLauncher = registerForActivityResult(
                 new ActivityResultContracts.StartIntentSenderForResult(),
-                new ActivityResultCallback<ActivityResult>() {
-                    @Override
-                    public void onActivityResult(ActivityResult result) {
-                        // Handle the result
-                        if (result.getResultCode() != RESULT_OK) {
-                            // Handle failure
-                            Functions.showToast(getContext(), getString(R.string.major_changes_in_app), FancyToast.ERROR);
-                            inAppUpdates();
-                        }
+                result -> {
+                    if (result.getResultCode() != RESULT_OK) {
+                        Functions.showToast(getContext(), getString(R.string.major_changes_in_app), FancyToast.ERROR);
+                        inAppUpdates();
                     }
                 });
     }
 
-    public void inAppUpdates(){
+    protected void applyEdgeToEdge(View rootView) {
+        ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom);
+            return WindowInsetsCompat.CONSUMED;
+        });
+    }
+
+    public void inAppUpdates() {
         appUpdateManager = AppUpdateManagerFactory.create(this);
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
 
@@ -206,7 +188,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void hideKeyboard() {
         try {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(), 0);
         } catch (Exception e) {
             // TODO: handle exception
@@ -252,7 +234,6 @@ public class BaseActivity extends AppCompatActivity {
         RatingPagerDialogFragment dialogFragment = new RatingPagerDialogFragment(gameId);
         dialogFragment.show(fragmentTransaction, "RatingPagerDialogFragment");
     }
-
 
 
     protected void showBestPlayerDialog(String gameId) {
@@ -348,6 +329,7 @@ public class BaseActivity extends AppCompatActivity {
         }
 
     }
+
     public void showDateRangeFilter(String fromDate, String toDate, OleDateRangeFilterDialogFragment.DateRangeFilterDialogFragmentCallback callback) {
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         Fragment fragment = getSupportFragmentManager().findFragmentByTag("EmpReviewFilterDialogFragment");
@@ -367,14 +349,15 @@ public class BaseActivity extends AppCompatActivity {
         rateIntent.putExtra("is_rated", isRated);
         startActivity(rateIntent);
     }
+
     protected int getRandomX(int viewWidth, float subVuW) {
         Random random = new Random();
-        return random.nextInt(viewWidth-(int)subVuW);
+        return random.nextInt(viewWidth - (int) subVuW);
     }
 
     protected int getRandomY(int viewHeight, float subVuH) {
         Random random = new Random();
-        return random.nextInt(viewHeight-(int)subVuH);
+        return random.nextInt(viewHeight - (int) subVuH);
     }
 
     public int getScreenWidth() {
@@ -388,14 +371,13 @@ public class BaseActivity extends AppCompatActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         return displayMetrics.heightPixels;
     }
+
     protected void setBackground(ImageView imageView) {
         if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kRefereeType)) {
             imageView.setImageResource(R.drawable.referee_bg);
-        }
-        else if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
+        } else if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
             imageView.setImageResource(R.drawable.owner_bg);
-        }
-        else {
+        } else {
             imageView.setImageResource(R.drawable.player_bg);
         }
     }
@@ -417,16 +399,16 @@ public class BaseActivity extends AppCompatActivity {
         window.setAttributes(winParams);
         window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
     }
+
     private Bitmap getBitmap(Drawable drawable) {
         Bitmap bitmap;
-        if (drawable instanceof BitmapDrawable) {
-            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
-            if(bitmapDrawable.getBitmap() != null) {
+        if (drawable instanceof BitmapDrawable bitmapDrawable) {
+            if (bitmapDrawable.getBitmap() != null) {
                 return bitmapDrawable.getBitmap();
             }
         }
 
-        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+        if (drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
             bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
         } else {
             bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
@@ -437,16 +419,16 @@ public class BaseActivity extends AppCompatActivity {
         drawable.draw(canvas);
         return bitmap;
     }
+
     protected Bitmap getBitmapFromView(View view, Drawable drawable) {
         //Define a bitmap with the same size as the view
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
         //Bind a canvas to it
         Canvas canvas = new Canvas(returnedBitmap);
         if (drawable != null) {
             Bitmap bitmap = getBitmap(drawable);
             canvas.drawBitmap(bitmap, canvas.getWidth() - bitmap.getWidth(), canvas.getHeight() - bitmap.getHeight(), new Paint());
-        }
-        else {
+        } else {
             canvas.drawColor(Color.WHITE);
         }
         // draw the view on the canvas
@@ -454,17 +436,18 @@ public class BaseActivity extends AppCompatActivity {
         //return the bitmap
         return returnedBitmap;
     }
+
     protected Bitmap getBitmapFromView(View view) {
         //Define a bitmap with the same size as the view
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
+        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(), Bitmap.Config.ARGB_8888);
         //Bind a canvas to it
         Canvas canvas = new Canvas(returnedBitmap);
         //Get the view's background
-        Drawable bgDrawable =view.getBackground();
-        if (bgDrawable!=null) {
+        Drawable bgDrawable = view.getBackground();
+        if (bgDrawable != null) {
             //has background drawable, then draw it on the canvas
             bgDrawable.draw(canvas);
-        }   else{
+        } else {
             //does not have background drawable, then draw white background on the canvas
             canvas.drawColor(Color.WHITE);
         }
@@ -505,8 +488,7 @@ public class BaseActivity extends AppCompatActivity {
             }
 
             return uri;
-        }
-        catch (IOException e) {
+        } catch (IOException e) {
 
             if (uri != null) {
                 // Don't leave an orphan entry in the MediaStore
@@ -516,6 +498,7 @@ public class BaseActivity extends AppCompatActivity {
             throw e;
         }
     }
+
     public String saveBitmap(Bitmap bitmap) {
         File mediaStorageDir = getCacheDir();
         File myFilePath = new File(mediaStorageDir.getAbsolutePath() + "/camera");
@@ -542,7 +525,7 @@ public class BaseActivity extends AppCompatActivity {
     public void makeCall(String phone) {
         ActionSheet.createBuilder(getContext(), getSupportFragmentManager())
                 .setCancelButtonTitle("Cancel")
-                .setOtherButtonTitles("Call "+phone)
+                .setOtherButtonTitles("Call " + phone)
                 .setCancelableOnTouchOutside(true)
                 .setListener(new ActionSheet.ActionSheetListener() {
                     @Override
@@ -626,7 +609,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void getCountriesAPI(CountriesCallback callback) {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getCountries(Functions.getAppLang(getContext()));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 List<OleCountry> countries = new ArrayList<>();
@@ -636,7 +619,7 @@ public class BaseActivity extends AppCompatActivity {
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             JSONArray arr = object.getJSONArray(Constants.kData);
                             Gson gson = new Gson();
-                            for (int i=0; i<arr.length();i++) {
+                            for (int i = 0; i < arr.length(); i++) {
                                 OleCountry oleCountry = gson.fromJson(arr.get(i).toString(), OleCountry.class);
                                 countries.add(oleCountry);
                             }
@@ -654,9 +637,10 @@ public class BaseActivity extends AppCompatActivity {
             }
         });
     }
+
     public void getBibsAPI(BibsCallback callback) {
         Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getBibs();
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 List<Shirt> shirts = new ArrayList<>();
@@ -666,7 +650,7 @@ public class BaseActivity extends AppCompatActivity {
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             JSONArray arr = object.getJSONArray(Constants.kData);
                             Gson gson = new Gson();
-                            for (int i=0; i<arr.length();i++) {
+                            for (int i = 0; i < arr.length(); i++) {
                                 Shirt shirt = gson.fromJson(arr.get(i).toString(), Shirt.class);
                                 shirts.add(shirt);
                             }
@@ -689,7 +673,7 @@ public class BaseActivity extends AppCompatActivity {
     public void gameAvailRequestAPI(String bookingId) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.gameAvailabilityRequest(Functions.getAppLang(getContext()), bookingId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -698,16 +682,14 @@ public class BaseActivity extends AppCompatActivity {
                         JSONObject object = new JSONObject(response.body().string());
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -717,8 +699,7 @@ public class BaseActivity extends AppCompatActivity {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -727,7 +708,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void getFieldDataAPI(FieldDataCallback callback) {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getFieldData(Functions.getAppLang(getContext()));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 OleFieldData oleFieldData = null;
@@ -755,7 +736,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void getWalletDataAPI(String clubId, WalletDataCallback callback) {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClubPaymentMethod(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, Functions.getPrefValue(getContext(), Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 String value = "", paymentMethod = "", currency = "", shopPaymentMethod = "";
@@ -788,7 +769,7 @@ public class BaseActivity extends AppCompatActivity {
 
     public void addRemoveFavAPI(String clubId, String status, String type, String module, FavCallback callback) {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addRemoveFav(Functions.getAppLang(this), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, status, type, module);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Boolean success = false;
@@ -816,8 +797,8 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void addToWishlistAPI(String prodId, FavCallback callback) {
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.addWishlist(Functions.getAppLang(this),Functions.getPrefValue(getContext(), Constants.kUserID), prodId);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.addWishlist(Functions.getAppLang(this), Functions.getPrefValue(getContext(), Constants.kUserID), prodId);
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Boolean success = false;
@@ -845,8 +826,8 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     public void removeFromWishlistAPI(String prodId, FavCallback callback) {
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.removeWishlist(Functions.getAppLang(this),Functions.getPrefValue(getContext(), Constants.kUserID), prodId);
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.removeWishlist(Functions.getAppLang(this), Functions.getPrefValue(getContext(), Constants.kUserID), prodId);
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Boolean success = false;
@@ -879,7 +860,7 @@ public class BaseActivity extends AppCompatActivity {
         //yeh server py unique id bhej rhi haii
         Log.d("uniqueIDDDDDDD", uniqueID);
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendFcmToken(Functions.getAppLang(getContext()), userId, uniqueID, "android", token, BuildConfig.VERSION_NAME);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -903,8 +884,8 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void sendAppLangApi() {
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendAppLang(userId,Functions.getAppLang(getContext()));
-        call.enqueue(new Callback<ResponseBody>() {
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendAppLang(userId, Functions.getAppLang(getContext()));
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 if (response.body() != null) {
@@ -928,7 +909,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void getUnreadNotificationAPI(UnreadCountCallback callback) {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.unreadNotifCount(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 int count = 0;
@@ -939,8 +920,7 @@ public class BaseActivity extends AppCompatActivity {
                             JSONObject obj = object.getJSONObject(Constants.kData);
                             String c = obj.getString("total_unread");
                             count = Integer.parseInt(c);
-                        }
-                        else {
+                        } else {
 
                         }
                     } catch (Exception e) {
@@ -949,6 +929,7 @@ public class BaseActivity extends AppCompatActivity {
                 }
                 callback.unreadNotificationCount(count);
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 callback.unreadNotificationCount(0);
@@ -958,7 +939,7 @@ public class BaseActivity extends AppCompatActivity {
 
     protected void getFacilityAPI(FacilityCallback callback) {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getFacilities(Functions.getAppLang(getContext()));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 List<OleClubFacility> facilities = new ArrayList<>();
@@ -975,8 +956,7 @@ public class BaseActivity extends AppCompatActivity {
                                 }
                                 facilities.add(facility);
                             }
-                        }
-                        else {
+                        } else {
 
                         }
                     } catch (Exception e) {
@@ -985,6 +965,7 @@ public class BaseActivity extends AppCompatActivity {
                 }
                 callback.facilities(facilities);
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 callback.facilities(new ArrayList<>());
@@ -1041,7 +1022,7 @@ public class BaseActivity extends AppCompatActivity {
     private void createOrderAPI(String bookingId, String price, String currency, String paymentMethod) {
         KProgressHUD hud = Functions.showLoader(getContext(), "Image processing");
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.createOrderRequest(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, price, currency);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1068,32 +1049,29 @@ public class BaseActivity extends AppCompatActivity {
                                         paymentCallback.paymentStatus(false, paymentOrderRef);
                                     }
                                 });
-                            }
-                            else {
+                            } else {
                                 String paymentAuthorizationUrl = obj.getJSONObject("_links").getJSONObject("payment-authorization").getString("href");
                                 String code = obj.getJSONObject("_links").getJSONObject("payment").getString("href").split("=")[1];
                                 paymentClient.launchCardPayment(new CardPaymentRequest.Builder().gatewayUrl(paymentAuthorizationUrl).code(code).build(), 101);
                             }
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1103,12 +1081,12 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-         if (requestCode == 101) {
-             if (resultCode == Activity.RESULT_OK) {
-                 CardPaymentData cardPaymentData = CardPaymentData.getFromIntent(data);
-                 paymentCallback.paymentStatus(cardPaymentData.getCode() == CardPaymentData.STATUS_PAYMENT_AUTHORIZED || cardPaymentData.getCode() == CardPaymentData.STATUS_PAYMENT_CAPTURED, paymentOrderRef);
-             }
-         }
+        if (requestCode == 101) {
+            if (resultCode == Activity.RESULT_OK) {
+                CardPaymentData cardPaymentData = CardPaymentData.getFromIntent(data);
+                paymentCallback.paymentStatus(cardPaymentData.getCode() == CardPaymentData.STATUS_PAYMENT_AUTHORIZED || cardPaymentData.getCode() == CardPaymentData.STATUS_PAYMENT_CAPTURED, paymentOrderRef);
+            }
+        }
     }
 
     public interface CountriesCallback {
@@ -1138,6 +1116,7 @@ public class BaseActivity extends AppCompatActivity {
     public interface PaymentCallback {
         void paymentStatus(boolean status, String orderRef);
     }
+
     public interface BibsCallback {
         void getBibs(List<Shirt> shirts);
     }

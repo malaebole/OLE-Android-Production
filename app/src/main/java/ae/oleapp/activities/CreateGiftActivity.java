@@ -259,7 +259,7 @@ public class CreateGiftActivity extends BaseActivity implements View.OnClickList
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getGiftTargetList(Functions.getAppLang(getContext()));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -301,7 +301,7 @@ public class CreateGiftActivity extends BaseActivity implements View.OnClickList
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId != null) {
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getGiftsList(Functions.getAppLang(getContext()), clubId, giftId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -352,7 +352,7 @@ public class CreateGiftActivity extends BaseActivity implements View.OnClickList
                     RequestBody.create(MediaType.parse("multipart/form-data"), details),
                     RequestBody.create(MediaType.parse("multipart/form-data"), startDate),
                     RequestBody.create(MediaType.parse("multipart/form-data"), endDate));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -402,7 +402,7 @@ public class CreateGiftActivity extends BaseActivity implements View.OnClickList
                     RequestBody.create(MediaType.parse("multipart/form-data"), details),
                     RequestBody.create(MediaType.parse("multipart/form-data"), startDate),
                     RequestBody.create(MediaType.parse("multipart/form-data"), endDate));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -438,7 +438,7 @@ public class CreateGiftActivity extends BaseActivity implements View.OnClickList
         if (userId!=null){
             KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteGift(Functions.getAppLang(getContext()), clubId, giftId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -481,7 +481,7 @@ public class CreateGiftActivity extends BaseActivity implements View.OnClickList
                 //file = new File(resultUri.getPath());
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.invoiceImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -530,7 +530,7 @@ public class CreateGiftActivity extends BaseActivity implements View.OnClickList
             binding.etEndDate.setText(clubGiftsList.getEndDate());
 
             if (!clubGiftsList.getPhotoUrl().isEmpty()){
-                Glide.with(getContext()).load(clubGiftsList.getPhotoUrl()).into(binding.invoiceImgVu);
+                Glide.with(getApplicationContext()).load(clubGiftsList.getPhotoUrl()).into(binding.invoiceImgVu);
             }
 
         }else{

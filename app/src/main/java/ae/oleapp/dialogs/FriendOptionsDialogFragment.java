@@ -154,7 +154,7 @@ public class FriendOptionsDialogFragment extends DialogFragment implements View.
     private void getProfileAPI(boolean isLoader, String playerId, String friendShipID) {
         hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserProfile(Functions.getAppLang(getContext()), playerId, friendShipID, Functions.getPrefValue(getContext(),Constants.kAppModule));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
 

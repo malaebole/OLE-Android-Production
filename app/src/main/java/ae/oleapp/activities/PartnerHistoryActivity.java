@@ -96,7 +96,7 @@ public class PartnerHistoryActivity extends BaseActivity implements View.OnClick
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId != null) {
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.partnerPaidHistory(Functions.getAppLang(getContext()), clubId, partnerId, filterBy, bankId, from, to);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -161,7 +161,7 @@ public class PartnerHistoryActivity extends BaseActivity implements View.OnClick
         binding.tvName.setText(partnerData.getName());
         binding.tvIncomeCur.setText(partnerData.getCurrency());
         if (!partnerData.getPhotoUrl().isEmpty()){
-            Glide.with(getContext()).load(partnerData.getPhotoUrl()).into(binding.imgVu);
+            Glide.with(getApplicationContext()).load(partnerData.getPhotoUrl()).into(binding.imgVu);
         }
     }
 

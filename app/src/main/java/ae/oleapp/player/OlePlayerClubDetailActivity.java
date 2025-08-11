@@ -206,7 +206,7 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             int width = displayMetrics.widthPixels;
             String url = "https://maps.google.com/maps/api/staticmap?center=" + club.getLatitude() + "," + club.getLongitude() + "&zoom=16&size="+width+"x300&sensor=false&key="+getString(R.string.maps_api_key);
-            Glide.with(getContext()).load(url).into(binding.mapVu);
+            Glide.with(getApplicationContext()).load(url).into(binding.mapVu);
         }
     }
 
@@ -354,7 +354,7 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
     private void getAllFields(boolean isLoader) {
         hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getAllFields(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), club.getId());
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                // Functions.hideLoader(hud);
@@ -536,7 +536,7 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
 
 
             if (giftData.getPhoto() !=null){
-                Glide.with(getContext()).load(giftData.getPhoto()).into(binding.imgVu);
+                Glide.with(getApplicationContext()).load(giftData.getPhoto()).into(binding.imgVu);
             }
             binding.tvGiftType.setText(giftData.getGiftName());
             binding.tvTitle.setText(giftData.getName());
@@ -548,10 +548,10 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
             binding.graphLay.setVisibility(View.GONE);
             binding.giftWinnerLay.setVisibility(View.VISIBLE);
             if (giftWinner.getEmojiUrl() !=null){
-                Glide.with(getContext()).load(giftWinner.getEmojiUrl()).into(binding.emojiImgVu);
+                Glide.with(getApplicationContext()).load(giftWinner.getEmojiUrl()).into(binding.emojiImgVu);
             }
             if (giftWinner.getBibUrl() !=null){
-                Glide.with(getContext()).load(giftWinner.getBibUrl()).into(binding.shirtImgVu);
+                Glide.with(getApplicationContext()).load(giftWinner.getBibUrl()).into(binding.shirtImgVu);
             }
             binding.giftTitle.setText(giftWinner.getGiftName());
             binding.playerName.setText(giftWinner.getPlayerName());

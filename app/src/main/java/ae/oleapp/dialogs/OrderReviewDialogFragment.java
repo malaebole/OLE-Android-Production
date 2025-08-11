@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 
 import androidx.fragment.app.DialogFragment;
 
-import com.hedgehog.ratingbar.RatingBar;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
+import com.willy.ratingbar.BaseRatingBar;
 
 import org.json.JSONObject;
 
@@ -56,13 +56,7 @@ public class OrderReviewDialogFragment extends DialogFragment implements View.On
         if (getDialog() != null && getDialog().getWindow() != null) {
             getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         }
-
-        binding.ratingBar.setOnRatingChangeListener(new RatingBar.OnRatingChangeListener() {
-            @Override
-            public void onRatingChange(float RatingCount) {
-                rating = RatingCount;
-            }
-        });
+        binding.ratingBar.setOnRatingChangeListener((ratingBar, ratings, fromUser) -> rating = ratings);
 
         binding.btnClose.setOnClickListener(this);
         binding.btnSubmit.setOnClickListener(this);
@@ -98,7 +92,7 @@ public class OrderReviewDialogFragment extends DialogFragment implements View.On
     private void orderReviewAPI(boolean isLoader, String msg) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.orderReview(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID),  productId, rating, msg);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

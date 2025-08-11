@@ -3,9 +3,11 @@ package ae.oleapp.dialogs;
 import static android.app.Activity.RESULT_OK;
 
 import android.Manifest;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -18,11 +20,13 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.bumptech.glide.Glide;
+import com.github.dhaval2404.imagepicker.ImagePicker;
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.nabinbhandari.android.permissions.PermissionHandler;
@@ -48,15 +52,10 @@ import ae.oleapp.player.OleCustomCameraActivity;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
-import droidninja.filepicker.FilePickerBuilder;
-import droidninja.filepicker.FilePickerConst;
-import droidninja.filepicker.utils.ContentUriUtils;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
-import pl.aprilapps.easyphotopicker.ChooserType;
-import pl.aprilapps.easyphotopicker.EasyImage;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -72,7 +71,7 @@ public class OleAddPlayerDialogFragment extends DialogFragment implements View.O
     private final List<OlePlayerPosition> positionList = new ArrayList<>();
     private OlePositionListAdapter adapter;
     private OlePlayerInfo info;
-    private String photoFilePath = "";
+    private final String photoFilePath = "";
 
     public OleAddPlayerDialogFragment() {
         // Required empty public constructor
@@ -104,7 +103,7 @@ public class OleAddPlayerDialogFragment extends DialogFragment implements View.O
 
         if (info != null) {
             binding.etName.setText(info.getName());
-            Glide.with(getContext()).load(info.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.imgVu);
+            Glide.with(requireActivity()).load(info.getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.imgVu);
             positionId = info.getPlayerPosition().getPositionId();
             binding.tvAddNow.setText(R.string.update);
         }
@@ -161,36 +160,64 @@ public class OleAddPlayerDialogFragment extends DialogFragment implements View.O
         }
     }
 
-    private void pickImage(boolean isGallery) {
+//    private void pickImage(boolean isGallery) {
+//
+//        String[] permissions = new String[0];
+//        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
+//            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES};
+//        }else{
+//            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+//
+//        }
+//        Permissions.check(getContext(), permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
+//            @Override
+//            public void onGranted() {
+//                // do your task.
+//                if (isGallery) {
+//                    FilePickerBuilder.getInstance()
+//                            .setMaxCount(1)
+//                            .setActivityTheme(R.style.AppThemePlayer)
+//                            .setActivityTitle(getString(R.string.image))
+//                            .setSpan(FilePickerConst.SPAN_TYPE.FOLDER_SPAN, 3)
+//                            .setSpan(FilePickerConst.SPAN_TYPE.DETAIL_SPAN, 4)
+//                            .enableVideoPicker(false)
+//                            .enableCameraSupport(false)
+//                            .showGifs(false)
+//                            .showFolderView(false)
+//                            .enableSelectAll(false)
+//                            .enableImagePicker(true)
+//                            .withOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
+//                            .pickPhoto(OleAddPlayerDialogFragment.this, 1124);
+//                }
+//                else {
+//                    Intent intent = new Intent(getContext(), OleCustomCameraActivity.class);
+//                    intent.putExtra("is_gallery", false);
+//                    startActivityForResult(intent, 1123);
+//                }
+//            }
+//        });
+//    }
 
-        String[] permissions = new String[0];
+
+    private void pickImage(boolean isGallery) {
+        String[] permissions;
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES};
-        }else{
+        } else {
             permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
-
         }
-        Permissions.check(getContext(), permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
+
+        Permissions.check(getContext(), permissions, null /*rationale*/, null /*options*/, new PermissionHandler() {
             @Override
             public void onGranted() {
-                // do your task.
+                // Choose the method based on whether the user wants to pick from the gallery or take a new photo
                 if (isGallery) {
-                    FilePickerBuilder.getInstance()
-                            .setMaxCount(1)
-                            .setActivityTheme(R.style.AppThemePlayer)
-                            .setActivityTitle(getString(R.string.image))
-                            .setSpan(FilePickerConst.SPAN_TYPE.FOLDER_SPAN, 3)
-                            .setSpan(FilePickerConst.SPAN_TYPE.DETAIL_SPAN, 4)
-                            .enableVideoPicker(false)
-                            .enableCameraSupport(false)
-                            .showGifs(false)
-                            .showFolderView(false)
-                            .enableSelectAll(false)
-                            .enableImagePicker(true)
-                            .withOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED)
-                            .pickPhoto(OleAddPlayerDialogFragment.this, 1124);
-                }
-                else {
+                    ImagePicker.with(OleAddPlayerDialogFragment.this)
+                            .crop() // Optionally enable cropping
+                            .compress(1024) // Compress image to 1024 KB
+                            .maxResultSize(1080, 1080) // Set maximum dimensions
+                            .start(1124); // Start the ImagePicker with the request code 1124
+                } else {
                     Intent intent = new Intent(getContext(), OleCustomCameraActivity.class);
                     intent.putExtra("is_gallery", false);
                     startActivityForResult(intent, 1123);
@@ -202,27 +229,70 @@ public class OleAddPlayerDialogFragment extends DialogFragment implements View.O
     @Override
     public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1123 && resultCode == RESULT_OK) {
-            photoFilePath = data.getExtras().getString("file_path");
-            File file = new File(photoFilePath);
-            Glide.with(getContext()).load(file).into(binding.imgVu);
-        }
-        else if (requestCode == 1124 && resultCode == RESULT_OK) {
-            ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
-            if (dataList != null && dataList.size() > 0) {
-                Uri uri = dataList.get(0);
-                try {
-                    String filePath = ContentUriUtils.INSTANCE.getFilePath(getContext(), uri);
-                    Intent intent = new Intent(getContext(), OleCustomCameraActivity.class);
-                    intent.putExtra("is_gallery", true);
-                    intent.putExtra("file_path", filePath);
-                    startActivityForResult(intent, 1123);
-                } catch (URISyntaxException e) {
-                    e.printStackTrace();
+
+        if (resultCode == RESULT_OK) {
+            if (requestCode == 1123) {
+                // Handle result from custom camera activity
+                String photoFilePath = data.getExtras().getString("file_path");
+                File file = new File(photoFilePath);
+                Glide.with(requireActivity()).load(file).into(binding.imgVu);
+            } else if (requestCode == 1124) {
+                // Handle result from ImagePicker
+                Uri uri = data.getData();
+                if (uri != null) {
+                    String filePath = getFilePathFromUri(getContext(), uri);
+                    if (filePath != null) {
+                        Intent intent = new Intent(getContext(), OleCustomCameraActivity.class);
+                        intent.putExtra("is_gallery", true);
+                        intent.putExtra("file_path", filePath);
+                        startActivityForResult(intent, 1123);
+                    }
                 }
             }
         }
     }
+
+    // Utility method to get file path from URI
+    public String getFilePathFromUri(Context context, Uri uri) {
+        String[] projection = {MediaStore.Images.Media.DATA};
+        Cursor cursor = context.getContentResolver().query(uri, projection, null, null, null);
+        if (cursor != null) {
+            int column_index = cursor.getColumnIndexOrThrow(MediaStore.Images.Media.DATA);
+            cursor.moveToFirst();
+            String filePath = cursor.getString(column_index);
+            cursor.close();
+            return filePath;
+        }
+        return null;
+    }
+
+
+
+
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//        if (requestCode == 1123 && resultCode == RESULT_OK) {
+//            photoFilePath = data.getExtras().getString("file_path");
+//            File file = new File(photoFilePath);
+//            Glide.with(getApplicationContext()).load(file).into(binding.imgVu);
+//        }
+//        else if (requestCode == 1124 && resultCode == RESULT_OK) {
+//            ArrayList<Uri> dataList = data.getParcelableArrayListExtra(FilePickerConst.KEY_SELECTED_MEDIA);
+//            if (dataList != null && dataList.size() > 0) {
+//                Uri uri = dataList.get(0);
+//                try {
+//                    String filePath = ContentUriUtils.INSTANCE.getFilePath(getContext(), uri);
+//                    Intent intent = new Intent(getContext(), OleCustomCameraActivity.class);
+//                    intent.putExtra("is_gallery", true);
+//                    intent.putExtra("file_path", filePath);
+//                    startActivityForResult(intent, 1123);
+//                } catch (URISyntaxException e) {
+//                    e.printStackTrace();
+//                }
+//            }
+//        }
+//    }
 
     OlePositionListAdapter.ItemClickListener clickListener = new OlePositionListAdapter.ItemClickListener() {
         @Override
@@ -252,7 +322,7 @@ public class OleAddPlayerDialogFragment extends DialogFragment implements View.O
     private void getPlayerPositionAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getPlayerPosition(Functions.getAppLang(getActivity()));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -314,7 +384,7 @@ public class OleAddPlayerDialogFragment extends DialogFragment implements View.O
                 RequestBody.create(MediaType.parse("multipart/form-data"), name),
                 RequestBody.create(MediaType.parse("multipart/form-data"), positionId),
                 RequestBody.create(MediaType.parse("multipart/form-data"), "add"));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -369,7 +439,7 @@ public class OleAddPlayerDialogFragment extends DialogFragment implements View.O
                 RequestBody.create(MediaType.parse("multipart/form-data"), name),
                 RequestBody.create(MediaType.parse("multipart/form-data"), positionId),
                 RequestBody.create(MediaType.parse("multipart/form-data"), "update"));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

@@ -258,7 +258,7 @@ public class OlePClubListActivity extends BaseActivity implements View.OnClickLi
         else {
             call = AppManager.getInstance().apiInterface.getClubList(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), location.getLatitude(), location.getLongitude(), pageNo, offer, name, date, openTime, closeTime, cityId, grassType, fieldType, fieldSize, nearby, Functions.getPrefValue(getContext(), Constants.kAppModule));
         }
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

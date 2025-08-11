@@ -53,7 +53,7 @@ public class ActivityCustomCameraLineup extends BaseActivity implements View.OnC
         if (isGallery) {
             binding.fragmentCameraPreview.setVisibility(View.GONE);
             binding.galleryVu.setVisibility(View.VISIBLE);
-            Glide.with(getContext()).load(new File(galleryFilePath)).into(binding.galleryPhoto);
+            Glide.with(getApplicationContext()).load(new File(galleryFilePath)).into(binding.galleryPhoto);
             binding.galleryPhoto.setDrawingCacheEnabled(true);
 //            ImageMatrixTouchHandler matrixTouchHandler = new ImageMatrixTouchHandler(binding.galleryPhoto.getContext());
 //            binding.galleryPhoto.setOnTouchListener(matrixTouchHandler);

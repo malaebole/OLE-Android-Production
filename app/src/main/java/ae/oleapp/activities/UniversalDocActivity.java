@@ -151,7 +151,7 @@ public class UniversalDocActivity extends BaseActivity implements View.OnClickLi
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.folderDetails(Functions.getAppLang(getContext()), clubId, type, typeID);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -216,12 +216,12 @@ public class UniversalDocActivity extends BaseActivity implements View.OnClickLi
         if (type.equalsIgnoreCase("folder") || type.equalsIgnoreCase("employees")) {
 
             if (!docDetails.getPhotoUrl().isEmpty()){
-                Glide.with(getContext()).load(docDetails.getPhotoUrl()).apply(RequestOptions.circleCropTransform()).into(binding.imgVu);
+                Glide.with(getApplicationContext()).load(docDetails.getPhotoUrl()).apply(RequestOptions.circleCropTransform()).into(binding.imgVu);
             }
 
         }else{
             if (!docDetails.getPhotoUrl().isEmpty()){
-                Glide.with(getContext()).load(docDetails.getPhotoUrl()).into(binding.imgVu);
+                Glide.with(getApplicationContext()).load(docDetails.getPhotoUrl()).into(binding.imgVu);
             }
         }
 

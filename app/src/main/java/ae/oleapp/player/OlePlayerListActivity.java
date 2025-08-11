@@ -304,7 +304,7 @@ public class OlePlayerListActivity extends BaseActivity implements View.OnClickL
         else {
             call = AppManager.getInstance().apiInterface.getPlayerList(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), location.getLatitude(), location.getLongitude(), pageNo, name, cityId, age, highMatch, point, topPlayer, playedMonth, playedOverAll, Functions.getPrefValue(getContext(), Constants.kAppModule));
         }
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

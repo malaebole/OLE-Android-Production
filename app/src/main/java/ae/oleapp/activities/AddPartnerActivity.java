@@ -193,7 +193,7 @@ public class AddPartnerActivity extends BaseActivity implements View.OnClickList
                     RequestBody.create(MediaType.parse("multipart/form-data"), email),
                     RequestBody.create(MediaType.parse("multipart/form-data"), phone),
                     RequestBody.create(MediaType.parse("multipart/form-data"), shareValue));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -244,7 +244,7 @@ public class AddPartnerActivity extends BaseActivity implements View.OnClickList
                     RequestBody.create(MediaType.parse("multipart/form-data"), email),
                     RequestBody.create(MediaType.parse("multipart/form-data"), phone),
                     RequestBody.create(MediaType.parse("multipart/form-data"), shareValue));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -285,7 +285,7 @@ public class AddPartnerActivity extends BaseActivity implements View.OnClickList
                 //file = new File(resultUri.getPath());
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.partnerImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.partnerImgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -320,7 +320,7 @@ public class AddPartnerActivity extends BaseActivity implements View.OnClickList
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getClubPartnersList(Functions.getAppLang(getContext()), clubId, partnerId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -359,7 +359,7 @@ public class AddPartnerActivity extends BaseActivity implements View.OnClickList
         if (userId!=null){
             KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.deletePartner(Functions.getAppLang(getContext()), clubId, partnerId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -406,7 +406,7 @@ public class AddPartnerActivity extends BaseActivity implements View.OnClickList
             binding.etShareValue.setText(partnerData.getShares());
 
             if (!partnerData.getPhotoUrl().isEmpty()){
-                Glide.with(getContext()).load(partnerData.getPhotoUrl()).into(binding.partnerImgVu);
+                Glide.with(getApplicationContext()).load(partnerData.getPhotoUrl()).into(binding.partnerImgVu);
             }
 
         }else{

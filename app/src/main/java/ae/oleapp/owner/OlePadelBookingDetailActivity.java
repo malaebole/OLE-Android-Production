@@ -697,7 +697,7 @@ public class OlePadelBookingDetailActivity extends BaseActivity implements View.
         }
         else {
             binding.tvPlayerName.setText(bookingDetail.getUser().getName());
-            Glide.with(getContext()).load(bookingDetail.getUser().getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.singlePlayerImageVu);
+            Glide.with(getApplicationContext()).load(bookingDetail.getUser().getPhotoUrl()).placeholder(R.drawable.player_active).into(binding.singlePlayerImageVu);
             if (bookingDetail.getUser().getLevel() != null && !bookingDetail.getUser().getLevel().isEmpty() && !bookingDetail.getUser().getLevel().getValue().equalsIgnoreCase("")) {
                 binding.tvLevel.setVisibility(View.VISIBLE);
                 binding.tvLevel.setText(String.format("LV: %s", bookingDetail.getUser().getLevel().getValue()));
@@ -890,7 +890,7 @@ public class OlePadelBookingDetailActivity extends BaseActivity implements View.
     private void getBookingDetail(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getBookingDetail(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -949,7 +949,7 @@ public class OlePadelBookingDetailActivity extends BaseActivity implements View.
                 RequestBody.create(MediaType.parse("text/plain"), posPayment),
                 RequestBody.create(MediaType.parse("text/plain"), balance),
                 RequestBody.create(MediaType.parse("text/plain"), Functions.getPrefValue(getContext(), Constants.kUserID)));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -1001,7 +1001,7 @@ public class OlePadelBookingDetailActivity extends BaseActivity implements View.
     private void blockUnblockUserAPI(boolean isLoader, String status, String userId, String reason, String phone) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.blockUnblockUser(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), userId, status, reason, phone);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

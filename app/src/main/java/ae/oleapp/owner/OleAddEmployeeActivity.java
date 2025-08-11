@@ -190,7 +190,7 @@ public class OleAddEmployeeActivity extends BaseActivity implements View.OnClick
 
 
     private void populateData() {
-        Glide.with(getContext()).load(employee.getEmployeePhoto()).into(binding.imgVu);
+        Glide.with(getApplicationContext()).load(employee.getEmployeePhoto()).into(binding.imgVu);
         binding.etName.setText(employee.getName());
         binding.etPhone.setText(employee.getPhone());
         binding.etEmpId.setText(employee.getEmployeeId());
@@ -335,7 +335,7 @@ public class OleAddEmployeeActivity extends BaseActivity implements View.OnClick
             if (resultCode == RESULT_OK) {
                 Uri resultUri = result.getUri();
                 photoFile = new File(resultUri.getPath());
-                Glide.with(getContext()).load(photoFile).into(binding.imgVu);
+                Glide.with(getApplicationContext()).load(photoFile).into(binding.imgVu);
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
                 Exception error = result.getError();
             }
@@ -465,7 +465,7 @@ public class OleAddEmployeeActivity extends BaseActivity implements View.OnClick
                 RequestBody.create(MediaType.parse("text/plain"), clubId),
                 RequestBody.create(MediaType.parse("text/plain"), salary),
                 RequestBody.create(MediaType.parse("text/plain"), id));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -504,7 +504,7 @@ public class OleAddEmployeeActivity extends BaseActivity implements View.OnClick
     private void getUserRolesAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getUserRole(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID));
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -546,7 +546,7 @@ public class OleAddEmployeeActivity extends BaseActivity implements View.OnClick
     private void getPlayerListAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getPlayerList(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), 0, 0, 1, name, "", "", "", "", "", "", "", "lineup");
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
@@ -613,7 +613,7 @@ public class OleAddEmployeeActivity extends BaseActivity implements View.OnClick
     private void deletePhotoAPI(boolean isLoader, String empId) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deletePhoto(Functions.getAppLang(getContext()), empId);
-        call.enqueue(new Callback<ResponseBody>() {
+        call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                 Functions.hideLoader(hud);

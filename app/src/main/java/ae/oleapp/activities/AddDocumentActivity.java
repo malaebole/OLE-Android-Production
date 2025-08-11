@@ -229,7 +229,7 @@ public class AddDocumentActivity extends BaseActivity implements View.OnClickLis
 
                 photoFilePath = resultUri.getPath();
                 file = new File(photoFilePath);
-                Glide.with(getContext()).load(file).into(binding.fileImgVu);
+                Glide.with(getApplicationContext()).load(file).into(binding.fileImgVu);
                 Functions.showToast(getContext(),getString(R.string.image_uploaded), FancyToast.SUCCESS);
 
             } else if (resultCode == CropImage.CROP_IMAGE_ACTIVITY_RESULT_ERROR_CODE) {
@@ -241,7 +241,7 @@ public class AddDocumentActivity extends BaseActivity implements View.OnClickLis
 
             if (filePath != null && !filePath.isEmpty()) {
                 photoFilePath = filePath;
-                Glide.with(getContext()).load(R.drawable.pdf_icon).into(binding.fileImgVu);
+                Glide.with(getApplicationContext()).load(R.drawable.pdf_icon).into(binding.fileImgVu);
                 Functions.showToast(getContext(),getString(R.string.file_uploaded), FancyToast.SUCCESS);
                 //binding.uploadPdf.setText("Selected File: " + filePath);
             }
@@ -381,7 +381,7 @@ public class AddDocumentActivity extends BaseActivity implements View.OnClickLis
                     RequestBody.create(MediaType.parse("multipart/form-data"),fileNumber),
                     RequestBody.create(MediaType.parse("multipart/form-data"),issuedDate),
                     RequestBody.create(MediaType.parse("multipart/form-data"),expiryDate));
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -444,7 +444,7 @@ public class AddDocumentActivity extends BaseActivity implements View.OnClickLis
                     RequestBody.create(MediaType.parse("multipart/form-data"),issuedDate),
                     RequestBody.create(MediaType.parse("multipart/form-data"),expiryDate));
 
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     Functions.hideLoader(hud);
@@ -481,7 +481,7 @@ public class AddDocumentActivity extends BaseActivity implements View.OnClickLis
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.getFile(Functions.getAppLang(getContext()), clubId, fileId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -515,7 +515,7 @@ public class AddDocumentActivity extends BaseActivity implements View.OnClickLis
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
         if (userId!=null){
             Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteFile(Functions.getAppLang(getContext()), clubId, fileId);
-            call.enqueue(new Callback<ResponseBody>() {
+            call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
                     if (response.body() != null) {
@@ -558,12 +558,12 @@ public class AddDocumentActivity extends BaseActivity implements View.OnClickLis
                 if (docLists.getPhotoUrl().contains("jpg")
                         || docLists.getPhotoUrl().contains("png")
                         || docLists.getPhotoUrl().contains("jpeg")){
-                    Glide.with(getContext()).load(docLists.getPhotoUrl()).into(binding.fileImgVu);
+                    Glide.with(getApplicationContext()).load(docLists.getPhotoUrl()).into(binding.fileImgVu);
                 }else{
-                    Glide.with(getContext()).load(R.drawable.pdf_icon).into(binding.fileImgVu);
+                    Glide.with(getApplicationContext()).load(R.drawable.pdf_icon).into(binding.fileImgVu);
                 }
             }else{
-                Glide.with(getContext()).load(R.drawable.attachment_img).into(binding.fileImgVu);
+                Glide.with(getApplicationContext()).load(R.drawable.attachment_img).into(binding.fileImgVu);
             }
 
         }else{
