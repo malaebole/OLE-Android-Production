@@ -22,13 +22,14 @@ import com.google.android.gms.maps.model.LatLng;
 import ae.oleapp.R;
 import ae.oleapp.base.BaseActivity;
 import ae.oleapp.databinding.OleactivityMapBinding;
-import mumayank.com.airlocationlibrary.AirLocation;
+import ae.oleapp.util.LocationHelperFragment;
 
 public class OleMapActivity extends BaseActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener, GoogleMap.OnMyLocationButtonClickListener, View.OnClickListener {
 
     private OleactivityMapBinding binding;
     private GoogleMap googleMap;
     private double lat = 0, lng = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,39 +66,70 @@ public class OleMapActivity extends BaseActivity implements OnMapReadyCallback, 
     }
 
     private void getLocation() {
-        new AirLocation(this, true, true, new AirLocation.Callbacks() {
-            @Override
-            public void onSuccess(Location loc) {
-                // do something
-                LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
+        LocationHelperFragment helper = LocationHelperFragment.getInstance(getSupportFragmentManager());
+        helper.startLocationRequest(new LocationHelperFragment.LocationCallback() {
+                @Override
+                public void onLocationRetrieved(Location loc) {
+                    LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
 
-                // Showing the current location in Google Map
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng)); //checkx
-                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-                    // TODO: Consider calling
-                    //    ActivityCompat#requestPermissions
-                    // here to request the missing permissions, and then overriding
-                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
-                    //                                          int[] grantResults)
-                    // to handle the case where the user grants the permission. See the documentation
-                    // for ActivityCompat#requestPermissions for more details.
-                    return;
+                    // Move camera to current location
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+                            || ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        googleMap.setMyLocationEnabled(true);
+                    }
+
+                    lat = latLng.latitude;
+                    lng = latLng.longitude;
+
+                    // Zoom in the map
+                    googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
                 }
-                googleMap.setMyLocationEnabled(true);
 
-                lat = latLng.latitude;
-                lng = latLng.longitude;
-                // Zoom in the Google Map
-                googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
-            }
-
-            @Override
-            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
-                // do something
-
-            }
-        });
+                @Override
+                public void onLocationError(String message) {
+                    // Handle failure here — maybe show a message or fallback behavior
+                    // You can log or toast the error message
+                }
+            });
     }
+
+
+//    private void getLocation() {
+//        new AirLocation(this, true, true, new AirLocation.Callbacks() {
+//            @Override
+//            public void onSuccess(Location loc) {
+//                // do something
+//                LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
+//
+//                // Showing the current location in Google Map
+//                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng)); //checkx
+//                if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+//                    // TODO: Consider calling
+//                    //    ActivityCompat#requestPermissions
+//                    // here to request the missing permissions, and then overriding
+//                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+//                    //                                          int[] grantResults)
+//                    // to handle the case where the user grants the permission. See the documentation
+//                    // for ActivityCompat#requestPermissions for more details.
+//                    return;
+//                }
+//                googleMap.setMyLocationEnabled(true);
+//
+//                lat = latLng.latitude;
+//                lng = latLng.longitude;
+//                // Zoom in the Google Map
+//                googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+//            }
+//
+//            @Override
+//            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
+//                // do something
+//
+//            }
+//        });
+//    }
 
     @Override
     public void onCameraIdle() {

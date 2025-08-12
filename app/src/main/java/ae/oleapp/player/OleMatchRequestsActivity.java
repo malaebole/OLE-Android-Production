@@ -39,6 +39,7 @@ import ae.oleapp.databinding.OleactivityMatchRequestsBinding;
 import ae.oleapp.dialogs.OlePaymentDialogFragment;
 import ae.oleapp.dialogs.OlePositionDialogFragment;
 import ae.oleapp.dialogs.OleResultFilterDialogFragment;
+import ae.oleapp.fragments.OleHomeFragment;
 import ae.oleapp.models.Club;
 import ae.oleapp.models.OleMatchResults;
 import ae.oleapp.models.OlePadelMatchResults;
@@ -50,7 +51,7 @@ import ae.oleapp.padel.OleProfilePadelMatchHistoryDetailsActivity;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
-import mumayank.com.airlocationlibrary.AirLocation;
+import ae.oleapp.util.LocationHelperFragment;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -271,32 +272,61 @@ public class OleMatchRequestsActivity extends BaseActivity implements View.OnCli
     }
 
     private void getLocationAndCallAPI() {
-        new AirLocation(getContext(), true, false, new AirLocation.Callbacks() {
-            @Override
-            public void onSuccess(Location loc) {
-                // do something
-                location = loc;
-                if (isResult) {
-                    getMatchListAPI(resultList.isEmpty());
+        LocationHelperFragment helper = LocationHelperFragment.getInstance(getSupportFragmentManager());
+        helper.startLocationRequest(new LocationHelperFragment.LocationCallback() {
+                @Override
+                public void onLocationRetrieved(Location location) {
+                    OleMatchRequestsActivity.this.location = location;
+                    if (isResult) {
+                        getMatchListAPI(resultList.isEmpty());
+                    }
+                    else {
+                        getMatchListAPI(matchList.isEmpty());
+                    }
                 }
-                else {
-                    getMatchListAPI(matchList.isEmpty());
-                }
-            }
 
-            @Override
-            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
-                // do something
-                binding.pullRefresh.setRefreshing(false);
-                if (isResult) {
-                    getMatchListAPI(resultList.isEmpty());
+                @Override
+                public void onLocationError(String message) {
+                    binding.pullRefresh.setRefreshing(false);
+                    if (isResult) {
+                        getMatchListAPI(resultList.isEmpty());
+                    }
+                    else {
+                        getMatchListAPI(matchList.isEmpty());
+                    }
                 }
-                else {
-                    getMatchListAPI(matchList.isEmpty());
-                }
-            }
-        });
+            });
+
     }
+
+
+//    private void getLocationAndCallAPI() {
+//        new AirLocation(getContext(), true, false, new AirLocation.Callbacks() {
+//            @Override
+//            public void onSuccess(Location loc) {
+//                // do something
+//                location = loc;
+//                if (isResult) {
+//                    getMatchListAPI(resultList.isEmpty());
+//                }
+//                else {
+//                    getMatchListAPI(matchList.isEmpty());
+//                }
+//            }
+//
+//            @Override
+//            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
+//                // do something
+//                binding.pullRefresh.setRefreshing(false);
+//                if (isResult) {
+//                    getMatchListAPI(resultList.isEmpty());
+//                }
+//                else {
+//                    getMatchListAPI(matchList.isEmpty());
+//                }
+//            }
+//        });
+//    }
 
     OleResultListAdapter.ItemClickListener itemClickListener = new OleResultListAdapter.ItemClickListener() {
         @Override

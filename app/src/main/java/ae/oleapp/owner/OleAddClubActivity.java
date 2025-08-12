@@ -44,6 +44,7 @@ import ae.oleapp.base.BaseActivity;
 import ae.oleapp.databinding.OleactivityAddClubBinding;
 import ae.oleapp.dialogs.OleCustomAlertDialog;
 import ae.oleapp.dialogs.OleSelectionListDialog;
+import ae.oleapp.fragments.OleHomeFragment;
 import ae.oleapp.models.Club;
 import ae.oleapp.models.OleClubFacility;
 import ae.oleapp.models.OleCountry;
@@ -54,8 +55,8 @@ import ae.oleapp.models.OleShiftTime;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
+import ae.oleapp.util.LocationHelperFragment;
 import ae.oleapp.util.OleKeyboardUtils;
-import mumayank.com.airlocationlibrary.AirLocation;
 import okhttp3.MediaType;
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -88,6 +89,7 @@ public class OleAddClubActivity extends BaseActivity implements View.OnClickList
     private OleClubFacilityListAdapter facilityAdapter;
     private boolean isForUpdate = false;
     private Club club;
+
 
     public enum ImageType {
         logo,
@@ -143,20 +145,7 @@ public class OleAddClubActivity extends BaseActivity implements View.OnClickList
         else {
             binding.bar.toolbarTitle.setText(R.string.add_club);
             binding.tvBtntitle.setText(R.string.add_now);
-
-            new AirLocation(getContext(), true, true, new AirLocation.Callbacks() {
-                @Override
-                public void onSuccess(@NotNull Location location) {
-                    latitude = location.getLatitude();
-                    longitude = location.getLongitude();
-                    Functions.getAddressFromLocation(location, getContext(), new GeocoderHandler());
-                }
-
-                @Override
-                public void onFailed(@NotNull AirLocation.LocationFailedEnum locationFailedEnum) {
-
-                }
-            });
+            getLocationAndCallAPI();
         }
 
         basicVuClicked();
@@ -188,28 +177,36 @@ public class OleAddClubActivity extends BaseActivity implements View.OnClickList
         binding.padelVu.setOnClickListener(this);
     }
 
+    private void getLocationAndCallAPI() {
+        LocationHelperFragment helper = LocationHelperFragment.getInstance(getSupportFragmentManager());
+        helper.startLocationRequest(new LocationHelperFragment.LocationCallback() {
+                @Override
+                public void onLocationRetrieved(Location location) {
+                    latitude = location.getLatitude();
+                    longitude = location.getLongitude();
+                    Functions.getAddressFromLocation(location, getContext(), new GeocoderHandler());
+                }
+
+                @Override
+                public void onLocationError(String message) {
+
+                }
+            });
+    }
+
     private void checkKeyboardListener() {
-        OleKeyboardUtils.addKeyboardToggleListener(this, new OleKeyboardUtils.SoftKeyboardToggleListener() {
-            @Override
-            public void onToggleSoftKeyboard(boolean isVisible) {
-                if (isVisible) {
-                    binding.btnAdd.setVisibility(View.GONE);
-                }
-                else {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            final Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    //your code here
-                                    binding.btnAdd.setVisibility(View.VISIBLE);
-                                }
-                            }, 50);
-                        }
-                    });
-                }
+        OleKeyboardUtils.addKeyboardToggleListener(this, isVisible -> {
+            if (isVisible) {
+                binding.btnAdd.setVisibility(View.GONE);
+            }
+            else {
+                runOnUiThread(() -> {
+                    final Handler handler = new Handler();
+                    handler.postDelayed(() -> {
+                        //your code here
+                        binding.btnAdd.setVisibility(View.VISIBLE);
+                    }, 50);
+                });
             }
         });
     }

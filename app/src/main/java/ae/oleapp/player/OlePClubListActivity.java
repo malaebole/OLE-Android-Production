@@ -31,9 +31,9 @@ import ae.oleapp.fragments.OleClubFilterFragment;
 import ae.oleapp.models.Club;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
+import ae.oleapp.util.LocationHelperFragment;
 import ae.oleapp.util.OleEndlessRecyclerViewScrollListener;
 import ae.oleapp.util.Functions;
-import mumayank.com.airlocationlibrary.AirLocation;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +49,7 @@ public class OlePClubListActivity extends BaseActivity implements View.OnClickLi
     private Location location;
     private OleEndlessRecyclerViewScrollListener scrollListener;
     OleClubFilterFragment filterFragment;
+
 
     //filter
     private String date = "";
@@ -142,25 +143,45 @@ public class OlePClubListActivity extends BaseActivity implements View.OnClickLi
         }
     }
 
-    private void getLocationAndCallAPI() {
-        new AirLocation(getContext(), true, false, new AirLocation.Callbacks() {
-            @Override
-            public void onSuccess(Location loc) {
-                // do something
-                location = loc;
-                pageNo = 1;
-                getClubList(clubList.isEmpty());
-            }
+//    private void getLocationAndCallAPI() {
+//        new AirLocation(getContext(), true, false, new AirLocation.Callbacks() {
+//            @Override
+//            public void onSuccess(Location loc) {
+//                // do something
+//                location = loc;
+//                pageNo = 1;
+//                getClubList(clubList.isEmpty());
+//            }
+//
+//            @Override
+//            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
+//                // do something
+//                binding.pullRefresh.setRefreshing(false);
+//                pageNo = 1;
+//                getClubList(clubList.isEmpty());
+//            }
+//        });
+//    }
 
-            @Override
-            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
-                // do something
-                binding.pullRefresh.setRefreshing(false);
-                pageNo = 1;
-                getClubList(clubList.isEmpty());
-            }
-        });
+    private void getLocationAndCallAPI() {
+        LocationHelperFragment helper = LocationHelperFragment.getInstance(getSupportFragmentManager());
+        helper.startLocationRequest(new LocationHelperFragment.LocationCallback() {
+                @Override
+                public void onLocationRetrieved(Location location) {
+                    OlePClubListActivity.this.location = location;
+                    pageNo = 1;
+                    getClubList(clubList.isEmpty());
+                }
+
+                @Override
+                public void onLocationError(String message) {
+                    binding.pullRefresh.setRefreshing(false);
+                    pageNo = 1;
+                    getClubList(clubList.isEmpty());
+                }
+            });
     }
+
 
     private final OlePlayerClubListAdapter.ItemClickListener itemClickListener = new OlePlayerClubListAdapter.ItemClickListener() {
         @Override

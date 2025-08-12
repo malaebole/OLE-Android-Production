@@ -28,13 +28,14 @@ import ae.oleapp.R;
 import ae.oleapp.adapters.OlePlayerListAdapter;
 import ae.oleapp.base.BaseActivity;
 import ae.oleapp.databinding.OleactivityPlayerListBinding;
+import ae.oleapp.fragments.OleHomeFragment;
 import ae.oleapp.fragments.PlayerListFiltersFragemnt;
 import ae.oleapp.models.OlePlayerInfo;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
+import ae.oleapp.util.LocationHelperFragment;
 import ae.oleapp.util.OleEndlessRecyclerViewScrollListener;
 import ae.oleapp.util.Functions;
-import mumayank.com.airlocationlibrary.AirLocation;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -66,6 +67,7 @@ public class OlePlayerListActivity extends BaseActivity implements View.OnClickL
     private String playedOverAll = "";
     private String playedMonth = "";
     private final int playersLoaded = 0;
+
 
 
     @Override
@@ -177,23 +179,40 @@ public class OlePlayerListActivity extends BaseActivity implements View.OnClickL
         }
     };
 
+//    private void getLocationAndCallAPI() {
+//        new AirLocation(getContext(), true, false, new AirLocation.Callbacks() {
+//            @Override
+//            public void onSuccess(Location loc) {
+//                // do something
+//                location = loc;
+//                getPlayerListAPI(playerList.isEmpty());
+//            }
+//
+//            @Override
+//            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
+//                // do something
+//                binding.pullRefresh.setRefreshing(false);
+//                getPlayerListAPI(playerList.isEmpty());
+//            }
+//        });
+//    }
     private void getLocationAndCallAPI() {
-        new AirLocation(getContext(), true, false, new AirLocation.Callbacks() {
-            @Override
-            public void onSuccess(Location loc) {
-                // do something
-                location = loc;
-                getPlayerListAPI(playerList.isEmpty());
-            }
+        LocationHelperFragment helper = LocationHelperFragment.getInstance(getSupportFragmentManager());
+        helper.startLocationRequest(new LocationHelperFragment.LocationCallback() {
+                @Override
+                public void onLocationRetrieved(Location location) {
+                    OlePlayerListActivity.this.location = location;
+                    getPlayerListAPI(playerList.isEmpty());
+                }
 
-            @Override
-            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
-                // do something
-                binding.pullRefresh.setRefreshing(false);
-                getPlayerListAPI(playerList.isEmpty());
-            }
-        });
+                @Override
+                public void onLocationError(String message) {
+                    binding.pullRefresh.setRefreshing(false);
+                    getPlayerListAPI(playerList.isEmpty());
+                }
+            });
     }
+
 
     @Override
     public void onClick(View v) {

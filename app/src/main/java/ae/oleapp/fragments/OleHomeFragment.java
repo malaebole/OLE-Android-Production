@@ -10,7 +10,6 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
@@ -32,13 +31,11 @@ import org.json.JSONObject;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.Timer;
 import java.util.TimerTask;
 
 import ae.oleapp.R;
 import ae.oleapp.activities.MainActivity;
-import ae.oleapp.activities.OleNotificationsActivity;
 import ae.oleapp.adapters.OleHomeNotifAdapter;
 import ae.oleapp.adapters.OleMatchListAdapter;
 import ae.oleapp.adapters.OlePlayerClubListAdapter;
@@ -46,7 +43,6 @@ import ae.oleapp.adapters.OleProfilePadelMatchHistoryAdapter;
 import ae.oleapp.adapters.OleResultListAdapter;
 import ae.oleapp.base.BaseActivity;
 import ae.oleapp.base.BaseFragment;
-
 import ae.oleapp.databinding.OlefragmentHomeBinding;
 import ae.oleapp.dialogs.OleClubRateDialog;
 import ae.oleapp.dialogs.OlePaymentDialogFragment;
@@ -55,10 +51,8 @@ import ae.oleapp.models.Club;
 import ae.oleapp.models.OleHomeNotification;
 import ae.oleapp.models.OleMatchResults;
 import ae.oleapp.models.OlePadelMatchResults;
-import ae.oleapp.models.OlePlayerInfo;
 import ae.oleapp.models.OlePlayerMatch;
 import ae.oleapp.models.OlePlayerPosition;
-import ae.oleapp.models.PlayerInfo;
 import ae.oleapp.models.Product;
 import ae.oleapp.models.UserInfo;
 import ae.oleapp.padel.OlePadelChallengeActivity;
@@ -82,12 +76,12 @@ import ae.oleapp.player.OlePlayerMainTabsActivity;
 import ae.oleapp.shop.ProductDetailActivity;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
-import ae.oleapp.util.OleEndlessRecyclerViewScrollListener;
 import ae.oleapp.util.Functions;
+import ae.oleapp.util.LocationHelperFragment;
+import ae.oleapp.util.OleEndlessRecyclerViewScrollListener;
 import ae.oleapp.util.OleScrollingLinearLayoutManager;
 import io.github.hyuwah.draggableviewlib.DraggableListener;
 import io.github.hyuwah.draggableviewlib.DraggableView;
-import mumayank.com.airlocationlibrary.AirLocation;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -117,7 +111,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     private OleResultListAdapter oleResultListAdapter;
     private OleProfilePadelMatchHistoryAdapter padelMatchAdapter;
     private DraggableView<MaterialCardView> draggableView;
-    private  UserInfo userInfo;
+    private UserInfo userInfo;
 
 
     //filter
@@ -143,6 +137,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
         // Inflate the layout for this fragment
         binding = OlefragmentHomeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
+        getLocationAndCallAPI();
 
         binding.filterBg.setVisibility(View.GONE);
         if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
@@ -151,33 +146,31 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
             binding.pLineup.setEnabled(true);
             binding.cardVu.setCardBackgroundColor(getResources().getColor(R.color.transparent));
             //binding.rel_menu.setImageResource(R.drawable.p_menu_ic_white);
-           //binding.imgVuSearch.setImageResource(R.drawable.search_ic_new_white);
-           //binding.tvSearch.setTextColor(getResources().getColor(R.color.whiteColor));
+            //binding.imgVuSearch.setImageResource(R.drawable.search_ic_new_white);
+            //binding.tvSearch.setTextColor(getResources().getColor(R.color.whiteColor));
             binding.imgVuFilter.setImageResource(R.drawable.p_filter);
             binding.imgVuNotif.setImageResource(R.drawable.p_bell_icon);
-           // binding.switchIcon.setImageResource(R.drawable.football_ball);
+            // binding.switchIcon.setImageResource(R.drawable.football_ball);
             binding.pPadel.setImageResource(R.drawable.p_active_padel);
             binding.pPadelBg.setImageResource(R.drawable.p_padel_bg);
             binding.pClubBg.setImageResource(android.R.color.transparent);
 
-        }
-        else if( Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kFootballModule)) {
+        } else if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kFootballModule)) {
             binding.pClubs.setImageResource(R.drawable.p_active_clubs);
             binding.pPadel.setEnabled(true);
             binding.pClubs.setEnabled(false);
             binding.pLineup.setEnabled(true);
             binding.cardVu.setCardBackgroundColor(getResources().getColor(R.color.transparent));
-           // binding.imgVuMenu.setImageResource(R.drawable.pmenu_ic);
-           // binding.imgVuSearch.setImageResource(R.drawable.search_ic_new);
-           // binding.tvSearch.setTextColor(Color.parseColor("#979FB3"));
+            // binding.imgVuMenu.setImageResource(R.drawable.pmenu_ic);
+            // binding.imgVuSearch.setImageResource(R.drawable.search_ic_new);
+            // binding.tvSearch.setTextColor(Color.parseColor("#979FB3"));
             binding.imgVuFilter.setImageResource(R.drawable.p_filter);
             binding.imgVuNotif.setImageResource(R.drawable.p_bell_icon);
-           // binding.switchIcon.setImageResource(R.drawable.padel_ball);
+            // binding.switchIcon.setImageResource(R.drawable.padel_ball);
             binding.pClubBg.setImageResource(R.drawable.p_club_bg);
             binding.pPadelBg.setImageResource(android.R.color.transparent);
 
-        }
-        else if(Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)){
+        } else if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kLineupModule)) {
             binding.pLineup.setImageResource(R.drawable.p_active_lineup);
             binding.pPadel.setEnabled(true);
             binding.pClubs.setEnabled(true);
@@ -220,8 +213,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
             padelMatchAdapter = new OleProfilePadelMatchHistoryAdapter(getContext(), olePadelMatchResults);
             padelMatchAdapter.setItemClickListener(padelResultItemClickListener);
             binding.resultRecyclerVu.setAdapter(padelMatchAdapter);
-        }
-        else {
+        } else {
             oleResultListAdapter = new OleResultListAdapter(getContext(), resultList);
             oleResultListAdapter.setItemClickListener(footballResultItemClickListener);
             binding.resultRecyclerVu.setAdapter(oleResultListAdapter);
@@ -234,13 +226,10 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
         timer.schedule(timerTask, 2000, 3000);
 
         binding.pullRefresh.setColorSchemeColors(getResources().getColor(R.color.blueColor));
-        binding.pullRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override
-            public void onRefresh() {
-                getLocationAndCallAPI();
-                getPromotionsAPI(false);
-                getResultListAPI(false);
-            }
+        binding.pullRefresh.setOnRefreshListener(() -> {
+            getLocationAndCallAPI();
+            getPromotionsAPI(false);
+            getResultListAPI(false);
         });
 
         binding.relMenu.setOnClickListener(this);
@@ -251,7 +240,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
         binding.btnResultSeeAll.setOnClickListener(this);
         binding.relFilter.setOnClickListener(this);
         binding.filterBg.setOnClickListener(this);
-       // binding.switchVu.setOnClickListener(this);
+        // binding.switchVu.setOnClickListener(this);
         binding.pClubs.setOnClickListener(this);
         binding.pLineup.setOnClickListener(this);
         binding.pPadel.setOnClickListener(this);
@@ -275,8 +264,8 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     protected void sendAppLangApi() {
         String userId = Functions.getPrefValue(getContext(), Constants.kUserID);
 
-        if (userId!=null){
-            Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendAppLang(userId,Functions.getAppLang(getContext()));
+        if (userId != null) {
+            Call<ResponseBody> call = AppManager.getInstance().apiInterface.sendAppLang(userId, Functions.getAppLang(getContext()));
             call.enqueue(new Callback<>() {
                 @Override
                 public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -340,6 +329,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     private class AutoScrollTask extends TimerTask {
         int position = 0;
         boolean end = false;
+
         @Override
         public void run() {
             if (notificationList.isEmpty()) {
@@ -363,14 +353,14 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        getLocationAndCallAPI();
+        getClubList(clubList.isEmpty());
         getPromotionsAPI(false);
         getResultListAPI(false);
         setBadgeValue();
         userInfo = Functions.getUserinfo(getContext());
         if (!Functions.getPrefValue(getContext(), Constants.kIsSignIn).equalsIgnoreCase("1")) {
             return;
-        }else{
+        } else {
             Glide.with(requireActivity()).load(userInfo.getEmojiUrl()).into(binding.emojiImgVu);
         }
         Glide.with(requireActivity()).load(userInfo.getBibUrl()).placeholder(R.drawable.bibl).into(binding.shirtImgVu);
@@ -378,26 +368,24 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void getLocationAndCallAPI() {
-
-
-        getClubList(clubList.isEmpty());
-        new AirLocation(getActivity(), true, false, new AirLocation.Callbacks() {
+        LocationHelperFragment helper = LocationHelperFragment.getInstance(getChildFragmentManager());
+        helper.startLocationRequest(new LocationHelperFragment.LocationCallback() {
             @Override
-            public void onSuccess(Location loc) {
-                location = loc;
+            public void onLocationRetrieved(Location location) {
+                OleHomeFragment.this.location = location;
                 pageNo = 1;
                 getClubList(clubList.isEmpty());
             }
 
             @Override
-            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
+            public void onLocationError(String message) {
                 binding.pullRefresh.setRefreshing(false);
                 pageNo = 1;
                 getClubList(clubList.isEmpty());
-
             }
         });
     }
+
 
     private final OleHomeNotifAdapter.ItemClickListener notifItemClickListener = new OleHomeNotifAdapter.ItemClickListener() {
         @Override
@@ -410,8 +398,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 intent.putExtra("req_status", notification.getRequestStatus());
                 intent.putExtra("player_id", notification.getBy().getId());
                 startActivity(intent);
-            }
-            else if (notification.getType().equalsIgnoreCase("new_challenge")) {
+            } else if (notification.getType().equalsIgnoreCase("new_challenge")) {
                 if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kFootballModule)) {
                     Intent intent = new Intent(getContext(), OleMatchHistoryActivity.class);
                     intent.putExtra("match_type", notification.getBookingType());
@@ -420,52 +407,44 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                     intent.putExtra("player_id", notification.getBy().getId());
                     startActivity(intent);
                 }
-            }
-            else if (notification.getType().equalsIgnoreCase("next_booking")) {
+            } else if (notification.getType().equalsIgnoreCase("next_booking")) {
                 if (notification.getBy().getId().equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID))) {
                     if (notification.getBookingType().equalsIgnoreCase(Constants.kNormalBooking)) {
                         if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                             Intent intent = new Intent(getContext(), OlePadelNormalBookingDetailActivity.class);
                             intent.putExtra("booking_id", notification.getBookingId());
                             startActivity(intent);
-                        }
-                        else {
+                        } else {
                             Intent intent = new Intent(getContext(), OleNormalBookingDetailActivity.class);
                             intent.putExtra("booking_id", notification.getBookingId());
                             startActivity(intent);
                         }
-                    }
-                    else if (notification.getBookingType().equalsIgnoreCase(Constants.kFriendlyGame)) {
+                    } else if (notification.getBookingType().equalsIgnoreCase(Constants.kFriendlyGame)) {
                         Intent intent = new Intent(getContext(), OleGameBookingDetailActivity.class);
                         intent.putExtra("booking_id", notification.getBookingId());
                         startActivity(intent);
-                    }
-                    else {
+                    } else {
                         if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                             Intent intent = new Intent(getContext(), OlePadelMatchBookingDetailActivity.class);
                             intent.putExtra("booking_id", notification.getBookingId());
                             startActivity(intent);
-                        }
-                        else {
+                        } else {
                             Intent intent = new Intent(getContext(), OleMatchBookingDetailActivity.class);
                             intent.putExtra("booking_id", notification.getBookingId());
                             startActivity(intent);
                         }
                     }
-                }
-                else {
+                } else {
                     if (notification.getBookingType().equalsIgnoreCase(Constants.kFriendlyGame)) {
                         Intent intent = new Intent(getContext(), OleGameDetailActivity.class);
                         intent.putExtra("booking_id", notification.getBookingId());
                         startActivity(intent);
-                    }
-                    else {
+                    } else {
                         if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                             Intent intent = new Intent(getContext(), OlePadelMatchDetailActivity.class);
                             intent.putExtra("booking_id", notification.getBookingId());
                             startActivity(intent);
-                        }
-                        else {
+                        } else {
                             Intent intent = new Intent(getContext(), OleMatchDetailActivity.class);
                             intent.putExtra("booking_id", notification.getBookingId());
                             startActivity(intent);
@@ -511,8 +490,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                         public void onClick(DialogInterface dialog, int which) {
                             if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                                 acceptPadelChallengeAPI(true, notification.getBookingId(), notification.getBy().getId(), pos);
-                            }
-                            else {
+                            } else {
                                 acceptRequestAPI(true, notification.getBookingId(), notification.getBy().getId(), notification.getBookingType(), notification.getRequestStatus(), "accept", pos);
                             }
                         }
@@ -536,8 +514,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 intent.putExtra("req_status", notification.getRequestStatus());
                 intent.putExtra("player_id", notification.getBy().getId());
                 startActivity(intent);
-            }
-            else if (notification.getType().equalsIgnoreCase("new_challenge")) {
+            } else if (notification.getType().equalsIgnoreCase("new_challenge")) {
                 if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kFootballModule)) {
                     Intent intent = new Intent(getContext(), OleMatchHistoryActivity.class);
                     intent.putExtra("match_type", notification.getBookingType());
@@ -560,8 +537,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                         public void onClick(DialogInterface dialog, int which) {
                             if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                                 acceptPadelChallengeAPI(true, notification.getBookingId(), notification.getBy().getId(), pos);
-                            }
-                            else {
+                            } else {
                                 acceptRequestAPI(true, notification.getBookingId(), notification.getBy().getId(), notification.getBookingType(), notification.getRequestStatus(), "accept", pos);
                             }
                         }
@@ -584,8 +560,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
             Product product = productList.get(pos);
             if (product.getIsFavorite().equalsIgnoreCase("1")) {
                 removeFromWishlist(true, product.getId(), pos);
-            }
-            else {
+            } else {
                 addToWishlist(true, product.getId(), pos);
             }
         }
@@ -616,8 +591,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
             Club club = clubList.get(pos);
             if (club.getFavorite().equalsIgnoreCase("1")) {
                 addRemoveFavClub(true, club.getId(), "0", pos);
-            }
-            else {
+            } else {
                 addRemoveFavClub(true, club.getId(), "1", pos);
             }
         }
@@ -645,14 +619,12 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 Intent intent = new Intent(getContext(), OleGameDetailActivity.class);
                 intent.putExtra("booking_id", matchList.get(pos).getBookingId());
                 startActivity(intent);
-            }
-            else {
+            } else {
                 if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                     Intent intent = new Intent(getContext(), OlePadelMatchDetailActivity.class);
                     intent.putExtra("booking_id", matchList.get(pos).getBookingId());
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Intent intent = new Intent(getContext(), OleMatchDetailActivity.class);
                     intent.putExtra("booking_id", matchList.get(pos).getBookingId());
                     startActivity(intent);
@@ -675,7 +647,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                         .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                ((BaseActivity)getActivity()).gameAvailRequestAPI(match.getBookingId());
+                                ((BaseActivity) getActivity()).gameAvailRequestAPI(match.getBookingId());
                             }
                         })
                         .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
@@ -685,8 +657,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             }
                         }).create();
                 builder.show();
-            }
-            else {
+            } else {
                 FragmentTransaction fragmentTransaction = getChildFragmentManager().beginTransaction();
                 Fragment prev = getChildFragmentManager().findFragmentByTag("PositionDialogFragment");
                 if (prev != null) {
@@ -697,7 +668,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 dialogFragment.setDialogCallback(new OlePositionDialogFragment.PositionDialogCallback() {
                     @Override
                     public void confirmClicked(OlePlayerPosition olePlayerPosition) {
-                        ((BaseActivity)getActivity()).openPaymentDialog(match.getJoiningFee(), Functions.getPrefValue(getContext(), Constants.kCurrency), "", "", "", true, false, match.getClubId(), new OlePaymentDialogFragment.PaymentDialogCallback() {
+                        ((BaseActivity) getActivity()).openPaymentDialog(match.getJoiningFee(), Functions.getPrefValue(getContext(), Constants.kCurrency), "", "", "", true, false, match.getClubId(), new OlePaymentDialogFragment.PaymentDialogCallback() {
                             @Override
                             public void didConfirm(boolean status, String paymentMethod, String orderRef, String paidPrice, String walletPaid, String cardPaid) {
                                 joinGameAPI(true, match.getBookingId(), olePlayerPosition.getPositionId(), match.getJoiningFee(), pos, paymentMethod, orderRef, cardPaid, walletPaid);
@@ -718,8 +689,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
             OlePlayerMatch olePlayerMatch = matchList.get(pos);
             if (olePlayerMatch.getRequestStatus().equalsIgnoreCase("request_received")) {
                 acceptChallenge(olePlayerMatch.getBookingId(), olePlayerMatch.getBookingType(), olePlayerMatch.getRequestStatus(), olePlayerMatch.getJoiningFee(), olePlayerMatch.getClubId(), pos);
-            }
-            else {
+            } else {
                 joinChallenge(olePlayerMatch.getBookingId(), olePlayerMatch.getBookingType(), olePlayerMatch.getJoiningFee(), olePlayerMatch.getClubId(), pos);
             }
         }
@@ -744,7 +714,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((BaseActivity)getActivity()).openPaymentDialog(price, Functions.getPrefValue(getContext(), Constants.kCurrency), "", "", "", false, false, clubId, new OlePaymentDialogFragment.PaymentDialogCallback() {
+                        ((BaseActivity) getActivity()).openPaymentDialog(price, Functions.getPrefValue(getContext(), Constants.kCurrency), "", "", "", false, false, clubId, new OlePaymentDialogFragment.PaymentDialogCallback() {
                             @Override
                             public void didConfirm(boolean status, String paymentMethod, String orderRef, String paidPrice, String walletPaid, String cardPaid) {
                                 acceptChallengeAPI(true, bookingId, bookingType, requestStatus, "accept", pos, paymentMethod, orderRef, price, cardPaid, walletPaid);
@@ -768,7 +738,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-                        ((BaseActivity)getActivity()).openPaymentDialog(price, Functions.getPrefValue(getContext(), Constants.kCurrency), "", "", "", false, false, clubId, new OlePaymentDialogFragment.PaymentDialogCallback() {
+                        ((BaseActivity) getActivity()).openPaymentDialog(price, Functions.getPrefValue(getContext(), Constants.kCurrency), "", "", "", false, false, clubId, new OlePaymentDialogFragment.PaymentDialogCallback() {
                             @Override
                             public void didConfirm(boolean status, String paymentMethod, String orderRef, String paidPrice, String walletPaid, String cardPaid) {
                                 joinChallengeAPI(true, bookingId, bookingType, pos, paymentMethod, orderRef, price, cardPaid, walletPaid);
@@ -789,40 +759,33 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     public void onClick(View v) {
         if (v == binding.relMenu) {
             menuClicked();
-        }
-        else if (v == binding.relNotif) {
+        } else if (v == binding.relNotif) {
             notifClicked();
-        }
-        else if (v == binding.btnClubSeeAll) {
+        } else if (v == binding.btnClubSeeAll) {
             searchClicked(v);
-        }
-        else if (v == binding.btnMatchSeeAll) {
+        } else if (v == binding.btnMatchSeeAll) {
             matchSeeAllClicked(v);
-        }
-        else if (v == binding.btnResultSeeAll) {
+        } else if (v == binding.btnResultSeeAll) {
             resultSeeAllClicked(v);
-        }
-        else if (v == binding.relFilter) {
+        } else if (v == binding.relFilter) {
             filterClicked();
-        }
-        else if (v == binding.filterBg) {
+        } else if (v == binding.filterBg) {
             filterBgClicked();
         }
 //        else if (v == binding.switchVu) {
 //
 //        }
-        else if (v == binding.pClubs){
+        else if (v == binding.pClubs) {
             switchToClubs();
             binding.pPadel.setImageResource(R.drawable.p_padel);
             binding.pClubs.setImageResource(R.drawable.p_active_clubs);
             binding.pLineup.setImageResource(R.drawable.p_lineup);
-        }
-        else if (v == binding.pLineup){
+        } else if (v == binding.pLineup) {
             if (!Functions.getPrefValue(getContext(), Constants.kIsSignIn).equalsIgnoreCase("1")) {
                 Functions.showToast(getContext(), getString(R.string.please_login_to_use_lineup), FancyToast.ERROR, FancyToast.LENGTH_SHORT);
-            }else{
+            } else {
                 Functions.setAppLang(getContext(), "en");
-                Functions.changeLanguage(getContext(),"en");
+                Functions.changeLanguage(getContext(), "en");
                 sendAppLangApi();
                 switchToLineup();
                 binding.pPadel.setImageResource(R.drawable.p_padel);
@@ -830,8 +793,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 binding.pLineup.setImageResource(R.drawable.p_active_lineup);
             }
 
-        }
-        else if (v == binding.pPadel){
+        } else if (v == binding.pPadel) {
             switchToPadel();
             binding.pPadel.setImageResource(R.drawable.p_active_padel);
             binding.pClubs.setImageResource(R.drawable.p_clubs);
@@ -855,6 +817,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
         getActivity().finish();
 
     }
+
     private void switchToClubs() {
         SharedPreferences.Editor editor = getContext().getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE).edit();
         editor.putString(Constants.kAppModule, Constants.kFootballModule);
@@ -866,6 +829,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
         getActivity().finish();
 
     }
+
     private void switchToLineup() {
         SharedPreferences.Editor editor = getContext().getSharedPreferences(Constants.PREF_NAME, MODE_PRIVATE).edit();
         editor.putString(Constants.kAppModule, Constants.kLineupModule);
@@ -902,8 +866,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     private void filterClicked() {
         if (filterFragment != null && filterFragment.isVisible()) {
             removeFilterFrag();
-        }
-        else {
+        } else {
             binding.filterBg.setVisibility(View.VISIBLE);
             //binding.switchVu.setVisibility(View.GONE);
             filterFragment = new OleClubFilterFragment();
@@ -926,8 +889,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
         if (AppManager.getInstance().notificationCount > 0) {
             binding.toolbarBadge.setVisibility(View.VISIBLE);
             binding.toolbarBadge.setNumber(AppManager.getInstance().notificationCount);
-        }
-        else  {
+        } else {
             binding.toolbarBadge.setVisibility(View.GONE);
         }
     }
@@ -943,7 +905,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
         //binding.switchVu.setVisibility(View.VISIBLE);
     }
 
-    OleClubFilterFragment.ClubFilterFragmentCallBack  callBack = new OleClubFilterFragment.ClubFilterFragmentCallBack() {
+    OleClubFilterFragment.ClubFilterFragmentCallBack callBack = new OleClubFilterFragment.ClubFilterFragmentCallBack() {
         @Override
         public void getFilters(String date, String countryId, String cityId, String offer, String openTime, String closeTime, String fieldSize, String fieldType, String grassType) {
             OleHomeFragment.this.date = date;
@@ -965,16 +927,15 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
 
     private void getClubList(boolean isLoader) {
         Call<ResponseBody> call;
-        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing") : null;
         if (location == null) {
-            call = AppManager.getInstance().apiInterface.getClubList(Functions.getAppLang(getActivity()), Functions.getPrefValue(getActivity(), Constants.kUserID),   0, 0, pageNo, offer, name, date, openTime, closeTime, cityId, grassType, fieldType, fieldSize, nearby, Functions.getPrefValue(getContext(), Constants.kAppModule));
-        }
-        else {
-            call = AppManager.getInstance().apiInterface.getClubList(Functions.getAppLang(getActivity()), Functions.getPrefValue(getActivity(), Constants.kUserID),   location.getLatitude(), location.getLongitude(), pageNo, offer, name, date, openTime, closeTime, cityId, grassType, fieldType, fieldSize, nearby, Functions.getPrefValue(getContext(), Constants.kAppModule));
+            call = AppManager.getInstance().apiInterface.getClubList(Functions.getAppLang(getActivity()), Functions.getPrefValue(requireActivity(), Constants.kUserID), 0, 0, pageNo, offer, name, date, openTime, closeTime, cityId, grassType, fieldType, fieldSize, nearby, Functions.getPrefValue(getContext(), Constants.kAppModule));
+        } else {
+            call = AppManager.getInstance().apiInterface.getClubList(Functions.getAppLang(getActivity()), Functions.getPrefValue(requireActivity(), Constants.kUserID), location.getLatitude(), location.getLongitude(), pageNo, offer, name, date, openTime, closeTime, cityId, grassType, fieldType, fieldSize, nearby, Functions.getPrefValue(getContext(), Constants.kAppModule));
         }
         call.enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
                 if (binding != null) {
                     binding.pullRefresh.setRefreshing(false);
@@ -1000,16 +961,14 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             AppManager.getInstance().clubs = clubList;
                             clubListAdapter.notifyDataSetChanged();
                             oleMatchListAdapter.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -1022,8 +981,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 }
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1031,8 +989,8 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void getPromotionsAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.getPromotions(Functions.getAppLang(getActivity()),Functions.getPrefValue(getActivity(), Constants.kUserID), Functions.getPrefValue(getActivity(), Constants.kAppModule));
+        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.getPromotions(Functions.getAppLang(getActivity()), Functions.getPrefValue(getActivity(), Constants.kUserID), Functions.getPrefValue(getActivity(), Constants.kAppModule));
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1050,8 +1008,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             JSONArray arrR;
                             if (Functions.getPrefValue(getActivity(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                                 arrR = object.getJSONArray("padel_matches_result");
-                            }
-                            else {
+                            } else {
                                 arrR = object.getJSONArray("matches_result");
                             }
                             Gson gson = new Gson();
@@ -1071,8 +1028,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             for (int i = 0; i < arrR.length(); i++) {
                                 if (Functions.getPrefValue(getActivity(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                                     matchResults.add(gson.fromJson(arrR.get(i).toString(), OlePadelMatchResults.class));
-                                }
-                                else {
+                                } else {
                                     matchResults.add(gson.fromJson(arrR.get(i).toString(), OleMatchResults.class));
                                 }
                             }
@@ -1095,16 +1051,14 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                                 oleHomeNotifAdapter.setResultList(matchResults);
                             }
                             oleHomeNotifAdapter.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -1117,8 +1071,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 }
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1126,8 +1079,8 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void getResultListAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.allMatches(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), 0, 0, "", "", "", "", "1", Functions.getPrefValue(getContext(), Constants.kAppModule));
+        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.allMatches(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), 0, 0, "", "", "", "", "1", Functions.getPrefValue(getContext(), Constants.kAppModule));
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1149,24 +1102,21 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             }
 //                            Glide.with(getApplicationContext()).load(userInfo.getEmojiUrl()).into(binding.emojiImgVu);
 //                            Glide.with(getApplicationContext()).load(userInfo.getBibUrl()).placeholder(R.drawable.bibl).into(binding.shirtImgVu);
-                        }
-                        else {
+                        } else {
                             resultList.clear();
                             olePadelMatchResults.clear();
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                         if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                             padelMatchAdapter.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             oleResultListAdapter.notifyDataSetChanged();
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -1176,8 +1126,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1186,7 +1135,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
 
     private void addRemoveFavClub(boolean isLoader, String clubId, String status, int pos) {
         KProgressHUD hud = Functions.showLoader(getActivity(), "Image processing");
-        ((OlePlayerMainTabsActivity)getActivity()).addRemoveFavAPI(clubId, status, "club", new BaseActivity.FavCallback() {
+        ((OlePlayerMainTabsActivity) getActivity()).addRemoveFavAPI(clubId, status, "club", new BaseActivity.FavCallback() {
             @Override
             public void addRemoveFav(boolean success, String msg) {
                 Functions.hideLoader(hud);
@@ -1195,17 +1144,15 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                     clubList.get(pos).setFavorite(status);
                     int favCount = Integer.parseInt(clubList.get(pos).getFavoriteCount());
                     if (status.equalsIgnoreCase("0")) {
-                        if (favCount>0) {
+                        if (favCount > 0) {
                             favCount -= 1;
                         }
-                    }
-                    else {
+                    } else {
                         favCount += 1;
                     }
                     clubList.get(pos).setFavoriteCount(String.valueOf(favCount));
                     clubListAdapter.notifyItemChanged(pos);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), msg, FancyToast.ERROR);
                 }
             }
@@ -1213,8 +1160,8 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void acceptChallengeAPI(boolean isLoader, String bookingId, String matchType, String requestStatus, String flag, int pos, String paymentMethod, String orderRef, String joinFee, String cardPaid, String walletPaid) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptRejectChallenge(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID),  bookingId, "", matchType, requestStatus, flag, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress(), joinFee);
+        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptRejectChallenge(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, "", matchType, requestStatus, flag, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress(), joinFee);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1226,16 +1173,14 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             matchList.get(pos).setMyStatus("accepted");
                             oleMatchListAdapter.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -1245,8 +1190,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1254,8 +1198,8 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void acceptRequestAPI(boolean isLoader, String bookingId, String playerId, String matchType, String requestStatus, String flag, int pos) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptRejectChallenge(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId, matchType, requestStatus, flag);
+        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptRejectChallenge(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId, matchType, requestStatus, flag);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1267,16 +1211,14 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             notificationList.remove(pos);
                             oleHomeNotifAdapter.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -1286,8 +1228,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1295,8 +1236,8 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void acceptPadelChallengeAPI(boolean isLoader, String bookingId, String playerId, int pos) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptChallenge(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId);
+        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.acceptChallenge(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, playerId);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1308,16 +1249,14 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             challengeReqList.remove(pos);
                             oleHomeNotifAdapter.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -1327,8 +1266,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1336,8 +1274,8 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void joinChallengeAPI(boolean isLoader, String bookingId, String matchType, int pos, String paymentMethod, String orderRef, String joinFee, String cardPaid, String walletPaid) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.joinChallenge(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, matchType, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress(), joinFee);
+        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.joinChallenge(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, matchType, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress(), joinFee);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1349,16 +1287,14 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             matchList.get(pos).setMyStatus("pending");
                             oleMatchListAdapter.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -1368,8 +1304,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1377,8 +1312,8 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     }
 
     private void joinGameAPI(boolean isLoader, String bookingId, String position, String fee, int pos, String paymentMethod, String orderRef, String cardPaid, String walletPaid) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.joinGame(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, position, fee, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress());
+        KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.joinGame(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingId, position, fee, orderRef, cardPaid, walletPaid, paymentMethod, Functions.getIPAddress());
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -1390,16 +1325,14 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             matchList.get(pos).setMyStatus("pending");
                             oleMatchListAdapter.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -1409,8 +1342,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -1419,15 +1351,14 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
 
     private void addToWishlist(boolean isLoader, String prodId, int pos) {
         KProgressHUD hud = Functions.showLoader(getActivity(), "Image processing");
-        ((BaseActivity)getActivity()).addToWishlistAPI(prodId, new BaseActivity.FavCallback() {
+        ((BaseActivity) getActivity()).addToWishlistAPI(prodId, new BaseActivity.FavCallback() {
             @Override
             public void addRemoveFav(boolean success, String msg) {
                 Functions.hideLoader(hud);
                 if (success) {
                     productList.get(pos).setIsFavorite("1");
                     oleHomeNotifAdapter.notifyDataSetChanged();
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), msg, FancyToast.ERROR);
                 }
             }
@@ -1436,15 +1367,14 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
 
     private void removeFromWishlist(boolean isLoader, String prodId, int pos) {
         KProgressHUD hud = Functions.showLoader(getActivity(), "Image processing");
-        ((BaseActivity)getActivity()).removeFromWishlistAPI(prodId, new BaseActivity.FavCallback() {
+        ((BaseActivity) getActivity()).removeFromWishlistAPI(prodId, new BaseActivity.FavCallback() {
             @Override
             public void addRemoveFav(boolean success, String msg) {
                 Functions.hideLoader(hud);
                 if (success) {
                     productList.get(pos).setIsFavorite("0");
                     oleHomeNotifAdapter.notifyDataSetChanged();
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), msg, FancyToast.ERROR);
                 }
             }

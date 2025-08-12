@@ -1,12 +1,15 @@
 package ae.oleapp.shop;
 
 import androidx.annotation.Nullable;
+import androidx.core.app.ActivityCompat;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
+import android.Manifest;
 import android.app.Dialog;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.location.Location;
 import android.os.Bundle;
 import android.util.Log;
@@ -33,7 +36,7 @@ import java.util.List;
 import ae.oleapp.R;
 import ae.oleapp.base.BaseActivity;
 import ae.oleapp.databinding.ActivityShopMapBinding;
-import mumayank.com.airlocationlibrary.AirLocation;
+import ae.oleapp.util.LocationHelperFragment;
 
 public class ShopMapActivity extends BaseActivity implements OnMapReadyCallback, GoogleMap.OnCameraIdleListener, GoogleMap.OnMyLocationButtonClickListener, View.OnClickListener {
 
@@ -41,6 +44,7 @@ public class ShopMapActivity extends BaseActivity implements OnMapReadyCallback,
     private SupportMapFragment mapFragment;
     private GoogleMap googleMap;
     private double lat = 0, lng = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,31 +89,64 @@ public class ShopMapActivity extends BaseActivity implements OnMapReadyCallback,
         locationButton.setLayoutParams(rlp);
     }
 
+//    private void getLocation() {
+//        new AirLocation(this, true, true, new AirLocation.Callbacks() {
+//            @Override
+//            public void onSuccess(Location loc) {
+//                // do something
+//                LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
+//
+//                // Showing the current location in Google Map
+//                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
+//                googleMap.setMyLocationEnabled(true);
+//                googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+//
+//                lat = latLng.latitude;
+//                lng = latLng.longitude;
+//                // Zoom in the Google Map
+//                googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
+//            }
+//
+//            @Override
+//            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
+//                // do something
+//
+//            }
+//        });
+//    }
+
     private void getLocation() {
-        new AirLocation(this, true, true, new AirLocation.Callbacks() {
-            @Override
-            public void onSuccess(Location loc) {
-                // do something
-                LatLng latLng = new LatLng(loc.getLatitude(), loc.getLongitude());
+        LocationHelperFragment helper = LocationHelperFragment.getInstance(getSupportFragmentManager());
+        helper.startLocationRequest(new LocationHelperFragment.LocationCallback() {
+                @Override
+                public void onLocationRetrieved(Location location) {
+                    if (location == null || googleMap == null) return;
 
-                // Showing the current location in Google Map
-                googleMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
-                googleMap.setMyLocationEnabled(true);
-                googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+                    LatLng latLng = new LatLng(location.getLatitude(), location.getLongitude());
 
-                lat = latLng.latitude;
-                lng = latLng.longitude;
-                // Zoom in the Google Map
-                googleMap.animateCamera(CameraUpdateFactory.zoomTo(16));
-            }
+                    // Enable location features on the map
+                    if (ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED ||
+                            ActivityCompat.checkSelfPermission(getContext(), Manifest.permission.ACCESS_COARSE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+                        googleMap.setMyLocationEnabled(true);
+                        googleMap.getUiSettings().setMyLocationButtonEnabled(true);
+                    }
 
-            @Override
-            public void onFailed(AirLocation.LocationFailedEnum locationFailedEnum) {
-                // do something
+                    // Move and zoom to current location
+                    googleMap.moveCamera(CameraUpdateFactory.newLatLngZoom(latLng, 16f));
 
-            }
-        });
+                    lat = latLng.latitude;
+                    lng = latLng.longitude;
+                }
+
+                @Override
+                public void onLocationError(String message) {
+                    // Optional: Show an error or retry
+                    Log.e("LocationError", message);
+                }
+            });
     }
+
+
 
     @Override
     public void onCameraIdle() {
