@@ -44,6 +44,7 @@ public class OleNewSaleActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = OleactivityNewSaleBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.sell);
 
         Bundle bundle = getIntent().getExtras();

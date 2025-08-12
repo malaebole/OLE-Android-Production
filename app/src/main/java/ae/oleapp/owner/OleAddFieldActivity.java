@@ -104,6 +104,7 @@ public class OleAddFieldActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = OleactivityAddFieldBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

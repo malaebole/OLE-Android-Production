@@ -39,6 +39,7 @@ public class OlePaymentSettingsActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         binding = OleactivityPaymentSettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.payment_settings);
 
         Bundle bundle = getIntent().getExtras();

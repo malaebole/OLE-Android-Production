@@ -81,6 +81,7 @@ public class AddLineupGlobalPlayerActivity extends BaseActivity implements View.
         super.onCreate(savedInstanceState);
         binding = ActivityAddLineupGlobalPlayerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

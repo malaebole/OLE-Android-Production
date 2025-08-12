@@ -208,11 +208,19 @@ public class SubscriptionActivity extends BaseActivity implements PurchasesUpdat
         super.onCreate(savedInstanceState);
         binding = ActivitySubscriptionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         //makeStatusbarTransperant();
 
-        //Establish connection to billing client
-        //check purchase status from google play store cache on every app start
-        billingClient = BillingClient.newBuilder(this).enablePendingPurchases(PendingPurchasesParams.newBuilder().build()).setListener(this).build();
+        PendingPurchasesParams.Builder pendingPurchasesParamsBuilder = PendingPurchasesParams.newBuilder();
+        pendingPurchasesParamsBuilder.enablePrepaidPlans();    // For your subscriptions
+        pendingPurchasesParamsBuilder.enableOneTimeProducts(); // Required by the library
+        PendingPurchasesParams pendingParams = pendingPurchasesParamsBuilder.build(); // <--- CALL .build()
+        billingClient = BillingClient.newBuilder(this)
+                .enablePendingPurchases(pendingParams) // <--- PASS THE BUILT OBJECT
+                .setListener(this)
+                .build();
+//        billingClient = BillingClient.newBuilder(this).enablePendingPurchases(PendingPurchasesParams.newBuilder().build()).setListener(this).build();
+
         billingClient.startConnection(new BillingClientStateListener() {
             @Override
             public void onBillingSetupFinished(@NonNull BillingResult billingResult) {
@@ -224,68 +232,64 @@ public class SubscriptionActivity extends BaseActivity implements PurchasesUpdat
 
                     billingClient.queryPurchasesAsync(
                             QueryPurchasesParams.newBuilder().setProductType(BillingClient.ProductType.SUBS).build(),
-                            new PurchasesResponseListener() {
-                                public void onQueryPurchasesResponse(
-                                        @NonNull BillingResult billingResult1,
-                                        @NonNull List<Purchase> queryPurchases) {
-                                    // Process the result
-                                    if(billingResult1.getResponseCode()==BillingClient.BillingResponseCode.OK){
-                                        if(queryPurchases.size()>0){
-                                            handleSusbcriptionPurchases(queryPurchases);
-                                        }
-                                        //checking for subscribe items
-                                        //check which items are in purchase list and which are not in purchase list
-                                        //if items that are found add them to purchaseFound
-                                        //check status of found items and save values to preference
-                                        //item which are not found simply save false values to their preference
-                                        //indexOf return index of item in purchase list from 0-1 (because we have 2 items) else returns -1 if not found
-                                        ArrayList<Integer> purchaseFound =new ArrayList<Integer> ();
-                                        if(queryPurchases.size()>0){
-                                            //check item in purchase list
-                                            for(int i=0; i<queryPurchases.size(); i++){
-                                                String subcribeItemIDTemp = "";
-                                                for(int j=0; j<subcribeItemIDs.size(); j++){
-                                                    if(queryPurchases.get(i).getProducts().contains(subcribeItemIDs.get(j))) {
-                                                        subcribeItemIDTemp = subcribeItemIDs.get(j);
-                                                    }
+                            (billingResult1, queryPurchases) -> {
+                                // Process the result
+                                if(billingResult1.getResponseCode()==BillingClient.BillingResponseCode.OK){
+                                    if(queryPurchases.size()>0){
+                                        handleSusbcriptionPurchases(queryPurchases);
+                                    }
+                                    //checking for subscribe items
+                                    //check which items are in purchase list and which are not in purchase list
+                                    //if items that are found add them to purchaseFound
+                                    //check status of found items and save values to preference
+                                    //item which are not found simply save false values to their preference
+                                    //indexOf return index of item in purchase list from 0-1 (because we have 2 items) else returns -1 if not found
+                                    ArrayList<Integer> purchaseFound =new ArrayList<Integer> ();
+                                    if(queryPurchases.size()>0){
+                                        //check item in purchase list
+                                        for(int i=0; i<queryPurchases.size(); i++){
+                                            String subcribeItemIDTemp = "";
+                                            for(int j=0; j<subcribeItemIDs.size(); j++){
+                                                if(queryPurchases.get(i).getProducts().contains(subcribeItemIDs.get(j))) {
+                                                    subcribeItemIDTemp = subcribeItemIDs.get(j);
                                                 }
+                                            }
 
-                                                int index=subcribeItemIDs.indexOf(subcribeItemIDTemp);
-                                                //if purchase found
-                                                if(index>-1)
-                                                {
-                                                    purchaseFound.add(index);
-                                                    //Edhr check hoga token or subscription detail send krni haii
-                                                    saveSubscribeItemValueToPref(subcribeItemIDs.get(index), queryPurchases.get(i).getPurchaseState() == Purchase.PurchaseState.PURCHASED);
-                                                }
-                                            }
-                                            //items that are not found in purchase list mark false
-                                            //indexOf returns -1 when item is not in foundlist
-                                            for(int i=0;i < subcribeItemIDs.size(); i++){
-                                                if(!purchaseFound.contains(i)){
-                                                    saveSubscribeItemValueToPref(subcribeItemIDs.get(i),false);
-                                                }
+                                            int index=subcribeItemIDs.indexOf(subcribeItemIDTemp);
+                                            //if purchase found
+                                            if(index>-1)
+                                            {
+                                                purchaseFound.add(index);
+                                                //Edhr check hoga token or subscription detail send krni haii
+                                                saveSubscribeItemValueToPref(subcribeItemIDs.get(index), queryPurchases.get(i).getPurchaseState() == Purchase.PurchaseState.PURCHASED);
                                             }
                                         }
-                                        //if purchase list is empty that means no item is not purchased/Subscribed
-                                        //Or purchase is refunded or canceled
-                                        //so mark them all false
-                                        else{
-                                            for( int k=0; k<subcribeItemIDs.size(); k++ ){
-                                                saveSubscribeItemValueToPref(subcribeItemIDs.get(k),false);
+                                        //items that are not found in purchase list mark false
+                                        //indexOf returns -1 when item is not in foundlist
+                                        for(int i=0;i < subcribeItemIDs.size(); i++){
+                                            if(!purchaseFound.contains(i)){
+                                                saveSubscribeItemValueToPref(subcribeItemIDs.get(i),false);
                                             }
                                         }
                                     }
+                                    //if purchase list is empty that means no item is not purchased/Subscribed
+                                    //Or purchase is refunded or canceled
+                                    //so mark them all false
                                     else{
-                                        SubscriptionActivity.this.runOnUiThread(new Runnable() {
-                                            public void run() {
+                                        for( int k=0; k<subcribeItemIDs.size(); k++ ){
+                                            saveSubscribeItemValueToPref(subcribeItemIDs.get(k),false);
+                                        }
+                                    }
+                                }
+                                else{
+                                    SubscriptionActivity.this.runOnUiThread(new Runnable() {
+                                        public void run() {
 //                                                Toast.makeText(getApplicationContext(),
 //                                                        " Error " + billingResult.getDebugMessage(), Toast.LENGTH_SHORT).show();
-                                                Functions.showToast(getApplicationContext(), " Error " + billingResult.getDebugMessage(), FancyToast.ERROR);
+                                            Functions.showToast(getApplicationContext(), " Error " + billingResult.getDebugMessage(), FancyToast.ERROR);
 
-                                            }
-                                        });
-                                    }
+                                        }
+                                    });
                                 }
                             }
                     );
@@ -480,7 +484,15 @@ public class SubscriptionActivity extends BaseActivity implements PurchasesUpdat
         }
         //else reconnect service
         else{
-            billingClient = BillingClient.newBuilder(SubscriptionActivity.this).enablePendingPurchases(PendingPurchasesParams.newBuilder().build()).setListener(SubscriptionActivity.this).build();
+            PendingPurchasesParams.Builder pendingPurchasesParamsBuilder = PendingPurchasesParams.newBuilder();
+            pendingPurchasesParamsBuilder.enablePrepaidPlans();    // For your subscriptions
+            pendingPurchasesParamsBuilder.enableOneTimeProducts(); // Required by the library
+            PendingPurchasesParams pendingParams = pendingPurchasesParamsBuilder.build(); // <--- CALL .build()
+            billingClient = BillingClient.newBuilder(this)
+                    .enablePendingPurchases(pendingParams) // <--- PASS THE BUILT OBJECT
+                    .setListener(this)
+                    .build();
+//            billingClient = BillingClient.newBuilder(SubscriptionActivity.this).enablePendingPurchases(PendingPurchasesParams.newBuilder().build()).setListener(SubscriptionActivity.this).build();
             billingClient.startConnection(new BillingClientStateListener() {
                 @Override
                 public void onBillingSetupFinished(@NonNull BillingResult billingResult) {

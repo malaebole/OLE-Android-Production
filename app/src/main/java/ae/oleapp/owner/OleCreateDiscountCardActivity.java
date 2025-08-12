@@ -47,6 +47,7 @@ public class OleCreateDiscountCardActivity extends BaseActivity implements View.
         super.onCreate(savedInstanceState);
         binding = OleactivityCreateDiscountCardBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.loyalty_card);
 
         amountClicked();

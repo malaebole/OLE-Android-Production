@@ -36,6 +36,7 @@ public class OleMapActivity extends BaseActivity implements OnMapReadyCallback, 
         super.onCreate(savedInstanceState);
         binding = OleactivityMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.location);
 
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()

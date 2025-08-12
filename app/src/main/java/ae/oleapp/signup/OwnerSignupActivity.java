@@ -41,6 +41,7 @@ public class OwnerSignupActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = OleactivityOwnerSignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         checkKeyboardListener();

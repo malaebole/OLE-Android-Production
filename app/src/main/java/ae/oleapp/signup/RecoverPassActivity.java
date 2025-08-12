@@ -40,6 +40,7 @@ public class RecoverPassActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = OleactivityRecoverPassBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         checkKeyboardListener();

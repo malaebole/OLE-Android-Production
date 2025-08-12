@@ -54,6 +54,7 @@ public class DocumentHomeActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = ActivityDocumentHomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
 

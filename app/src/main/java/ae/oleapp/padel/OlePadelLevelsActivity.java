@@ -50,6 +50,7 @@ public class OlePadelLevelsActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivityPadelLevelsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.global_rank);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);

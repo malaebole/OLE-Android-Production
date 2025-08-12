@@ -31,6 +31,7 @@ public class OleCreatePromotionActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         binding = OleactivityCreatePromotionBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.create_promotion);
 
         binding.bar.backBtn.setOnClickListener(this);

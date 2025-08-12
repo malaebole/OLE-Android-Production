@@ -41,6 +41,7 @@ public class GameHistoryActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = ActivityGameHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

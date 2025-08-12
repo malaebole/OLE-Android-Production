@@ -43,6 +43,7 @@ public class OlePlayerReviewsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityPlayerReviewsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.playing_reviews);
 
         Bundle bundle = getIntent().getExtras();

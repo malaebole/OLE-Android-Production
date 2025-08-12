@@ -53,6 +53,7 @@ public class OleFinanceActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityOleFinanceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

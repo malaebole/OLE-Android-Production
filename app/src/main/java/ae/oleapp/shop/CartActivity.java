@@ -47,6 +47,7 @@ public class CartActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         binding = ActivityCartBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.cart);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);

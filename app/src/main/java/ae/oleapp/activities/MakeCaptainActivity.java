@@ -75,6 +75,7 @@ public class MakeCaptainActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = ActivityMakeCaptainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         socketManager = SocketManager.getInstance();

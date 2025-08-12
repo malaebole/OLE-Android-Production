@@ -137,7 +137,6 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
         // Inflate the layout for this fragment
         binding = OlefragmentHomeBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
-        getLocationAndCallAPI();
 
         binding.filterBg.setVisibility(View.GONE);
         if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
@@ -353,7 +352,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
     @Override
     public void onResume() {
         super.onResume();
-        getClubList(clubList.isEmpty());
+        getLocationAndCallAPI();
         getPromotionsAPI(false);
         getResultListAPI(false);
         setBadgeValue();
@@ -384,6 +383,7 @@ public class OleHomeFragment extends BaseFragment implements View.OnClickListene
                 getClubList(clubList.isEmpty());
             }
         });
+        getClubList(clubList.isEmpty());
     }
 
 

@@ -65,6 +65,7 @@ public class OleCashDepositActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivityCashDepositBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.cash_deposit);
 
         Bundle bundle = getIntent().getExtras();

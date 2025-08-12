@@ -81,6 +81,7 @@ public class CreateGiftActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = ActivityCreateGiftBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

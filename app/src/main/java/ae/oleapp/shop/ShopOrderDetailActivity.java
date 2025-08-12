@@ -48,6 +48,7 @@ public class ShopOrderDetailActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = ActivityShopOrderDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.tracking);
 
         Bundle bundle = getIntent().getExtras();

@@ -80,6 +80,7 @@ public class AddUpcomingExpenseActivity  extends BaseActivity implements View.On
         super.onCreate(savedInstanceState);
         binding = ActivityAddUpcomingExpenseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
 
         Bundle bundle = getIntent().getExtras();

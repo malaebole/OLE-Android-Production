@@ -1,8 +1,5 @@
 package ae.oleapp.player;
 
-import androidx.annotation.NonNull;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -11,20 +8,18 @@ import android.graphics.Color;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.Looper;
 import android.util.DisplayMetrics;
 import android.view.View;
 
+import androidx.recyclerview.widget.LinearLayoutManager;
+
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.target.CustomTarget;
-import com.bumptech.glide.request.transition.Transition;
 import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
 import com.github.mikephil.charting.data.BarEntry;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.formatter.IndexAxisValueFormatter;
 import com.github.mikephil.charting.formatter.ValueFormatter;
 import com.github.mikephil.charting.highlight.Highlight;
@@ -37,7 +32,6 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -51,10 +45,7 @@ import java.util.Locale;
 import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
 
-import javax.annotation.Nullable;
-
 import ae.oleapp.R;
-import ae.oleapp.activities.MyMarkerView;
 import ae.oleapp.adapters.OlePlayerFieldAdapter;
 import ae.oleapp.base.BaseActivity;
 import ae.oleapp.databinding.OleactivityPlayerClubDetailBinding;
@@ -64,10 +55,8 @@ import ae.oleapp.models.Club;
 import ae.oleapp.models.CustomGraphMarker;
 import ae.oleapp.models.Day;
 import ae.oleapp.models.Field;
-import ae.oleapp.models.GameTeam;
 import ae.oleapp.models.GiftData;
 import ae.oleapp.models.GiftWinner;
-import ae.oleapp.models.GraphData;
 import ae.oleapp.models.OleShiftTime;
 import ae.oleapp.models.Player;
 import ae.oleapp.owner.OleBookingActivity;
@@ -96,6 +85,7 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
         super.onCreate(savedInstanceState);
         binding = OleactivityPlayerClubDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.club_details);
 
         Bundle bundle = getIntent().getExtras();
@@ -143,39 +133,33 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
         String distance;
         if (club.getDistance().isEmpty()) {
             distance = getResources().getString(R.string.km_place, "0");
-        }
-        else {
+        } else {
             distance = getResources().getString(R.string.km_place, club.getDistance());
         }
         binding.tvLoc.setText(String.format("%s - %s", distance, club.getCity().getName()));
         if (club.getRating().isEmpty()) {
             binding.tvRate.setText("0.0");
-        }
-        else {
+        } else {
             binding.tvRate.setText(club.getRating());
         }
         if (club.getStartPrice().isEmpty()) {
             binding.tvPrice.setText(String.format("0 %s", club.getCurrency()));
-        }
-        else {
+        } else {
             binding.tvPrice.setText(String.format("%s %s", club.getStartPrice(), club.getCurrency()));
         }
         if (club.getFavorite().equalsIgnoreCase("1")) {
             binding.btnFav.setImageResource(R.drawable.fav_green);
-        }
-        else {
+        } else {
             binding.btnFav.setImageResource(R.drawable.club_unfav);
         }
         if (club.getFavoriteCount().isEmpty()) {
             binding.tvFavCount.setText("0");
-        }
-        else {
+        } else {
             binding.tvFavCount.setText(club.getFavoriteCount());
         }
         if (club.getContact().isEmpty()) {
             binding.btnCall.setVisibility(View.GONE);
-        }
-        else {
+        } else {
             binding.btnCall.setVisibility(View.VISIBLE);
         }
         String todayName = Functions.getDayName(new Date());
@@ -184,19 +168,17 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
             if (day.getShifting().size() == 2) {
                 binding.tvShift1.setVisibility(View.VISIBLE);
                 OleShiftTime time1 = day.getShifting().get(0);
-                binding.tvShift1.setText(time1.getOpening()+" - "+time1.getClosing());
+                binding.tvShift1.setText(time1.getOpening() + " - " + time1.getClosing());
                 binding.tvShift2.setVisibility(View.VISIBLE);
                 OleShiftTime time2 = day.getShifting().get(1);
-                binding.tvShift2.setText(time2.getOpening()+" - "+time2.getClosing());
-            }
-            else if (day.getShifting().size() == 1) {
+                binding.tvShift2.setText(time2.getOpening() + " - " + time2.getClosing());
+            } else if (day.getShifting().size() == 1) {
                 binding.tvShift1.setVisibility(View.VISIBLE);
                 OleShiftTime time1 = day.getShifting().get(0);
-                binding.tvShift1.setText(time1.getOpening()+" - "+time1.getClosing());
+                binding.tvShift1.setText(time1.getOpening() + " - " + time1.getClosing());
                 binding.tvShift2.setVisibility(View.GONE);
             }
-        }
-        else {
+        } else {
             binding.tvShift1.setVisibility(View.GONE);
             binding.tvShift2.setVisibility(View.GONE);
         }
@@ -205,7 +187,7 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
             DisplayMetrics displayMetrics = new DisplayMetrics();
             getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
             int width = displayMetrics.widthPixels;
-            String url = "https://maps.google.com/maps/api/staticmap?center=" + club.getLatitude() + "," + club.getLongitude() + "&zoom=16&size="+width+"x300&sensor=false&key="+getString(R.string.maps_api_key);
+            String url = "https://maps.google.com/maps/api/staticmap?center=" + club.getLatitude() + "," + club.getLongitude() + "&zoom=16&size=" + width + "x300&sensor=false&key=" + getString(R.string.maps_api_key);
             Glide.with(getApplicationContext()).load(url).into(binding.mapVu);
         }
     }
@@ -221,43 +203,39 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
         String discountExpiry = obj.getString("discount_expiry");
 
         if (!playerBookings.equalsIgnoreCase("") && !playerBookings.equalsIgnoreCase("0")) {
-            binding.stepView.setCompletedPosition(Integer.parseInt(playerBookings)-1);
+            binding.stepView.setCompletedPosition(Integer.parseInt(playerBookings) - 1);
             binding.stepView.setProgressColorIndicator(getResources().getColor(R.color.greenColor));
-        }
-        else {
+        } else {
             binding.stepView.setProgressColorIndicator(getResources().getColor(R.color.separatorColor));
         }
         if (!targetBookings.equalsIgnoreCase("")) {
             int value = Integer.parseInt(targetBookings);
             String[] arr = new String[value];
             for (int i = 0; i < value; i++) {
-                arr[i] = String.valueOf(i+1);
+                arr[i] = String.valueOf(i + 1);
             }
             binding.stepView.setLabels(arr);
         }
         if (playerBookings.equalsIgnoreCase(targetBookings)) {
             binding.imgVuTick.setImageResource(R.drawable.discount_tick_green);
-        }
-        else {
+        } else {
             binding.imgVuTick.setImageResource(R.drawable.discount_tick_gray);
         }
         if (remainingBookings.equalsIgnoreCase("0")) {
             binding.tvNotes.setText(R.string.discount_on_next_booking);
-        }
-        else {
+        } else {
             binding.tvNotes.setText(String.format(getResources().getString(R.string.booking_remaining_discount), remainingBookings, playerBookings, targetBookings));
         }
         if (type.equalsIgnoreCase("percent")) {
             binding.tvPerc.setText(String.format("%s%%", discount));
-        }
-        else {
+        } else {
             binding.tvPerc.setText(String.format("%s %s", discount, currency));
         }
         binding.tvExpiry.setText(getString(R.string.expired_on_place, discountExpiry));
     }
 
     private Day checkDayExist(String dayName) {
-        for (Day day: club.getTimings()) {
+        for (Day day : club.getTimings()) {
             if (day.getDayName().equalsIgnoreCase(dayName)) {
                 return day;
             }
@@ -269,20 +247,15 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
     public void onClick(View v) {
         if (v == binding.bar.backBtn) {
             finish();
-        }
-        else if (v == binding.mapVu) {
+        } else if (v == binding.mapVu) {
             mapClicked();
-        }
-        else if (v == binding.rateVu) {
+        } else if (v == binding.rateVu) {
             rateVuClicked();
-        }
-        else if (v == binding.btnCall) {
+        } else if (v == binding.btnCall) {
             callClicked();
-        }
-        else if (v == binding.btnFav) {
+        } else if (v == binding.btnFav) {
             favClicked();
-        }
-        else if (v == binding.infoIcon) {
+        } else if (v == binding.infoIcon) {
             infoIconClicked(v);
 
         }
@@ -316,11 +289,11 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
         }
         if (club.getFavorite().equalsIgnoreCase("1")) {
             addRemoveFavClub(club.getId(), "0");
-        }
-        else {
+        } else {
             addRemoveFavClub(club.getId(), "1");
         }
     }
+
     private void infoIconClicked(View view) {
         //binding.tvGiftType.setText(giftData.getGiftName());
         PopUpClass popUpClass = new PopUpClass();
@@ -339,12 +312,10 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
                     club.setFavorite(status);
                     if (status.equalsIgnoreCase("1")) {
                         binding.btnFav.setImageResource(R.drawable.fav_green);
-                    }
-                    else {
+                    } else {
                         binding.btnFav.setImageResource(R.drawable.club_unfav);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), msg, FancyToast.ERROR);
                 }
             }
@@ -352,12 +323,12 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
     }
 
     private void getAllFields(boolean isLoader) {
-        hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getAllFields(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), club.getId());
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-               // Functions.hideLoader(hud);
+                // Functions.hideLoader(hud);
                 if (response.body() != null) {
                     try {
                         JSONObject object = new JSONObject(response.body().string());
@@ -372,8 +343,7 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
                             JSONObject obj = object.getJSONObject("player_discount");
                             if (obj.length() > 0) {
                                 populateDiscountData(obj);
-                            }
-                            else {
+                            } else {
                                 binding.relNotes.setVisibility(View.GONE);
                             }
                             JSONObject giftObj = object.getJSONObject("gift_data");
@@ -390,28 +360,24 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
 
                             // Post the Runnable with a delay
                             handler.postDelayed(runnable, 200);
-                        }
-
-
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -420,7 +386,7 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
 
     private void showGraph() {
 
-        if (giftData.getGiftId() != null){
+        if (giftData.getGiftId() != null) {
             downloadImages(true);
             binding.graphLay.setVisibility(View.VISIBLE);
             Context context = getContext();
@@ -535,7 +501,7 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
             barChart.invalidate();
 
 
-            if (giftData.getPhoto() !=null){
+            if (giftData.getPhoto() != null) {
                 Glide.with(getApplicationContext()).load(giftData.getPhoto()).into(binding.imgVu);
             }
             binding.tvGiftType.setText(giftData.getGiftName());
@@ -544,13 +510,13 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
             handler.post(updateTimerRunnable);
             Functions.hideLoader(hud);
         }
-        if (giftWinner.getGiftId() != null){
+        if (giftWinner.getGiftId() != null) {
             binding.graphLay.setVisibility(View.GONE);
             binding.giftWinnerLay.setVisibility(View.VISIBLE);
-            if (giftWinner.getEmojiUrl() !=null){
+            if (giftWinner.getEmojiUrl() != null) {
                 Glide.with(getApplicationContext()).load(giftWinner.getEmojiUrl()).into(binding.emojiImgVu);
             }
-            if (giftWinner.getBibUrl() !=null){
+            if (giftWinner.getBibUrl() != null) {
                 Glide.with(getApplicationContext()).load(giftWinner.getBibUrl()).into(binding.shirtImgVu);
             }
             binding.giftTitle.setText(giftWinner.getGiftName());
@@ -604,7 +570,6 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
         // Now you have downloaded and set all the images in their original form
         // Perform any further operations as needed.
     }
-
 
 
 //    private void downloadImages() {
@@ -662,9 +627,6 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
 //    }
 
 
-
-
-
 //    private void autoHighlightAllBars(BarChart barChart) {
 //        BarData barData = barChart.getBarData();
 //
@@ -688,7 +650,6 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
 //    }
 
 
-
     private final Runnable updateTimerRunnable = new Runnable() {
         @Override
         public void run() {
@@ -697,7 +658,7 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
         }
     };
 
-    private void updateTimerDisplay(){
+    private void updateTimerDisplay() {
         String inputDateStr = giftData.getEndDate();
         SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.US);
         try {
@@ -751,7 +712,6 @@ public class OlePlayerClubDetailActivity extends BaseActivity implements View.On
         // Remove the callback to stop updating when the activity is destroyed
         handler.removeCallbacks(updateTimerRunnable);
     }
-
 
 
 }

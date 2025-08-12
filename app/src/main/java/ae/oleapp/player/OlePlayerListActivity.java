@@ -75,6 +75,7 @@ public class OlePlayerListActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = OleactivityPlayerListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

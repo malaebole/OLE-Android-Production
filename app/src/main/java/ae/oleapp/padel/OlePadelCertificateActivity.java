@@ -48,6 +48,7 @@ public class OlePadelCertificateActivity extends BaseActivity implements View.On
         super.onCreate(savedInstanceState);
         binding = OleactivityPadelCertificateBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.global_rank);
 
         binding.nameVu.setVisibility(View.GONE);

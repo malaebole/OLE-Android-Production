@@ -46,6 +46,7 @@ public class OleGroupPlayersActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityGroupPlayersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

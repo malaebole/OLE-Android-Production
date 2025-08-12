@@ -41,6 +41,7 @@ public class OleEmpMyRatingsActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityEmpMyRatingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

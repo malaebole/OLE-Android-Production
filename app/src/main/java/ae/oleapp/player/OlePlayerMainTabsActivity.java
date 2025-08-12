@@ -65,6 +65,8 @@ public class OlePlayerMainTabsActivity extends BaseTabActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityPlayerMainTabsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
+        makeStatusbarTransperant();
 
         setupViewPager(binding.content.contentMain.viewPager);
         setupTabLayout();

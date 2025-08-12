@@ -56,6 +56,7 @@ public class ModuleOptionsActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = OleactivityModuleOptionsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         binding.relFootball.setOnClickListener(this);

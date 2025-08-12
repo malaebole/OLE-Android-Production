@@ -99,6 +99,7 @@ public class GroupFormationActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = ActivityGroupFormationBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

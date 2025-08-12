@@ -48,6 +48,7 @@ public class OleEmployeeRateActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityEmployeeRateBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

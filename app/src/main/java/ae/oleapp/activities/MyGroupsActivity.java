@@ -41,6 +41,7 @@ public class MyGroupsActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         binding = ActivityMyGroupsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

@@ -20,6 +20,7 @@ public class OleShareActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         binding = OleactivityShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.share);
 
         binding.bar.backBtn.setOnClickListener(this);

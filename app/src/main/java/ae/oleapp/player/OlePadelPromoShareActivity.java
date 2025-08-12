@@ -30,6 +30,7 @@ public class OlePadelPromoShareActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         binding = OleactivityPadelPromoShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.promo_code);
 
         Bundle bundle = getIntent().getExtras();

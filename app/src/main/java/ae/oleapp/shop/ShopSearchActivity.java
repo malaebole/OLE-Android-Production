@@ -44,6 +44,7 @@ public class ShopSearchActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityShopSearchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         binding.searchVu.requestFocus();
 

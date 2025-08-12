@@ -47,6 +47,7 @@ public class OleStockReportActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivityStockReportBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.stock);
 
         Bundle bundle = getIntent().getExtras();

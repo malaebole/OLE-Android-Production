@@ -47,6 +47,7 @@ public class OleBlockedUsersActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityBlockedUsersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.blocked_users);
 
         binding.noDataVu.setVisibility(View.GONE);

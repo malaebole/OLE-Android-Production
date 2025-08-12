@@ -50,6 +50,7 @@ public class OleDiscountCardsActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityDiscountCardsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.loyalty_cards);
 
         Bundle bundle = getIntent().getExtras();

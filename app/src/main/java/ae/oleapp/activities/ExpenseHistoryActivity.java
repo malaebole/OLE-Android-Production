@@ -52,6 +52,7 @@ public class ExpenseHistoryActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = ActivityExpenseHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         Intent intent = getIntent();
         clubId  = intent.getStringExtra("club_id");

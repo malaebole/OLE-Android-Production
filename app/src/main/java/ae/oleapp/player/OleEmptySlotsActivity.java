@@ -63,6 +63,7 @@ public class OleEmptySlotsActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = OleactivityEmptySlotsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.empty_slots);
 
         if (AppManager.getInstance().clubs.size() > 0) {

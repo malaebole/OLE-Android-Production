@@ -67,6 +67,7 @@ public class OleBookingInfoActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivityBookingInfoBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.booking_info);
 
         isSchedule = false;

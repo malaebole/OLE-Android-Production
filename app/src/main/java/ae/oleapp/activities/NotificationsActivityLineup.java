@@ -43,6 +43,7 @@ public class NotificationsActivityLineup extends BaseActivity implements View.On
         super.onCreate(savedInstanceState);
         binding = ActivityNotificationsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

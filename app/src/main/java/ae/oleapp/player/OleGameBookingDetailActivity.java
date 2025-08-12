@@ -92,6 +92,7 @@ public class OleGameBookingDetailActivity extends BaseActivity implements View.O
         super.onCreate(savedInstanceState);
         binding = OleactivityGameBookingDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.booking_detail);
 
         Bundle bundle = getIntent().getExtras();

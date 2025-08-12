@@ -49,6 +49,7 @@ public class OleEarningBalanceDetailActivity extends BaseActivity implements Vie
         super.onCreate(savedInstanceState);
         binding = OleactivityEarningBalanceDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.balance);
 
         Bundle bundle = getIntent().getExtras();

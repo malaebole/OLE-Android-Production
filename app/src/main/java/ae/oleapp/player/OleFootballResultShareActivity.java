@@ -35,6 +35,7 @@ public class OleFootballResultShareActivity extends BaseActivity implements View
         super.onCreate(savedInstanceState);
         binding = OleactivityFootballResultShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.match_result);
 
         Bundle bundle = getIntent().getExtras();

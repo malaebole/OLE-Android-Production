@@ -46,6 +46,7 @@ public class OleCreateTeamActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = OleactivityCreateTeamBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         colorList = Arrays.asList(
                 new OleColorModel(getString(R.string.black), "#000000"),

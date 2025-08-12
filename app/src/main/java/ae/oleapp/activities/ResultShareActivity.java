@@ -30,6 +30,7 @@ public class ResultShareActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = ActivityResultShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

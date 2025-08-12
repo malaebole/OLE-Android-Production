@@ -70,6 +70,7 @@ public class AddBankActivity extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         binding = ActivityAddBankBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

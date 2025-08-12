@@ -34,6 +34,7 @@ public class OleSmsDetailsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivitySmsDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.details);
 
         Bundle bundle = getIntent().getExtras();

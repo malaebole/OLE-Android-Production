@@ -70,6 +70,7 @@ public class PayToPartnerActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = ActivityPayToPartnerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

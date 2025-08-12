@@ -69,6 +69,7 @@ public class OleMatchBookingDetailActivity extends BaseActivity implements View.
         super.onCreate(savedInstanceState);
         binding = OleactivityMatchBookingDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.booking_detail);
 
         Bundle bundle = getIntent().getExtras();

@@ -48,6 +48,7 @@ public class OlePlayerPaymentActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityPlayerPaymentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.my_payment);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);

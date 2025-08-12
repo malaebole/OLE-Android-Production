@@ -57,6 +57,7 @@ public class UniversalDocActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = ActivityUniversalDocBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

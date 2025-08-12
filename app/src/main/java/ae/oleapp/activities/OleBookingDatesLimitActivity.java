@@ -62,6 +62,7 @@ public class OleBookingDatesLimitActivity extends BaseActivity implements View.O
         super.onCreate(savedInstanceState);
         binding = OleactivityBookingDatesLimitBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.booking_dates_limit);
 
         int pos = 0;

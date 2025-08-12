@@ -88,6 +88,7 @@ public class OleGameDetailActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = OleactivityGameDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.game_detail);
 
         Bundle bundle = getIntent().getExtras();

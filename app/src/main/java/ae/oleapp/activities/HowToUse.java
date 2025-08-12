@@ -15,6 +15,7 @@ public class HowToUse extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityWebVuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
 //        binding.webVu.getSettings().setJavaScriptEnabled(true);

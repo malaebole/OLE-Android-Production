@@ -49,6 +49,7 @@ public class OleReceivedRequestActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityReceivedRequestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.received_request);
 
         Bundle bundle = getIntent().getExtras();

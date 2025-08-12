@@ -35,6 +35,7 @@ public class OlePadelResultShareActivity extends BaseActivity implements View.On
         super.onCreate(savedInstanceState);
         binding = OleactivityPadelResultShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.match_result);
 
         Bundle bundle = getIntent().getExtras();

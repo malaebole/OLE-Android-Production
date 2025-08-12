@@ -77,6 +77,7 @@ public class PaySalaryActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         binding = ActivityPaySalaryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

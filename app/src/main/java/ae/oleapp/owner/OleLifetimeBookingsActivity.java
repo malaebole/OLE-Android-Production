@@ -41,6 +41,7 @@ public class OleLifetimeBookingsActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityLifetimeBookingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

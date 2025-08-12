@@ -77,6 +77,7 @@ public class AddCashDepositFileActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         binding = ActivityAddCashDepositFileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

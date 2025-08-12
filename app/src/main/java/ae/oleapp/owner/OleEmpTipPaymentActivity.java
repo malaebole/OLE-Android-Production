@@ -43,6 +43,7 @@ public class OleEmpTipPaymentActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityEmpTipPaymentBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);

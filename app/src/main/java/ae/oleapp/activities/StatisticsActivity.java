@@ -74,6 +74,7 @@ public class StatisticsActivity  extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = ActivityStatisticsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

@@ -3,8 +3,8 @@
     <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/bgVuColor</item>
-        <item name="colorPrimaryDark">@color/bgVuColor</item>
+        <item name="colorPrimary">@color/blueColorNew</item>
+        <item name="colorPrimaryDark">@color/blueColorNew</item>
         <item name="colorAccent">@color/blueColorNew</item>
         <item name="actionSheetStyle">@style/actionsheetstyle</item>
 <!--        <item name="colorPrimary">@color/colorPrimary</item>-->
@@ -38,8 +38,16 @@
         <item name="android:windowFullscreen">false</item>
         <item name="colorPrimary">@color/blueColorNew</item>
         <item name="colorPrimaryDark">@color/blueColorNew</item>
-        <item name="android:windowTranslucentStatus">true</item>
+        <item name="android:windowTranslucentStatus">false</item>
+        <item name="android:windowTranslucentNavigation">false</item>
+
+        <!-- Dark status bar icons -->
+        <item name="android:windowLightStatusBar">true</item>
+
+        <!-- Optional: Transparent nav bar too -->
+        <item name="android:navigationBarColor">@android:color/transparent</item>
     </style>
+
 
     <style name="LoginTheme" parent="AppTheme">
         <item name="android:statusBarColor">@android:color/transparent</item>

@@ -60,6 +60,7 @@ public class EmployeeSalaryHistoryActivity extends BaseActivity implements View.
         super.onCreate(savedInstanceState);
         binding = ActivityEmployeeSalaryHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Intent intent = getIntent();

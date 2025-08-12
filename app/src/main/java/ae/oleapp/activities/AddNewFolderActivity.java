@@ -59,6 +59,7 @@ public class AddNewFolderActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = ActivityAddNewFolderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

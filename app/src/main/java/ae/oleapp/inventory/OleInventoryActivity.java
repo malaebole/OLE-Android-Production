@@ -18,6 +18,7 @@ public class OleInventoryActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = OleactivityInventoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.inventory);
 
         Bundle bundle = getIntent().getExtras();

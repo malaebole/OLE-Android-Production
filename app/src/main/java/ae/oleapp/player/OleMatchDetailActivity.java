@@ -59,6 +59,7 @@ public class OleMatchDetailActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivityMatchDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.match_detail);
 
         Bundle bundle = getIntent().getExtras();

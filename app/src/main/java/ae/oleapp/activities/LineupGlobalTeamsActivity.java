@@ -61,6 +61,7 @@ public class LineupGlobalTeamsActivity extends BaseActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         binding = ActivityLineupGlobalTeamsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

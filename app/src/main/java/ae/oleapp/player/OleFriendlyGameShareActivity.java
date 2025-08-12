@@ -43,6 +43,7 @@ public class OleFriendlyGameShareActivity extends BaseActivity implements View.O
         super.onCreate(savedInstanceState);
         binding = OleactivityFriendlyGameShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.friendly_game);
 
         Bundle bundle = getIntent().getExtras();

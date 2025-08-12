@@ -55,6 +55,7 @@ public class OleProfilePadelMatchHistoryDetailsActivity extends BaseActivity imp
         super.onCreate(savedInstanceState);
         binding = OleactivityProfilePadelMatchHistoryDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

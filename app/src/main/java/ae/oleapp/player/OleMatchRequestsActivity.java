@@ -84,6 +84,7 @@ public class OleMatchRequestsActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityMatchRequestsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.match_request);
 
         boolean isResultOpen = false;

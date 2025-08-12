@@ -30,6 +30,7 @@ public class OleDateRangeActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = OleactivityDateRangeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.select_date_range);
 
         Calendar startDate = Calendar.getInstance(TimeZone.getDefault(), Locale.ENGLISH);

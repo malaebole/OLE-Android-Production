@@ -45,6 +45,7 @@ public class OleSalesOrderDetailActivity extends BaseActivity implements View.On
         super.onCreate(savedInstanceState);
         binding = OleactivitySalesOrderDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.details);
 
         Bundle bundle = getIntent().getExtras();

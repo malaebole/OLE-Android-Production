@@ -55,6 +55,7 @@ public class OleAddItemActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = OleactivityAddItemBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.add_item);
 
         Bundle bundle = getIntent().getExtras();

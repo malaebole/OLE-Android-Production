@@ -53,6 +53,7 @@ public class BankHistoryActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = ActivityBankHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Intent intent = getIntent();

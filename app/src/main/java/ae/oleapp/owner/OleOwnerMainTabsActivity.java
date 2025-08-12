@@ -1,5 +1,6 @@
 package ae.oleapp.owner;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
@@ -60,17 +61,15 @@ public class OleOwnerMainTabsActivity extends BaseTabActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityOwnerMainTabsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
+        makeStatusbarTransperant();
+
         setupTabLayout();
         binding.contentMainLay.contentMain.tabBar.setSelectTab(0);
         binding.contentMainLay.contentMain.viewPager.setCurrentItem(0);
         setupMenu();
 
-        getCountriesAPI(new CountriesCallback() {
-            @Override
-            public void getCountries(List<OleCountry> countries) {
-                AppManager.getInstance().countries = countries;
-            }
-        });
+        getCountriesAPI(countries -> AppManager.getInstance().countries = countries);
 
         if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
             paymentVu.setVisibility(View.GONE);
@@ -110,28 +109,33 @@ public class OleOwnerMainTabsActivity extends BaseTabActivity {
         }
         globalRankVu.setVisibility(View.GONE);
 
-        KeyboardVisibilityEvent.setEventListener(getContext(), new KeyboardVisibilityEventListener() {
-            @Override
-            public void onVisibilityChanged(boolean isOpen) {
-                if (isOpen) {
-                    binding.contentMainLay.contentMain.tabBar.setVisibility(View.GONE);
-                    binding.contentMainLay.contentMain.tabBar.getMiddleView().setVisibility(View.GONE);
-                }
-                else {
-                    binding.contentMainLay.contentMain.tabBar.setVisibility(View.VISIBLE);
-                    binding.contentMainLay.contentMain.tabBar.getMiddleView().setVisibility(View.VISIBLE);
-                }
+        KeyboardVisibilityEvent.setEventListener(getContext(), isOpen -> {
+            if (isOpen) {
+                binding.contentMainLay.contentMain.tabBar.setVisibility(View.GONE);
+                binding.contentMainLay.contentMain.tabBar.getMiddleView().setVisibility(View.GONE);
+            }
+            else {
+                binding.contentMainLay.contentMain.tabBar.setVisibility(View.VISIBLE);
+                binding.contentMainLay.contentMain.tabBar.getMiddleView().setVisibility(View.VISIBLE);
             }
         });
 
         if (AppManager.getInstance().oleFieldData == null) {
-            getFieldDataAPI(new BaseActivity.FieldDataCallback() {
-                @Override
-                public void getFieldData(OleFieldData oleFieldData) {
-                    AppManager.getInstance().oleFieldData = oleFieldData;
-                }
-            });
+            getFieldDataAPI(oleFieldData -> AppManager.getInstance().oleFieldData = oleFieldData);
         }
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                if (resideMenu.isOpened()) {
+                    resideMenu.closeMenu();
+                } else {
+                    // Disable callback so default back behavior works
+                    setEnabled(false);
+                    getOnBackPressedDispatcher().onBackPressed();
+                }
+            }
+        });
     }
 
     @Override
@@ -181,23 +185,20 @@ public class OleOwnerMainTabsActivity extends BaseTabActivity {
         });
     }
 
-    @Override
-    public void onBackPressed() {
-        if (resideMenu.isOpened()) {
-            resideMenu.closeMenu();
-        }
-        else {
-            super.onBackPressed();
-        }
-    }
+//    @Override
+//    public void onBackPressed() {
+//        if (resideMenu.isOpened()) {
+//            resideMenu.closeMenu();
+//        }
+//        else {
+//            super.onBackPressed();
+//        }
+//    }
 
     private void callUnreadNotifAPI() {
-        getUnreadNotificationAPI(new UnreadCountCallback() {
-            @Override
-            public void unreadNotificationCount(int count) {
-                AppManager.getInstance().notificationCount = count;
-                setBadgeValue();
-            }
+        getUnreadNotificationAPI(count -> {
+            AppManager.getInstance().notificationCount = count;
+            setBadgeValue();
         });
     }
 

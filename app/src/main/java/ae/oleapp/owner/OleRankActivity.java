@@ -36,6 +36,7 @@ public class OleRankActivity extends BaseActivity implements View.OnClickListene
         super.onCreate(savedInstanceState);
         binding = OleactivityRankBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.rank);
 
         Bundle bundle = getIntent().getExtras();

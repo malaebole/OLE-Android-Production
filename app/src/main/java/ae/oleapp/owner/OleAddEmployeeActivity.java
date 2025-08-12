@@ -85,6 +85,7 @@ public class OleAddEmployeeActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivityAddEmployeeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         //binding.toolbarTitle.setText(R.string.employee);
         makeStatusbarTransperant();
         Bundle bundle = getIntent().getExtras();

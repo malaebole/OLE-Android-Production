@@ -55,6 +55,7 @@ public class OleChangeBookingTimeActivity extends BaseActivity implements View.O
         super.onCreate(savedInstanceState);
         binding = OleactivityChangeBookingTimeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.change_time);
 
         Bundle bundle = getIntent().getExtras();

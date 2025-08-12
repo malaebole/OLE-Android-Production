@@ -50,6 +50,7 @@ public class OleEmployeeListActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityEmployeeListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.employee_list);
 
         Bundle bundle = getIntent().getExtras();

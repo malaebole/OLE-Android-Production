@@ -31,6 +31,7 @@ public class OleProfileMissionDetailsActivity extends BaseActivity implements Vi
         super.onCreate(savedInstanceState);
         binding = OleactivityProfileMissionDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

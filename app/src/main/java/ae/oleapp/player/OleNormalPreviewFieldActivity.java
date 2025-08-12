@@ -89,6 +89,7 @@ public class OleNormalPreviewFieldActivity extends BaseActivity implements View.
         super.onCreate(savedInstanceState);
         binding = OleactivityNormalPreviewFieldBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.preview);
 
         Bundle bundle = getIntent().getExtras();

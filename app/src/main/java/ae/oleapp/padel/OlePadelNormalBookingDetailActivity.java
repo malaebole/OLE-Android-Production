@@ -65,6 +65,7 @@ public class OlePadelNormalBookingDetailActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         binding = OleactivityPadelNormalBookingDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.booking_detail);
 
         Bundle bundle = getIntent().getExtras();

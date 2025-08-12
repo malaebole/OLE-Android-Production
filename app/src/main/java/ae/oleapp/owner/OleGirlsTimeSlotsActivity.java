@@ -47,6 +47,7 @@ public class OleGirlsTimeSlotsActivity extends BaseActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         binding = OleactivityGirlsTimeSlotsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.girls_time_slots);
 
         Bundle bundle = getIntent().getExtras();

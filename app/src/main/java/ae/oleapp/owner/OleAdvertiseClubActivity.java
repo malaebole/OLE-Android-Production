@@ -46,6 +46,7 @@ public class OleAdvertiseClubActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityAdvertiseClubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.advertise_club);
 
         binding.tvStatus.setText("");

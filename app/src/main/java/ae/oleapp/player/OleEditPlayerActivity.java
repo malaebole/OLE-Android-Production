@@ -89,6 +89,7 @@ public class OleEditPlayerActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = OleactivityEditPlayerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.profile);
 
         getProfileAPI(userInfo == null);

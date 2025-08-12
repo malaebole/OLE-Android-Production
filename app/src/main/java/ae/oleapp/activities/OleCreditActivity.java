@@ -50,6 +50,7 @@ public class OleCreditActivity extends BaseActivity implements OleWalletSection.
         super.onCreate(savedInstanceState);
         binding = OleactivityOleCreditBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.ole_credit);
 
         sectionedRecyclerViewAdapter = new SectionedRecyclerViewAdapter();

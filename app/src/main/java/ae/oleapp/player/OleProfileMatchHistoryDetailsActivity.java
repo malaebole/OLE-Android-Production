@@ -56,6 +56,7 @@ public class OleProfileMatchHistoryDetailsActivity extends BaseActivity implemen
         super.onCreate(savedInstanceState);
         binding = OleactivityProfileMatchHistoryDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

@@ -48,6 +48,7 @@ public class OleMatchHistoryActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityMatchHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.match_history);
 
         Bundle bundle = getIntent().getExtras();

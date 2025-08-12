@@ -66,6 +66,7 @@ public class PdfViewerActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         binding = ActivityPdfViewerBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         pdfUrl = getIntent().getStringExtra("file_url");
         folderName = getIntent().getStringExtra("folder_name");

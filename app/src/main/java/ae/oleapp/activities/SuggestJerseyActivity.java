@@ -50,6 +50,7 @@ public class SuggestJerseyActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = ActivitySuggestJerseyBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         binding.btnClose.setOnClickListener(this);

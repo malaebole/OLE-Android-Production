@@ -45,6 +45,7 @@ public class PlayerComparisonActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = ActivityPlayerComparisonBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.HORIZONTAL, false);

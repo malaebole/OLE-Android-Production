@@ -49,6 +49,7 @@ public class OleManualPlayersActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityManualPlayersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.players);
 
         Bundle bundle = getIntent().getExtras();

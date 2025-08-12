@@ -66,6 +66,7 @@ public class ShopActivity extends BaseActivity implements View.OnClickListener {
         super.onCreate(savedInstanceState);
         binding = ActivityShopBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
 
         binding.cartBadge.setVisibility(View.GONE);
         binding.bannerCard.setVisibility(View.GONE);

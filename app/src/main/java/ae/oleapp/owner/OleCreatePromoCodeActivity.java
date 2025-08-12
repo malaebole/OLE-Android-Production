@@ -82,6 +82,7 @@ public class OleCreatePromoCodeActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         binding = OleactivityCreatePromoCodeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.promo_code);
 
         amountClicked();

@@ -49,6 +49,7 @@ public class OlePlayerOutstandingBalanceActivity extends BaseActivity implements
         super.onCreate(savedInstanceState);
         binding = OleactivityPlayerOutstandingBalanceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.unpaid_amount);
 
         Bundle bundle = getIntent().getExtras();

@@ -45,6 +45,7 @@ public class OlePurchaseReportActivity extends BaseActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         binding = OleactivityPurchaseReportBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.purchase_report);
 
         Bundle bundle = getIntent().getExtras();

@@ -80,6 +80,7 @@ public class ShareFieldActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = ActivityShareFieldBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
 

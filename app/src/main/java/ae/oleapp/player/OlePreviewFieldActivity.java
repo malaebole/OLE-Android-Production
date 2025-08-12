@@ -79,6 +79,7 @@ public class OlePreviewFieldActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityPreviewFieldBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.preview);
 
         Bundle bundle = getIntent().getExtras();

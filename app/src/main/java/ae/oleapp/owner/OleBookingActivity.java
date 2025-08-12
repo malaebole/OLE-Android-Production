@@ -122,6 +122,7 @@ public class OleBookingActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = OleactivityBookingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(getString(R.string.booking));
 
         Bundle bundle = getIntent().getExtras();

@@ -43,6 +43,7 @@ public class ActivityCustomCameraLineup extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         binding = ActivityCustomCameraLineupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

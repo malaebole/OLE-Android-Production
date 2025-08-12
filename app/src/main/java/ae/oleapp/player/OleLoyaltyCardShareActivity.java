@@ -32,6 +32,7 @@ public class OleLoyaltyCardShareActivity extends BaseActivity implements View.On
         super.onCreate(savedInstanceState);
         binding= OleactivityLoyaltyCardShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.loyalty_card);
 
         Bundle bundle = getIntent().getExtras();

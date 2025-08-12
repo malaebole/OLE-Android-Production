@@ -49,6 +49,7 @@ public class AddFromContactsActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = ActivityAddFromContactsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         checkPermission();
 

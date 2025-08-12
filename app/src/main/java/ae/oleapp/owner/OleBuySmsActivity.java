@@ -54,6 +54,7 @@ public class OleBuySmsActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         binding = OleactivityBuySmsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.sms);
 
         Bundle bundle = getIntent().getExtras();

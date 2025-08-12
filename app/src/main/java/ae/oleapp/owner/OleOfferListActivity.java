@@ -48,6 +48,7 @@ public class OleOfferListActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = OleactivityOfferListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.offers);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);

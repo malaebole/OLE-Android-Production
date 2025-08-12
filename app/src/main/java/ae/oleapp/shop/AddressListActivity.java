@@ -49,6 +49,7 @@ public class AddressListActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = ActivityAddressListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.checkout);
 
         Bundle bundle = getIntent().getExtras();

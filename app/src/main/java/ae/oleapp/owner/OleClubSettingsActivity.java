@@ -38,6 +38,7 @@ public class OleClubSettingsActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityClubSettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.club_settings);
 
         Bundle bundle = getIntent().getExtras();

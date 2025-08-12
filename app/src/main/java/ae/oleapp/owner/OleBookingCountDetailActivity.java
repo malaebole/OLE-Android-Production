@@ -81,6 +81,7 @@ public class OleBookingCountDetailActivity extends BaseActivity implements View.
         super.onCreate(savedInstanceState);
         binding = OleactivityBookingCountDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.player);
 
         Bundle bundle = getIntent().getExtras();

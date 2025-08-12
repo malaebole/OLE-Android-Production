@@ -43,6 +43,7 @@ public class OleHiddenFieldsActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityHiddenFieldsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.hidden_fields);
 
         Bundle bundle = getIntent().getExtras();

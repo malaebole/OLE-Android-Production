@@ -49,6 +49,7 @@ public class OleFieldListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityFieldListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.fields);
 
         Bundle bundle = getIntent().getExtras();

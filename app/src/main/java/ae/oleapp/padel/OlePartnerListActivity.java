@@ -54,6 +54,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivityPartnerListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.your_partners);
 
         Bundle bundle = getIntent().getExtras();
@@ -67,8 +68,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
         if (bookingDetail.getCreatedBy().getId().equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID))) {
             if (playerList.size() > 2) {
                 binding.selectPartnerVu.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 binding.selectPartnerVu.setVisibility(View.VISIBLE);
             }
 
@@ -84,8 +84,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
             binding.btnPay.setOnClickListener(this);
             binding.selectPartnerVu.setOnClickListener(this);
             binding.barBtn.setOnClickListener(this);
-        }
-        else {
+        } else {
             binding.selectPartnerVu.setVisibility(View.GONE);
             binding.btnPay.setVisibility(View.GONE);
             binding.barBtn.setVisibility(View.INVISIBLE);
@@ -106,12 +105,10 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
             if (isPay) {
                 adapter.selectItem(paymentPlayerList.get(pos));
                 setBtnText();
-            }
-            else {
+            } else {
                 if (bookingDetail.getCreatedBy().getId().equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID))) {
                     showActionSheet(pos);
-                }
-                else {
+                } else {
                     gotoProfile(playerList.get(pos).getId());
                 }
             }
@@ -130,6 +127,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
                 .setCancelableOnTouchOutside(true)
                 .setListener(new ActionSheet.ActionSheetListener() {
                     int ind = 0;
+
                     @Override
                     public void onDismiss(ActionSheet actionSheet, boolean isCancel) {
                         if (!isCancel) {
@@ -144,8 +142,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
                         ind = index;
                         if (index == 0) {
                             actionSheet.dismiss();
-                        }
-                        else {
+                        } else {
                             removePartnerAPI(true, playerList.get(pos).getId(), pos);
                         }
                     }
@@ -170,17 +167,14 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
     public void onClick(View v) {
         if (v == binding.bar.backBtn) {
             finish();
-        }
-        else if (v == binding.btnPay) {
+        } else if (v == binding.btnPay) {
             payClicked();
-        }
-        else if (v == binding.selectPartnerVu) {
+        } else if (v == binding.selectPartnerVu) {
             Intent intent = new Intent(getContext(), OlePlayerListActivity.class);
             intent.putExtra("is_selection", true);
             intent.putExtra("is_three_selection", true);
             startActivityForResult(intent, 106);
-        }
-        else if (v == binding.barBtn) {
+        } else if (v == binding.barBtn) {
             barBtnPayClicked();
         }
     }
@@ -188,7 +182,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
     private void payClicked() {
         if (adapter.selectedList.size() == 0 || totalAmount == 0) {
             Functions.showToast(getContext(), getString(R.string.select_one_player), FancyToast.ERROR);
-             return;
+            return;
         }
 
         openPaymentDialog(String.format(Locale.ENGLISH, "%.2f", totalAmount), bookingDetail.getCurrency(), "", "", "", true, false, "0", "", new OlePaymentDialogFragment.PaymentDialogCallback() {
@@ -198,8 +192,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
                 for (OlePlayerInfo info : adapter.selectedList) {
                     if (pIds.isEmpty()) {
                         pIds = info.getId();
-                    }
-                    else {
+                    } else {
                         pIds = String.format("%s,%s", pIds, info.getId());
                     }
                 }
@@ -214,13 +207,13 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
         if (requestCode == 106 && resultCode == RESULT_OK) {
             String str = data.getExtras().getString("players");
             Gson gson = new Gson();
-            List<OlePlayerInfo> list = gson.fromJson(str, new TypeToken<List<OlePlayerInfo>>(){}.getType());
+            List<OlePlayerInfo> list = gson.fromJson(str, new TypeToken<List<OlePlayerInfo>>() {
+            }.getType());
             String pIds = "";
             for (OlePlayerInfo info : list) {
                 if (pIds.isEmpty()) {
                     pIds = info.getId();
-                }
-                else {
+                } else {
                     pIds = String.format("%s,%s", pIds, info.getId());
                 }
             }
@@ -237,13 +230,11 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
             adapter.selectedList.clear();
             if (playerList.size() > 2) {
                 binding.selectPartnerVu.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 binding.selectPartnerVu.setVisibility(View.VISIBLE);
             }
             adapter.setDatasource(playerList, isPay);
-        }
-        else {
+        } else {
             isPay = true;
             binding.btnPay.setVisibility(View.VISIBLE);
             binding.selectPartnerVu.setVisibility(View.GONE);
@@ -259,7 +250,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
     }
 
     private void addPartnerAPI(boolean isLoader, String pIds) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.addPartner(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingDetail.getBookingId(), pIds, "booking");
         call.enqueue(new Callback<>() {
             @Override
@@ -280,20 +271,17 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
                             adapter.setDatasource(playerList, isPay);
                             if (playerList.size() > 2) {
                                 binding.selectPartnerVu.setVisibility(View.GONE);
-                            }
-                            else {
+                            } else {
                                 binding.selectPartnerVu.setVisibility(View.VISIBLE);
                             }
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -303,8 +291,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -312,7 +299,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
     }
 
     private void removePartnerAPI(boolean isLoader, String pIds, int pos) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.removePartner(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingDetail.getBookingId(), pIds);
         call.enqueue(new Callback<>() {
             @Override
@@ -327,20 +314,17 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
                             adapter.notifyDataSetChanged();
                             if (playerList.size() > 2) {
                                 binding.selectPartnerVu.setVisibility(View.GONE);
-                            }
-                            else {
+                            } else {
                                 binding.selectPartnerVu.setVisibility(View.VISIBLE);
                             }
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -350,8 +334,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -359,7 +342,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
     }
 
     private void updatePaymentStatusAPI(boolean isLoader, String pIds, String amount, String paymentMethod, String orderRef, String cardPaid, String walletPaid) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.updatePaymentStatus(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), bookingDetail.getBookingId(), pIds, amount, paymentMethod, Functions.getIPAddress(), orderRef, cardPaid, walletPaid);
         call.enqueue(new Callback<>() {
             @Override
@@ -371,16 +354,14 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
                         if (object.getInt(Constants.kStatus) == Constants.kSuccessCode) {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             finish();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
@@ -390,8 +371,7 @@ public class OlePartnerListActivity extends BaseActivity implements View.OnClick
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }

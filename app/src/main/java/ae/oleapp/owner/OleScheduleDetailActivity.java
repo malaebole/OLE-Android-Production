@@ -49,6 +49,7 @@ public class OleScheduleDetailActivity extends BaseActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         binding = OleactivityScheduleDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.details);
 
         Bundle bundle = getIntent().getExtras();

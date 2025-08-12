@@ -45,6 +45,7 @@ public class OleSalesReportActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivitySalesReportBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.sales_report);
 
         Bundle bundle = getIntent().getExtras();

@@ -57,6 +57,7 @@ public class OleJoinedPlayersActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityJoinedPlayersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.joined_players);
 
         Bundle bundle = getIntent().getExtras();

@@ -44,6 +44,7 @@ public class FriendRequestActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = ActivityFriendRequestBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         socketManager =  SocketManager.getInstance();
         socket = socketManager.getSocket();

@@ -76,6 +76,7 @@ public class OleInventoryCheckoutActivity extends BaseActivity implements View.O
         super.onCreate(savedInstanceState);
         binding = OleactivityInventoryCheckoutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.sell);
 
         Bundle bundle = getIntent().getExtras();

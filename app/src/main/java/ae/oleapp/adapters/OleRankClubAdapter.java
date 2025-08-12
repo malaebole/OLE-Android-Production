@@ -92,12 +92,7 @@ public class OleRankClubAdapter extends RecyclerView.Adapter<OleRankClubAdapter.
 
 
 
-        holder.cardView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onItemClickListener.OnItemClick(v, holder.getAdapterPosition());
-            }
-        });
+        holder.cardView.setOnClickListener(v -> onItemClickListener.OnItemClick(v, holder.getBindingAdapterPosition()));
     }
 
     @Override

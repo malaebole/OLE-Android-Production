@@ -51,6 +51,7 @@ public class OleScheduleListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityScheduleListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.continuous_booking);
 
         Bundle bundle = getIntent().getExtras();

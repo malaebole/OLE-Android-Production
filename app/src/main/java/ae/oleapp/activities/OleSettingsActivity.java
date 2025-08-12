@@ -33,6 +33,7 @@ public class OleSettingsActivity extends BaseActivity implements OleLanguageDial
         super.onCreate(savedInstanceState);
         binding = OleactivitySettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.settings);
 
         if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {

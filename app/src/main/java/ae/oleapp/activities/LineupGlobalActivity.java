@@ -53,6 +53,7 @@ public class LineupGlobalActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = ActivityLineupGlobalBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         getAssignedCountries(true);
 

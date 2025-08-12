@@ -90,6 +90,7 @@ public class PlayerListActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = ActivityPlayerListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
 //        gridLayoutManager = new GridLayoutManager(this, 3, RecyclerView.VERTICAL, false);

@@ -45,6 +45,7 @@ public class OleProfitReportActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityProfitReportBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.profit_report);
 
         Bundle bundle = getIntent().getExtras();

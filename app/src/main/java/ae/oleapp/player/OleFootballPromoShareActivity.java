@@ -30,6 +30,7 @@ public class OleFootballPromoShareActivity extends BaseActivity implements View.
         super.onCreate(savedInstanceState);
         binding = OleactivityPromoShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.promo_code);
 
         Bundle bundle = getIntent().getExtras();

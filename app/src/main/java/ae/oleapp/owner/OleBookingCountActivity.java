@@ -53,6 +53,7 @@ public class OleBookingCountActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityBookingCountBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.player_search);
 
         if (AppManager.getInstance().clubs.size() > 0) {

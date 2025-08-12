@@ -50,6 +50,7 @@ public class OleEmployeeActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = OleactivityEmployeeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

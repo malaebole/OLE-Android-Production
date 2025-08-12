@@ -50,6 +50,7 @@ public class OleHistoryDetailActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityHistoryDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.match_history);
 
         Bundle bundle = getIntent().getExtras();

@@ -34,6 +34,7 @@ public class OrdersProductReviewActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityOrdersProductReviewBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.review);
 
         Bundle bundle = getIntent().getExtras();

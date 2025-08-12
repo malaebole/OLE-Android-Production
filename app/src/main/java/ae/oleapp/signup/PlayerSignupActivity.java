@@ -87,6 +87,7 @@ public class PlayerSignupActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = OleactivityPlayerSignupBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         ipdetails(true,"");
 

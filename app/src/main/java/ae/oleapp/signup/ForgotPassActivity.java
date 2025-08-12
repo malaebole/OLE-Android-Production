@@ -38,6 +38,7 @@ public class ForgotPassActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = OleactivityForgotPassBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         checkKeyboardListener();

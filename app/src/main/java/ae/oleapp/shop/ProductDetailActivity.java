@@ -83,6 +83,7 @@ public class ProductDetailActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = ActivityProductDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.details);
 
         Bundle bundle = getIntent().getExtras();

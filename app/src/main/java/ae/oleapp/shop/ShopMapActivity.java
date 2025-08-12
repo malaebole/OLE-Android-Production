@@ -51,6 +51,7 @@ public class ShopMapActivity extends BaseActivity implements OnMapReadyCallback,
         super.onCreate(savedInstanceState);
         binding = ActivityShopMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
 

@@ -43,6 +43,7 @@ public class OleEmptySlotsShareActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         binding = OleactivityEmptySlotsShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.empty_slots);
 
         Bundle bundle = getIntent().getExtras();

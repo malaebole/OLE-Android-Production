@@ -57,6 +57,7 @@ public class OleResultListShareActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         binding = OleactivityResultListShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.match_result);
 
         if (AppManager.getInstance().clubs.size() > 0) {

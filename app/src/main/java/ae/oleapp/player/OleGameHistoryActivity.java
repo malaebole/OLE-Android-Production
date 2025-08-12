@@ -48,6 +48,7 @@ public class OleGameHistoryActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivityGameHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.ole_game_history);
 
         Bundle bundle = getIntent().getExtras();

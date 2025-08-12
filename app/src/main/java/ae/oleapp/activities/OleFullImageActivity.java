@@ -27,6 +27,7 @@ public class OleFullImageActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityFullImageBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         String urlStr = "";
         Bundle bundle = getIntent().getExtras();

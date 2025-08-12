@@ -38,6 +38,7 @@ public class OlePadelMatchShareActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         binding = OleactivityPadelMatchShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.match);
 
         Bundle bundle = getIntent().getExtras();

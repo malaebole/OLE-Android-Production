@@ -12,6 +12,7 @@ import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.media.AudioFormat;
@@ -37,6 +38,7 @@ import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.ScaleAnimation;
@@ -53,7 +55,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AlertDialog;
 import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.fragment.app.DialogFragment;
 import androidx.fragment.app.Fragment;
@@ -275,6 +281,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         makeStatusbarTransperant();
+        applyEdgeToEdgee(binding.getRoot());
 
         page = findViewById(R.id.logo_vuu);
         pager_indicator = findViewById(R.id.viewPagerCountDots);
@@ -471,6 +478,54 @@ public class MainActivity extends BaseActivity implements View.OnClickListener, 
 //        inAppUpdates();
 
     }
+
+//    protected void applyEdgeToEdgee(View rootView) {
+//        ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
+//            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+//            v.setPadding(systemBars.left, 0, systemBars.right, 0);
+//            return WindowInsetsCompat.CONSUMED;
+//        });
+//    }
+
+    ///// EDGE TO EDGE START ////
+    protected void applyEdgeToEdgee(View rootView) {
+        ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            // Keep content inside safe area without shifting vertically unless needed
+            return WindowInsetsCompat.CONSUMED;
+        });
+        setStatusBarAndNavBarColor();
+    }
+
+    private void setStatusBarAndNavBarColor() {
+        Window window = getWindow();
+        int green = ContextCompat.getColor(this, R.color.transparent);
+
+        if (Build.VERSION.SDK_INT >= 34) { // Android 15+
+            boolean isLandscape = getResources().getConfiguration().orientation
+                    == Configuration.ORIENTATION_LANDSCAPE;
+            ViewCompat.setOnApplyWindowInsetsListener(window.getDecorView(), (view, windowInsets) -> {
+                Insets statusBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars());
+                Insets navBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars());
+
+                // Apply background color to the whole decor view
+                view.setBackgroundColor(green);
+
+                // Combine paddings for status + navigation bars
+                int left = isLandscape ? navBarInsets.left : Math.max(statusBarInsets.left, navBarInsets.left);
+                int top = 0;
+                int right = isLandscape ? navBarInsets.right : Math.max(statusBarInsets.right, navBarInsets.right);
+                int bottom = navBarInsets.bottom;
+
+                view.setPadding(left, top, right, bottom);
+                return windowInsets;
+            });
+        } else {
+            window.setStatusBarColor(green);
+            window.setNavigationBarColor(green);
+        }
+    }
+    ///// EDGE TO EDGE END ////
 
 
     private void checkPermissionForVoice() {

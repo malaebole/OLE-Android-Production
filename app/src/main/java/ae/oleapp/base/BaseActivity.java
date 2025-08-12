@@ -9,6 +9,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -38,6 +39,7 @@ import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -123,6 +125,7 @@ public class BaseActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
         Functions.changeLanguage(this, Functions.getPrefValue(this, Constants.kAppLang));
+
 //        getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         OleInAppReviewManager.showRateDialogIfMeetsConditions(this);
 
@@ -139,10 +142,47 @@ public class BaseActivity extends AppCompatActivity {
     protected void applyEdgeToEdge(View rootView) {
         ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
-            v.setPadding(systemBars.left, 0, systemBars.right, systemBars.bottom);
+            Insets statusBarInsets = insets.getInsets(WindowInsetsCompat.Type.statusBars());
+            Insets navBars = insets.getInsets(WindowInsetsCompat.Type.navigationBars());
+            v.setPadding(systemBars.left, statusBarInsets.top, systemBars.right, navBars.bottom);
             return WindowInsetsCompat.CONSUMED;
         });
     }
+
+
+///// EDGE TO EDGE START ////
+//protected void applyEdgeToEdge(View rootView) {
+//    ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
+//        Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+//        // Keep content inside safe area without shifting vertically unless needed
+//        return WindowInsetsCompat.CONSUMED;
+//    });
+//    setStatusBarAndNavBarColor();
+//}
+
+//    private void setStatusBarAndNavBarColor() {
+//        Window window = getWindow();
+//
+//        if (Build.VERSION.SDK_INT >= 34) { // Android 15+
+//            boolean isLandscape = getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+//            ViewCompat.setOnApplyWindowInsetsListener(window.getDecorView(), (view, windowInsets) -> {
+//                Insets statusBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars());
+//                Insets navBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars());
+//
+//                // Combine paddings for status + navigation bars
+//                int left = isLandscape ? navBarInsets.left : Math.max(statusBarInsets.left, navBarInsets.left);
+//                int top = statusBarInsets.top;
+//                int right = isLandscape ? navBarInsets.right : Math.max(statusBarInsets.right, navBarInsets.right);
+//                int bottom = navBarInsets.bottom;
+//
+//                view.setPadding(left, top, right, bottom);
+//                return windowInsets;
+//            });
+//        } else {
+//            window.setStatusBarColor(ContextCompat.getColor(this, R.color.blueColorNew));
+//            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.grayColor));
+//        }
+//    }
 
     public void inAppUpdates() {
         appUpdateManager = AppUpdateManagerFactory.create(this);

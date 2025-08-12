@@ -42,6 +42,7 @@ public class OleAdvertiseListActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityAdvertiseListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.advertise_club);
 
         Bundle bundle = getIntent().getExtras();

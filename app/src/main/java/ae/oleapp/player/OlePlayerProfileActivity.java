@@ -77,6 +77,7 @@ public class OlePlayerProfileActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityPlayerProfileBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

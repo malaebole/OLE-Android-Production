@@ -101,6 +101,8 @@ public class OleAddClubActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = OleactivityAddClubBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
+        makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

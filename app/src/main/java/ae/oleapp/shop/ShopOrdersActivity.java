@@ -43,6 +43,7 @@ public class ShopOrdersActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityShopOrdersBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.shop_orders);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(this, RecyclerView.VERTICAL, false);

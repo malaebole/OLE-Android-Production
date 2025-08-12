@@ -43,6 +43,7 @@ public class WishlistActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = ActivityWishlistBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.wishlist);
 
         GridLayoutManager layoutManager = new GridLayoutManager(getContext(), 2, RecyclerView.VERTICAL, false);

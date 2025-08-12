@@ -68,6 +68,7 @@ public class OleChatActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityChatBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(getString(R.string.chat));
 
         Bundle bundle = getIntent().getExtras();

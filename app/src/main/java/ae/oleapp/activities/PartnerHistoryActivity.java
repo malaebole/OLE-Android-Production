@@ -62,6 +62,7 @@ public class PartnerHistoryActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = ActivityPartnerHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Intent intent = getIntent();

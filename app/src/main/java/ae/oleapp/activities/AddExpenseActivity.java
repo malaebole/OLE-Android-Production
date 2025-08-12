@@ -76,6 +76,7 @@ public class AddExpenseActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = ActivityAddExpenseBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
 
         Bundle bundle = getIntent().getExtras();

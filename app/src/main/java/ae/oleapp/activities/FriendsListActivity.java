@@ -59,6 +59,7 @@ public class FriendsListActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = ActivityFriendsListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         socketManager = SocketManager.getInstance();
         socket = socketManager.getSocket();

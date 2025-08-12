@@ -86,6 +86,7 @@ public class AddIncomeActivity extends BaseActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         binding = ActivityAddIncomeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

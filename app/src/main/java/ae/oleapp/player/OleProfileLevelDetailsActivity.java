@@ -42,6 +42,7 @@ public class OleProfileLevelDetailsActivity extends BaseActivity implements View
         super.onCreate(savedInstanceState);
         binding = OleactivityProfileLevelDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

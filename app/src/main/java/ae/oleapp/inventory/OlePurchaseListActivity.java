@@ -42,6 +42,7 @@ public class OlePurchaseListActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityPurchaseListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.purchase);
 
         Bundle bundle = getIntent().getExtras();

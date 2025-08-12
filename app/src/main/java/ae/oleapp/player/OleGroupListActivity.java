@@ -47,6 +47,7 @@ public class OleGroupListActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = OleactivityGroupListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.groups);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), RecyclerView.VERTICAL, false);

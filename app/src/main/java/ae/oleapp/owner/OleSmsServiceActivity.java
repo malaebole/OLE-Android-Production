@@ -41,6 +41,7 @@ public class OleSmsServiceActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = OleactivitySmsServiceBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.sms_services);
 
         Bundle bundle = getIntent().getExtras();

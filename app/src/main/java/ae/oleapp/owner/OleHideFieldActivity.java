@@ -64,6 +64,7 @@ public class OleHideFieldActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = OleactivityHideFieldBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.hide_field);
 
         Bundle bundle = getIntent().getExtras();

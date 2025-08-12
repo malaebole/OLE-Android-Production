@@ -5,6 +5,10 @@ import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AlertDialog;
+import androidx.core.content.ContextCompat;
+import androidx.core.graphics.Insets;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -14,7 +18,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
@@ -22,6 +28,7 @@ import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
+import android.view.Window;
 import android.view.WindowManager;
 
 import android.widget.RelativeLayout;
@@ -111,6 +118,7 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
         binding = ActivityLineupRealBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
         makeStatusbarTransperant();
+        applyEdgeToEdgee(binding.getRoot());
         getLineupSelections(true);
 
         vibrator = (Vibrator) getSystemService(VIBRATOR_SERVICE);
@@ -187,6 +195,47 @@ public class LineupRealActivity extends BaseActivity implements View.OnClickList
         binding.btnChangeName.setOnClickListener(this);
 
     }
+
+    ///// EDGE TO EDGE START ////
+    protected void applyEdgeToEdgee(View rootView) {
+        ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
+            Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
+            // Keep content inside safe area without shifting vertically unless needed
+            return WindowInsetsCompat.CONSUMED;
+        });
+        setStatusBarAndNavBarColor();
+    }
+
+    private void setStatusBarAndNavBarColor() {
+        Window window = getWindow();
+        int green = ContextCompat.getColor(this, R.color.transparent);
+
+        if (Build.VERSION.SDK_INT >= 34) { // Android 15+
+            boolean isLandscape = getResources().getConfiguration().orientation
+                    == Configuration.ORIENTATION_LANDSCAPE;
+            ViewCompat.setOnApplyWindowInsetsListener(window.getDecorView(), (view, windowInsets) -> {
+                Insets statusBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.statusBars());
+                Insets navBarInsets = windowInsets.getInsets(WindowInsetsCompat.Type.navigationBars());
+
+                // Apply background color to the whole decor view
+                view.setBackgroundColor(green);
+
+                // Combine paddings for status + navigation bars
+                int left = isLandscape ? navBarInsets.left : Math.max(statusBarInsets.left, navBarInsets.left);
+                int top = 0;
+                int right = isLandscape ? navBarInsets.right : Math.max(statusBarInsets.right, navBarInsets.right);
+                int bottom = navBarInsets.bottom;
+
+                view.setPadding(left, top, right, bottom);
+                return windowInsets;
+            });
+        } else {
+            window.setStatusBarColor(green);
+            window.setNavigationBarColor(green);
+        }
+    }
+    ///// EDGE TO EDGE END ////
+
 
     @Override
     protected void onDestroy() {

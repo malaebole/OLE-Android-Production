@@ -22,6 +22,7 @@ public class OleWebVuActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityWebVuBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.term_condition);
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

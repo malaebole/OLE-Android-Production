@@ -52,6 +52,7 @@ public class OlePadelChallengeActivity extends BaseActivity implements View.OnCl
         super.onCreate(savedInstanceState);
         binding = OleactivityPadelChallengeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.challenge);
 
         Bundle bundle = getIntent().getExtras();

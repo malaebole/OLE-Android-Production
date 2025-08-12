@@ -47,6 +47,7 @@ public class OleCompleteBookingActivity extends BaseActivity implements View.OnC
         super.onCreate(savedInstanceState);
         binding = OleactivityCompleteBookingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.complete_booking);
 
         Bundle bundle = getIntent().getExtras();

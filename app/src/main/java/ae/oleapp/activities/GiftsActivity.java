@@ -46,6 +46,7 @@ public class GiftsActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         binding = ActivityGiftsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Intent intent = getIntent();

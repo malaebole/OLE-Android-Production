@@ -49,6 +49,7 @@ public class OleClubPricingActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivityClubPricingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.membership_plan);
 
         Bundle bundle = getIntent().getExtras();

@@ -57,6 +57,7 @@ public class OleNormalBookingDetailActivity extends BaseActivity implements View
         super.onCreate(savedInstanceState);
         binding = OleactivityNormalBookingDetailBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.booking_detail);
 
         Bundle bundle = getIntent().getExtras();

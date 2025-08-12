@@ -51,6 +51,7 @@ public class OleOwnerEarningDetailsActivity extends BaseActivity implements View
         super.onCreate(savedInstanceState);
         binding = OleactivityOwnerEarningDetailsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.earnings);
         
         Bundle bundle = getIntent().getExtras();

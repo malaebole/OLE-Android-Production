@@ -70,6 +70,7 @@ public class OleCreateMatchActivity extends BaseActivity implements View.OnClick
         super.onCreate(savedInstanceState);
         binding = OleactivityCreateMatchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.create_match);
 
         Bundle bundle = getIntent().getExtras();

@@ -41,6 +41,7 @@ public class PlayerReviewsActivity extends BaseActivity implements View.OnClickL
         super.onCreate(savedInstanceState);
         binding = ActivityPlayerReviewsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         Bundle bundle = getIntent().getExtras();

@@ -64,6 +64,7 @@ public class CheckoutActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         binding = ActivityCheckoutBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.checkout);
 
         Bundle bundle = getIntent().getExtras();

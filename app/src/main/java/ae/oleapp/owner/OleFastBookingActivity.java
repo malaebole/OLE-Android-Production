@@ -95,12 +95,15 @@ public class OleFastBookingActivity extends BaseActivity implements View.OnClick
     private final List<OleKeyValuePair> durationList = new ArrayList<>();
     private int selectedSlotIndex = -1;
     private int selectedFieldIndex = -1;
+    private int clubIndex = -1;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = OleactivityFastBookingBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(getString(R.string.fast_booking));
 
         Bundle bundle = getIntent().getExtras();
@@ -111,21 +114,26 @@ public class OleFastBookingActivity extends BaseActivity implements View.OnClick
             //id = bundle.getString("id");
         }
 
-        int clubIndex = -1;
-        for (int i = 0; i < AppManager.getInstance().clubs.size(); i++) {
-            Club c = AppManager.getInstance().clubs.get(i);
-            if (isPadel && c.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
-                clubList.add(c);
-                if (club.getId().equalsIgnoreCase(c.getId())) {
-                    clubIndex = i;
-                }
+        clubList.addAll(AppManager.getInstance().clubs);
+        for (int i = 0; i < clubList.size(); i++) {
+            if (club.getId().equalsIgnoreCase(clubList.get(i).getId())) {
+                clubIndex = i;
             }
-            else if (!isPadel && c.getClubType().equalsIgnoreCase(Constants.kFootballModule)) {
-                clubList.add(c);
-                if (club.getId().equalsIgnoreCase(c.getId())) {
-                    clubIndex = i;
-                }
-            }
+
+
+
+//            if (isPadel && c.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
+////                clubList.add(c);
+//                if (club.getId().equalsIgnoreCase(c.getId())) {
+//                    clubIndex = i;
+//                }
+//            }
+//            else if (!isPadel && c.getClubType().equalsIgnoreCase(Constants.kFootballModule)) {
+////                clubList.add(c);
+//                if (club.getId().equalsIgnoreCase(c.getId())) {
+//                    clubIndex = i;
+//                }
+//            }
         }
 
         binding.btnBook.setBackgroundImage(club.getClubType().equalsIgnoreCase(Constants.kPadelModule));
@@ -153,6 +161,10 @@ public class OleFastBookingActivity extends BaseActivity implements View.OnClick
         clubAdapter = new OleRankClubAdapter(getContext(), clubList, clubIndex, false);
         clubAdapter.setOnItemClickListener(clubClickListener);
         binding.clubRecyclerVu.setAdapter(clubAdapter);
+        if (clubIndex != -1){
+            binding.clubRecyclerVu.scrollToPosition(clubIndex);
+        }
+
 
         LinearLayoutManager fieldLayoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
         binding.fieldRecyclerVu.setLayoutManager(fieldLayoutManager);

@@ -26,6 +26,7 @@ public class UserTypeActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         binding = OleactivityUserTypeBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         userModule = Functions.getPrefValue(getContext(), Constants.kUserModule);

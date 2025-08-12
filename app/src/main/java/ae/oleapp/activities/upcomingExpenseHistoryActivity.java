@@ -48,6 +48,7 @@ public class upcomingExpenseHistoryActivity extends BaseActivity implements View
         super.onCreate(savedInstanceState);
         binding = ActivityUpcomingExpenseHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         Intent intent = getIntent();
         clubId  = intent.getStringExtra("club_id");

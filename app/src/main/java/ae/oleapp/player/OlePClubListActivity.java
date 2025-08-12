@@ -69,6 +69,7 @@ public class OlePClubListActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = OleactivityPClubListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -180,6 +181,7 @@ public class OlePClubListActivity extends BaseActivity implements View.OnClickLi
                     getClubList(clubList.isEmpty());
                 }
             });
+        getClubList(clubList.isEmpty());
     }
 
 

@@ -79,6 +79,7 @@ public class LineupRealShareActivity extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = ActivityLineupRealShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
 

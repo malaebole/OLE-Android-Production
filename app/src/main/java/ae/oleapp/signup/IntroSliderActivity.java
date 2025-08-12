@@ -49,6 +49,7 @@ public class IntroSliderActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = OleactivityIntroSliderBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         userIpDetails = Functions.getPrefValue(getContext(),Constants.kLoginType);

@@ -68,6 +68,7 @@ public class MarkPaidActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         binding = ActivityMarkPaidBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
 
 
         Bundle bundle = getIntent().getExtras();

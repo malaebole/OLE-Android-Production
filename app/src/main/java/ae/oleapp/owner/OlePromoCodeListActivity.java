@@ -51,6 +51,7 @@ public class OlePromoCodeListActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityPromoCodeListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.promo_codes);
 
         Bundle bundle = getIntent().getExtras();

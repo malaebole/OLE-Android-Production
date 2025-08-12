@@ -58,6 +58,7 @@ public class OleCreatePadelMatchActivity extends BaseActivity implements View.On
         super.onCreate(savedInstanceState);
         binding = OleactivityCreatePadelMatchBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
+applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.create_match);
 
         Bundle bundle = getIntent().getExtras();
