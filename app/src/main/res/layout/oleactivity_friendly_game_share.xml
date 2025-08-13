@@ -87,7 +87,7 @@
             android:layout_marginTop="@dimen/_15sdp"
             android:layout_marginStart="@dimen/_25sdp">
 
-            <com.rishabhharit.roundedimageview.RoundedImageView
+            <com.github.siyamed.shapeimageview.RoundedImageView
                 android:id="@+id/p1_img_vu"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"

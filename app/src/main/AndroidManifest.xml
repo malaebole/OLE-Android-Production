@@ -180,11 +180,6 @@
             android:screenOrientation="portrait"
             android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".dialogs.ExpenseSelectionListDialog"
-            android:exported="false"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="adjustResize" />
-        <activity
             android:name=".activities.AddExpenseActivity"
             android:exported="false"
             android:screenOrientation="portrait"
@@ -907,7 +902,7 @@
             android:name=".player.OlePlayerMainTabsActivity"
             android:exported="false"
             android:screenOrientation="portrait"
-            android:theme="@style/AppThemePlayer">
+            android:theme="@style/AppTheme">
             <intent-filter>
                 <action android:name="OPEN_ACTIVITY_MAIN_PLAYER" />
 

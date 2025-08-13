@@ -56,12 +56,7 @@ public class OleBookingDurationAdapter extends RecyclerView.Adapter<OleBookingDu
             holder.tvName.setTextColor(context.getResources().getColor(R.color.darkTextColor));
         }
 
-        holder.mainLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onItemClickListener.OnItemClick(v, holder.getAdapterPosition());
-            }
-        });
+        holder.mainLayout.setOnClickListener(v -> onItemClickListener.OnItemClick(v, holder.getBindingAdapterPosition()));
     }
 
     @Override

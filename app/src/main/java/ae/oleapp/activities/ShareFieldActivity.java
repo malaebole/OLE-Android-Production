@@ -2,8 +2,6 @@ package ae.oleapp.activities;
 
 import android.Manifest;
 import android.content.ActivityNotFoundException;
-import android.content.ContentResolver;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -15,7 +13,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.view.View;
@@ -42,14 +39,12 @@ import org.json.JSONObject;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.net.UnknownHostException;
 
 import ae.oleapp.R;
 import ae.oleapp.base.BaseActivity;
 import ae.oleapp.databinding.ActivityShareFieldBinding;
 import ae.oleapp.models.DragData;
-import ae.oleapp.models.FormationTeams;
 import ae.oleapp.models.GameTeam;
 import ae.oleapp.models.PlayerInfo;
 import ae.oleapp.util.AppManager;
@@ -80,7 +75,7 @@ public class ShareFieldActivity extends BaseActivity implements View.OnClickList
         super.onCreate(savedInstanceState);
         binding = ActivityShareFieldBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
 
@@ -148,21 +143,17 @@ applyEdgeToEdge(binding.getRoot());
                     if (teamAStatus.equalsIgnoreCase("win")) {
                         binding.imgVuWin.setImageResource(R.drawable.rating_check);
                         binding.tvWin.setTextColor(getResources().getColor(R.color.yellowColor));
-                    }
-                    else if (teamAStatus.equalsIgnoreCase("loss")) {
+                    } else if (teamAStatus.equalsIgnoreCase("loss")) {
                         binding.imgVuLost.setImageResource(R.drawable.rating_check);
                         binding.tvLost.setTextColor(getResources().getColor(R.color.yellowColor));
-                    }
-                    else if (teamAStatus.equalsIgnoreCase("played")) {
+                    } else if (teamAStatus.equalsIgnoreCase("played")) {
                         binding.imgVuPlayed.setImageResource(R.drawable.rating_check);
                         binding.tvPlayed.setTextColor(getResources().getColor(R.color.yellowColor));
-                    }
-                    else if (teamAStatus.equalsIgnoreCase("skills")) {
+                    } else if (teamAStatus.equalsIgnoreCase("skills")) {
                         binding.imgVuSkills.setImageResource(R.drawable.rating_check);
                         binding.tvSkills.setTextColor(getResources().getColor(R.color.yellowColor));
                     }
-                }
-                else if (tab.getPosition() == 1) {
+                } else if (tab.getPosition() == 1) {
                     selectedTab = 1;
                     binding.btnShare.setVisibility(View.INVISIBLE);
                     binding.fullVuDetail.setVisibility(View.INVISIBLE);
@@ -177,21 +168,17 @@ applyEdgeToEdge(binding.getRoot());
                     if (teamBStatus.equalsIgnoreCase("win")) {
                         binding.imgVuWin.setImageResource(R.drawable.rating_check);
                         binding.tvWin.setTextColor(getResources().getColor(R.color.yellowColor));
-                    }
-                    else if (teamBStatus.equalsIgnoreCase("loss")) {
+                    } else if (teamBStatus.equalsIgnoreCase("loss")) {
                         binding.imgVuLost.setImageResource(R.drawable.rating_check);
                         binding.tvLost.setTextColor(getResources().getColor(R.color.yellowColor));
-                    }
-                    else if (teamBStatus.equalsIgnoreCase("played")) {
+                    } else if (teamBStatus.equalsIgnoreCase("played")) {
                         binding.imgVuPlayed.setImageResource(R.drawable.rating_check);
                         binding.tvPlayed.setTextColor(getResources().getColor(R.color.yellowColor));
-                    }
-                    else if (teamBStatus.equalsIgnoreCase("skills")) {
+                    } else if (teamBStatus.equalsIgnoreCase("skills")) {
                         binding.imgVuSkills.setImageResource(R.drawable.rating_check);
                         binding.tvSkills.setTextColor(getResources().getColor(R.color.yellowColor));
                     }
-                }
-                else {
+                } else {
                     selectedTab = 2;
                     binding.filterVu.setVisibility(View.GONE);
                     binding.btmVu.setVisibility(View.GONE);
@@ -242,12 +229,11 @@ applyEdgeToEdge(binding.getRoot());
         binding.btnShare.setOnClickListener(this);
 
 
-
     }
 
     private void shareGameCount(boolean isLoader, String gameId, String type) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.shareGameCount(gameId,type);
+        Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.shareGameCount(gameId, type);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -285,8 +271,7 @@ applyEdgeToEdge(binding.getRoot());
     public void onClick(View view) {
         if (view == binding.btnClose) {
             finish();
-        }
-        else if (view == binding.tabWin) {
+        } else if (view == binding.tabWin) {
             resetTabs();
             if (selectedTab == 0) {
                 if (teamAStatus.equalsIgnoreCase("win")) {
@@ -296,8 +281,7 @@ applyEdgeToEdge(binding.getRoot());
                     binding.imgVuWin.setImageResource(R.drawable.rating_check);
                     binding.tvWin.setTextColor(getResources().getColor(R.color.yellowColor));
                 }
-            }
-            else if (selectedTab == 1) {
+            } else if (selectedTab == 1) {
                 if (teamBStatus.equalsIgnoreCase("win")) {
                     teamBStatus = "";
                 } else {
@@ -307,8 +291,7 @@ applyEdgeToEdge(binding.getRoot());
                 }
             }
             getTeams(true);
-        }
-        else if (view == binding.tabLost) {
+        } else if (view == binding.tabLost) {
             resetTabs();
             if (selectedTab == 0) {
                 if (teamAStatus.equalsIgnoreCase("loss")) {
@@ -318,8 +301,7 @@ applyEdgeToEdge(binding.getRoot());
                     binding.imgVuLost.setImageResource(R.drawable.rating_check);
                     binding.tvLost.setTextColor(getResources().getColor(R.color.yellowColor));
                 }
-            }
-            else if (selectedTab == 1) {
+            } else if (selectedTab == 1) {
                 if (teamBStatus.equalsIgnoreCase("loss")) {
                     teamBStatus = "";
                 } else {
@@ -329,8 +311,7 @@ applyEdgeToEdge(binding.getRoot());
                 }
             }
             getTeams(true);
-        }
-        else if (view == binding.tabPlayed) {
+        } else if (view == binding.tabPlayed) {
             resetTabs();
             if (selectedTab == 0) {
                 if (teamAStatus.equalsIgnoreCase("played")) {
@@ -340,8 +321,7 @@ applyEdgeToEdge(binding.getRoot());
                     binding.imgVuPlayed.setImageResource(R.drawable.rating_check);
                     binding.tvPlayed.setTextColor(getResources().getColor(R.color.yellowColor));
                 }
-            }
-            else if (selectedTab == 1) {
+            } else if (selectedTab == 1) {
                 if (teamBStatus.equalsIgnoreCase("played")) {
                     teamBStatus = "";
                 } else {
@@ -351,8 +331,7 @@ applyEdgeToEdge(binding.getRoot());
                 }
             }
             getTeams(true);
-        }
-        else if (view == binding.tabSkills) {
+        } else if (view == binding.tabSkills) {
             resetTabs();
             if (selectedTab == 0) {
                 if (teamAStatus.equalsIgnoreCase("skills")) {
@@ -362,8 +341,7 @@ applyEdgeToEdge(binding.getRoot());
                     binding.imgVuSkills.setImageResource(R.drawable.rating_check);
                     binding.tvSkills.setTextColor(getResources().getColor(R.color.yellowColor));
                 }
-            }
-            else if (selectedTab == 1) {
+            } else if (selectedTab == 1) {
                 if (teamBStatus.equalsIgnoreCase("skills")) {
                     teamBStatus = "";
                 } else {
@@ -373,23 +351,17 @@ applyEdgeToEdge(binding.getRoot());
                 }
             }
             getTeams(true);
-        }
-        else if (view == binding.btnMore) {
+        } else if (view == binding.btnMore) {
             shareClicked("", false);
-        }
-        else if (view == binding.btnFacebook) {
+        } else if (view == binding.btnFacebook) {
             shareClicked("com.facebook.katana", false);
-        }
-        else if (view == binding.btnWhatsapp) {
+        } else if (view == binding.btnWhatsapp) {
             shareClicked("com.whatsapp", false);
-        }
-        else if (view == binding.btnSave) {
+        } else if (view == binding.btnSave) {
             saveToGallery("");
-        }
-        else if (view == binding.btnInsta) {
+        } else if (view == binding.btnInsta) {
             shareClicked("com.instagram.android", false);
-        }
-        else if (view == binding.btnShare) {
+        } else if (view == binding.btnShare) {
             shareClicked("", true);
         }
     }
@@ -398,9 +370,9 @@ applyEdgeToEdge(binding.getRoot());
 
         String[] permissions = new String[0];
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            permissions = new String[]{Manifest.permission.CAMERA,  Manifest.permission.READ_MEDIA_IMAGES};
-        }else {
-            permissions = new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES};
+        } else {
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
         }
 
         Permissions.check(getContext(), permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
@@ -417,8 +389,7 @@ applyEdgeToEdge(binding.getRoot());
                     }
                     bitmap = getBitmapFromView(binding.fullVuDetail, binding.fieldBgImgVu.getDrawable());
                     binding.fullFieldLogo.setVisibility(View.INVISIBLE);
-                }
-                else {
+                } else {
                     binding.fieldLogo.setVisibility(View.VISIBLE);
                     binding.tvTeamTitle.setVisibility(View.VISIBLE);
                     try {
@@ -454,17 +425,14 @@ applyEdgeToEdge(binding.getRoot());
                                         share.putExtra(Intent.EXTRA_STREAM, uri);
                                         if (path.isEmpty()) {
                                             startActivity(Intent.createChooser(share, "Share"));
-                                        }
-                                        else {
+                                        } else {
                                             share.setPackage(path);
                                             startActivity(share);
                                         }
-                                    }
-                                    catch (ActivityNotFoundException e) {
+                                    } catch (ActivityNotFoundException e) {
                                         e.printStackTrace();
                                         Functions.showToast(getContext(), "Install app first!", FancyToast.ERROR, FancyToast.LENGTH_SHORT);
-                                    }
-                                    catch (Exception e) {
+                                    } catch (Exception e) {
                                         e.printStackTrace();
                                     }
 
@@ -478,8 +446,7 @@ applyEdgeToEdge(binding.getRoot());
                                     } catch (IOException e) {
                                         e.printStackTrace();
                                     }
-                                }
-                                else {
+                                } else {
                                     shareGameCount(false, gameId, "lineup");
                                     createPdf(finalBitmap);
                                 }
@@ -490,12 +457,12 @@ applyEdgeToEdge(binding.getRoot());
 
     }
 
-    private void saveToGallery(String path){
+    private void saveToGallery(String path) {
         String[] permissions = new String[0];
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
-            permissions = new String[]{Manifest.permission.CAMERA,  Manifest.permission.READ_MEDIA_IMAGES};
-        }else {
-            permissions = new String[] {Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES};
+        } else {
+            permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
         }
         Permissions.check(getContext(), permissions, null/*rationale*/, null/*options*/, new PermissionHandler() {
             @Override
@@ -515,25 +482,21 @@ applyEdgeToEdge(binding.getRoot());
                 Bitmap finalBitmap = bitmap;
                 try {
                     saveBitmap(getContext(), finalBitmap);
-                    Functions.showToast(getContext(),getString(R.string.image_saved), FancyToast.SUCCESS, FancyToast.LENGTH_SHORT);
+                    Functions.showToast(getContext(), getString(R.string.image_saved), FancyToast.SUCCESS, FancyToast.LENGTH_SHORT);
                     shareGameCount(false, gameId, "lineup");
-                }
-                catch (ActivityNotFoundException e) {
+                } catch (ActivityNotFoundException e) {
                     e.printStackTrace();
                     Functions.showToast(getContext(), "Install app first!", FancyToast.ERROR, FancyToast.LENGTH_SHORT);
-                }
-                catch (Exception e) {
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
             }
         });
 
 
-
-
     }
 
-    private void createPdf(Bitmap bitmap){
+    private void createPdf(Bitmap bitmap) {
         WindowManager wm = (WindowManager) getSystemService(Context.WINDOW_SERVICE);
         Display display = wm.getDefaultDisplay();
         DisplayMetrics displaymetrics = new DisplayMetrics();
@@ -553,7 +516,7 @@ applyEdgeToEdge(binding.getRoot());
         bitmap = Bitmap.createScaledBitmap(bitmap, bitmap.getWidth(), bitmap.getHeight(), true);
 
         paint.setColor(Color.BLUE);
-        canvas.drawBitmap(bitmap, 0, 0 , null);
+        canvas.drawBitmap(bitmap, 0, 0, null);
         document.finishPage(page);
 
         File filePath = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), "Ole");
@@ -637,7 +600,7 @@ applyEdgeToEdge(binding.getRoot());
 
     private void replaceViewTeamA(DragData state, int x, int y) {
         PlayerInfo info = state.getItem();
-        PreviewFieldView fieldViewA = new PreviewFieldView(getContext(),gameTeam.getTeamAPlayers().size(), gameTeam.getTeamBPlayers().size());
+        PreviewFieldView fieldViewA = new PreviewFieldView(getContext(), gameTeam.getTeamAPlayers().size(), gameTeam.getTeamBPlayers().size());
 //        PreviewFieldView fieldViewA = new PreviewFieldView(getContext());
         populateDataInTeamAVu(fieldViewA, info, teamAVuWidth, teamAVuHeight);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -668,7 +631,7 @@ applyEdgeToEdge(binding.getRoot());
     private void replaceViewTeamB(DragData state, int x, int y) {
         PlayerInfo info = state.getItem();
 //        PreviewFieldView fieldView = new PreviewFieldView(getContext());
-        PreviewFieldView fieldView = new PreviewFieldView(getContext(),gameTeam.getTeamAPlayers().size(), gameTeam.getTeamBPlayers().size());
+        PreviewFieldView fieldView = new PreviewFieldView(getContext(), gameTeam.getTeamAPlayers().size(), gameTeam.getTeamBPlayers().size());
         populateDataInTeamBVu(fieldView, info, teamBVuWidth, teamBVuHeight);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         if (info.getxCoordinate() != null && !info.getxCoordinate().isEmpty() && info.getyCoordinate() != null && !info.getyCoordinate().isEmpty()) {
@@ -697,15 +660,15 @@ applyEdgeToEdge(binding.getRoot());
 
     private void replaceViewFullTeamA(DragData state, int x, int y) {
         PlayerInfo info = state.getItem();
-        PreviewFieldView fieldViewA = new PreviewFieldView(getContext(),gameTeam.getTeamAPlayers().size(), gameTeam.getTeamBPlayers().size());
+        PreviewFieldView fieldViewA = new PreviewFieldView(getContext(), gameTeam.getTeamAPlayers().size(), gameTeam.getTeamBPlayers().size());
         populateDataInTeamAVu(fieldViewA, info, fullTeamAVuWidth, fullTeamAVuHeight);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         if (info.getxCoordinate() != null && !info.getxCoordinate().isEmpty() && info.getyCoordinate() != null && !info.getyCoordinate().isEmpty()) {
             float xValue = Float.parseFloat(info.getxCoordinate());
             float yValue = Float.parseFloat(info.getyCoordinate());
             float actualXValue = xValue * fullTeamAVuWidth; //getScreenWidth();
-            float actualYValue = yValue *  fullTeamAVuHeight; //getScreenHeight();
-            int h = (fullTeamAVuHeight/3)+40;
+            float actualYValue = yValue * fullTeamAVuHeight; //getScreenHeight();
+            int h = (fullTeamAVuHeight / 3) + 40;
 //            int h = (fullTeamAVuHeight/3);
 //            setFullViewMargin(params, actualXValue, fullTeamAVuHeight - h - actualYValue);
             setFullViewMargin(params, actualXValue, fullTeamAVuHeight - h - actualYValue);
@@ -715,7 +678,7 @@ applyEdgeToEdge(binding.getRoot());
 
     private void replaceViewFullTeamB(DragData state, int x, int y) {
         PlayerInfo info = state.getItem();
-        PreviewFieldView fieldViewA = new PreviewFieldView(getContext(),gameTeam.getTeamAPlayers().size(), gameTeam.getTeamBPlayers().size());
+        PreviewFieldView fieldViewA = new PreviewFieldView(getContext(), gameTeam.getTeamAPlayers().size(), gameTeam.getTeamBPlayers().size());
         populateDataInTeamBVu(fieldViewA, info, fullTeamBVuWidth, fullTeamBVuHeight);
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
         if (info.getxCoordinate() != null && !info.getxCoordinate().isEmpty() && info.getyCoordinate() != null && !info.getyCoordinate().isEmpty()) {
@@ -730,11 +693,11 @@ applyEdgeToEdge(binding.getRoot());
 
     private void setViewMargin(RelativeLayout.LayoutParams params, float xValue, float yValue) {
         params.leftMargin = (int) xValue;
-        if (teamAVuWidth-params.leftMargin < subVuW) {
+        if (teamAVuWidth - params.leftMargin < subVuW) {
             params.leftMargin = teamAVuWidth - (int) subVuW;
         }
         params.topMargin = (int) yValue;
-        if (teamAVuHeight-params.topMargin < subVuH) {
+        if (teamAVuHeight - params.topMargin < subVuH) {
             params.topMargin = teamAVuHeight - (int) subVuH;
         }
     }
@@ -744,11 +707,11 @@ applyEdgeToEdge(binding.getRoot());
             yValue = 0;
         }
         params.leftMargin = (int) xValue;
-        if (fullTeamAVuWidth-params.leftMargin < subVuW) {
+        if (fullTeamAVuWidth - params.leftMargin < subVuW) {
             params.leftMargin = fullTeamAVuWidth - (int) subVuW;
         }
         params.topMargin = (int) yValue;
-        if (fullTeamAVuHeight-params.topMargin < subVuH) {
+        if (fullTeamAVuHeight - params.topMargin < subVuH) {
             params.topMargin = fullTeamAVuHeight - (int) subVuH;
         }
     }
@@ -758,14 +721,12 @@ applyEdgeToEdge(binding.getRoot());
             if (teamACaptainAvailable && teamACaptainId.equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID))) {
                 viewA.setParentViewSize(viewWidth, viewHeight);
             }
-        }
-        else {
+        } else {
             if (teamACaptainAvailable) {
                 if (teamACaptainId.equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID))) {
                     viewA.setParentViewSize(viewWidth, viewHeight);
                 }
-            }
-            else {
+            } else {
                 viewA.setParentViewSize(viewWidth, viewHeight);
             }
         }
@@ -777,14 +738,12 @@ applyEdgeToEdge(binding.getRoot());
             if (teamBCaptainAvailable && teamBCaptainId.equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID))) {
                 viewA.setParentViewSize(viewWidth, viewHeight);
             }
-        }
-        else {
+        } else {
             if (teamBCaptainAvailable) {
                 if (teamBCaptainId.equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID))) {
                     viewA.setParentViewSize(viewWidth, viewHeight);
                 }
-            }
-            else {
+            } else {
                 viewA.setParentViewSize(viewWidth, viewHeight);
             }
         }
@@ -835,8 +794,7 @@ applyEdgeToEdge(binding.getRoot());
                     int w = teamAVuWidth / 4;
                     // goal keeper
                     isGK = newX > w && newX + view.getWidth() < teamAVuWidth - w;
-                }
-                else {
+                } else {
                     isGK = false;
                 }
                 if (isGK) {
@@ -853,7 +811,7 @@ applyEdgeToEdge(binding.getRoot());
                         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         float xValue = Float.parseFloat(playerInfo.getxCoordinate());
                         float yValue = Float.parseFloat(playerInfo.getyCoordinate());
-                        float actualXValue = xValue *teamAVuWidth; //getScreenWidth();
+                        float actualXValue = xValue * teamAVuWidth; //getScreenWidth();
                         float actualYValue = yValue * teamAVuHeight; //getScreenHeight();
                         setViewMargin(params, actualXValue, actualYValue);
                         binding.vuTeamA.addView(fieldViewA, params);
@@ -863,22 +821,19 @@ applyEdgeToEdge(binding.getRoot());
 //                    saveCoordinateAPI(false, gameTeam.getTeamAId(), playerInfo.getId(), relX, relY, "1", false);
                     view.setImage(gameTeam.getTeamAgkShirt());
                     view.getPlayerInfo().setIsGoalkeeper("1");
-                }
-                else {
+                } else {
 //                    saveCoordinateAPI(false, gameTeam.getTeamAId(), playerInfo.getId(), relX, relY, "0", false);
                     view.getPlayerInfo().setIsGoalkeeper("0");
                     view.setImage(gameTeam.getTeamAShirt());
                 }
                 view.getPlayerInfo().setxCoordinate(String.valueOf(relX));
                 view.getPlayerInfo().setyCoordinate(String.valueOf(relY));
-            }
-            else {
+            } else {
                 if (newY + view.getHeight() > teamBVuHeight - 50) {
                     int w = teamBVuWidth / 4;
                     // goal keeper
                     isGK = newX > w && newX + view.getWidth() < teamBVuWidth - w;
-                }
-                else {
+                } else {
                     isGK = false;
                 }
                 if (isGK) {
@@ -889,7 +844,7 @@ applyEdgeToEdge(binding.getRoot());
                         existingGk.getPlayerInfo().setyCoordinate(playerInfo.getyCoordinate());
                         existingGk.getPlayerInfo().setIsGoalkeeper("0");
                         binding.vuTeamB.removeView(existingGk);
-                        PreviewFieldView fieldView = new PreviewFieldView(getContext(),gameTeam.getTeamAPlayers().size(), gameTeam.getTeamBPlayers().size());
+                        PreviewFieldView fieldView = new PreviewFieldView(getContext(), gameTeam.getTeamAPlayers().size(), gameTeam.getTeamBPlayers().size());
                         populateDataInTeamBVu(fieldView, existingGk.getPlayerInfo(), teamBVuWidth, teamBVuHeight);
                         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
                         float xValue = Float.parseFloat(playerInfo.getxCoordinate());
@@ -904,8 +859,7 @@ applyEdgeToEdge(binding.getRoot());
                     // saveCoordinateAPI(false, gameTeam.getTeamBId(), playerInfo.getId(), relX, relY, "1", false);
                     view.setImage(gameTeam.getTeamBgkShirt());
                     playerInfo.setIsGoalkeeper("1");
-                }
-                else {
+                } else {
                     //saveCoordinateAPI(false, gameTeam.getTeamBId(), playerInfo.getId(), relX, relY, "0", false);
                     view.setImage(gameTeam.getTeamBShirt());
                     playerInfo.setIsGoalkeeper("0");
@@ -918,7 +872,7 @@ applyEdgeToEdge(binding.getRoot());
 
     private void getTeams(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getContext()) : null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getFormationDetails(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), gameId, teamAId, teamAStatus, teamBId, teamBStatus);
+        Call<ResponseBody> call = AppManager.getInstance().apiInterfaceNode.getFormationDetails(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), gameId, teamAId, teamAStatus, teamBId, teamBStatus);
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {

@@ -64,7 +64,6 @@ import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
 import ae.oleapp.util.PreviewFieldView;
-import ae.oleapp.zegocloudexpress.ExpressManager;
 import okhttp3.ResponseBody;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -189,12 +188,12 @@ applyEdgeToEdge(binding.getRoot());
         if (databaseReference != null && databaseHandle != null) {
             databaseReference.child("lineup").child(gameTeam.getGameId()).removeEventListener(databaseHandle);
         }
-        try {
-            ExpressManager.getInstance().enableMic(false);
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            ExpressManager.getInstance().enableMic(false);
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -204,12 +203,12 @@ applyEdgeToEdge(binding.getRoot());
             if (teamACaptainId.equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID)) || teamBCaptainId.equalsIgnoreCase(Functions.getPrefValue(getContext(), Constants.kUserID))) {
                 if (gameTeam.getIsGameOn().equalsIgnoreCase("1")) {
                     observeChange();
-                    try {
-                        ExpressManager.getInstance().enableMic(isAudioRoomActive);
-                    }
-                    catch (Exception e) {
-                        e.printStackTrace();
-                    }
+//                    try {
+//                        ExpressManager.getInstance().enableMic(isAudioRoomActive);
+//                    }
+//                    catch (Exception e) {
+//                        e.printStackTrace();
+//                    }
                 }
             }
         }
@@ -219,12 +218,12 @@ applyEdgeToEdge(binding.getRoot());
     protected void onDestroy() {
         super.onDestroy();
         getWindow().clearFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
-        try {
-            ExpressManager.getInstance().leaveRoom();
-        }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
+//        try {
+//            ExpressManager.getInstance().leaveRoom();
+//        }
+//        catch (Exception e) {
+//            e.printStackTrace();
+//        }
     }
 
     @Override
@@ -576,13 +575,13 @@ applyEdgeToEdge(binding.getRoot());
         }
         else {
             binding.btnSpeak.setOnClickListener(null);
-            try {
-                ExpressManager.getInstance().enableMic(false);
-                ExpressManager.getInstance().leaveRoom();
-            }
-            catch (Exception e) {
-                e.printStackTrace();
-            }
+//            try {
+//                ExpressManager.getInstance().enableMic(false);
+//                ExpressManager.getInstance().leaveRoom();
+//            }
+//            catch (Exception e) {
+//                e.printStackTrace();
+//            }
             binding.btnSpeak.setImageResource(R.drawable.mic_deactivel);
             binding.btmVu.setVisibility(View.INVISIBLE);
             binding.playersRecyclerVu.setVisibility(View.INVISIBLE);

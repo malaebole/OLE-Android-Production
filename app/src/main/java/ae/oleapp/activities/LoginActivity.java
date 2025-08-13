@@ -49,7 +49,6 @@ public class LoginActivity extends BaseActivity implements View.OnClickListener 
         super.onCreate(savedInstanceState);
         binding = OleactivityLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         checkKeyboardListener();

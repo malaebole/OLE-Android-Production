@@ -45,7 +45,7 @@ public class OleActivityCustomCamera extends BaseActivity implements View.OnClic
         super.onCreate(savedInstanceState);
         binding = OleactivityCustomCameraBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {

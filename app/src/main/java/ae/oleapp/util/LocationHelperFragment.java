@@ -135,9 +135,8 @@ public class LocationHelperFragment extends Fragment {
         Task<LocationSettingsResponse> task = settingsClient.checkLocationSettings(request);
         task.addOnSuccessListener(locationSettingsResponse -> fetchLastLocation())
                 .addOnFailureListener(e -> {
-                    if (e instanceof ResolvableApiException) {
+                    if (e instanceof ResolvableApiException rae) {
                         try {
-                            ResolvableApiException rae = (ResolvableApiException) e;
                             IntentSenderRequest intentSenderRequest = new IntentSenderRequest.Builder(rae.getResolution()).build();
                             settingsLauncher.launch(intentSenderRequest);
                         } catch (Exception ex) {

@@ -9,7 +9,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
-import com.facebook.drawee.backends.pipeline.Fresco;
 import com.google.android.gms.ads.MobileAds;
 import com.google.android.libraries.places.api.Places;
 
@@ -32,7 +31,7 @@ public class MyApp extends Application implements Application.ActivityLifecycleC
     public void onCreate() {
         super.onCreate();
         mContext = getApplicationContext();
-        Fresco.initialize(this);
+//        Fresco.initialize(this);
         Realm.init(this);
         MobileAds.initialize(this);
         RealmConfiguration config = new RealmConfiguration.Builder()

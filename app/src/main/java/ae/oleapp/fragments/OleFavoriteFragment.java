@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -24,6 +25,7 @@ import org.json.JSONObject;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.List;
+
 
 import ae.oleapp.R;
 import ae.oleapp.adapters.OlePadelPlayerListAdapter;
@@ -66,13 +68,12 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         binding = OlefragmentFavoriteBinding.inflate(inflater, container, false);
         View view = binding.getRoot();
 
-        if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
+        if (Functions.getPrefValue(requireContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
             binding.cardVu.setCardBackgroundColor(getResources().getColor(R.color.blueColorNew));
             binding.imgVuMenu.setImageResource(R.drawable.p_menu_ic_white);
             binding.tvTitle.setTextColor(getResources().getColor(R.color.whiteColor));
@@ -156,7 +157,7 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
 
     private void playerClicked() {
         isClub = false;
-        if (Functions.getPrefValue(getActivity(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
+        if (Functions.getPrefValue(requireContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
             padelPlayerAdapter = new OlePadelPlayerListAdapter(getActivity(), playerList);
             padelPlayerAdapter.setOnItemClickListener(padelItemClickListener);
             binding.recyclerVu.setAdapter(padelPlayerAdapter);
@@ -195,7 +196,7 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
     };
 
     private void gotoProfile(String playerId) {
-        Intent intent = new Intent(getContext(), OlePlayerProfileActivity.class);
+        Intent intent = new Intent(getActivity(), OlePlayerProfileActivity.class);
         intent.putExtra("player_id", playerId);
         startActivity(intent);
     }
@@ -203,7 +204,7 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
     private final OlePlayerClubListAdapter.ItemClickListener itemClickListener = new OlePlayerClubListAdapter.ItemClickListener() {
         @Override
         public void itemClicked(View view, int pos) {
-            Intent intent = new Intent(getContext(), OlePlayerClubDetailActivity.class);
+            Intent intent = new Intent(getActivity(), OlePlayerClubDetailActivity.class);
             Gson gson = new Gson();
             intent.putExtra("club", gson.toJson(clubList.get(pos)));
             startActivity(intent);
@@ -219,7 +220,7 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
 
         @Override
         public void rateVuClicked(View view, int pos) {
-            OleClubRateDialog rateDialog = new OleClubRateDialog(getContext(), clubList.get(pos).getId());
+            OleClubRateDialog rateDialog = new OleClubRateDialog(getActivity(), clubList.get(pos).getId());
             rateDialog.show();
         }
     };
@@ -250,7 +251,7 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
     }
 
     private void addClicked() {
-        Intent intent = new Intent(getContext(), OlePlayerListActivity.class);
+        Intent intent = new Intent(getActivity(), OlePlayerListActivity.class);
         intent.putExtra("is_selection", true);
         this.startActivityForResult(intent, 106);
     }
@@ -277,29 +278,26 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
 
     private void addRemoveFavClub(boolean isLoader, String clubId, String status, int pos) {
         KProgressHUD hud = Functions.showLoader(getActivity(), "Image processing");
-        ((OlePlayerMainTabsActivity)getActivity()).addRemoveFavAPI(clubId, status, "club", new BaseActivity.FavCallback() {
-            @Override
-            public void addRemoveFav(boolean success, String msg) {
-                Functions.hideLoader(hud);
-                if (success) {
-                    Functions.showToast(getContext(), msg, FancyToast.SUCCESS);
-                    clubList.remove(pos);
-                    clubAdapter.notifyItemRemoved(pos);
-                    clubAdapter.notifyItemRangeChanged(pos, clubList.size());
-                }
-                else {
-                    Functions.showToast(getContext(), msg, FancyToast.ERROR);
-                }
+        ((OlePlayerMainTabsActivity)requireContext()).addRemoveFavAPI(clubId, status, "club", (success, msg) -> {
+            Functions.hideLoader(hud);
+            if (success) {
+                Functions.showToast(getActivity(), msg, FancyToast.SUCCESS);
+                clubList.remove(pos);
+                clubAdapter.notifyItemRemoved(pos);
+                clubAdapter.notifyItemRangeChanged(pos, clubList.size());
+            }
+            else {
+                Functions.showToast(getActivity(), msg, FancyToast.ERROR);
             }
         });
     }
 
     private void getFavListAPI(boolean isLoader) {
         KProgressHUD hud = isLoader ? Functions.showLoader(getActivity(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.getFavList(Functions.getAppLang(getActivity()),Functions.getPrefValue(getActivity(), Constants.kUserID), Functions.getPrefValue(getActivity(), Constants.kAppModule));
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.getFavList(Functions.getAppLang(getActivity()),Functions.getPrefValue(requireContext(), Constants.kUserID), Functions.getPrefValue(getActivity(), Constants.kAppModule));
         call.enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 Functions.hideLoader(hud);
                 if (response.body() != null) {
                     try {
@@ -325,7 +323,7 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
                             clubAdapter.notifyDataSetChanged();
                         }
                         else {
-                            if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
+                            if (Functions.getPrefValue(requireContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                                 padelPlayerAdapter.notifyDataSetChanged();
                             }
                             else {
@@ -334,11 +332,11 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
-                        Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
+                        Functions.showToast(getActivity(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
                 }
                 else {
-                    Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
+                    Functions.showToast(getActivity(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
 
@@ -346,10 +344,10 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
-                    Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
+                    Functions.showToast(getActivity(), getString(R.string.check_internet_connection), FancyToast.ERROR);
                 }
                 else {
-                    Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
+                    Functions.showToast(getActivity(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
         });
@@ -357,17 +355,14 @@ public class OleFavoriteFragment extends BaseFragment implements View.OnClickLis
 
     private void addFav(String playerId) {
         KProgressHUD hud = Functions.showLoader(getActivity(), "Image processing");
-        ((BaseActivity) getActivity()).addRemoveFavAPI(playerId, "1", "player", new BaseActivity.FavCallback() {
-            @Override
-            public void addRemoveFav(boolean success, String msg) {
-                Functions.hideLoader(hud);
-                if (success) {
-                    Functions.showToast(getContext(), msg, FancyToast.SUCCESS);
-                    getFavListAPI(false);
-                }
-                else {
-                    Functions.showToast(getContext(), msg, FancyToast.ERROR);
-                }
+        ((BaseActivity) requireContext()).addRemoveFavAPI(playerId, "1", "player", (success, msg) -> {
+            Functions.hideLoader(hud);
+            if (success) {
+                Functions.showToast(getActivity(), msg, FancyToast.SUCCESS);
+                getFavListAPI(false);
+            }
+            else {
+                Functions.showToast(getActivity(), msg, FancyToast.ERROR);
             }
         });
     }

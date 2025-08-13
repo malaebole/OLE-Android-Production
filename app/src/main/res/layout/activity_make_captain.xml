@@ -17,6 +17,7 @@
             android:scaleType="centerCrop"
             android:src="@drawable/blue_bg_captain" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/bar"
         android:layout_width="match_parent"
@@ -46,24 +47,26 @@
             android:id="@+id/invite"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
             android:layout_alignParentEnd="true"
+            android:layout_centerInParent="true"
+            android:layout_marginEnd="@dimen/_15sdp"
             android:text="Invite"
             android:textAppearance="@style/TextAppearance.AppCompat.Medium"
             android:textColor="@color/whiteColor"
-            android:layout_marginEnd="@dimen/_15sdp"
             android:textStyle="bold" />
 
     </RelativeLayout>
+
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recycler_vu"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginStart="@dimen/_5sdp"
-        android:scrollbars="none"
         android:layout_below="@+id/bar"
-        android:layout_marginTop="@dimen/_20sdp"/>
+        android:layout_marginStart="@dimen/_5sdp"
+        android:layout_marginTop="@dimen/_20sdp"
+        android:orientation="horizontal"
+        android:scrollbars="none" />
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/p1_card"
         android:layout_width="170dp"
@@ -217,6 +220,7 @@
         </RelativeLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/p2_card"
         android:layout_width="170dp"
@@ -373,6 +377,7 @@
         </RelativeLayout>
 
     </com.google.android.material.card.MaterialCardView>
+
     <RelativeLayout
         android:id="@+id/captain_a_ready"
         android:layout_width="170dp"
@@ -404,35 +409,37 @@
             android:textSize="16sp" />
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/captain_b_ready"
         android:layout_width="170dp"
         android:layout_height="40dp"
         android:layout_below="@+id/p1_card"
         android:layout_alignParentEnd="true"
-        android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginTop="@dimen/_5sdp"
+        android:layout_marginEnd="@dimen/_20sdp"
         android:layout_marginBottom="10dp"
         android:gravity="center">
 
-            <ImageButton
-                android:id="@+id/captain_b_ready_btn"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:background="@null"
-                android:scaleType="centerInside"
-                android:src="@drawable/captain_ready_unselected" />
+        <ImageButton
+            android:id="@+id/captain_b_ready_btn"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:background="@null"
+            android:scaleType="centerInside"
+            android:src="@drawable/captain_ready_unselected" />
 
-            <TextView
-                android:id="@+id/captain_b_ready_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_centerInParent="true"
-                android:fontFamily="@font/dubai_bold"
-                android:text="Ready"
-                android:textColor="@color/white"
-                android:textSize="16sp" />
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/captain_b_ready_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:fontFamily="@font/dubai_bold"
+            android:text="Ready"
+            android:textColor="@color/white"
+            android:textSize="16sp" />
+    </RelativeLayout>
+
     <androidx.core.widget.NestedScrollView
         android:id="@+id/scroll_bar"
         android:layout_width="wrap_content"
@@ -569,11 +576,11 @@
                 android:layout_marginTop="@dimen/_15sdp"
                 android:layout_marginBottom="@dimen/_15sdp"
                 android:theme="@style/Theme.MaterialComponents.Light"
+                android:visibility="gone"
                 app:cardBackgroundColor="@color/whiteColor"
                 app:cardCornerRadius="@dimen/_50sdp"
                 app:strokeColor="#DDDDDD"
-                app:strokeWidth="@dimen/_2sdp"
-                android:visibility="gone">
+                app:strokeWidth="@dimen/_2sdp">
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/video_cardd_temp"
@@ -593,14 +600,14 @@
                         android:id="@+id/videoView"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_gravity="center"
-                        />
+                        android:layout_gravity="center" />
                 </com.google.android.material.card.MaterialCardView>
 
             </com.google.android.material.card.MaterialCardView>
         </RelativeLayout>
 
     </androidx.core.widget.NestedScrollView>
+
     <RelativeLayout
         android:id="@+id/button_layout"
         android:layout_width="match_parent"
@@ -619,8 +626,8 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_margin="@dimen/_15sdp"
-            app:cardElevation="0dp"
-            app:cardCornerRadius="@dimen/_5sdp">
+            app:cardCornerRadius="@dimen/_5sdp"
+            app:cardElevation="0dp">
 
             <ImageView
                 android:layout_width="match_parent"
@@ -639,14 +646,15 @@
         </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/gif_lay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:translationZ="90dp"
-        android:visibility="gone"
+        android:layout_centerInParent="true"
         android:background="@color/white"
-        android:layout_centerInParent="true">
+        android:translationZ="90dp"
+        android:visibility="gone">
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/countdown_gif"
@@ -655,14 +663,15 @@
             android:scaleType="centerInside"
             android:src="@drawable/countdown_gif" />
     </RelativeLayout>
+
     <RelativeLayout
         android:id="@+id/loading_lay"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:translationZ="90dp"
+        android:layout_centerInParent="true"
         android:background="@color/white"
-        android:visibility="gone"
-        android:layout_centerInParent="true">
+        android:translationZ="90dp"
+        android:visibility="gone">
 
         <pl.droidsonroids.gif.GifImageView
             android:id="@+id/loading"
@@ -675,12 +684,12 @@
             android:id="@+id/tv_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="center"
             android:layout_below="@+id/loading"
+            android:gravity="center"
             android:text="Please wait your friend is selecting players, we will redirect you to the game screen in a while. \n\nالرجاء الانتظار، صديقك يقوم باختيار اللاعبين المشاركين في المباراه ، سيتم تحويلك إلى شاشة اللعبة بعد قليل."
             android:textAppearance="@style/TextAppearance.AppCompat.Small"
-            android:textSize="16sp"
-            android:textColor="@color/blackColor" />
+            android:textColor="@color/blackColor"
+            android:textSize="16sp" />
 
     </RelativeLayout>
 

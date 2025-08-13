@@ -124,7 +124,7 @@ internal class ImageViewerView<T> @JvmOverloads constructor(
         get() = currentPosition == startPosition
 
     init {
-        View.inflate(context, R.layout.view_image_viewer, this)
+        inflate(context, R.layout.view_image_viewer, this)
 
         rootContainer = findViewById(R.id.rootContainer)
         backgroundView = findViewById(R.id.backgroundView)

@@ -53,7 +53,6 @@ public class EmpLoginActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         binding = OleactivityEmpLoginBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
 
         checkKeyboardListener();

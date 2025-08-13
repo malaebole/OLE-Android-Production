@@ -41,15 +41,12 @@ public class SplashActivity extends BaseActivity {
 
     private Handler handler;
     private Uri deepLinkUri;
-    TextView version_name;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = OleactivitySplashBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         if (Functions.getAppLangStr(getContext()).isEmpty()) {
             Functions.setAppLang(getContext(), "en");

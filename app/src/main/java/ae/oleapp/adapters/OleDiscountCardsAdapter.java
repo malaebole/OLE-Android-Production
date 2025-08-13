@@ -90,21 +90,15 @@ public class OleDiscountCardsAdapter extends RecyclerView.Adapter<OleDiscountCar
             holder.expiredCard.setVisibility(View.GONE);
         }
 
-        holder.layout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (itemClickListener != null) {
-                    itemClickListener.itemClicked(v, holder.getAdapterPosition());
-                }
+        holder.layout.setOnClickListener(v -> {
+            if (itemClickListener != null) {
+                itemClickListener.itemClicked(v, holder.getBindingAdapterPosition());
             }
         });
 
-        holder.deleteLayout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (itemClickListener != null) {
-                    itemClickListener.deleteClicked(v, holder.getAdapterPosition());
-                }
+        holder.deleteLayout.setOnClickListener(v -> {
+            if (itemClickListener != null) {
+                itemClickListener.deleteClicked(v, holder.getBindingAdapterPosition());
             }
         });
     }

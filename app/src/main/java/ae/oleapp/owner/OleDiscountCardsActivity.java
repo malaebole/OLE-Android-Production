@@ -1,11 +1,11 @@
 package ae.oleapp.owner;
 
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.baoyz.actionsheet.ActionSheet;
 import com.google.gson.Gson;
@@ -50,7 +50,7 @@ public class OleDiscountCardsActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityDiscountCardsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.loyalty_cards);
 
         Bundle bundle = getIntent().getExtras();
@@ -98,8 +98,7 @@ applyEdgeToEdge(binding.getRoot());
                 Gson gson = new Gson();
                 intent.putExtra("card", gson.toJson(oleDiscountCards.get(pos)));
                 startActivity(intent);
-            }
-            else {
+            } else {
                 adapter.binderHelper.closeLayout(String.valueOf(pos));
                 Intent intent = new Intent(getContext(), OleCreateDiscountCardActivity.class);
                 Gson gson = new Gson();
@@ -147,11 +146,9 @@ applyEdgeToEdge(binding.getRoot());
     public void onClick(View v) {
         if (v == binding.bar.backBtn) {
             finish();
-        }
-        else if (v == binding.btnCreate || v == binding.btnNewDiscount) {
+        } else if (v == binding.btnCreate || v == binding.btnNewDiscount) {
             createClicked();
-        }
-        else if (v == binding.btnFilter) {
+        } else if (v == binding.btnFilter) {
             ActionSheet.createBuilder(getContext(), getSupportFragmentManager())
                     .setCancelButtonTitle(getResources().getString(R.string.cancel))
                     .setOtherButtonTitles(getResources().getString(R.string.active), getResources().getString(R.string.expired))
@@ -166,8 +163,7 @@ applyEdgeToEdge(binding.getRoot());
                         public void onOtherButtonClick(ActionSheet actionSheet, int index) {
                             if (index == 0) {
                                 filter = "active";
-                            }
-                            else {
+                            } else {
                                 filter = "expired";
                             }
                             getDiscountCardsAPI(true);
@@ -183,7 +179,7 @@ applyEdgeToEdge(binding.getRoot());
     }
 
     private void getDiscountCardsAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getDiscountCards(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, filter);
         call.enqueue(new Callback<>() {
             @Override
@@ -204,25 +200,21 @@ applyEdgeToEdge(binding.getRoot());
                                 if (oleDiscountCards.isEmpty()) {
                                     Functions.showToast(getContext(), getString(R.string.no_loyalty_card), FancyToast.ERROR);
                                 }
-                            }
-                            else {
+                            } else {
                                 if (oleDiscountCards.isEmpty()) {
                                     binding.noDataVu.setVisibility(View.VISIBLE);
                                     binding.btnCreate.setVisibility(View.GONE);
-                                }
-                                else {
+                                } else {
                                     binding.noDataVu.setVisibility(View.GONE);
                                     binding.btnCreate.setVisibility(View.VISIBLE);
                                 }
                             }
-                        }
-                        else {
+                        } else {
                             oleDiscountCards.clear();
                             adapter.notifyDataSetChanged();
                             if (isShare) {
                                 Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
-                            }
-                            else {
+                            } else {
                                 binding.noDataVu.setVisibility(View.VISIBLE);
                                 binding.btnCreate.setVisibility(View.GONE);
                             }
@@ -231,18 +223,17 @@ applyEdgeToEdge(binding.getRoot());
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -265,26 +256,24 @@ applyEdgeToEdge(binding.getRoot());
                             oleDiscountCards.remove(pos);
                             adapter.notifyItemRemoved(pos);
                             adapter.notifyItemRangeChanged(pos, oleDiscountCards.size());
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }

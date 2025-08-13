@@ -26,14 +26,13 @@ public class OleSettingsActivity extends BaseActivity implements OleLanguageDial
     protected void onCreate(Bundle savedInstanceState) {
         if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
             setTheme(R.style.AppThemePlayer);
-        }
-        else {
+        } else {
             setTheme(R.style.AppTheme);
         }
         super.onCreate(savedInstanceState);
         binding = OleactivitySettingsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.settings);
 
         if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
@@ -61,8 +60,7 @@ applyEdgeToEdge(binding.getRoot());
         if (lang.equalsIgnoreCase("ar")) {
             binding.tvLang.setText("العربية");
 
-        }
-        else {
+        } else {
             binding.tvLang.setText("English");
         }
     }
@@ -71,29 +69,21 @@ applyEdgeToEdge(binding.getRoot());
     public void onClick(View v) {
         if (v == binding.bar.backBtn) {
             finish();
-        }
-        else if (v == binding.relBlockUser) {
+        } else if (v == binding.relBlockUser) {
             blockClicked();
-        }
-        else if (v == binding.relEmployee) {
+        } else if (v == binding.relEmployee) {
             employeeClicked();
-        }
-        else if (v == binding.relUserRole) {
+        } else if (v == binding.relUserRole) {
             userRolesClicked();
-        }
-        else if (v == binding.relPass) {
+        } else if (v == binding.relPass) {
             passClicked();
-        }
-        else if (v == binding.relLang) {
+        } else if (v == binding.relLang) {
             langClicked();
-        }
-        else if (v == binding.relBookingDatesLimit) {
+        } else if (v == binding.relBookingDatesLimit) {
             startActivity(new Intent(getContext(), OleBookingDatesLimitActivity.class));
-        }
-        else if (v == binding.relTc) {
+        } else if (v == binding.relTc) {
             startActivity(new Intent(getContext(), OleWebVuActivity.class));
-        }
-        else if (v == binding.relContact) {
+        } else if (v == binding.relContact) {
             startActivity(new Intent(getContext(), OleContactUsActivity.class));
         }
     }
@@ -145,9 +135,9 @@ applyEdgeToEdge(binding.getRoot());
             return;
         }
         setLabelText(lang);
-        if (lang.equalsIgnoreCase("ar")){
+        if (lang.equalsIgnoreCase("ar")) {
             Functions.setAppLangAr(getContext(), "ar");
-        }else{
+        } else {
             Functions.setAppLangAr(getContext(), "en");
         }
         Functions.setAppLang(getContext(), lang);
@@ -160,8 +150,7 @@ applyEdgeToEdge(binding.getRoot());
             finishAffinity();
             finish();
             startActivity(intent);
-        }
-        else if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
+        } else if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kOwnerType)) {
             Intent intent = new Intent(getContext(), OleOwnerMainTabsActivity.class);
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

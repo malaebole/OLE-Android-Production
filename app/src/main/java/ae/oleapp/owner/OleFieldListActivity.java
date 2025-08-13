@@ -1,16 +1,15 @@
 package ae.oleapp.owner;
 
-import androidx.appcompat.app.AlertDialog;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Gravity;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.PopupMenu;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
@@ -49,7 +48,7 @@ public class OleFieldListActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         binding = OleactivityFieldListBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.fields);
 
         Bundle bundle = getIntent().getExtras();
@@ -98,45 +97,73 @@ applyEdgeToEdge(binding.getRoot());
             if (club.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
                 popup.getMenu().findItem(R.id.hide_field).setTitle(getString(R.string.girls_time_slots));
             }
-            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
-                @Override
-                public boolean onMenuItemClick(MenuItem item) {
-                    switch (item.getItemId()) {
-                        case R.id.hide_field:
-                            if (club.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
-                                Intent intent = new Intent(getContext(), OleGirlsTimeSlotsActivity.class);
-                                intent.putExtra("club_id", club.getId());
-                                intent.putExtra("field_id", fieldList.get(pos).getId());
-                                startActivity(intent);
-                            }
-                            else {
-                                Intent intent = new Intent(getContext(), OleHiddenFieldsActivity.class);
-                                intent.putExtra("club_id", club.getId());
-                                intent.putExtra("field_id", fieldList.get(pos).getId());
-                                startActivity(intent);
-                            }
-                            return true;
-                        case R.id.edit:
-                            Intent addFieldIntent = new Intent(getContext(), OleAddFieldActivity.class);
-                            addFieldIntent.putExtra("club_id", club.getId());
-                            addFieldIntent.putExtra("field_id", fieldList.get(pos).getId());
-                            if (club.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
-                                addFieldIntent.putExtra("is_football_update", false);
-                                addFieldIntent.putExtra("is_padel_update", true);
-                            }
-                            else {
-                                addFieldIntent.putExtra("is_football_update", true);
-                                addFieldIntent.putExtra("is_padel_update", false);
-                            }
-                            startActivity(addFieldIntent);
-                            return true;
-                        case R.id.delete:
-                            deleteField(fieldList.get(pos).getId(), pos);
-                            return true;
-                        default:
-                            return false;
+            popup.setOnMenuItemClickListener(item -> {
+                int itemId = item.getItemId();
+                if (itemId == R.id.hide_field) {
+                    if (club.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
+                        Intent intent = new Intent(getContext(), OleGirlsTimeSlotsActivity.class);
+                        intent.putExtra("club_id", club.getId());
+                        intent.putExtra("field_id", fieldList.get(pos).getId());
+                        startActivity(intent);
+                    } else {
+                        Intent intent = new Intent(getContext(), OleHiddenFieldsActivity.class);
+                        intent.putExtra("club_id", club.getId());
+                        intent.putExtra("field_id", fieldList.get(pos).getId());
+                        startActivity(intent);
                     }
+                    return true;
+                } else if (itemId == R.id.edit) {
+                    Intent addFieldIntent = new Intent(getContext(), OleAddFieldActivity.class);
+                    addFieldIntent.putExtra("club_id", club.getId());
+                    addFieldIntent.putExtra("field_id", fieldList.get(pos).getId());
+                    if (club.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
+                        addFieldIntent.putExtra("is_football_update", false);
+                        addFieldIntent.putExtra("is_padel_update", true);
+                    } else {
+                        addFieldIntent.putExtra("is_football_update", true);
+                        addFieldIntent.putExtra("is_padel_update", false);
+                    }
+                    startActivity(addFieldIntent);
+                    return true;
+                } else if (itemId == R.id.delete) {
+                    deleteField(fieldList.get(pos).getId(), pos);
+                    return true;
+                } else {
+                    return false;
                 }
+//                switch (item.getItemId()) {
+//                    case R.id.hide_field:
+//                        if (club.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
+//                            Intent intent = new Intent(getContext(), OleGirlsTimeSlotsActivity.class);
+//                            intent.putExtra("club_id", club.getId());
+//                            intent.putExtra("field_id", fieldList.get(pos).getId());
+//                            startActivity(intent);
+//                        } else {
+//                            Intent intent = new Intent(getContext(), OleHiddenFieldsActivity.class);
+//                            intent.putExtra("club_id", club.getId());
+//                            intent.putExtra("field_id", fieldList.get(pos).getId());
+//                            startActivity(intent);
+//                        }
+//                        return true;
+//                    case R.id.edit:
+//                        Intent addFieldIntent = new Intent(getContext(), OleAddFieldActivity.class);
+//                        addFieldIntent.putExtra("club_id", club.getId());
+//                        addFieldIntent.putExtra("field_id", fieldList.get(pos).getId());
+//                        if (club.getClubType().equalsIgnoreCase(Constants.kPadelModule)) {
+//                            addFieldIntent.putExtra("is_football_update", false);
+//                            addFieldIntent.putExtra("is_padel_update", true);
+//                        } else {
+//                            addFieldIntent.putExtra("is_football_update", true);
+//                            addFieldIntent.putExtra("is_padel_update", false);
+//                        }
+//                        startActivity(addFieldIntent);
+//                        return true;
+//                    case R.id.delete:
+//                        deleteField(fieldList.get(pos).getId(), pos);
+//                        return true;
+//                    default:
+//                        return false;
+//                }
             });
             popup.show();
         }
@@ -146,23 +173,15 @@ applyEdgeToEdge(binding.getRoot());
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         builder.setTitle(getResources().getString(R.string.delete_field))
                 .setMessage(getResources().getString(R.string.do_you_want_to_delete_field))
-                .setPositiveButton(getResources().getString(R.string.yes), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        deleteFieldAPI(true, fieldId, pos);
-                    }
-                })
-                .setNegativeButton(getResources().getString(R.string.no), new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
+                .setPositiveButton(getResources().getString(R.string.yes), (dialog, which) -> deleteFieldAPI(true, fieldId, pos))
+                .setNegativeButton(getResources().getString(R.string.no), (dialog, which) -> {
 
-                    }
                 }).create();
         builder.show();
     }
 
     private void getAllFieldsAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.getAllFields(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), club.getId());
         call.enqueue(new Callback<>() {
             @Override
@@ -180,8 +199,7 @@ applyEdgeToEdge(binding.getRoot());
                                 fieldList.add(field);
                             }
                             adapter.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             fieldList.clear();
                             adapter.notifyDataSetChanged();
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
@@ -190,18 +208,17 @@ applyEdgeToEdge(binding.getRoot());
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -209,7 +226,7 @@ applyEdgeToEdge(binding.getRoot());
     }
 
     private void deleteFieldAPI(boolean isLoader, String fieldId, int pos) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteField(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), fieldId);
         call.enqueue(new Callback<>() {
             @Override
@@ -223,26 +240,24 @@ applyEdgeToEdge(binding.getRoot());
                             fieldList.remove(pos);
                             adapter.notifyItemRemoved(pos);
                             adapter.notifyItemRangeChanged(pos, fieldList.size());
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }

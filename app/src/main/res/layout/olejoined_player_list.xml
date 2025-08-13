@@ -12,7 +12,7 @@
     <com.chauthai.swipereveallayout.SwipeRevealLayout
         android:id="@+id/swipe_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         app:dragEdge="right"
         app:mode="same_level">
 
@@ -24,7 +24,7 @@
 
             <TextView
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
                 android:minWidth="@dimen/_60sdp"
                 android:background="@color/redColor"
                 android:gravity="center"

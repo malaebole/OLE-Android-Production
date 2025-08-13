@@ -36,7 +36,7 @@ public class OleFootballMatchShareActivity extends BaseActivity implements View.
         super.onCreate(savedInstanceState);
         binding = OleactivityFootballMatchShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.match);
 
         Bundle bundle = getIntent().getExtras();
@@ -68,12 +68,10 @@ applyEdgeToEdge(binding.getRoot());
             if (playerTwo.getLevel() != null && !playerTwo.getLevel().isEmpty() && !playerTwo.getLevel().getValue().equalsIgnoreCase("")) {
                 binding.tvP2Level.setVisibility(View.VISIBLE);
                 binding.tvP2Level.setText(String.format("LV: %s", playerTwo.getLevel().getValue()));
-            }
-            else {
+            } else {
                 binding.tvP2Level.setVisibility(View.INVISIBLE);
             }
-        }
-        else {
+        } else {
             binding.tvQMark.setVisibility(View.VISIBLE);
             binding.p2ImgVu.setVisibility(View.INVISIBLE);
             binding.tvP2Name.setText(String.format("  %s  ", getString(R.string.join_now)));
@@ -92,8 +90,7 @@ applyEdgeToEdge(binding.getRoot());
         if (playerOne.getLevel() != null && !playerOne.getLevel().isEmpty() && !playerOne.getLevel().getValue().equalsIgnoreCase("")) {
             binding.tvP1Level.setVisibility(View.VISIBLE);
             binding.tvP1Level.setText(String.format("LV: %s", playerOne.getLevel().getValue()));
-        }
-        else {
+        } else {
             binding.tvP1Level.setVisibility(View.INVISIBLE);
         }
     }
@@ -102,8 +99,7 @@ applyEdgeToEdge(binding.getRoot());
     public void onClick(View v) {
         if (v == binding.titleBar.backBtn) {
             finish();
-        }
-        else if (v == binding.btnShare) {
+        } else if (v == binding.btnShare) {
             shareClicked();
         }
     }
@@ -112,7 +108,7 @@ applyEdgeToEdge(binding.getRoot());
         String[] permissions = new String[0];
         if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.TIRAMISU) {
             permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.READ_MEDIA_IMAGES};
-        }else{
+        } else {
             permissions = new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE};
 
         }

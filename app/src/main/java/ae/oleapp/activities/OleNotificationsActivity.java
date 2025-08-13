@@ -1,13 +1,13 @@
 package ae.oleapp.activities;
 
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentTransaction;
-import androidx.recyclerview.widget.LinearLayoutManager;
-
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
+
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.baoyz.actionsheet.ActionSheet;
 import com.google.gson.Gson;
@@ -37,15 +37,15 @@ import ae.oleapp.padel.OlePadelMatchBookingDetailActivity;
 import ae.oleapp.padel.OlePadelMatchDetailActivity;
 import ae.oleapp.padel.OlePadelNormalBookingDetailActivity;
 import ae.oleapp.player.OleEmployeeRateActivity;
+import ae.oleapp.player.OleFootballResultShareActivity;
 import ae.oleapp.player.OleGameBookingDetailActivity;
 import ae.oleapp.player.OleGameDetailActivity;
 import ae.oleapp.player.OleMatchBookingDetailActivity;
 import ae.oleapp.player.OleMatchDetailActivity;
 import ae.oleapp.player.OleNormalBookingDetailActivity;
+import ae.oleapp.player.OlePadelResultShareActivity;
 import ae.oleapp.player.OlePlayerProfileActivity;
 import ae.oleapp.shop.ShopOrderDetailActivity;
-import ae.oleapp.player.OleFootballResultShareActivity;
-import ae.oleapp.player.OlePadelResultShareActivity;
 import ae.oleapp.util.AppManager;
 import ae.oleapp.util.Constants;
 import ae.oleapp.util.Functions;
@@ -67,7 +67,7 @@ public class OleNotificationsActivity extends BaseActivity implements View.OnCli
         super.onCreate(savedInstanceState);
         binding = OleactivityNotificationsBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         binding.titleBar.toolbarTitle.setText(R.string.notifications);
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false);
@@ -88,8 +88,7 @@ applyEdgeToEdge(binding.getRoot());
                 clubId = AppManager.getInstance().clubs.get(0).getId();
                 getNotifications(true);
             }
-        }
-        else {
+        } else {
             binding.clubRecyclerVu.setVisibility(View.GONE);
         }
 
@@ -161,15 +160,13 @@ applyEdgeToEdge(binding.getRoot());
                     Intent intent = new Intent(getContext(), OlePadelBookingDetailActivity.class);
                     intent.putExtra("booking_id", notification.getBookingId());
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Intent intent = new Intent(getContext(), OleBookingDetailActivity.class);
                     intent.putExtra("booking_id", notification.getBookingId());
                     startActivity(intent);
                 }
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kConfirmBookingByOwnerNotification) ||
+        } else if (notification.getType().equalsIgnoreCase(Constants.kConfirmBookingByOwnerNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kCancelBookingByOwnerNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kBookingReminderNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kAcceptInvitationNotification) ||
@@ -181,39 +178,34 @@ applyEdgeToEdge(binding.getRoot());
                 notification.getType().equalsIgnoreCase(Constants.kPlayerCanceledAcceptedMatchNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kNewChallengeRequestNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kPrivateChallengeAcceptedNotification) ||
-                notification.getType().equalsIgnoreCase(Constants.kPrivateChallengeCanceledNotification)){
+                notification.getType().equalsIgnoreCase(Constants.kPrivateChallengeCanceledNotification)) {
             if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
                 if (notification.getBookingType().equalsIgnoreCase(Constants.kNormalBooking)) {
                     Intent intent = new Intent(getContext(), OleNormalBookingDetailActivity.class);
                     intent.putExtra("booking_id", notification.getBookingId());
                     startActivity(intent);
-                }
-                else if (notification.getBookingType().equalsIgnoreCase(Constants.kFriendlyGame)) {
+                } else if (notification.getBookingType().equalsIgnoreCase(Constants.kFriendlyGame)) {
                     Intent intent = new Intent(getContext(), OleGameBookingDetailActivity.class);
                     intent.putExtra("booking_id", notification.getBookingId());
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Intent intent = new Intent(getContext(), OleMatchBookingDetailActivity.class);
                     intent.putExtra("booking_id", notification.getBookingId());
                     startActivity(intent);
                 }
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kBookingAvailableNotification) ||
+        } else if (notification.getType().equalsIgnoreCase(Constants.kBookingAvailableNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kNewOfferNotification)) {
             Intent intent = new Intent(getContext(), OleBookingActivity.class);
             if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
                 intent.putExtra("field_id", notification.getFieldId());
-            }
-            else {
+            } else {
                 intent.putExtra("field_id", "");
             }
             Gson gson = new Gson();
             intent.putExtra("club", gson.toJson(notification.getClub()));
             startActivity(intent);
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kBookingCompleteNotification)) {
+        } else if (notification.getType().equalsIgnoreCase(Constants.kBookingCompleteNotification)) {
             if (notification.getBookingType().equalsIgnoreCase(Constants.kFriendlyGame)) {
                 FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
                 Fragment prev = getSupportFragmentManager().findFragmentByTag("RatingPagerDialogFragment");
@@ -223,24 +215,21 @@ applyEdgeToEdge(binding.getRoot());
                 fragmentTransaction.addToBackStack(null);
                 OleRatingPagerDialogFragment dialogFragment = new OleRatingPagerDialogFragment(notification.getBookingId());
                 dialogFragment.show(fragmentTransaction, "RatingPagerDialogFragment");
-            }
-            else {
+            } else {
                 Intent rateIntent = new Intent(getContext(), OleEmployeeRateActivity.class);
                 rateIntent.putExtra("booking_id", notification.getBookingId());
                 rateIntent.putExtra("club_id", notification.getClub().getId());
                 rateIntent.putExtra("is_rated", notification.getIsRated());
                 startActivity(rateIntent);
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kAppUpdateNotification)) {
+        } else if (notification.getType().equalsIgnoreCase(Constants.kAppUpdateNotification)) {
             final String appPackageName = getPackageName();
             try {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=" + appPackageName)));
             } catch (android.content.ActivityNotFoundException anfe) {
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("https://play.google.com/store/apps/details?id=" + appPackageName)));
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kCreatorCanceledAcceptedMatchNotification)) {
+        } else if (notification.getType().equalsIgnoreCase(Constants.kCreatorCanceledAcceptedMatchNotification)) {
             if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
                 if (notification.getBookingType().equalsIgnoreCase(Constants.kFriendlyGame)) {
                     Intent intent = new Intent(getContext(), OleGameDetailActivity.class);
@@ -252,8 +241,7 @@ applyEdgeToEdge(binding.getRoot());
                     startActivity(intent);
                 }
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kPublicChallengeAcceptedNotification) ||
+        } else if (notification.getType().equalsIgnoreCase(Constants.kPublicChallengeAcceptedNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kPublicChallengeCanceledNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kNewInvitationRequestNotification)) {
             if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
@@ -261,8 +249,7 @@ applyEdgeToEdge(binding.getRoot());
                 intent.putExtra("booking_id", notification.getBookingId());
                 startActivity(intent);
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kGameRequestAcceptedNotification) ||
+        } else if (notification.getType().equalsIgnoreCase(Constants.kGameRequestAcceptedNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kGameRequestCanceledNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kJoinFriendlyGameNotification) ||
                 notification.getType().equalsIgnoreCase(Constants.kNewCaptainGameNotification)) {
@@ -271,16 +258,14 @@ applyEdgeToEdge(binding.getRoot());
                 intent.putExtra("booking_id", notification.getBookingId());
                 startActivity(intent);
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kShoppingNotification)) {
+        } else if (notification.getType().equalsIgnoreCase(Constants.kShoppingNotification)) {
             if (Functions.getPrefValue(getContext(), Constants.kUserType).equalsIgnoreCase(Constants.kPlayerType)) {
                 Intent intent = new Intent(getContext(), ShopOrderDetailActivity.class);
                 intent.putExtra("order_id", notification.getOrderId());
                 intent.putExtra("is_from_checkout", false);
                 startActivity(intent);
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kInvitationPadel) ||
+        } else if (notification.getType().equalsIgnoreCase(Constants.kInvitationPadel) ||
                 notification.getType().equalsIgnoreCase(Constants.kInvitationRejectedByPlayer) ||
                 notification.getType().equalsIgnoreCase(Constants.kInvitationAcceptedByPlayer)) {
             if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
@@ -288,8 +273,7 @@ applyEdgeToEdge(binding.getRoot());
                 intent.putExtra("booking_id", notification.getBookingId());
                 startActivity(intent);
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kPadelChallengeRejected) ||
+        } else if (notification.getType().equalsIgnoreCase(Constants.kPadelChallengeRejected) ||
                 notification.getType().equalsIgnoreCase(Constants.kAcceptedChallengeCanceledByCreator) ||
                 notification.getType().equalsIgnoreCase(Constants.kPadelChallengeAccepted) ||
                 notification.getType().equalsIgnoreCase(Constants.kPartnerForChallenge)) {
@@ -298,8 +282,7 @@ applyEdgeToEdge(binding.getRoot());
                 intent.putExtra("booking_id", notification.getBookingId());
                 startActivity(intent);
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kChallengePadel) ||
+        } else if (notification.getType().equalsIgnoreCase(Constants.kChallengePadel) ||
                 notification.getType().equalsIgnoreCase(Constants.kPadelChallengeCanceled) ||
                 notification.getType().equalsIgnoreCase(Constants.kAcceptedChallengeCanceledByPlayer)) {
             if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
@@ -307,30 +290,25 @@ applyEdgeToEdge(binding.getRoot());
                 intent.putExtra("booking_id", notification.getBookingId());
                 startActivity(intent);
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kLevelCompleted)) {
+        } else if (notification.getType().equalsIgnoreCase(Constants.kLevelCompleted)) {
             Intent intent = new Intent(getContext(), OlePlayerProfileActivity.class);
             intent.putExtra("player_id", notification.getSender().getId());
             startActivity(intent);
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kCompletePayment)) {
+        } else if (notification.getType().equalsIgnoreCase(Constants.kCompletePayment)) {
             if (Functions.getPrefValue(getContext(), Constants.kAppModule).equalsIgnoreCase(Constants.kPadelModule)) {
                 if (notification.getBookingType().equalsIgnoreCase(Constants.kNormalBooking)) {
                     Intent intent = new Intent(getContext(), OlePadelNormalBookingDetailActivity.class);
                     intent.putExtra("booking_id", notification.getBookingId());
                     startActivity(intent);
-                }
-                else {
+                } else {
                     Intent intent = new Intent(getContext(), OlePadelMatchBookingDetailActivity.class);
                     intent.putExtra("booking_id", notification.getBookingId());
                     startActivity(intent);
                 }
             }
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kYouWonTheMatch)) {
+        } else if (notification.getType().equalsIgnoreCase(Constants.kYouWonTheMatch)) {
             getMatchResultAPI(false, notification.getBookingId());
-        }
-        else if (notification.getType().equalsIgnoreCase(Constants.kYouWonTheMatchPadel)) {
+        } else if (notification.getType().equalsIgnoreCase(Constants.kYouWonTheMatchPadel)) {
             getMatchResultAPI(true, notification.getBookingId());
         }
     }
@@ -339,8 +317,7 @@ applyEdgeToEdge(binding.getRoot());
     public void onClick(View v) {
         if (v == binding.titleBar.backBtn) {
             finish();
-        }
-        else if (v == binding.btnDelete) {
+        } else if (v == binding.btnDelete) {
             deleteClicked();
         }
     }
@@ -362,8 +339,7 @@ applyEdgeToEdge(binding.getRoot());
                     public void onOtherButtonClick(ActionSheet actionSheet, int index) {
                         if (index == 0) {
                             readAllNotificationAPI(true);
-                        }
-                        else if (index == 1) {
+                        } else if (index == 1) {
                             deleteAllNotificationAPI(true);
                         }
                     }
@@ -371,8 +347,8 @@ applyEdgeToEdge(binding.getRoot());
     }
 
     private void getNotifications(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.notificationList(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID),clubId, Functions.getPrefValue(getContext(), Constants.kAppModule));
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.notificationList(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, Functions.getPrefValue(getContext(), Constants.kAppModule));
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -388,8 +364,7 @@ applyEdgeToEdge(binding.getRoot());
                                 oleNotificationList.add(gson.fromJson(arr.get(i).toString(), OleNotificationList.class));
                             }
                             adapter.notifyDataSetChanged();
-                        }
-                        else {
+                        } else {
                             oleNotificationList.clear();
                             adapter.notifyDataSetChanged();
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
@@ -398,18 +373,17 @@ applyEdgeToEdge(binding.getRoot());
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -417,7 +391,7 @@ applyEdgeToEdge(binding.getRoot());
     }
 
     private void deleteNotificationAPI(boolean isLoader, String notId, int pos) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteNotification(Functions.getAppLang(getContext()), notId);
         call.enqueue(new Callback<>() {
             @Override
@@ -432,26 +406,24 @@ applyEdgeToEdge(binding.getRoot());
                             oleNotificationList.remove(pos);
                             adapter.notifyItemRemoved(pos);
                             adapter.notifyItemRangeChanged(pos, oleNotificationList.size());
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -459,8 +431,8 @@ applyEdgeToEdge(binding.getRoot());
     }
 
     private void deleteAllNotificationAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteAllNotification(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), clubId, Functions.getPrefValue(getContext(), Constants.kAppModule));
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.deleteAllNotification(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, Functions.getPrefValue(getContext(), Constants.kAppModule));
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -472,26 +444,24 @@ applyEdgeToEdge(binding.getRoot());
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             AppManager.getInstance().notificationCount = 0;
                             finish();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -499,8 +469,8 @@ applyEdgeToEdge(binding.getRoot());
     }
 
     private void readAllNotificationAPI(boolean isLoader) {
-        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing"): null;
-        Call<ResponseBody> call = AppManager.getInstance().apiInterface.readAllNotification(Functions.getAppLang(getContext()),Functions.getPrefValue(getContext(), Constants.kUserID), clubId, Functions.getPrefValue(getContext(), Constants.kAppModule));
+        KProgressHUD hud = isLoader ? Functions.showLoader(getContext(), "Image processing") : null;
+        Call<ResponseBody> call = AppManager.getInstance().apiInterface.readAllNotification(Functions.getAppLang(getContext()), Functions.getPrefValue(getContext(), Constants.kUserID), clubId, Functions.getPrefValue(getContext(), Constants.kAppModule));
         call.enqueue(new Callback<>() {
             @Override
             public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
@@ -512,26 +482,24 @@ applyEdgeToEdge(binding.getRoot());
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.SUCCESS);
                             AppManager.getInstance().notificationCount = 0;
                             finish();
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }
@@ -550,17 +518,16 @@ applyEdgeToEdge(binding.getRoot());
                             if (AppManager.getInstance().notificationCount > 0) {
                                 AppManager.getInstance().notificationCount -= 1;
                             }
-                        }
-                        else {
+                        } else {
 
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                }
-                else {
+                } else {
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
 
@@ -586,34 +553,31 @@ applyEdgeToEdge(binding.getRoot());
                                 intent.putExtra("result", new Gson().toJson(matchResult));
                                 intent.putExtra("club_name", matchResult.getClubName());
                                 startActivity(intent);
-                            }
-                            else {
+                            } else {
                                 OleMatchResults matchResult = new Gson().fromJson(obj.getJSONObject("result").toString(), OleMatchResults.class);
                                 Intent intent = new Intent(getContext(), OleFootballResultShareActivity.class);
                                 intent.putExtra("result", new Gson().toJson(matchResult));
                                 intent.putExtra("club_name", matchResult.getClubName());
                                 startActivity(intent);
                             }
-                        }
-                        else {
+                        } else {
                             Functions.showToast(getContext(), object.getString(Constants.kMsg), FancyToast.ERROR);
                         }
                     } catch (Exception e) {
                         e.printStackTrace();
                         Functions.showToast(getContext(), e.getLocalizedMessage(), FancyToast.ERROR);
                     }
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), getString(R.string.error_occured), FancyToast.ERROR);
                 }
             }
+
             @Override
             public void onFailure(Call<ResponseBody> call, Throwable t) {
                 Functions.hideLoader(hud);
                 if (t instanceof UnknownHostException) {
                     Functions.showToast(getContext(), getString(R.string.check_internet_connection), FancyToast.ERROR);
-                }
-                else {
+                } else {
                     Functions.showToast(getContext(), t.getLocalizedMessage(), FancyToast.ERROR);
                 }
             }

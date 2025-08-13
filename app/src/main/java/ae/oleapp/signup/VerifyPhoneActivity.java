@@ -49,7 +49,6 @@ public class VerifyPhoneActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         binding = OleactivityVerifyPhoneBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         binding.tvPhone.setText("");
         Bundle bundle = getIntent().getExtras();

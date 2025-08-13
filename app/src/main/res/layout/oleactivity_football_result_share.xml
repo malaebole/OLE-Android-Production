@@ -153,7 +153,7 @@
                             app:cardCornerRadius="@dimen/_10sdp"
                             app:cardElevation="0dp">
 
-                            <com.rishabhharit.roundedimageview.RoundedImageView
+                            <com.github.siyamed.shapeimageview.RoundedImageView
                                 android:id="@+id/p1_img_vu"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"
@@ -219,7 +219,7 @@
                             app:cardCornerRadius="@dimen/_10sdp"
                             app:cardElevation="0dp">
 
-                            <com.rishabhharit.roundedimageview.RoundedImageView
+                            <com.github.siyamed.shapeimageview.RoundedImageView
                                 android:id="@+id/p2_img_vu"
                                 android:layout_width="match_parent"
                                 android:layout_height="match_parent"

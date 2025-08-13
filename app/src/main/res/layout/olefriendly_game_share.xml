@@ -12,7 +12,7 @@
         android:background="@drawable/player_bg_vu"
         android:layout_margin="@dimen/_3sdp">
 
-        <com.rishabhharit.roundedimageview.RoundedImageView
+        <com.github.siyamed.shapeimageview.RoundedImageView
             android:id="@+id/img_vu"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

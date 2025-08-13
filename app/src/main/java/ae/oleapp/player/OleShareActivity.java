@@ -6,7 +6,6 @@ import android.view.View;
 
 import ae.oleapp.R;
 import ae.oleapp.base.BaseActivity;
-
 import ae.oleapp.databinding.OleactivityShareBinding;
 import ae.oleapp.owner.OleDiscountCardsActivity;
 import ae.oleapp.owner.OlePromoCodeListActivity;
@@ -20,7 +19,7 @@ public class OleShareActivity extends BaseActivity implements View.OnClickListen
         super.onCreate(savedInstanceState);
         binding = OleactivityShareBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         binding.bar.toolbarTitle.setText(R.string.share);
 
         binding.bar.backBtn.setOnClickListener(this);
@@ -37,30 +36,24 @@ applyEdgeToEdge(binding.getRoot());
     public void onClick(View v) {
         if (v == binding.bar.backBtn) {
             finish();
-        }
-        else if (v == binding.relSlots) {
+        } else if (v == binding.relSlots) {
             startActivity(new Intent(getContext(), OleEmptySlotsActivity.class));
-        }
-        else if (v == binding.relFriendly) {
+        } else if (v == binding.relFriendly) {
             Intent intent = new Intent(getContext(), OleMatchShareActivity.class);
             intent.putExtra("is_match", false);
             startActivity(intent);
-        }
-        else if (v == binding.relMatch) {
+        } else if (v == binding.relMatch) {
             Intent intent = new Intent(getContext(), OleMatchShareActivity.class);
             intent.putExtra("is_match", true);
             startActivity(intent);
-        }
-        else if (v == binding.relResult) {
+        } else if (v == binding.relResult) {
             Intent intent = new Intent(getContext(), OleResultListShareActivity.class);
             startActivity(intent);
-        }
-        else if (v == binding.relLoyalty) {
+        } else if (v == binding.relLoyalty) {
             Intent intent = new Intent(getContext(), OleDiscountCardsActivity.class);
             intent.putExtra("is_share", true);
             startActivity(intent);
-        }
-        else if (v == binding.relPromo) {
+        } else if (v == binding.relPromo) {
             Intent intent = new Intent(getContext(), OlePromoCodeListActivity.class);
             intent.putExtra("is_share", true);
             startActivity(intent);
