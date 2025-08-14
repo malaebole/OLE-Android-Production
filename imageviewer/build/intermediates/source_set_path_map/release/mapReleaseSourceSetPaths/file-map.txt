@@ -1,0 +1,11 @@
+com.stfalcon.imageviewer-transition-1.2.0-0 C:\Users\burga\.gradle\caches\transforms-4\128b717ee9fda685c8af31a7e45bdc78\transformed\transition-1.2.0\res
+com.stfalcon.imageviewer-jetified-appcompat-resources-1.1.0-1 C:\Users\burga\.gradle\caches\transforms-4\6662693c7672c4fe4e2b9da3a83fd753\transformed\jetified-appcompat-resources-1.1.0\res
+com.stfalcon.imageviewer-core-1.1.0-2 C:\Users\burga\.gradle\caches\transforms-4\728fc0202a90a0944cc29f6ae378125f\transformed\core-1.1.0\res
+com.stfalcon.imageviewer-appcompat-1.1.0-3 C:\Users\burga\.gradle\caches\transforms-4\f08e329f430ec1074445f9d5f702940d\transformed\appcompat-1.1.0\res
+com.stfalcon.imageviewer-pngs-4 F:\ole production\imageviewer\build\generated\res\pngs\release
+com.stfalcon.imageviewer-resValues-5 F:\ole production\imageviewer\build\generated\res\resValues\release
+com.stfalcon.imageviewer-mergeReleaseResources-6 F:\ole production\imageviewer\build\intermediates\incremental\release\mergeReleaseResources\merged.dir
+com.stfalcon.imageviewer-mergeReleaseResources-7 F:\ole production\imageviewer\build\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+com.stfalcon.imageviewer-release-8 F:\ole production\imageviewer\build\intermediates\merged_res\release\mergeReleaseResources
+com.stfalcon.imageviewer-main-9 F:\ole production\imageviewer\src\main\res
+com.stfalcon.imageviewer-release-10 F:\ole production\imageviewer\src\release\res

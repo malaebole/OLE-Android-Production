@@ -1,0 +1,18 @@
+[
+    {
+        "merged": "com.stfalcon.imageviewer-release-7:/layout-v21/notification_template_icon_group.xml",
+        "source": "com.stfalcon.imageviewer-core-1.1.0-2:/layout-v21/notification_template_icon_group.xml"
+    },
+    {
+        "merged": "com.stfalcon.imageviewer-release-7:/layout-v21/notification_action_tombstone.xml",
+        "source": "com.stfalcon.imageviewer-core-1.1.0-2:/layout-v21/notification_action_tombstone.xml"
+    },
+    {
+        "merged": "com.stfalcon.imageviewer-release-7:/layout-v21/notification_action.xml",
+        "source": "com.stfalcon.imageviewer-core-1.1.0-2:/layout-v21/notification_action.xml"
+    },
+    {
+        "merged": "com.stfalcon.imageviewer-release-7:/layout-v21/notification_template_custom_big.xml",
+        "source": "com.stfalcon.imageviewer-core-1.1.0-2:/layout-v21/notification_template_custom_big.xml"
+    }
+]

@@ -11,6 +11,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+
 import com.google.gson.Gson;
 import com.kaopiz.kprogresshud.KProgressHUD;
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -213,7 +215,7 @@ public class SplashActivity extends BaseActivity {
         Call<ResponseBody> call = AppManager.getInstance().apiInterface.checkUpdate("android");
         call.enqueue(new Callback<>() {
             @Override
-            public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
+            public void onResponse(@NonNull Call<ResponseBody> call, @NonNull Response<ResponseBody> response) {
                 if (response.body() != null) {
                     try {
                         JSONObject object = new JSONObject(response.body().string());
@@ -228,14 +230,14 @@ public class SplashActivity extends BaseActivity {
                                 startActivity(intent);
                             }
                         }
+
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
                 }
             }
-
             @Override
-            public void onFailure(Call<ResponseBody> call, Throwable t) {
+            public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
             }
         });
     }

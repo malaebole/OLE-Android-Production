@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.View;
 
+import androidx.activity.OnBackPressedCallback;
 import androidx.core.content.ContextCompat;
 
 import com.shashank.sony.fancytoastlib.FancyToast;
@@ -27,10 +28,11 @@ public class OleUpdateAppActivity extends BaseActivity implements View.OnClickLi
         super.onCreate(savedInstanceState);
         binding = OleactivityUpdateAppBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-applyEdgeToEdge(binding.getRoot());
+        applyEdgeToEdge(binding.getRoot());
         makeStatusbarTransperant();
         getWindow().getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);//  set status text dark
         getWindow().setStatusBarColor(ContextCompat.getColor(this, R.color.bgVuColor));// set status background white
+
 
         Bundle bundle = getIntent().getExtras();
         if (bundle != null) {
@@ -38,14 +40,19 @@ applyEdgeToEdge(binding.getRoot());
             forceUpdate = bundle.getString("force_update", "");
         }
 
-        binding.btnUpdate.setVisibility(View.GONE);
-        binding.btnNotNow.setVisibility(View.GONE);
-
         new Handler().postDelayed(this::inAppUpdates, 1000);
 
-
+        binding.btnUpdate.setVisibility(View.GONE);
+        binding.btnNotNow.setVisibility(View.GONE);
         binding.btnUpdate.setOnClickListener(this);
         binding.btnNotNow.setOnClickListener(this);
+
+        getOnBackPressedDispatcher().addCallback(this, new OnBackPressedCallback(true) {
+            @Override
+            public void handleOnBackPressed() {
+                // Do nothing to block back press
+            }
+        });
     }
 
     @Override

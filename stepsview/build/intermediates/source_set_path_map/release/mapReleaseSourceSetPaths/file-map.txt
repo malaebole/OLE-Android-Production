@@ -1,0 +1,10 @@
+io.canner.stepsview-core-1.0.0-0 C:\Users\burga\.gradle\caches\transforms-4\5dfa355e89ca96cb46d042673759d5bd\transformed\core-1.0.0\res
+io.canner.stepsview-coordinatorlayout-1.0.0-1 C:\Users\burga\.gradle\caches\transforms-4\b070fbbd9885cd31baea3263dd26b90f\transformed\coordinatorlayout-1.0.0\res
+io.canner.stepsview-appcompat-1.0.0-2 C:\Users\burga\.gradle\caches\transforms-4\df7a27e554bcedb2c4ff1a4ab8b7fb39\transformed\appcompat-1.0.0\res
+io.canner.stepsview-pngs-3 F:\ole production\stepsview\build\generated\res\pngs\release
+io.canner.stepsview-resValues-4 F:\ole production\stepsview\build\generated\res\resValues\release
+io.canner.stepsview-mergeReleaseResources-5 F:\ole production\stepsview\build\intermediates\incremental\release\mergeReleaseResources\merged.dir
+io.canner.stepsview-mergeReleaseResources-6 F:\ole production\stepsview\build\intermediates\incremental\release\mergeReleaseResources\stripped.dir
+io.canner.stepsview-release-7 F:\ole production\stepsview\build\intermediates\merged_res\release\mergeReleaseResources
+io.canner.stepsview-main-8 F:\ole production\stepsview\src\main\res
+io.canner.stepsview-release-9 F:\ole production\stepsview\src\release\res

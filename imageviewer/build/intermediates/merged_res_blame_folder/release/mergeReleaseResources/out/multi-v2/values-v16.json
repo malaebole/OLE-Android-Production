@@ -1,0 +1,72 @@
+{
+    "logs": [
+        {
+            "outputFile": "com.stfalcon.imageviewer-release-7:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\burga\\.gradle\\caches\\transforms-4\\728fc0202a90a0944cc29f6ae378125f\\transformed\\core-1.1.0\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\burga\\.gradle\\caches\\transforms-4\\f08e329f430ec1074445f9d5f702940d\\transformed\\appcompat-1.1.0\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                }
+            ]
+        },
+        {
+            "outputFile": "com.stfalcon.imageviewer-mergeReleaseResources-5:/values-v16/values-v16.xml",
+            "map": [
+                {
+                    "source": "C:\\Users\\burga\\.gradle\\caches\\transforms-4\\728fc0202a90a0944cc29f6ae378125f\\transformed\\core-1.1.0\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "65",
+                        "endOffsets": "116"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\burga\\.gradle\\caches\\transforms-4\\f08e329f430ec1074445f9d5f702940d\\transformed\\appcompat-1.1.0\\res\\values-v16\\values-v16.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endLines": "5",
+                        "endColumns": "12",
+                        "endOffsets": "223"
+                    },
+                    "to": {
+                        "startLines": "3",
+                        "startColumns": "4",
+                        "startOffsets": "121",
+                        "endLines": "6",
+                        "endColumns": "12",
+                        "endOffsets": "289"
+                    }
+                }
+            ]
+        }
+    ]
+}

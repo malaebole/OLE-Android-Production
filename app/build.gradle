@@ -7,43 +7,35 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'kotlin-kapt'
 
-
-
 android {
     compileSdk 35
+
     defaultConfig {
         applicationId "ae.oleapp"
         minSdk 26
         targetSdk 35
-        versionCode 125
-        versionName "2.0.3.5"
-
+        versionCode 127
+        versionName "2.0.3.7"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 
+        // Secure API keys
         def secureProps = new Properties()
         if (file("../secure.properties").exists()) {
             file("../secure.properties")?.withInputStream { secureProps.load(it) }
         }
         resValue "string", "maps_api_key", (secureProps.getProperty("MAPS_API_KEY") ?: "")
 
-        tasks.withType(JavaCompile).tap {
-            configureEach {
-                options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
-            }
+        tasks.withType(JavaCompile).configureEach {
+            options.compilerArgs << "-Xlint:deprecation" << "-Xlint:unchecked"
         }
     }
 
     buildTypes {
         release {
-            shrinkResources true
-            minifyEnabled true
+            minifyEnabled false
+            shrinkResources false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
-    }
-
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
     }
 
     compileOptions {
@@ -55,29 +47,31 @@ android {
         jvmTarget = "17"
     }
 
+//    lintOptions {
+//        checkReleaseBuilds false
+//        abortOnError false
+//    }
+
     buildFeatures {
-        buildConfig = true
+        buildConfig true
         viewBinding true
     }
 
-    // AAB configuration
     bundle {
-        language {
-            // We want to be able to switch the locale at runtime using AppLocale!
-            enableSplit = false
-        }
-        abi {
-            enableSplit = true
-        }
+        language { enableSplit = false }
+        abi { enableSplit = true }
     }
-
 
     namespace 'ae.oleapp'
 
     packagingOptions {
+        jniLibs {
+            useLegacyPackaging = false
+        }
         pickFirst 'lib/armeabi-v7a/libc++_shared.so'
         pickFirst 'lib/arm64-v8a/libc++_shared.so'
         pickFirst 'lib/x86_64/libc++_shared.so'
+        exclude "META-INF/services/org.xmlpull.v1.XmlPullParserFactory"
     }
 }
 
@@ -141,11 +135,12 @@ dependencies {
     implementation 'io.github.chaosleung:pinview:1.4.4'
 
     // Retrofit / OkHttp / Gson
-    implementation 'com.squareup.retrofit2:retrofit:3.0.0'
-    implementation 'com.google.code.gson:gson:2.13.1'
+    implementation 'com.squareup.retrofit2:retrofit:2.11.0'
+    implementation 'com.google.code.gson:gson:2.11.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.11.0'
-    implementation 'com.squareup.okhttp3:logging-interceptor:5.1.0'
-    implementation 'com.squareup.okhttp3:okhttp:5.1.0'
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.12.0'
+    implementation 'com.squareup.okhttp3:okhttp:4.12.0'
+
 
     implementation 'io.github.shashank02051997:FancyToast:2.0.2'
     implementation 'com.github.nabinbhandari:Android-Permissions:f8643bf'
@@ -194,8 +189,8 @@ dependencies {
         exclude group: 'com.nineoldandroids', module: 'library'
     }
 
-    implementation(project(":imageviewer"))
     implementation project(path: ':ActionSheet')
+    implementation project(path: ':imageviewer')
     implementation 'net.yslibrary.keyboardvisibilityevent:keyboardvisibilityevent:3.0.0-RC3'
     implementation 'com.github.ugurtekbas:dialTimePicker:8d263fc3a1'
 
@@ -471,7 +466,7 @@ dependencies {
 //    implementation 'com.mikhaellopez:circularprogressbar:3.1.0'
 //
 //    // linear progress bar
-//    implementation 'com.akexorcist:round-corner-progress-bar:2.2.1'
+//    implementation 'com.akexorcist:round-corner-progress-bar:2.2.2'
 //
 //    // time picker
 //    implementation 'com.wdullaer:materialdatetimepicker:4.2.3'

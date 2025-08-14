@@ -9,7 +9,6 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.pm.ActivityInfo;
 import android.content.res.AssetFileDescriptor;
-import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -26,20 +25,16 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
-import android.view.WindowInsetsController;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
 
-import androidx.activity.result.ActivityResult;
-import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.IntentSenderRequest;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
@@ -150,7 +145,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
 
-///// EDGE TO EDGE START ////
+    /// // EDGE TO EDGE START ////
 //protected void applyEdgeToEdge(View rootView) {
 //    ViewCompat.setOnApplyWindowInsetsListener(rootView, (v, insets) -> {
 //        Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -183,7 +178,6 @@ public class BaseActivity extends AppCompatActivity {
 //            window.setNavigationBarColor(ContextCompat.getColor(this, R.color.grayColor));
 //        }
 //    }
-
     public void inAppUpdates() {
         appUpdateManager = AppUpdateManagerFactory.create(this);
         Task<AppUpdateInfo> appUpdateInfoTask = appUpdateManager.getAppUpdateInfo();
@@ -334,12 +328,12 @@ public class BaseActivity extends AppCompatActivity {
 //                if (errorCode == 0) {
 //                    ExpressManager.getInstance().enableCamera(false);
 //                } else {
-////                    Toast.makeText(getApplication(), "join room failed,errorCode :" + errorCode, Toast.LENGTH_LONG).show();
+
+    /// /                    Toast.makeText(getApplication(), "join room failed,errorCode :" + errorCode, Toast.LENGTH_LONG).show();
 //                }
 //            }
 //        });
 //    }
-
     protected void playSoundFromAssets(String fileName) {
         try {
             AssetFileDescriptor afd = getAssets().openFd(fileName);
